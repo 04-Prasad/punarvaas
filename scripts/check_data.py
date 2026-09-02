@@ -168,7 +168,7 @@ def probe_copernicus(bbox):
            f"OData.CSC.Intersects(area=geography'SRID=4326;POLYGON(("
            f"{minlon} {minlat},{maxlon} {minlat},{maxlon} {maxlat},{minlon} {maxlat},{minlon} {minlat})')') "
            f"and ContentDate/Start gt {start:%Y-%m-%d}T00:00:00.000Z&$top=1&$count=true")
-    code, raw, err = _get(urllib.parse.quote(url, safe=":/?&=$'(),. "))
+    code, raw, err = _get(urllib.parse.quote(url, safe=":/?&=$'(),."))
     if code == 200 and raw:
         try:
             j = json.loads(raw)
