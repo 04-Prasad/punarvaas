@@ -1,0 +1,810 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PUNARVAAS · {{ d.name }}, {{ d.state }} — Hazard Zonation, Carrying Capacity and Relocation Priority</title>
+<style>
+  :root{
+    --ink:#16181d; --body:#2b2f36; --muted:#666e7a; --rule:#d8dce2; --paper:#fff;
+    --tint:#f6f7f9; --accent:#1f6f8b; --red:#c1272d; --orange:#e07b39;
+    --yellow:#cfa72e; --green:#3f8f5f;
+    --imm:#a4161a; --short:#d1642a; --med:#c8a02a; --mit:#2f7d6f;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:"Inter","Helvetica Neue",Arial,"Segoe UI",system-ui,sans-serif;
+    --mono:"SF Mono",ui-monospace,"Cascadia Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:#eceef1;color:var(--body);font:16px/1.62 var(--serif);
+       font-feature-settings:"kern" 1,"liga" 1;}
+  .sheet{max-width:210mm;margin:0 auto;background:var(--paper);padding:26mm 20mm 24mm;
+         box-shadow:0 1px 3px rgba(0,0,0,.14);}
+  h1,h2,h3,h4{font-family:var(--sans);color:var(--ink);font-weight:650;line-height:1.22;
+              letter-spacing:-.011em;margin:0}
+  h1{font-size:27px}
+  h2{font-size:19px;margin:34px 0 4px;padding-top:13px;border-top:2px solid var(--ink)}
+  h3{font-size:15.5px;margin:22px 0 5px}
+  h4{font-size:13px;margin:15px 0 3px;text-transform:uppercase;letter-spacing:.07em;
+     color:var(--muted);font-weight:640}
+  p{margin:.55em 0}
+  a{color:var(--accent)}
+  .sec-no{font-family:var(--mono);font-size:.72em;color:var(--muted);margin-right:.6em;
+          font-weight:400;letter-spacing:0}
+  .lede{font-size:17.5px;line-height:1.56}
+  .small{font-size:13px;line-height:1.5}
+  .muted{color:var(--muted)}
+  .mono{font-family:var(--mono);font-size:.88em}
+
+  /* masthead */
+  .mast{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+        border-bottom:3px double var(--ink);padding-bottom:11px}
+  .wordmark{font-family:var(--sans);font-weight:760;font-size:20px;letter-spacing:.16em;
+            color:var(--ink)}
+  .wordmark span{display:block;font-size:11px;letter-spacing:.05em;font-weight:520;
+                 color:var(--muted);margin-top:2px}
+  .mast .meta{text-align:right;font:11.5px/1.5 var(--mono);color:var(--muted)}
+  .doctitle{margin:16px 0 0}
+  .subtitle{font-family:var(--sans);font-size:14px;color:var(--muted);margin-top:5px}
+
+  /* banners */
+  .banner{border-left:4px solid var(--orange);background:#fdf6ef;padding:11px 14px;
+          margin:15px 0;font-size:13.5px;line-height:1.55}
+  .banner.hard{border-left-color:var(--red);background:#fdf1f1}
+  .banner.calm{border-left-color:var(--accent);background:#f0f6f9}
+  .banner b{font-family:var(--sans);font-size:12px;letter-spacing:.05em;
+            text-transform:uppercase;display:block;margin-bottom:2px;color:var(--ink)}
+
+  /* KPI */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);
+        border:1px solid var(--rule);margin:16px 0}
+  .kpi{background:var(--paper);padding:11px 12px}
+  .kpi .k{font:11px/1.3 var(--sans);text-transform:uppercase;letter-spacing:.055em;
+          color:var(--muted)}
+  .kpi .v{font:22px/1.15 var(--sans);font-weight:680;color:var(--ink);margin-top:4px;
+          font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .kpi .n{font-size:11.5px;color:var(--muted);line-height:1.35;margin-top:3px}
+
+  /* tables */
+  table{width:100%;border-collapse:collapse;margin:11px 0;font:12.5px/1.42 var(--sans);
+        font-variant-numeric:tabular-nums}
+  caption{caption-side:top;text-align:left;font:12px/1.4 var(--sans);color:var(--muted);
+          padding-bottom:5px}
+  th,td{padding:5px 7px;border-bottom:1px solid var(--rule);vertical-align:top;text-align:left}
+  thead th{border-bottom:1.5px solid var(--ink);font-weight:640;color:var(--ink);
+           font-size:11.5px;text-transform:uppercase;letter-spacing:.035em}
+  tbody tr:nth-child(even){background:#fafbfc}
+  td.n,th.n{text-align:right;white-space:nowrap}
+  tfoot td{border-top:1.5px solid var(--ink);border-bottom:none;font-weight:640;color:var(--ink)}
+
+  /* chips */
+  .chip{display:inline-block;padding:1px 7px;border-radius:9px;font:10.5px/1.6 var(--sans);
+        font-weight:650;letter-spacing:.045em;color:#fff;white-space:nowrap}
+  .t-IMMEDIATE{background:var(--imm)} .t-SHORT_TERM{background:var(--short)}
+  .t-MEDIUM_TERM{background:var(--med)} .t-MITIGATE{background:var(--mit)}
+  .z-RED{background:var(--red)} .z-ORANGE{background:var(--orange)}
+  .z-YELLOW{background:var(--yellow);color:#3a2f00} .z-GREEN{background:var(--green)}
+  .flag{display:inline-block;border:1px solid var(--orange);color:#8a4b12;background:#fdf6ef;
+        padding:0 5px;border-radius:3px;font:10px/1.6 var(--sans);font-weight:640}
+  .ok{color:var(--green);font-weight:640} .no{color:var(--red);font-weight:640}
+
+  /* figures */
+  figure{margin:15px 0;break-inside:avoid}
+  figcaption{font:11.5px/1.45 var(--sans);color:var(--muted);margin-top:5px}
+  svg.fig{display:block;overflow:visible;font-family:var(--sans)}
+  svg.fig text{fill:var(--body)}
+  .cl{font-size:11px}
+  .cv{font-size:11px;font-weight:640;fill:var(--ink)!important;font-variant-numeric:tabular-nums}
+  .cu{font-size:10px;fill:var(--muted)!important}
+  .ct{font-size:9.5px;fill:var(--muted)!important;text-anchor:middle}
+  .cr{font-size:9.5px;fill:var(--muted)!important;text-anchor:end}
+  .cc{font-size:10px;fill:var(--muted)!important;text-anchor:middle}
+  .nofig{font:12px var(--sans);color:var(--muted);font-style:italic}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+
+  /* case card */
+  .case{border:1px solid var(--rule);border-top:3px solid var(--ink);padding:14px 16px 16px;
+        margin:18px 0;break-inside:avoid}
+  .case.tier-IMMEDIATE{border-top-color:var(--imm)}
+  .case.tier-SHORT_TERM{border-top-color:var(--short)}
+  .case.tier-MEDIUM_TERM{border-top-color:var(--med)}
+  .case.tier-MITIGATE{border-top-color:var(--mit)}
+  .case h3{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .verdict{background:var(--tint);border-left:3px solid var(--accent);padding:9px 12px;
+           margin:10px 0;font-size:14px}
+  .verdict .act{font-family:var(--sans);font-weight:660;color:var(--ink)}
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 18px;margin:10px 0;
+         font:12px/1.45 var(--sans)}
+  .facts div{border-top:1px solid var(--rule);padding-top:4px}
+  .facts b{display:block;color:var(--muted);font-weight:520;font-size:10.5px;
+           text-transform:uppercase;letter-spacing:.045em}
+  .facts span{font-weight:640;color:var(--ink);font-variant-numeric:tabular-nums}
+
+  ol.chain{list-style:none;counter-reset:s;padding:0;margin:12px 0}
+  ol.chain li{counter-increment:s;position:relative;padding:8px 0 8px 40px;
+              border-bottom:1px solid var(--rule);font-size:14px}
+  ol.chain li::before{content:"E" counter(s);position:absolute;left:0;top:8px;
+              font:11px/1.7 var(--sans);font-weight:700;color:#fff;background:var(--ink);
+              width:26px;height:20px;border-radius:3px;text-align:center;letter-spacing:.02em}
+  ol.chain b{font-family:var(--sans);color:var(--ink)}
+  ul.tight{margin:.4em 0;padding-left:1.15em}
+  ul.tight li{margin:.24em 0}
+  dl.gloss{margin:10px 0;font-size:13.5px}
+  dl.gloss dt{font-family:var(--sans);font-weight:640;color:var(--ink);margin-top:9px;
+              font-size:12.5px}
+  dl.gloss dd{margin:1px 0 0 0;color:var(--body)}
+
+  .sign{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:26px}
+  .sign div{border-top:1px solid var(--ink);padding-top:6px;font:12px/1.5 var(--sans);
+            color:var(--muted);min-height:74px}
+  .sign b{display:block;color:var(--ink);font-size:13px}
+  .colophon{margin-top:26px;padding-top:10px;border-top:1px solid var(--rule);
+            font:11px/1.55 var(--mono);color:var(--muted);word-break:break-all}
+
+  @media print{
+    body{background:#fff;font-size:10.4pt}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    h2{break-after:avoid} h3{break-after:avoid} table{break-inside:auto}
+    tr{break-inside:avoid} thead{display:table-header-group}
+    .kpis{grid-template-columns:repeat(4,1fr)}
+    .pb{break-before:page}
+    a{color:inherit;text-decoration:none}
+  }
+  @page{size:A4;margin:16mm 14mm 18mm}
+  @media screen and (max-width:760px){
+    .sheet{padding:16px 14px}
+    .kpis{grid-template-columns:1fr 1fr} .two{grid-template-columns:1fr}
+    .facts{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+<main class="sheet">
+
+<header class="mast">
+  <div class="wordmark">PUNARVAAS<span>पुनर्वास · hazard zonation, carrying capacity and relocation priority</span></div>
+  <div class="meta">
+    District screening report<br>
+    snapshot {{ d.snapshot_id }}<br>
+    ruleset {{ manifest.ruleset_version }} · grid H3 r{{ manifest.grid.resolution }}<br>
+    generated {{ generated }}
+  </div>
+</header>
+
+<h1 class="doctitle">{{ d.name }} district, {{ d.state }}</h1>
+<p class="subtitle">Sub-village hazard zonation · carrying-capacity assessment of relocation sites ·
+   immediate relocation needs for vulnerable habitations</p>
+
+{% if d.contains_synthetic %}
+<div class="banner hard">
+  <b>Not for operational use — synthetic inputs present</b>
+  This snapshot was produced with modelled stand-ins for one or more authoritative
+  datasets, listed and marked in section 8. The method, the thresholds and the
+  arithmetic are real; the ground truth is not. Every habitation-level finding in
+  this document must be confirmed by field verification before any household is
+  informed, any land is acquired, or any figure is published.
+</div>
+{% endif %}
+{% if residual_caveat %}
+<div class="banner">
+  <b>Relaxed residual-hazard cap</b>
+  {{ residual_caveat }}
+</div>
+{% endif %}
+
+<h2><span class="sec-no">1</span>What this district looks like</h2>
+<p class="lede">{{ headline }}</p>
+<div class="kpis">
+  <div class="kpi"><div class="k">Population modelled</div>
+    <div class="v">{{ d.population|num }}</div>
+    <div class="n">across {{ d.cells|num }} cells of {{ '%.2f'|format(1.50475) }} ha</div></div>
+  <div class="kpi"><div class="k">On unacceptable land</div>
+    <div class="v">{{ d.pop_at_risk|num }}</div>
+    <div class="n">{{ (d.pop_at_risk / d.population)|pct }} of modelled population</div></div>
+  <div class="kpi"><div class="k">Expected annual loss</div>
+    <div class="v">{{ d.eal_annual_inr|crore }}<span class="n"> cr</span></div>
+    <div class="n">physical damage only; no value placed on life</div></div>
+  <div class="kpi"><div class="k">Habitations screened</div>
+    <div class="v">{{ habitations|length }}</div>
+    <div class="n">{{ tier_counts[0].n }} immediate · {{ tier_counts[1].n }} short-term ·
+        {{ tier_counts[2].n }} medium · {{ tier_counts[3].n }} mitigate</div></div>
+</div>
+<p>{{ zone_story }}</p>
+
+<h4>The three questions this report answers</h4>
+<ol class="chain">
+  <li><b>Where is it unsafe, and for exactly whom?</b> Every {{ manifest.grid.resolution }}-resolution
+      hex cell carries an annual probability of at least one damaging event from all perils
+      combined, and a population count disaggregated from Census village totals by building
+      footprint — so risk is reported for parts of a village, not for the village as a whole.</li>
+  <li><b>Which land could receive people, and how many will it hold?</b> Candidate sites are
+      built from the same cells, screened through nine hard constraints, ranked, and then sized
+      by the scarcest resource they have — with that resource named.</li>
+  <li><b>Who moves first, and what does it cost?</b> Each habitation gets a tier, a
+      recommended action, a benefit-cost comparison between moving and protecting in place,
+      and a funding phase under the district's annual budget.</li>
+</ol>
+
+<figure>{{ figs.risk_bars|safe }}
+  <figcaption>Habitations ranked by the number of residents standing on RED or ORANGE land.
+  This ranking, not the district total, is what a relocation programme acts on.</figcaption></figure>
+
+<h2><span class="sec-no">2</span>The hazard picture</h2>
+<table>
+  <caption>Zone composition. RED and ORANGE are the zones in which new residential
+  construction is not permitted under the applied ruleset.</caption>
+  <thead><tr><th>Zone</th><th class="n">Cells</th><th class="n">Area (ha)</th>
+    <th class="n">Population</th><th class="n">Mean hazard</th>
+    <th class="n">Worst cell</th><th class="n">Mean confidence</th></tr></thead>
+  <tbody>
+  {% for z in zones|sort(attribute='zone') %}
+    <tr><td><span class="chip z-{{ z.zone }}">{{ z.zone }}</span></td>
+      <td class="n">{{ z.cells|num }}</td>
+      <td class="n">{{ (z.cells * 1.50475)|num }}</td>
+      <td class="n">{{ z.population|num }}</td>
+      <td class="n">{{ z.h_union_mean|rp }}</td>
+      <td class="n">{{ z.h_union_max|rp }}</td>
+      <td class="n">{{ z.confidence|pct }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+<div class="two">
+  <figure>{{ figs.zone_pop|safe }}<figcaption>Where the people are.</figcaption></figure>
+  <figure>{{ figs.zone_cells|safe }}<figcaption>Where the land is. The two differ because
+    settlement concentrates: a small RED area can carry a large share of the population.</figcaption></figure>
+</div>
+<figure>{{ figs.eal|safe }}
+  <figcaption>Expected annual loss = Σ (hazard probability × exposed value × vulnerability),
+  summed over perils. Mortality is deliberately not monetised, so these figures understate
+  total harm and should never be read as the full cost of inaction.</figcaption></figure>
+
+<h2><span class="sec-no">3</span>Habitations at risk</h2>
+<table>
+  <caption>All {{ habitations|length }} habitations crossing the screening threshold, ordered by
+  population on unacceptable land. "Governing hazard" is the peril contributing most to the
+  combined annual probability at the worst cell.</caption>
+  <thead><tr><th>Habitation</th><th class="n">LGD</th><th class="n">Population</th>
+    <th class="n">At risk</th><th class="n">Share</th><th class="n">Households</th>
+    <th>Governing hazard</th><th class="n">Worst cell</th>
+    <th class="n">EAL</th><th class="n">Conf.</th></tr></thead>
+  <tbody>
+  {% for h in habitations %}
+    <tr><td>{{ h.village_name }}</td>
+      <td class="n mono">{{ h.lgd_village_code }}</td>
+      <td class="n">{{ h.population|num }}</td>
+      <td class="n"><b>{{ h.pop_at_risk|num }}</b></td>
+      <td class="n">{{ h.frac_at_risk|pct }}</td>
+      <td class="n">{{ h.households|num }}</td>
+      <td>{{ h.governing_hazard|title }}</td>
+      <td class="n">{{ h.h_union_max|rp }}</td>
+      <td class="n">{{ h.eal_annual_inr|inr }}</td>
+      <td class="n">{{ h.confidence|pct }}</td></tr>
+  {% endfor %}
+  </tbody>
+  <tfoot><tr><td>District</td><td></td><td class="n">{{ d.population|num }}</td>
+    <td class="n">{{ d.pop_at_risk|num }}</td>
+    <td class="n">{{ (d.pop_at_risk / d.population)|pct }}</td>
+    <td class="n">{{ (habitations|sum(attribute='households'))|num }}</td>
+    <td></td><td></td><td class="n">{{ d.eal_annual_inr|inr }}</td><td></td></tr></tfoot>
+</table>
+<p class="small muted">Confidence is not a probability of being right. It is a composite of
+input vintage, resolution, model discrimination and whether the layer is synthetic — a low
+figure means "verify this before acting", not "this is safe".</p>
+
+<h2 class="pb"><span class="sec-no">4</span>Priority, recommended action and the reason for it</h2>
+<p>Four tiers. The tier is not a score threshold: it is the output of a decision rule that
+looks at whether the hazard is <i>active</i> (subsidence and erosion do not wait for a
+trigger), whether a receiving site actually exists with capacity for the people, and whether
+protecting in place buys more safety per rupee than moving.</p>
+<dl class="gloss">
+{% for t, meaning in tier_meaning.items() %}
+  <dt><span class="chip t-{{ t }}">{{ t.replace('_',' ') }}</span></dt>
+  <dd>{{ meaning }}</dd>
+{% endfor %}
+</dl>
+<figure>{{ figs.tiers|safe }}
+  <figcaption>Persons at risk in each tier. MITIGATE is not a lesser finding — for a
+  flood-exposed habitation with a viable embankment, mitigation routinely returns several
+  rupees of avoided loss per rupee spent, which relocation cannot match.</figcaption></figure>
+
+<table>
+  <caption>Decision table. BCR compares the present value of avoided loss over 30 years
+  against capital cost; "recommended" is the higher of the two options, subject to the
+  override that an actively failing site cannot be protected in place.</caption>
+  <thead><tr><th>Habitation</th><th>Tier</th><th class="n">At risk</th>
+    <th class="n">HH</th><th>Site portfolio</th><th class="n">Coverage</th>
+    <th>Binding constraint</th><th class="n">BCR move</th><th class="n">BCR protect</th>
+    <th>Recommended</th><th class="n">Cost</th><th class="n">Phase</th></tr></thead>
+  <tbody>
+  {% for c in cases %}
+    {% set p = c.plan %}
+    <tr>
+      <td>{{ p.village_name }}</td>
+      <td><span class="chip t-{{ p.priority }}">{{ p.priority.replace('_',' ') }}</span></td>
+      <td class="n">{{ p.population_at_risk|num }}</td>
+      <td class="n">{{ p.households_at_risk|num }}</td>
+      <td class="n">{% if p.sites_required %}{{ p.sites_required }} parcel{{ 's' if p.sites_required != 1 }}{% else %}<span class="no">none</span>{% endif %}</td>
+      <td class="n">{% if p.portfolio_coverage %}{{ p.portfolio_coverage|pct }}{% else %}—{% endif %}</td>
+      <td>{{ p.binding_constraint|title if p.binding_constraint else '—' }}</td>
+      <td class="n">{{ p.bcr_relocate|dp2 }}</td>
+      <td class="n">{{ p.bcr_mitigate|dp2 }}</td>
+      <td>{{ p.bcr_recommended|title }}</td>
+      <td class="n">{{ p.cost_inr|inr }}</td>
+      <td class="n">{{ p.phase if p.phase else '—' }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+  <tfoot><tr><td>Total</td><td></td>
+    <td class="n">{{ (plan|sum(attribute='population_at_risk'))|num }}</td>
+    <td class="n">{{ (plan|sum(attribute='households_at_risk'))|num }}</td>
+    <td colspan="6"></td>
+    <td class="n">{{ total_gap_cost|inr }}</td><td></td></tr></tfoot>
+</table>
+
+<h2><span class="sec-no">5</span>Habitation dossiers</h2>
+<p class="small muted">One card per habitation, in tier order. Each card carries the hazard
+reading, the receiving site or sites, the resource that caps how many people the land can hold,
+and the exclusion funnel that shows how much land was rejected and for what reason — the answer
+to "why not there?"</p>
+
+{% for c in cases %}
+{% set p = c.plan %}{% set h = c.hab %}{% set b = c.best %}
+<article class="case tier-{{ p.priority }}">
+  <h3><span>{{ loop.index }}. {{ p.village_name }}
+      <span class="mono muted" style="font-weight:400">LGD {{ p.lgd_village_code }}</span></span>
+    <span class="chip t-{{ p.priority }}">{{ p.priority.replace('_',' ') }}</span></h3>
+  <p class="lede" style="font-size:15px;margin-top:7px">Approximately
+    <b>{{ p.population_at_risk|num }}</b> of {{ p.population|num }} residents
+    ({{ p.households_at_risk|num }} households) face unacceptable risk from
+    <b>{{ p.governing_hazard|title|lower }}</b>; the worst cell in this habitation carries a
+    {{ p.h_union_max|rp }} chance of a damaging event in any year, i.e.
+    {{ p.h_union_max|p_over }} over a 30-year horizon.</p>
+
+  <div class="verdict">
+    <span class="act">Recommended action — {{ p.recommended_action|sent }}</span><br>
+    {{ p.rationale|sent }}
+  </div>
+
+  <div class="facts">
+    <div><b>Governing hazard</b><span>{{ p.governing_hazard|title }}</span></div>
+    <div><b>Annual expected loss</b><span>{{ p.eal_annual_inr|inr }}</span></div>
+    <div><b>Confidence</b><span>{{ p.confidence|pct }}</span></div>
+    <div><b>Candidate cells screened</b><span>{{ p.sites_screened|num }}</span></div>
+    <div><b>Cells surviving all gates</b><span>{{ p.sites_surviving_cells|num }}</span></div>
+    <div><b>Parcels formed</b><span>{{ c.n_candidates }}</span></div>
+    <div><b>Site available</b>
+      <span class="{{ 'ok' if p.safe_site_available else 'no' }}">{{ p.safe_site_available|yn }}</span></div>
+    <div><b>Portfolio capacity</b><span>{{ p.portfolio_capacity|num }} persons</span></div>
+    <div><b>Shortfall</b><span>{{ p.shortfall_persons|num }} persons</span></div>
+    <div><b>Capital cost</b><span>{{ p.cost_inr|inr }}</span></div>
+    <div><b>PV avoided loss (30 yr)</b><span>{{ p.pv_benefit_inr|inr }}</span></div>
+    <div><b>Cost per person moved</b><span>{{ p.cost_per_person_inr|inr }}</span></div>
+  </div>
+
+  <figure>{{ c.hazard_meter|safe }}</figure>
+
+  {% if c.portfolio %}
+  <h4>Receiving site{{ 's' if c.portfolio|length > 1 }}</h4>
+  {% if c.portfolio|length > 1 %}
+  <p class="small">No single parcel of buildable land in range is large enough, so the
+  recommendation is a <b>portfolio of {{ c.portfolio|length }} parcels</b> taken in rank order
+  until the households fit. This is how hill resettlement is actually done — one contiguous
+  bench of the required size rarely exists above 1,800 m.</p>
+  {% endif %}
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Usable</th>
+      <th class="n">Holds</th><th>Binding</th><th class="n">Residual hazard</th>
+      <th class="n">Slope</th><th class="n">Road</th><th class="n">School</th>
+      <th class="n">Health</th><th class="n">TOPSIS</th><th class="n">Gap cost</th></tr></thead>
+    <tbody>
+    {% for s in c.portfolio %}
+      <tr><td class="mono">{{ s.site_id }}</td>
+        <td class="n">{{ s.distance_km|dp1 }} km</td>
+        <td class="n">{{ s.usable_ha|dp1 }} ha</td>
+        <td class="n"><b>{{ s.capacity_persons|num }}</b></td>
+        <td>{{ s.binding_constraint|title }}</td>
+        <td class="n">{{ s.residual_h_union|rp }}</td>
+        <td class="n">{{ s.slope_deg|dp1 }}°</td>
+        <td class="n">{{ s.road_km|dp1 }} km</td>
+        <td class="n">{{ s.school_km|dp1 }} km</td>
+        <td class="n">{{ s.health_km|dp1 }} km</td>
+        <td class="n">{{ s.topsis_closeness|dp2 }}</td>
+        <td class="n">{{ s.total_gap_cost_inr|inr }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% if b %}
+  <p class="small"><b>Why {{ b.site_id }} ranks first —</b> {{ b.why }}</p>
+  <h4>Carrying capacity of {{ b.site_id }}, resource by resource</h4>
+  <table>
+    <caption>Liebig's law of the minimum. Capacity is set by the scarcest
+    <i>site-intrinsic</i> resource — land and sustainable water yield, which cannot be
+    manufactured. Schooling, healthcare, road and power are <i>augmentable</i>: their absence
+    is a cost, priced below, not a ceiling. Reporting the minimum over everything would return
+    zero persons for every greenfield site in India.</caption>
+    <thead><tr><th>Resource</th><th class="n">Holds</th><th class="n">Available</th>
+      <th>Norm applied</th><th>Type</th><th>Basis</th></tr></thead>
+    <tbody>
+    {% for r in c.capacity_rows %}
+      <tr{% if r.binds %} style="background:#fdf1f1"{% endif %}>
+        <td>{{ r.label }}{% if r.binds %} <span class="flag">binds</span>{% endif %}</td>
+        <td class="n">{% if r.infinite %}not limiting{% else %}{{ r.capacity_persons|num }}{% endif %}</td>
+        <td class="n">{{ r.available|dp1 }} {{ r.unit }}</td>
+        <td class="small">{{ r.norm }}</td>
+        <td>{{ 'augmentable' if r.augmentable else 'site-intrinsic' }}</td>
+        <td class="small">{{ r.note }}<br><span class="muted">{{ r.source }}</span></td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% if b.gaps %}
+  <h4>What must be built, and which scheme pays</h4>
+  <table>
+    <caption>Augmentable deficits, priced at unit rates and mapped to the centrally sponsored
+    scheme that funds them. A gap with no scheme is a gap the district has to fund itself.</caption>
+    <thead><tr><th>Gap</th><th class="n">Quantity</th><th class="n">Cost</th>
+      <th>Scheme</th><th>Component</th></tr></thead>
+    <tbody>
+    {% for g in b.gaps %}
+      <tr{% if not g.total_cost_inr %} class="muted"{% endif %}>
+        <td>{{ g.resource|title }}</td>
+        <td class="n">{{ g.quantity|dp1 }} {{ g.quantity_unit }}</td>
+        <td class="n">{{ g.total_cost_inr|inr }}</td>
+        <td>{{ g.scheme }}</td>
+        <td class="small">{{ g.scheme_component }}</td></tr>
+    {% endfor %}
+    </tbody>
+    <tfoot><tr><td>Total</td><td class="n"></td>
+      <td class="n">{{ b.total_gap_cost_inr|inr }}</td>
+      <td colspan="2" class="small">after closure the site holds
+        {{ b.capacity_after_gap_closure|num }} persons; the next constraint becomes
+        {{ b.next_binding_constraint|title|lower }}</td></tr></tfoot>
+  </table>
+  {% endif %}
+  {% endif %}
+  {% else %}
+  <div class="banner hard"><b>No receiving site found within acceptable travel distance</b>
+    {{ p.sites_screened|num }} cells were screened and
+    {{ p.sites_surviving_cells|num }} survived the constraint funnel, but none formed a parcel
+    that met the acceptance rules. This is a finding, not a gap in the analysis: it means the
+    search radius, the residual-hazard cap, or the land-availability assumption has to be
+    revisited by the district administration, or the habitation protected in place.</div>
+  {% endif %}
+
+  {% if c.funnel_svg %}
+  <h4>Why not elsewhere — the exclusion funnel</h4>
+  <figure>{{ c.funnel_svg|safe }}
+    <figcaption>Applied in this order, so each rejected cell is reported against the
+    <i>first</i> constraint it failed. Residual-hazard cap for this habitation:
+    {{ c.funnel.residual_cap|dp2 }} per year
+    ({{ c.funnel.residual_cap_return_period_yr|dp1 }}-year return period,
+    {{ c.funnel.residual_cap_basis }} basis).</figcaption></figure>
+  {% endif %}
+
+  {% if c.rejected %}
+  <h4>Nearest rejected candidates</h4>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Holds</th>
+      <th class="n">TOPSIS</th><th>Why it was not accepted</th></tr></thead>
+    <tbody>
+    {% for s in c.rejected %}
+      <tr><td class="mono">{{ s.site_id }}</td><td class="n">{{ s.distance_km|dp1 }} km</td>
+        <td class="n">{{ s.capacity_persons|num }}</td>
+        <td class="n">{{ s.topsis_closeness|dp2 }}</td>
+        <td class="small">{{ s.reasons_reject|join('; ') }}</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% endif %}
+</article>
+{% endfor %}
+
+<h2 class="pb"><span class="sec-no">6</span>How sites were chosen</h2>
+<p>Two decisions had to be made explicit and defensible: which land is
+<i>permissible</i>, and among permissible land, which is <i>preferable</i>. They are handled
+separately and deliberately, because conflating them is how a ranking ends up recommending
+forest land with an excellent score.</p>
+
+<h3>Permissible — nine hard constraints, applied in order</h3>
+<p class="small">The order matters. A cell is reported against the first constraint it fails, so
+cheap and definitive tests come first and judgement calls come last. That way "rejected: inside
+a RED zone" is never displaced by "rejected: too far".</p>
+<ol class="chain" style="counter-reset:none;list-style:decimal;padding-left:1.4em">
+  <li style="padding-left:0"><b>Zone RED</b> — inside a red zone declared by the district ruleset.</li>
+  <li style="padding-left:0"><b>Zone ORANGE</b> — not permitted for new residential layout.</li>
+  <li style="padding-left:0"><b>Residual hazard</b> — combined annual probability above the
+      resettlement cap. A site is never risk-free; the cap states how much residual risk the
+      state is prepared to accept, and it is printed on every funnel above.</li>
+  <li style="padding-left:0"><b>Slope</b> — above the NDMA habitable-slope norm
+      ({{ '%.0f'|format(norms|selectattr('0','equalto','safe_slope_deg')|map(attribute='1')|map(attribute='value')|first) }}°).</li>
+  <li style="padding-left:0"><b>Erosion</b> — land predicted lost inside the planning horizon.
+      Moving a village onto a retreating shoreline is a 20-year problem, not a solution.</li>
+  <li style="padding-left:0"><b>Inundation</b> — below the flood or surge screening level.</li>
+  <li style="padding-left:0"><b>Land class</b> — forest, CRZ or private land not readily available.</li>
+  <li style="padding-left:0"><b>Already built</b> — occupied at settlement density.</li>
+  <li style="padding-left:0"><b>Distance</b> — beyond what households accept from their origin.
+      Livelihood, school and kinship ties are why relocation colonies stand empty when this is ignored.</li>
+</ol>
+<p class="small muted">Surviving cells are grouped into contiguous parcels by hex adjacency
+before ranking, because a site is a parcel: you cannot lay a road, a water line and a school
+across cells that do not touch.</p>
+
+<h3>Preferable — AHP weights, then TOPSIS ranking</h3>
+{% if ahp %}
+<figure>{{ figs.weights|safe }}
+  <figcaption>Criteria weights from the principal eigenvector of the pairwise-comparison
+  matrix (Saaty 1980). Consistency ratio <b>{{ '%.4f'|format(ahp.consistency_ratio) }}</b>
+  against the 0.10 admissibility threshold, λ<sub>max</sub> =
+  {{ '%.3f'|format(ahp.lambda_max) }} — {{ 'the judgement matrix is consistent' if ahp.acceptable else 'INCONSISTENT: the weights must be revised before use' }}.</figcaption></figure>
+<p class="small">{{ ahp.note }}</p>
+{% endif %}
+<div class="banner calm">
+  <b>Why fixed weights rather than a learned model</b>
+  There is no labelled corpus of "correct" resettlement sites in India to train on — the
+  historical record contains sites chosen for reasons no one wrote down, including some that
+  failed. So the weights come from a structured expert judgement whose internal consistency can
+  be tested and whose numbers a District Magistrate can change and re-run. A learned weighting
+  would be more impressive and less accountable.
+</div>
+
+<h3>Acceptance rules</h3>
+<ul class="tight small">
+  <li>A parcel is accepted only above a TOPSIS closeness of
+      <b>{{ acceptance.min_topsis_closeness }}</b> — a site cannot merely be the best of a bad set.</li>
+  <li>It must hold at least <b>{{ acceptance.min_households_per_site }} households</b>; below
+      that the per-household cost of a road, a water scheme and a school is indefensible.</li>
+  <li>A portfolio is accepted only if it covers at least
+      <b>{{ (acceptance.min_portfolio_coverage * 100)|round|int }}%</b> of the people at risk.
+      Partial coverage is reported as a shortfall rather than hidden.</li>
+</ul>
+{% if figs.site_space %}
+<figure>{{ figs.site_space|safe }}
+  <figcaption>Every candidate parcel in the district: distance from its origin habitation
+  against carrying capacity. Green accepted, orange rejected. The visible frontier is the real
+  trade-off — nearby land is small, and large land is far.</figcaption></figure>
+{% endif %}
+{% if figs.binding %}
+<figure>{{ figs.binding|safe }}
+  <figcaption>What actually limits capacity across {{ n_sites }} candidate parcels
+  ({{ n_accepted }} accepted). If water dominates this chart, the district's relocation
+  programme is a water-supply programme.</figcaption></figure>
+{% endif %}
+
+<h2><span class="sec-no">7</span>Phasing under the budget</h2>
+{% if phase_summary %}
+<p>Habitations are funded tier-first, and within a tier by an <b>exact 0/1 knapsack</b> over
+avoided loss subject to the annual budget of
+{{ plan_meta.annual_budget_inr|inr }}. Greedy benefit-per-rupee selection was rejected because
+it reliably funds four cheap medium-risk habitations ahead of one expensive IMMEDIATE one —
+arithmetically efficient and indefensible in front of the people left behind.</p>
+<figure>{{ figs.phases|safe }}
+  <figcaption>Capital cost against present-value avoided loss, by phase. Benefit is discounted
+  at the social rate over 30 years and counts avoided physical damage only.</figcaption></figure>
+<table>
+  <thead><tr><th>Phase</th><th class="n">Habitations</th><th class="n">Households</th>
+    <th class="n">Persons</th><th class="n">Capital cost</th>
+    <th class="n">PV benefit</th><th class="n">BCR</th></tr></thead>
+  <tbody>
+  {% for key, v in phase_summary.items() if key != 'unfunded' %}
+    <tr><td>{{ key.replace('_',' ')|title }}</td>
+      <td class="n">{{ v.habitations }}</td><td class="n">{{ v.households|num }}</td>
+      <td class="n">{{ v.persons|num }}</td><td class="n">{{ v.cost_inr|inr }}</td>
+      <td class="n">{{ v.pv_benefit_inr|inr }}</td>
+      <td class="n">{{ (v.pv_benefit_inr / v.cost_inr)|dp2 if v.cost_inr else '—' }}</td></tr>
+  {% endfor %}
+  {% if phase_summary.unfunded.habitations %}
+    <tr style="background:#fdf1f1"><td><b>Unfunded</b> within the horizon</td>
+      <td class="n">{{ phase_summary.unfunded.habitations }}</td>
+      <td class="n">{{ phase_summary.unfunded.households|num }}</td>
+      <td class="n">{{ phase_summary.unfunded.persons|num }}</td>
+      <td class="n">{{ phase_summary.unfunded.cost_inr|inr }}</td>
+      <td class="n">{{ phase_summary.unfunded.pv_benefit_inr|inr }}</td><td class="n"></td></tr>
+  {% endif %}
+  </tbody>
+</table>
+{% if phase_summary.unfunded.habitations %}
+<div class="banner"><b>Unfunded need</b>
+  {{ phase_summary.unfunded.habitations }} habitation(s) carrying
+  {{ phase_summary.unfunded.persons|num }} people at risk do not fit inside
+  {{ plan_meta.n_phases }} years of budget. They are listed rather than dropped, because an
+  unfunded requirement is a decision the state should take knowingly.</div>
+{% endif %}
+{% else %}
+<p class="nofig">No phasing computed for this district.</p>
+{% endif %}
+
+<h2 class="pb"><span class="sec-no">8</span>Where every number came from</h2>
+<table>
+  <caption>Input datasets in this snapshot. Synthetic rows are stand-ins produced by this
+  system; they are physically plausible and they are not measurements.</caption>
+  <thead><tr><th>Dataset</th><th>Role</th><th>Vintage</th><th class="n">Resolution</th>
+    <th>Source</th><th>Licence</th><th>Status</th></tr></thead>
+  <tbody>
+  {% for ds in datasets %}
+    <tr{% if ds.synthetic %} style="background:#fdf6ef"{% endif %}>
+      <td>{{ ds.name }}</td><td>{{ ds.role }}</td><td class="n">{{ ds.vintage }}</td>
+      <td class="n">{{ ds.resolution }}</td><td class="small">{{ ds.source }}</td>
+      <td class="small">{{ ds.licence }}</td>
+      <td>{% if ds.synthetic %}<span class="flag">synthetic</span>{% else %}<span class="ok">authoritative</span>{% endif %}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+<p class="small">Snapshot <span class="mono">{{ d.snapshot_id }}</span> ·
+  ruleset <span class="mono">{{ manifest.ruleset_version }}</span> ·
+  grid backend <span class="mono">{{ manifest.grid.backend }}</span> ·
+  created <span class="mono">{{ manifest.created_at }}</span>{% if manifest.code_git_sha %} ·
+  code <span class="mono">{{ manifest.code_git_sha }}</span>{% endif %}. Re-running this
+  snapshot id with the same ruleset reproduces every figure in this document.</p>
+
+{% if model %}
+<h3>Model card — landslide susceptibility</h3>
+<table>
+  <tbody>
+    <tr><th style="width:26%">Form</th><td>L2-regularised logistic regression
+      (<span class="mono">{{ model.kind }}</span>) on standardised terrain predictors</td></tr>
+    <tr><th>Predictors</th><td class="mono small">
+      {% for f in model.features %}{{ f }} β={{ '%+.3f'|format(model.coef[loop.index0]) }}{{ ' · ' if not loop.last }}{% endfor %}
+      <br>intercept {{ '%+.3f'|format(model.intercept) }}
+      (uncorrected {{ '%+.3f'|format(model.intercept_raw) }})</td></tr>
+    <tr><th>Training set</th><td>{{ model.n_pos|num }} positive cells,
+      {{ model.n_neg|num }} negative cells</td></tr>
+    <tr><th>Discrimination</th><td>AUC {{ '%.4f'|format(model.auc_train) }} in-sample;
+      <b>{{ '%.4f'|format(model.auc_cv) }}</b> under spatially blocked cross-validation.
+      The blocked figure is the honest one — random k-fold on autocorrelated terrain leaks
+      neighbouring cells across the split and inflates AUC.</td></tr>
+    <tr><th>Prevalence correction</th><td>King &amp; Zeng (2001) prior correction to a true
+      prevalence of {{ model.true_prevalence|pct(2) }}. Without it a case-control sample
+      ranks cells correctly and reports absolute probabilities that are wrong by an order of
+      magnitude — and this system multiplies those probabilities by population, so the error
+      would propagate straight into the relocation cost.</td></tr>
+    <tr><th>Attribution</th><td>Exact Shapley values for a linear logit,
+      φ<sub>i</sub> = β<sub>i</sub>(z<sub>i</sub> − E[z<sub>i</sub>]) — closed-form, not
+      sampled, so a per-cell explanation is reproducible to the last digit and sums exactly to
+      the prediction. Standardisation means μ and σ are persisted with the coefficients;
+      without them the saved model cannot be turned back into either a prediction or an
+      attribution.</td></tr>
+    <tr><th>Known limits</th><td class="small">Trained on a synthetic inventory in this
+      snapshot: the coefficients are indicative of the direction and rough magnitude of terrain
+      relationships, not calibrated to observed failures in {{ d.name }}. Substitute the GSI
+      national landslide inventory before operational use. The model sees terrain only — it has
+      no knowledge of lithology, joint orientation, road cuts or drainage interference, all of
+      which govern real failures on the Joshimath slope.</td></tr>
+  </tbody>
+</table>
+{% endif %}
+{% if gev %}
+<h3>Extreme-value fit — design rainfall</h3>
+<p class="small">{{ gev.distribution }} fitted to {{ gev.n_years }} years of annual maxima:
+  location {{ gev.loc_mm|dp1 }} mm, scale {{ gev.scale_mm|dp1 }} mm,
+  shape ξ = {{ gev.shape_xi|dp2 }}
+  {%- if gev.shape_xi and gev.shape_xi > 0 %} (heavy-tailed — the largest events are
+  substantially larger than a Gumbel fit would suggest, which is why a fitted shape parameter is
+  used rather than assumed zero){% endif %}.
+  Return levels: 25-yr {{ '%.0f'|format(gev.rl_25yr_mm) }} mm ·
+  50-yr {{ '%.0f'|format(gev.rl_50yr_mm) }} mm ·
+  100-yr {{ '%.0f'|format(gev.rl_100yr_mm) }} mm.
+  Source: {{ gev.source }}{% if gev.is_synthetic %} <span class="flag">synthetic</span>{% endif %}.</p>
+{% endif %}
+
+<h3>Norms applied</h3>
+<table>
+  <caption>Every threshold in this report is a published Indian norm, cited. None is a
+  parameter this system invented.</caption>
+  <thead><tr><th>Norm</th><th class="n">Value</th><th>Unit</th><th>Source</th></tr></thead>
+  <tbody>
+  {% for key, n in norms %}
+    <tr><td>{{ key|title }}</td><td class="n">{{ n.value }}</td><td>{{ n.unit }}</td>
+      <td class="small">{{ n.source }}</td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<h2><span class="sec-no">9</span>What this analysis cannot do</h2>
+<p>A screening tool that presents itself as a survey gets people killed. The following are
+limits of method, not bugs, and they are stated here so that a reader can decide what weight to
+put on each finding.</p>
+<dl class="gloss">
+  <dt>It is a screening, not a geotechnical investigation.</dt>
+  <dd>Nothing here substitutes for borehole logs, a slope-stability analysis or a site
+    inspection. The output identifies <i>where to send an engineer</i>, in what order.</dd>
+
+  <dt>Population is disaggregated, not counted.</dt>
+  <dd>Census village totals are redistributed within the village by building footprint area,
+    storey estimate and probability of residential use, and the village total is conserved
+    exactly. A cell-level count is therefore an expectation, not a roll of residents. Village
+    totals are as good as the Census; cell values are as good as the footprint layer.</dd>
+
+  <dt>Land availability is the weakest input.</dt>
+  <dd>Ownership and land class drive the largest single exclusion in most funnels above, and it
+    is the layer most likely to be a stand-in. A site on land that turns out to be private or
+    forest is not a site. Revenue-record verification must precede any acquisition step.</dd>
+
+  <dt>Hazard interaction is approximated.</dt>
+  <dd>Perils are combined as independent annual probabilities with a coupling term for known
+    cascades. Real cascades — a landslide-dammed river breaching, a cyclone on a saturated
+    catchment — are correlated in ways a product of marginals understates. Where a coupling
+    term applies it is reported per cell.</dd>
+
+  <dt>No value is placed on human life.</dt>
+  <dd>Every benefit-cost ratio in this report counts avoided physical damage only. Mortality is
+    excluded deliberately: a value of statistical life makes relocation look profitable for
+    reasons the state should decide politically, not arithmetically. Every BCR here is therefore
+    a <b>lower bound</b> on the case for acting.</dd>
+
+  <dt>Effectiveness is never assumed complete.</dt>
+  <dd>No mitigation option is credited with eliminating risk, and no relocation is credited with
+    zero residual hazard — the receiving site's own residual probability is carried through and
+    printed.</dd>
+
+  <dt>Consent is not modelled.</dt>
+  <dd>Distance caps stand in for a social process they cannot replace. Households refuse to move
+    for reasons — grazing rights, a shrine, a fishing landing, a school-going child — that no
+    raster contains. Gram Sabha consultation is a precondition, not a downstream step.</dd>
+
+  {% if d.contains_synthetic %}
+  <dt>This snapshot contains synthetic inputs.</dt>
+  <dd>Marked row by row in section 8. Figures are internally consistent and externally
+    unverified. Publishing any habitation-level number from this snapshot as fact would be a
+    misrepresentation.</dd>
+  {% endif %}
+</dl>
+
+<h3>What would change these answers</h3>
+<ul class="tight">
+  <li>A real ownership and land-class layer would move sites in or out of the funnel at gate 7 —
+      the single highest-leverage data substitution available.</li>
+  <li>The GSI landslide inventory would replace the trained susceptibility surface and change
+      cell-level probabilities, though the ranking of habitations is driven mainly by
+      subsidence and slope, which are observed.</li>
+  <li>CGWB block groundwater status and the JJM source register would replace the inferred water
+      yield, which is the binding constraint on
+      {{ (all_sites|selectattr('binding_constraint','equalto','water')|list|length) }} of
+      {{ n_sites }} candidate parcels here — so it directly sets capacity.</li>
+  <li>A district-agreed residual-hazard cap and travel-distance limit would replace the defaults
+      used above. Both are policy choices, both are printed, and both can be changed and re-run
+      in under a second per district.</li>
+</ul>
+
+<h2><span class="sec-no">10</span>Recommendation and approval</h2>
+<p>Subject to field verification of the habitations in section 5, the district administration is
+recommended to:</p>
+<ol class="tight">
+  {% if tier_counts[0].n %}
+  <li>Issue notice and begin land acquisition for the
+      <b>{{ tier_counts[0].n }} IMMEDIATE habitation(s)</b> covering
+      {{ tier_counts[0].persons|num }} persons at risk, capital requirement
+      {{ tier_counts[0].cost|inr }}, inside the current financial year.</li>
+  {% endif %}
+  {% if tier_counts[1].n %}
+  <li>Commission geotechnical and revenue verification of the receiving parcels named for the
+      <b>{{ tier_counts[1].n }} SHORT_TERM habitation(s)</b>
+      ({{ tier_counts[1].persons|num }} persons, {{ tier_counts[1].cost|inr }}).</li>
+  {% endif %}
+  {% if tier_counts[3].n %}
+  <li>Sanction in-place mitigation for the <b>{{ tier_counts[3].n }} MITIGATE habitation(s)</b>
+      ({{ tier_counts[3].persons|num }} persons), where protection returns more avoided loss per
+      rupee than relocation.</li>
+  {% endif %}
+  <li>Replace the synthetic inputs listed in section 8 and re-run this screening before any
+      household is informed or any figure is published.</li>
+</ol>
+
+<div class="sign">
+  <div><b>Prepared by</b>PUNARVAAS screening pipeline, snapshot {{ d.snapshot_id }}<br>
+    Generated {{ generated }}</div>
+  <div><b>Verified by</b>Tehsildar / Revenue Inspector<br>Signature and date</div>
+  <div><b>Recommended by</b>District Disaster Management Authority<br>Signature and date</div>
+  <div><b>Approved by</b>District Magistrate / Collector, {{ d.name }}<br>Signature and date</div>
+</div>
+
+<div class="colophon">
+  PUNARVAAS · {{ d.district }} · {{ d.snapshot_id }} · ruleset {{ manifest.ruleset_version }} ·
+  {{ d.cells|num }} cells · {{ habitations|length }} habitations · {{ n_sites }} candidate
+  parcels ({{ n_accepted }} accepted) · Σ capital {{ total_gap_cost|inr_full }} ·
+  Σ PV benefit {{ total_pv_benefit|inr_full }}<br>
+  Advisory output of a decision-support screening. Not a legal notification of hazard zonation
+  and not a substitute for site investigation.
+</div>
+
+</main>
+</body>
+</html>

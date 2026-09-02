@@ -1,0 +1,49 @@
+# data — never commit rasters/vectors, they are large and re-derivable
+data/raw/**
+data/interim/**
+data/processed/**
+!data/**/.gitkeep
+!data/seed/*.sql.gz
+
+# python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+
+# node
+node_modules/
+web/dist/
+field/dist/
+*.tsbuildinfo
+
+# local artefacts
+out/
+*.sqlite
+*.sqlite-journal
+*.log
+.env
+.env.local
+.DS_Store
+
+# private / internal — do not push
+plan.md
+SIH.pdf
+
+# secrets & API keys
+*.key
+*.pem
+*.secret
+.env.*
+api_keys.json
+secrets.json
+credentials.json
+service-account*.json
+
+# database files
+*.db
+*.db-shm
+*.db-wal

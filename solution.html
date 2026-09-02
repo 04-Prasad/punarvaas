@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PUNARVAAS — SIH 2026 Solution Brief</title>
+<meta name="description" content="PUNARVAAS: Platform for Unified National Assessment of Risk, Vulnerability And Alternative-Site Selection. SIH 2026 Solution Brief for MHA/NDRF Disaster Management.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#090d15;--surface:#10172a;--surface2:#151e35;--surface3:#1a2540;
+  --border:rgba(56,82,130,.4);--border2:rgba(56,82,130,.6);
+  --text:#e4ecf9;--muted:#8da0c0;--dim:#5e7394;
+  --accent:#4da3ff;--accent2:#7c5cff;--accent-glow:rgba(77,163,255,.15);
+  --red:#ef4444;--orange:#f97316;--yellow:#eab308;--green:#22c55e;
+  --cyan:#06d6d0;--pink:#f472b6;
+  --mono:'JetBrains Mono',ui-monospace,monospace;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg);color:var(--text);
+  font:15px/1.7 var(--sans);
+  -webkit-font-smoothing:antialiased;
+}
+
+/* ── Ambient background ── */
+body::before{
+  content:'';position:fixed;inset:0;z-index:-1;pointer-events:none;
+  background:
+    radial-gradient(ellipse 900px 600px at 10% -5%,rgba(77,163,255,.12),transparent 55%),
+    radial-gradient(ellipse 800px 500px at 90% 5%,rgba(124,92,255,.10),transparent 55%),
+    radial-gradient(ellipse 700px 500px at 50% 100%,rgba(6,214,208,.06),transparent 50%);
+}
+
+/* ── Layout ── */
+.wrap{display:grid;grid-template-columns:240px 1fr;max-width:1520px;margin:0 auto}
+
+/* ── Sidebar ── */
+aside{
+  position:sticky;top:0;height:100vh;overflow-y:auto;
+  border-right:1px solid var(--border);padding:24px 14px 40px;
+  background:rgba(9,13,21,.85);backdrop-filter:blur(14px);z-index:10;
+}
+aside::-webkit-scrollbar{width:5px}
+aside::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.brand{display:flex;align-items:center;gap:10px;padding:0 6px 18px;border-bottom:1px solid var(--border);margin-bottom:16px}
+.brand .logo{
+  width:38px;height:38px;border-radius:10px;flex:0 0 38px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  display:grid;place-items:center;font-weight:900;font-size:16px;color:#080e1e;
+  box-shadow:0 4px 18px rgba(77,163,255,.35);
+}
+.brand b{font-size:15px;letter-spacing:.4px}
+.brand span{font-size:10px;color:var(--dim);letter-spacing:1.6px;text-transform:uppercase;display:block}
+nav a{
+  display:flex;align-items:center;gap:9px;
+  padding:7px 10px;margin:1px 0;border-radius:7px;
+  color:var(--muted);text-decoration:none;font-size:13px;font-weight:500;
+  border-left:2px solid transparent;transition:.15s;
+}
+nav a:hover{background:var(--surface2);color:var(--text)}
+nav a.on{background:rgba(77,163,255,.1);color:#cfe4ff;border-left-color:var(--accent)}
+nav a i{font-style:normal;font-size:13px;width:18px;text-align:center;opacity:.8}
+.navgrp{font-size:10px;letter-spacing:1.8px;text-transform:uppercase;color:var(--dim);padding:18px 10px 6px;font-weight:700}
+
+/* ── Main ── */
+main{padding:0 52px 120px;min-width:0}
+section{padding:56px 0;border-bottom:1px solid rgba(56,82,130,.2);scroll-margin-top:20px}
+section:last-child{border:0}
+h1{font-size:44px;line-height:1.1;letter-spacing:-1.5px;font-weight:900}
+h2{font-size:27px;letter-spacing:-.5px;margin-bottom:10px;display:flex;align-items:center;gap:12px;font-weight:800}
+h2 .n{
+  font:700 12px/1 var(--mono);color:var(--accent);
+  background:rgba(77,163,255,.1);border:1px solid rgba(77,163,255,.25);
+  padding:6px 9px;border-radius:7px;flex:0 0 auto;
+}
+h3{font-size:17px;margin:28px 0 12px;color:#dce8fb;font-weight:700}
+p{color:#bccfe6;margin:8px 0;max-width:90ch}
+.lead{font-size:17px;color:#b0c5e2;max-width:84ch}
+ul,ol{margin:8px 0 8px 20px;color:#bccfe6}
+li{margin:5px 0}
+b,strong{color:#f0f5ff;font-weight:650}
+code{font:12.5px var(--mono);background:var(--surface3);padding:2px 6px;border-radius:4px;color:#9fd0ff;border:1px solid var(--border)}
+a{color:var(--accent)}
+.sub{color:var(--dim);font-size:13px}
+hr{border:0;border-top:1px solid var(--border);margin:28px 0}
+
+/* ── Gradient text ── */
+.gr{background:linear-gradient(100deg,#fff 10%,var(--accent) 55%,var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ── Reveal animation ── */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+/* ── Hero ── */
+.hero{padding:64px 0 50px}
+.kicker{
+  display:inline-flex;align-items:center;gap:8px;font:700 11px/1 var(--mono);
+  letter-spacing:1.8px;text-transform:uppercase;color:var(--cyan);
+  background:rgba(6,214,208,.08);border:1px solid rgba(6,214,208,.25);
+  padding:7px 14px;border-radius:20px;margin-bottom:18px;
+}
+.pitch{
+  border-left:3px solid var(--accent);background:linear-gradient(90deg,rgba(77,163,255,.08),transparent 70%);
+  padding:18px 22px;border-radius:0 11px 11px 0;margin:24px 0;font-size:16.5px;color:#dbe8fa;line-height:1.65;
+}
+.meta{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.meta div{
+  background:var(--surface);border:1px solid var(--border);border-radius:9px;padding:10px 14px;font-size:12.5px;
+}
+.meta div s{display:block;text-decoration:none;color:var(--dim);font-size:10px;letter-spacing:1.3px;text-transform:uppercase;margin-bottom:3px}
+.meta div em{font-style:normal;color:#e8eefb;font-weight:600}
+
+/* ── KPI row ── */
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:22px 0}
+.kp{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 14px;text-align:center}
+.kp .kv{font:900 30px/1 var(--mono);background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.kp .kl{font-size:11.5px;color:var(--muted);margin-top:7px;line-height:1.35}
+
+/* ── Grid / cards ── */
+.grid{display:grid;gap:14px}
+.g2{grid-template-columns:repeat(auto-fit,minmax(320px,1fr))}
+.g3{grid-template-columns:repeat(auto-fit,minmax(250px,1fr))}
+.g4{grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.card{
+  background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;transition:.18s;
+}
+.card:hover{border-color:var(--border2);background:var(--surface2)}
+.card h5{font-size:14.5px;margin-bottom:7px;color:#eef4ff;display:flex;align-items:center;gap:8px;font-weight:700}
+.card p{font-size:13.5px;margin:5px 0;color:#a0b8d6}
+.card ul{margin-left:17px;font-size:13.2px}
+
+/* ── Tags ── */
+.tag{
+  display:inline-block;font:600 10.5px/1 var(--mono);letter-spacing:.6px;
+  padding:4px 8px;border-radius:5px;background:var(--surface3);color:var(--muted);border:1px solid var(--border2);
+}
+.tag.a{background:rgba(77,163,255,.12);color:#9ccfff;border-color:rgba(77,163,255,.3)}
+.tag.g{background:rgba(34,197,94,.12);color:#86efac;border-color:rgba(34,197,94,.3)}
+.tag.y{background:rgba(234,179,8,.12);color:#fde047;border-color:rgba(234,179,8,.3)}
+.tag.o{background:rgba(249,115,22,.12);color:#fdba74;border-color:rgba(249,115,22,.3)}
+.tag.r{background:rgba(239,68,68,.12);color:#fca5a5;border-color:rgba(239,68,68,.32)}
+.tag.p{background:rgba(124,92,255,.14);color:#c4b5fd;border-color:rgba(124,92,255,.32)}
+
+/* ── Callout boxes ── */
+.callout{border-radius:11px;padding:16px 20px;margin:18px 0;border:1px solid;font-size:14px;line-height:1.65}
+.callout.win{background:rgba(34,197,94,.06);border-color:rgba(34,197,94,.28)}
+.callout.warn{background:rgba(249,115,22,.06);border-color:rgba(249,115,22,.28)}
+.callout.dang{background:rgba(239,68,68,.06);border-color:rgba(239,68,68,.28)}
+.callout.info{background:rgba(77,163,255,.06);border-color:rgba(77,163,255,.25)}
+.callout b:first-child{display:block;margin-bottom:5px;font-size:12px;letter-spacing:1.2px;text-transform:uppercase}
+.callout.win b:first-child{color:#86efac}.callout.warn b:first-child{color:#fdba74}
+.callout.dang b:first-child{color:#fca5a5}.callout.info b:first-child{color:#9ccfff}
+
+/* ── Objective cards (star section) ── */
+.obj-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:16px;margin:20px 0}
+.obj-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:22px 22px 18px;position:relative;overflow:hidden;transition:.2s;
+}
+.obj-card:hover{border-color:var(--accent);transform:translateY(-2px);box-shadow:0 8px 30px rgba(77,163,255,.1)}
+.obj-card .obj-icon{
+  width:44px;height:44px;border-radius:11px;display:grid;place-items:center;
+  font-size:20px;margin-bottom:14px;
+}
+.obj-card h5{font-size:16px;font-weight:800;color:#f0f5ff;margin-bottom:8px}
+.obj-card p{font-size:13.5px;color:#a0b8d6;line-height:1.6}
+.obj-card .obj-tag{
+  margin-top:12px;display:inline-block;font:600 10px/1 var(--mono);
+  letter-spacing:.8px;padding:4px 8px;border-radius:5px;text-transform:uppercase;
+}
+.obj-card::after{
+  content:'';position:absolute;top:0;right:0;width:120px;height:120px;
+  border-radius:0 14px 0 80px;opacity:.06;pointer-events:none;
+}
+.obj1 .obj-icon{background:rgba(239,68,68,.12);color:#fca5a5}
+.obj1::after{background:var(--red)}
+.obj1 .obj-tag{background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.3)}
+.obj2 .obj-icon{background:rgba(34,197,94,.12);color:#86efac}
+.obj2::after{background:var(--green)}
+.obj2 .obj-tag{background:rgba(34,197,94,.1);color:#86efac;border:1px solid rgba(34,197,94,.3)}
+.obj3 .obj-icon{background:rgba(77,163,255,.12);color:#9ccfff}
+.obj3::after{background:var(--accent)}
+.obj3 .obj-tag{background:rgba(77,163,255,.1);color:#9ccfff;border:1px solid rgba(77,163,255,.3)}
+.obj4 .obj-icon{background:rgba(234,179,8,.12);color:#fde047}
+.obj4::after{background:var(--yellow)}
+.obj4 .obj-tag{background:rgba(234,179,8,.1);color:#fde047;border:1px solid rgba(234,179,8,.3)}
+.obj5 .obj-icon{background:rgba(124,92,255,.12);color:#c4b5fd}
+.obj5::after{background:var(--accent2)}
+.obj5 .obj-tag{background:rgba(124,92,255,.1);color:#c4b5fd;border:1px solid rgba(124,92,255,.3)}
+.obj6 .obj-icon{background:rgba(6,214,208,.12);color:#67e8e4}
+.obj6::after{background:var(--cyan)}
+.obj6 .obj-tag{background:rgba(6,214,208,.1);color:#67e8e4;border:1px solid rgba(6,214,208,.3)}
+
+/* ── Engine pipeline SVG area ── */
+.pipeline{margin:28px 0;padding:0;overflow-x:auto}
+.pipeline svg{display:block;margin:0 auto;max-width:100%}
+
+/* ── Flow steps ── */
+.flow{display:flex;align-items:stretch;gap:0;flex-wrap:wrap;margin:22px 0}
+.step{
+  flex:1 1 220px;background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:18px;position:relative;
+}
+.arrow{display:grid;place-items:center;padding:0 10px;color:var(--accent);font-size:24px;flex:0 0 auto}
+.step .num{
+  position:absolute;top:-10px;left:14px;font:700 10px/1 var(--mono);
+  background:var(--accent);color:#080e1e;padding:4px 8px;border-radius:5px;letter-spacing:.5px;
+}
+.step h5{margin:10px 0 7px;font-size:14.5px;color:#eef4ff;font-weight:700}
+.step p{font-size:13px;color:#a0b8d6;margin:4px 0}
+
+/* ── Zone bars ── */
+.zone{display:flex;align-items:center;gap:13px;padding:12px 16px;border-radius:10px;margin:7px 0;border:1px solid}
+.zone .dot{width:13px;height:13px;border-radius:50%;flex:0 0 13px}
+.zone .zn{font-weight:800;width:80px;font-size:14px}
+.zone .zd{font-size:13px;color:#a0b8d6;flex:1}
+.z-r{background:rgba(239,68,68,.07);border-color:rgba(239,68,68,.28)}.z-r .dot{background:var(--red)}.z-r .zn{color:#fca5a5}
+.z-o{background:rgba(249,115,22,.07);border-color:rgba(249,115,22,.28)}.z-o .dot{background:var(--orange)}.z-o .zn{color:#fdba74}
+.z-y{background:rgba(234,179,8,.07);border-color:rgba(234,179,8,.28)}.z-y .dot{background:var(--yellow)}.z-y .zn{color:#fde047}
+.z-g{background:rgba(34,197,94,.07);border-color:rgba(34,197,94,.28)}.z-g .dot{background:var(--green)}.z-g .zn{color:#86efac}
+
+/* ── Provenance card mockup ── */
+.mock{
+  background:#0b1120;border:1px solid var(--border2);border-radius:14px;
+  overflow:hidden;margin:20px 0;max-width:680px;box-shadow:0 20px 50px rgba(0,0,0,.45);
+}
+.mock .mh{
+  background:linear-gradient(90deg,rgba(239,68,68,.18),rgba(239,68,68,.03));
+  padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px;
+}
+.mock .mh .dot{width:11px;height:11px;border-radius:50%;background:var(--red);box-shadow:0 0 14px var(--red)}
+.mock .mh b{font-size:15px}
+.mock .mh .pill{margin-left:auto;font:700 10.5px var(--mono);background:var(--red);color:#fff;padding:4px 10px;border-radius:6px;letter-spacing:.8px}
+.mrow{display:grid;grid-template-columns:140px 1fr;gap:12px;padding:10px 18px;border-bottom:1px solid rgba(56,82,130,.35);font-size:13px}
+.mrow:last-of-type{border:0}
+.mrow .mk{color:var(--dim);font:600 11px var(--mono);letter-spacing:.5px;text-transform:uppercase;padding-top:2px}
+.mrow .mv{color:#cfdcef}
+.bar{height:6px;background:var(--surface3);border-radius:3px;overflow:hidden;margin-top:5px}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));border-radius:3px}
+.mfoot{background:rgba(249,115,22,.08);border-top:1px solid rgba(249,115,22,.22);padding:11px 18px;font-size:12.5px;color:#fdba74}
+
+/* ── Contribution bars ── */
+.cbar{display:grid;grid-template-columns:110px 1fr 44px;gap:10px;align-items:center;margin:5px 0;font-size:12.5px}
+.cbar .cn{color:var(--muted)}
+.cbar .ct{height:9px;background:var(--surface3);border-radius:4px;overflow:hidden}
+.cbar .ct i{display:block;height:100%;border-radius:4px}
+.cbar .cv{font:600 12px var(--mono);color:#cfdcef;text-align:right}
+
+/* ── Capacity meter ── */
+.cap{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin:16px 0}
+.capline{display:grid;grid-template-columns:130px 1fr 95px;gap:12px;align-items:center;margin:9px 0;font-size:13px}
+.capline .cl{color:var(--muted)}
+.capline .cm{height:20px;background:var(--surface3);border-radius:5px;overflow:hidden;position:relative}
+.capline .cm i{display:block;height:100%;border-radius:5px}
+.capline .cq{font:600 12px var(--mono);text-align:right;color:#cfdcef}
+.bind{border:1px dashed var(--red)!important;background:rgba(239,68,68,.06)!important}
+
+/* ── Tables ── */
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px}
+th{
+  text-align:left;padding:11px 14px;background:var(--surface2);color:var(--muted);
+  font-size:10.5px;letter-spacing:1.3px;text-transform:uppercase;border-bottom:1px solid var(--border2);font-weight:700;
+}
+td{padding:11px 14px;border-bottom:1px solid rgba(56,82,130,.5);color:#bacbe3;vertical-align:top}
+tr:hover td{background:rgba(22,31,48,.4)}
+.tbl{border:1px solid var(--border);border-radius:12px;overflow:hidden}
+td strong{color:#eaf2ff}
+
+/* ── Comparison side-by-side ── */
+.compare{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+.compare .side{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px;position:relative;overflow:hidden}
+.compare .side h5{font-size:14px;margin-bottom:10px;font-weight:700}
+.compare .side.bad{border-color:rgba(239,68,68,.3)}
+.compare .side.bad h5{color:#fca5a5}
+.compare .side.good{border-color:rgba(34,197,94,.3)}
+.compare .side.good h5{color:#86efac}
+.compare pre{
+  background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:8px;
+  padding:14px 16px;font:12.5px/1.7 var(--mono);color:#b9cee8;margin:8px 0;overflow-x:auto;
+}
+.compare pre .c{color:var(--dim)}
+.compare pre .f{color:#fde047}
+.compare pre .v{color:#86efac}
+.compare pre .k{color:var(--pink)}
+
+/* ── Timeline ── */
+.tl{position:relative;margin:22px 0 0 8px;padding-left:28px;border-left:2px solid var(--border2)}
+.tli{position:relative;padding:0 0 26px}
+.tli::before{
+  content:'';position:absolute;left:-35px;top:4px;width:12px;height:12px;border-radius:50%;
+  background:var(--accent);border:2px solid var(--bg);box-shadow:0 0 0 3px rgba(77,163,255,.18);
+}
+.tli .th{font-weight:800;font-size:15px;color:#eef4ff}
+.tli .tt{font:600 10.5px var(--mono);color:var(--accent);letter-spacing:1.2px;text-transform:uppercase;margin-bottom:3px}
+.tli p{font-size:13.5px;color:#a0b8d6;margin:4px 0}
+
+/* ── Powered-by strip ── */
+.tech-strip{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.tech-strip .chip{
+  background:var(--surface);border:1px solid var(--border);border-radius:8px;
+  padding:6px 12px;font-size:12px;color:var(--muted);font-weight:600;
+}
+
+/* ── Funnel ── */
+.funnel{margin:16px 0}
+.fn{
+  background:var(--surface);border:1px solid var(--border);border-radius:9px;
+  padding:11px 16px;margin:6px auto;display:flex;align-items:center;gap:11px;font-size:13.2px;
+}
+.fn .fi{font:700 10px var(--mono);color:var(--dim);width:26px;flex:0 0 26px}
+.fn .ft{flex:1;color:#bccfe6}
+.fn .fc{font:600 11.5px var(--mono);color:#fca5a5}
+.fn.pass .fc{color:#86efac}
+
+/* ── Verdict sentence ── */
+.verdict{
+  background:linear-gradient(135deg,rgba(34,197,94,.08),rgba(77,163,255,.06));
+  border:1px solid rgba(34,197,94,.25);border-radius:12px;padding:20px 24px;margin:20px 0;
+  font-size:15.5px;line-height:1.7;color:#dbe8fa;
+}
+.verdict b{color:#86efac}
+
+/* ── Footer ── */
+.foot{padding:36px 0;color:var(--dim);font-size:12.5px;text-align:center}
+.tick{color:var(--green);font-weight:700}
+.cross{color:var(--red);font-weight:700}
+
+/* ── Tech stack visual ── */
+.ts-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin:24px 0}
+.ts-card{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:22px 22px 18px;position:relative;overflow:hidden;transition:.2s;
+}
+.ts-card:hover{border-color:var(--accent);transform:translateY(-3px);box-shadow:0 10px 35px rgba(77,163,255,.12)}
+.ts-card .ts-icon{
+  width:48px;height:48px;border-radius:12px;display:grid;place-items:center;
+  font-size:22px;margin-bottom:14px;
+}
+.ts-card h5{font-size:15px;font-weight:800;color:#f0f5ff;margin-bottom:8px}
+.ts-card .ts-items{list-style:none;margin:0;padding:0}
+.ts-card .ts-items li{
+  display:flex;align-items:center;gap:8px;padding:5px 0;
+  font-size:13.5px;color:#a0b8d6;border-bottom:1px solid rgba(56,82,130,.2);
+}
+.ts-card .ts-items li:last-child{border:0}
+.ts-card .ts-items li .ts-dot{
+  width:7px;height:7px;border-radius:50%;flex:0 0 7px;
+}
+.ts-card::after{
+  content:'';position:absolute;top:0;right:0;width:100px;height:100px;
+  border-radius:0 14px 0 70px;opacity:.06;pointer-events:none;
+}
+.ts1 .ts-icon{background:rgba(77,163,255,.12);color:#9ccfff}
+.ts1::after{background:var(--accent)}
+.ts1 .ts-dot{background:var(--accent)}
+.ts2 .ts-icon{background:rgba(124,92,255,.12);color:#c4b5fd}
+.ts2::after{background:var(--accent2)}
+.ts2 .ts-dot{background:var(--accent2)}
+.ts3 .ts-icon{background:rgba(34,197,94,.12);color:#86efac}
+.ts3::after{background:var(--green)}
+.ts3 .ts-dot{background:var(--green)}
+.ts4 .ts-icon{background:rgba(249,115,22,.12);color:#fdba74}
+.ts4::after{background:var(--orange)}
+.ts4 .ts-dot{background:var(--orange)}
+.ts5 .ts-icon{background:rgba(239,68,68,.12);color:#fca5a5}
+.ts5::after{background:var(--red)}
+.ts5 .ts-dot{background:var(--red)}
+.ts6 .ts-icon{background:rgba(6,214,208,.12);color:#67e8e4}
+.ts6::after{background:var(--cyan)}
+.ts6 .ts-dot{background:var(--cyan)}
+.ts7 .ts-icon{background:rgba(234,179,8,.12);color:#fde047}
+.ts7::after{background:var(--yellow)}
+.ts7 .ts-dot{background:var(--yellow)}
+
+/* ── System architecture SVG ── */
+.arch-container{
+  background:var(--surface);border:1px solid var(--border);border-radius:16px;
+  padding:28px 20px;margin:28px 0;overflow-x:auto;
+}
+.arch-container svg{display:block;margin:0 auto}
+
+/* ── Architecture legend ── */
+.arch-legend{display:flex;flex-wrap:wrap;gap:16px;margin:18px 0;justify-content:center}
+.arch-legend .al-item{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted)}
+.arch-legend .al-swatch{width:14px;height:14px;border-radius:4px}
+
+/* ── Responsive ── */
+@media(max-width:1000px){
+  .wrap{grid-template-columns:1fr}
+  aside{position:static;height:auto;border-right:0;border-bottom:1px solid var(--border)}
+  main{padding:0 20px 80px}
+  h1{font-size:30px}
+  .compare{grid-template-columns:1fr}
+  .mrow,.capline,.cbar{grid-template-columns:1fr}
+  .arrow{transform:rotate(90deg);padding:6px 0}
+  .obj-grid{grid-template-columns:1fr}
+  .ts-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<aside>
+  <div class="brand">
+    <div class="logo">पु</div>
+    <div><b>PUNARVAAS</b><span>SIH 2026 · Brief</span></div>
+  </div>
+  <nav id="nav">
+    <div class="navgrp">Understand</div>
+    <a href="#top"><i>◆</i>The Pitch</a>
+    <a href="#objectives"><i>★</i>Objectives</a>
+    <a href="#problem"><i>①</i>The Problem</a>
+    <a href="#insight"><i>②</i>Core Insight</a>
+    <div class="navgrp">Solution</div>
+    <a href="#engines"><i>③</i>Three Engines</a>
+    <a href="#risk"><i>④</i>Risk Engine</a>
+    <a href="#site"><i>⑤</i>Site Discovery</a>
+    <a href="#capacity"><i>⑥</i>Carrying Capacity</a>
+    <a href="#xai"><i>⑦</i>Glass Box Card</a>
+    <a href="#priority"><i>⑧</i>Priority & Phasing</a>
+    <div class="navgrp">Win</div>
+    <a href="#edge"><i>⊕</i>Our Edge</a>
+    <a href="#proof"><i>⌾</i>Hindcast Proof</a>
+    <a href="#demo"><i>▶</i>Demo Script</a>
+    <a href="#impact"><i>☀</i>Impact</a>
+    <a href="#guard"><i>⚠</i>Guardrails</a>
+    <a href="#techapproach"><i>⚙</i>Technical Approach</a>
+    <a href="#build"><i>⚒</i>How We Build</a>
+  </nav>
+</aside>
+
+<main>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section class="hero" id="top">
+  <div class="kicker">◆ Smart India Hackathon 2026 · Solution Brief</div>
+  <h1><span class="gr">PUNARVAAS</span><br>Relocation Decision OS<br>for Vulnerable Habitations</h1>
+  <p class="lead" style="margin-top:16px">
+    <b>P</b>latform for <b>U</b>nified <b>N</b>ational <b>A</b>ssessment of <b>R</b>isk,
+    <b>V</b>ulnerability <b>A</b>nd <b>A</b>lternative-<b>S</b>ite Selection.
+    <span class="sub">(पुनर्वास — the word Indian disaster-management departments use for rehabilitation.)</span>
+  </p>
+
+  <div class="pitch">
+    A <b>glass-box decision system</b> that turns India's scattered hazard, census and terrain data into a
+    <b>signed, auditable, budgeted relocation plan</b> — habitation by habitation, household by household.
+    Not a map. A <b>decision</b>.
+  </div>
+
+  <div class="meta">
+    <div><s>Problem</s><em>Hazard-Based Red Zones &amp; Relocation</em></div>
+    <div><s>Ministry</s><em>Ministry of Home Affairs</em></div>
+    <div><s>Department</s><em>NDRF · Disaster Management Div.</em></div>
+    <div><s>Category</s><em>Software</em></div>
+    <div><s>Theme</s><em>Disaster Management</em></div>
+  </div>
+
+  <div class="kpi reveal">
+    <div class="kp"><div class="kv" data-count="3">3</div><div class="kl">Chained decision<br>engines</div></div>
+    <div class="kp"><div class="kv" data-count="8">8</div><div class="kl">PS deliverables<br>covered</div></div>
+    <div class="kp"><div class="kv">~120m</div><div class="kl">Sub-village H3<br>resolution</div></div>
+    <div class="kp"><div class="kv" data-count="4">4</div><div class="kl">Hindcast<br>validation events</div></div>
+    <div class="kp"><div class="kv" data-count="0">0</div><div class="kl">Unexplained colours<br>on the map</div></div>
+  </div>
+</section>
+
+<!-- ══════════════════ OBJECTIVES ══════════════════ -->
+<section id="objectives">
+  <h2><span class="n">★</span>Our Six Objectives</h2>
+  <p class="lead">Each objective maps directly to what SIH judges score. This is what we are building, and why.</p>
+
+  <div class="obj-grid reveal">
+    <div class="obj-card obj1">
+      <div class="obj-icon">🎯</div>
+      <h5>Objective 1 — Identify Red Zones at Sub-Village Level</h5>
+      <p>Go beyond whole-village labelling. Use H3 hexagonal grids (~120 m) to pinpoint exactly <b>which hamlets within a village</b> are unsafe — so we can say "420 of 600 residents" instead of "this village is risky".</p>
+      <span class="obj-tag">Judges: Problem Understanding + Innovation</span>
+    </div>
+    <div class="obj-card obj2">
+      <div class="obj-icon">🏔️</div>
+      <h5>Objective 2 — Auto-Discover Safe Relocation Sites</h5>
+      <p>Don't just accept uploaded candidate sites — <b>automatically find, rank and explain</b> the best relocation options within a livelihood-preserving radius, with hard legal exclusions and suitability scoring.</p>
+      <span class="obj-tag">Judges: Technical Depth + Feasibility</span>
+    </div>
+    <div class="obj-card obj3">
+      <div class="obj-icon">💧</div>
+      <h5>Objective 3 — Compute Carrying Capacity by Binding Constraint</h5>
+      <p>A site's true capacity = its <b>scarcest resource</b> (usually water). Compute per-resource limits against real Indian norms (JJM, RTE, IPHS), name the bottleneck, and cost the gap in ₹ mapped to the government scheme that pays.</p>
+      <span class="obj-tag">Judges: Technical Depth + Impact</span>
+    </div>
+    <div class="obj-card obj4">
+      <div class="obj-icon">📋</div>
+      <h5>Objective 4 — Produce a Budgeted, Phased Relocation Plan</h5>
+      <p>Rank habitations into <b>Immediate / Short-term / Medium-term / Mitigate</b> tiers. Solve who moves where, in which year, under a real budget — with benefit–cost analysis and consent as a hard constraint.</p>
+      <span class="obj-tag">Judges: Innovation + Impact</span>
+    </div>
+    <div class="obj-card obj5">
+      <div class="obj-icon">🔍</div>
+      <h5>Objective 5 — Make Every Decision Fully Explainable</h5>
+      <p>Clicking any Red Zone answers <b>8 questions</b>: which hazard, which datasets, what resolution, what factors, how confident, who approved the threshold, when last updated. Zero unexplained colours.</p>
+      <span class="obj-tag">Judges: Technical Depth + Q&A Survival</span>
+    </div>
+    <div class="obj-card obj6">
+      <div class="obj-icon">✅</div>
+      <h5>Objective 6 — Prove It on Real Disasters</h5>
+      <p>Feed the system <b>only pre-event data</b> and check if it would have raised the alarm. Wayanad 2024, Joshimath 2023, coastal erosion in Odisha — validated backwards, not just claimed forwards.</p>
+      <span class="obj-tag">Judges: Presentation + Impact</span>
+    </div>
+  </div>
+
+  <div class="callout win reveal">
+    <b>The single strategic bet</b>
+    Every team will show a red map. <b>We will show a signed, costed, phased government decision — and prove it
+    would have worked on a disaster that already happened.</b>
+  </div>
+</section>
+
+<!-- ══════════════════ PROBLEM ══════════════════ -->
+<section id="problem">
+  <h2><span class="n">01</span>What the Problem Statement Actually Asks</h2>
+  <p class="lead">
+    <b>"Intelligent Identification of Hazard-Based Red Zones, Carrying Capacity Assessment,
+    and Immediate Relocation Needs for Vulnerable Habitations."</b>
+  </p>
+  <p>The PS opens with a story: a village of 1,200 residents below a landslide-prone slope. The government
+  <em>already knows</em> it's vulnerable. What it cannot answer is <b>ten questions</b> — which we group into three engines:</p>
+
+  <div class="grid g2 reveal">
+    <div class="card">
+      <h5><span class="tag r">RISK</span> Engine 1 — Where is it unsafe?</h5>
+      <ol style="font-size:13.2px">
+        <li>Is the <b>entire</b> village unsafe, or only some parts?</li>
+        <li>Which hazards affect it?</li>
+        <li>How severe and frequent are those hazards?</li>
+        <li>Should the population be relocated immediately?</li>
+        <li>Permanently, or only seasonally?</li>
+      </ol>
+    </div>
+    <div class="card">
+      <h5><span class="tag g">SITE</span> Engine 2 &amp; 3 — Where can they go?</h5>
+      <ol start="6" style="font-size:13.2px">
+        <li>Where can residents be relocated?</li>
+        <li>Is the proposed site itself safe from other hazards?</li>
+        <li>How many people can the new site support?</li>
+        <li>Does it have water, roads, hospitals, schools?</li>
+        <li>Which villages get priority when resources are limited?</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="callout dang reveal">
+    <b>The sentence that defines the whole build</b>
+    The PS says today this data <em>"may exist in separate maps, reports, spreadsheets and government departments.
+    There is no unified intelligent system that converts it into a clear relocation decision."</em>
+    <br><br>Our product is that conversion layer. Everything we build must end in <b>an action, a number, and a rupee figure.</b>
+  </div>
+
+  <h3>Three non-negotiables from the PS</h3>
+  <div class="grid g3 reveal">
+    <div class="card">
+      <h5>❶ A decision, not data</h5>
+      <p><span class="cross">Weak:</span> "This village is high-risk."</p>
+      <p><span class="tick">Strong:</span> "420 of 600 residents face unacceptable risk. Site B holds 300 due to water. Relocate 110 highest-risk households first."</p>
+    </div>
+    <div class="card">
+      <h5>❷ Not a black box</h5>
+      <p>AI in <b>8 named slots only</b>. Land law, water norms, zone approval → must be <b>rule-based, expert-controlled</b>.</p>
+    </div>
+    <div class="card">
+      <h5>❸ Fully explainable</h5>
+      <p>Click any Red Zone → see <b>which hazard, which datasets, what factors, who approved, when last updated</b>.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ INSIGHT ══════════════════ -->
+<section id="insight">
+  <h2><span class="n">02</span>The Core Insight That Wins</h2>
+
+  <div class="callout win reveal">
+    <b>Go sub-village</b>
+    The PS's <b>very first question</b> is <em>"Is the entire village unsafe or only some parts?"</em>
+    Every competing team answers at village-centroid level — one dot, one colour, one verdict.
+    We answer at <b>hamlet and building level</b>. That single choice lets us say
+    <b>"420 of 600 residents"</b> instead of <b>"this village is risky"</b>.
+  </div>
+
+  <div class="compare reveal">
+    <div class="side bad">
+      <h5><span class="tag r">EVERYONE ELSE</span> Village-level</h5>
+      <pre><span class="c">// one row per village</span>
+village_id: <span class="v">"IN-UK-CH-0417"</span>
+risk:       <span class="f">HIGH</span>
+population: <span class="f">1200</span>
+verdict:    <span class="f">"relocate"</span></pre>
+      <p class="sub">Implies moving all 1,200 people. Costs 4× more than needed. Government shelves the file.</p>
+    </div>
+    <div class="side good">
+      <h5><span class="tag g">PUNARVAAS</span> Hamlet + building level</h5>
+      <pre><span class="c">// ~120 m H3 hexagons inside the village</span>
+hex ...e1  RED     pop <span class="f">198</span>  hh <span class="f">41</span>
+hex ...e3  RED     pop <span class="f">222</span>  hh <span class="f">47</span>
+hex ...f7  ORANGE  pop <span class="f">104</span>  hh <span class="f">22</span>
+hex ...a2  YELLOW  pop <span class="f">380</span>  hh <span class="f">79</span>
+<span class="c">────────────────────────────</span>
+<span class="k">RED total</span>  <span class="v">420 of 1200</span> · <span class="v">88 households</span></pre>
+      <p class="sub">Move 88 households, not 250. Cost drops ~65%. The file gets approved.</p>
+    </div>
+  </div>
+
+  <h3>How: Dasymetric Population Disaggregation</h3>
+  <p>Census gives population per <b>village</b>. We redistribute it onto <b>building footprints</b>,
+  weighted by area × estimated storeys — so every H3 hexagon has a defensible population count.</p>
+  <div class="callout warn reveal">
+    <b>Honesty is the strategy</b>
+    This is an <b>estimate</b> and we label it as one. Every disaggregated figure carries a confidence score, and the
+    field-verification app can replace it with a <b>surveyed household roster</b>. The PS forbids claiming
+    "software replaces field surveys" — so we make the survey a first-class feature.
+  </div>
+</section>
+
+<!-- ══════════════════ ENGINES ══════════════════ -->
+<section id="engines">
+  <h2><span class="n">03</span>The Three Chained Engines</h2>
+  <p>The PS names three questions. Each is an engine, and each <b>feeds the next</b>. The chain is the product.</p>
+
+  <!-- Animated SVG pipeline -->
+  <div class="pipeline reveal">
+    <svg viewBox="0 0 900 180" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto">
+      <defs>
+        <linearGradient id="g1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ef4444"/><stop offset="100%" stop-color="#f97316"/></linearGradient>
+        <linearGradient id="g2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#22c55e"/><stop offset="100%" stop-color="#06d6d0"/></linearGradient>
+        <linearGradient id="g3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4da3ff"/><stop offset="100%" stop-color="#7c5cff"/></linearGradient>
+        <filter id="glow"><feGaussianBlur stdDeviation="3" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+      </defs>
+      <!-- Engine 1 -->
+      <rect x="20" y="20" width="240" height="140" rx="16" fill="rgba(239,68,68,.08)" stroke="rgba(239,68,68,.3)" stroke-width="1.5"/>
+      <text x="140" y="52" text-anchor="middle" fill="#fca5a5" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" letter-spacing="1.5">ENGINE 1</text>
+      <text x="140" y="76" text-anchor="middle" fill="#f0f5ff" font-family="Inter,sans-serif" font-size="15" font-weight="800">Risk Engine</text>
+      <text x="140" y="100" text-anchor="middle" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="11">Where are the unsafe</text>
+      <text x="140" y="115" text-anchor="middle" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="11">habitations?</text>
+      <text x="140" y="143" text-anchor="middle" fill="#fca5a5" font-family="JetBrains Mono,monospace" font-size="10">Red/Orange/Yellow/Green</text>
+      <!-- Arrow 1 -->
+      <path d="M270 90 L320 90" stroke="url(#g1)" stroke-width="2.5" fill="none" filter="url(#glow)">
+        <animate attributeName="stroke-dashoffset" from="50" to="0" dur="2s" repeatCount="indefinite"/>
+      </path>
+      <polygon points="318,82 335,90 318,98" fill="url(#g1)"/>
+      <!-- Engine 2 -->
+      <rect x="340" y="20" width="240" height="140" rx="16" fill="rgba(34,197,94,.08)" stroke="rgba(34,197,94,.3)" stroke-width="1.5"/>
+      <text x="460" y="52" text-anchor="middle" fill="#86efac" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" letter-spacing="1.5">ENGINE 2</text>
+      <text x="460" y="76" text-anchor="middle" fill="#f0f5ff" font-family="Inter,sans-serif" font-size="15" font-weight="800">Site Engine</text>
+      <text x="460" y="100" text-anchor="middle" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="11">Which safer sites can</text>
+      <text x="460" y="115" text-anchor="middle" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="11">support relocation?</text>
+      <text x="460" y="143" text-anchor="middle" fill="#86efac" font-family="JetBrains Mono,monospace" font-size="10">Ranked sites + capacity</text>
+      <!-- Arrow 2 -->
+      <path d="M590 90 L640 90" stroke="url(#g2)" stroke-width="2.5" fill="none" filter="url(#glow)">
+        <animate attributeName="stroke-dashoffset" from="50" to="0" dur="2s" repeatCount="indefinite"/>
+      </path>
+      <polygon points="638,82 655,90 638,98" fill="url(#g2)"/>
+      <!-- Engine 3 -->
+      <rect x="660" y="20" width="220" height="140" rx="16" fill="rgba(77,163,255,.08)" stroke="rgba(77,163,255,.3)" stroke-width="1.5"/>
+      <text x="770" y="52" text-anchor="middle" fill="#9ccfff" font-family="JetBrains Mono,monospace" font-size="11" font-weight="700" letter-spacing="1.5">ENGINE 3</text>
+      <text x="770" y="76" text-anchor="middle" fill="#f0f5ff" font-family="Inter,sans-serif" font-size="15" font-weight="800">Plan Engine</text>
+      <text x="770" y="100" text-anchor="middle" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="11">Who should be</text>
+      <text x="770" y="115" text-anchor="middle" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="11">relocated first?</text>
+      <text x="770" y="143" text-anchor="middle" fill="#9ccfff" font-family="JetBrains Mono,monospace" font-size="10">Priority + Budget + BCR</text>
+    </svg>
+  </div>
+
+  <div class="callout info reveal">
+    <b>Why chaining matters</b>
+    A village is only <b>"Immediate relocation"</b> if a viable destination exists with enough capacity.
+    Otherwise the honest verdict is <b>"Immediate risk, no viable site — build site capacity first"</b> — a
+    completely different government action with a different budget line. Systems that don't chain can't tell those two apart. <b>Ours can.</b>
+  </div>
+</section>
+
+<!-- ══════════════════ RISK ENGINE ══════════════════ -->
+<section id="risk">
+  <h2><span class="n">04</span>Engine 1 — Risk Scoring</h2>
+  <p>Combine multi-hazard maps → score exposure and vulnerability → classify into 4 zones → <b>explain every number</b>.</p>
+
+  <h3>The risk formula</h3>
+  <div class="card reveal" style="text-align:center;padding:24px;margin:16px 0;border-color:rgba(77,163,255,.25);background:linear-gradient(135deg,rgba(77,163,255,.06),rgba(124,92,255,.04))">
+    <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:10px">Multi-hazard union (not a weighted average)</div>
+    <div style="font:600 22px var(--mono);color:#dbe8fa;letter-spacing:.5px">H = 1 − Π<sub>i</sub> (1 − h<sub>i</sub>)</div>
+    <div style="font-size:13px;color:var(--muted);margin-top:10px;max-width:600px;display:inline-block">A weighted average lets one catastrophic hazard look "medium". A probabilistic union will not.</div>
+  </div>
+
+  <div class="card reveal" style="text-align:center;padding:24px;margin:16px 0;border-color:rgba(77,163,255,.25);background:linear-gradient(135deg,rgba(77,163,255,.06),rgba(124,92,255,.04))">
+    <div style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-bottom:10px">Risk, expressed two ways</div>
+    <div style="font:600 20px var(--mono);color:#dbe8fa">R<sub>score</sub> = 100 · Ĥ × Ê × V̂ &nbsp;|&nbsp; EAP = Σ p<sub>i</sub>·pop<sub>i</sub>·f<sub>i</sub></div>
+    <div style="font-size:13px;color:var(--muted);margin-top:10px;max-width:600px;display:inline-block"><b>R (0–100)</b> for ranking. <b>EAL in ₹</b> for benefit–cost analysis — which is what unlocks government money.</div>
+  </div>
+
+  <h3>7 hazard layers we compute</h3>
+  <div class="grid g4 reveal">
+    <div class="card"><h5>🏔️ Landslide</h5><p>XGBoost on GSI inventory + SHAP</p><span class="tag a">ML</span></div>
+    <div class="card"><h5>🌊 Flood</h5><p>HAND from DEM + Sentinel-1 SAR inundation frequency</p><span class="tag">Physical</span></div>
+    <div class="card"><h5>🏖️ Erosion</h5><p>Multi-date bankline extraction → erosion rate m/yr</p><span class="tag a">CV</span></div>
+    <div class="card"><h5>🌧️ Cloudburst</h5><p>GEV extreme-value fit on IMD gridded rainfall</p><span class="tag">Statistical</span></div>
+    <div class="card"><h5>📡 Ground deformation</h5><p>InSAR velocity mm/yr — the Joshimath signal</p><span class="tag p">DIFFERENTIATOR</span></div>
+    <div class="card"><h5>🌍 Seismic</h5><p>IS 1893 zone factor × site amplification</p><span class="tag">Code-based</span></div>
+    <div class="card"><h5>🏔️ GLOF / Cyclone</h5><p>Glacial lake inventory + cyclone track density</p><span class="tag">Physical</span></div>
+  </div>
+
+  <h3>Four zones — rules, not colours</h3>
+  <div class="reveal">
+    <div class="zone z-r"><span class="dot"></span><span class="zn">RED</span>
+      <span class="zd"><b>Unacceptable risk.</b> → Relocation or urgent intervention.</span></div>
+    <div class="zone z-o"><span class="dot"></span><span class="zn">ORANGE</span>
+      <span class="zd"><b>High risk requiring inspection.</b> → Short-term mitigation and monitoring.</span></div>
+    <div class="zone z-y"><span class="dot"></span><span class="zn">YELLOW</span>
+      <span class="zd"><b>Moderate risk.</b> → Preparedness and building restrictions.</span></div>
+    <div class="zone z-g"><span class="dot"></span><span class="zn">GREEN</span>
+      <span class="zd"><b>Comparatively safer.</b> → Possible relocation candidate site.</span></div>
+  </div>
+  <p>Zones are assigned by a <b>versioned YAML rule engine</b> — editable by an SDMA, carrying an approving
+  authority + version. Thresholds are <b>policy</b>, not engineering.</p>
+</section>
+
+<!-- ══════════════════ SITE DISCOVERY ══════════════════ -->
+<section id="site">
+  <h2><span class="n">05</span>Engine 2 — Safe-Site Discovery</h2>
+  <div class="callout info reveal">
+    <b>We exceed the PS here</b>
+    The PS only asks for site upload. We also <b>auto-discover and rank</b> candidates — because the officer who doesn't know where to move people is the officer who needs this tool most.
+  </div>
+
+  <h3>The discovery funnel — hard exclusions first, then scoring</h3>
+  <div class="funnel reveal">
+    <div class="fn"><span class="fi">◇</span><span class="ft"><b>Search space:</b> all cells within 5 km of the origin habitation</span><span class="fc">18,400</span></div>
+    <div class="fn"><span class="fi">1</span><span class="ft">Exclude <b>Red &amp; Orange zones</b> — site must be safe from other hazards too</span><span class="fc">−9,110</span></div>
+    <div class="fn"><span class="fi">2</span><span class="ft">Exclude <b>slope &gt; 15%</b> (unbuildable terrain)</span><span class="fc">−4,220</span></div>
+    <div class="fn"><span class="fi">3</span><span class="ft">Exclude <b>forest, protected areas, CRZ</b> — hard legal stop</span><span class="fc">−2,050</span></div>
+    <div class="fn"><span class="fi">4</span><span class="ft">Exclude <b>floodplain &amp; erosion</b> corridors</span><span class="fc">−980</span></div>
+    <div class="fn"><span class="fi">5</span><span class="ft">Exclude <b>prime irrigated agricultural land</b></span><span class="fc">−610</span></div>
+    <div class="fn"><span class="fi">6</span><span class="ft">Prefer <b>government / revenue land</b></span><span class="fc">−390</span></div>
+    <div class="fn pass"><span class="fi">7</span><span class="ft">Keep only <b>contiguous patches</b> above minimum viable area</span><span class="fc">→ 6 patches</span></div>
+    <div class="fn pass"><span class="fi">★</span><span class="ft"><b>Score &amp; rank</b> surviving patches with AHP-weighted TOPSIS</span><span class="fc">→ top 3</span></div>
+  </div>
+
+  <h3>13 suitability criteria (11 from PS + 2 of ours)</h3>
+  <div class="grid g4 reveal">
+    <div class="card"><h5>Physical</h5><ul><li>Outside Red Zones</li><li>Terrain slope</li><li>Flood/landslide safety</li><li>Available land</li></ul></div>
+    <div class="card"><h5>Services</h5><ul><li>Road connectivity</li><li>Water access</li><li>Healthcare</li><li>Education</li><li>Power &amp; telecom</li></ul></div>
+    <div class="card"><h5>Legal</h5><ul><li>Environmental restrictions</li><li>Land ownership class</li></ul></div>
+    <div class="card" style="border-color:rgba(124,92,255,.3)"><h5><span class="tag p">OURS</span> Human factors</h5>
+      <ul><li><b>Livelihood Continuity</b></li><li><b>Social Disruption</b></li></ul></div>
+  </div>
+
+  <div class="callout warn reveal">
+    <b>The insight most teams will miss</b>
+    Indian resettlement colonies stand half-empty because families were moved away from their fields.
+    A site scoring 92 on infrastructure but 20 on livelihood continuity is a <b>failed relocation waiting to happen</b>.
+  </div>
+</section>
+
+<!-- ══════════════════ CARRYING CAPACITY ══════════════════ -->
+<section id="capacity">
+  <h2><span class="n">06</span>Engine 3a — Carrying Capacity</h2>
+  <p>A site's true capacity = its <b>scarcest resource</b> (<b>Liebig's Law of the Minimum</b>).</p>
+
+  <div class="cap reveal">
+    <div style="font-size:13px;color:var(--muted);margin-bottom:12px">
+      <b style="color:#eef4ff">Candidate Site B</b> · 4.2 ha · demand = <b>600 people / 126 households</b></div>
+    <div class="capline"><span class="cl">Housing land</span><span class="cm"><i style="width:100%;background:var(--green)"></i></span><span class="cq">840 people</span></div>
+    <div class="capline"><span class="cl">Road capacity</span><span class="cm"><i style="width:100%;background:var(--green)"></i></span><span class="cq">1,200+</span></div>
+    <div class="capline"><span class="cl">School (RTE)</span><span class="cm"><i style="width:82%;background:var(--yellow)"></i></span><span class="cq">690</span></div>
+    <div class="capline"><span class="cl">Health (IPHS)</span><span class="cm"><i style="width:75%;background:var(--yellow)"></i></span><span class="cq">620</span></div>
+    <div class="capline"><span class="cl">Sanitation</span><span class="cm"><i style="width:70%;background:var(--orange)"></i></span><span class="cq">580</span></div>
+    <div class="capline bind" style="padding:6px 8px;border-radius:7px">
+      <span class="cl" style="color:#fca5a5"><b>Water (55 lpcd JJM)</b></span>
+      <span class="cm"><i style="width:36%;background:var(--red)"></i></span>
+      <span class="cq" style="color:#fca5a5"><b>300 people</b></span></div>
+    <hr style="margin:14px 0">
+    <div style="font-size:14px;color:#dbe8fa">
+      <b>Verdict:</b> Site B supports <b>300 of 600</b>. <b>Binding constraint: water yield.</b><br>
+      <span class="sub">₹42 lakh borewell + OHT under Jal Jeevan Mission raises capacity to 640.</span>
+    </div>
+  </div>
+
+  <div class="verdict reveal">
+    <em>"Site B is the best relocation option but currently supports only <b>300 people</b> because of limited water capacity.
+    Immediate relocation of the <b>110 highest-risk households</b> is recommended, followed by <b>water-capacity expansion</b> for the remaining population."</em>
+    <br><br><span class="sub">↑ This is quoted from the PS itself. Our engine generates it automatically.</span>
+  </div>
+
+  <h3>Gaps → Government schemes → ₹</h3>
+  <div class="grid g4 reveal">
+    <div class="card"><h5>💧 Water</h5><p><b>Jal Jeevan Mission</b></p></div>
+    <div class="card"><h5>🏠 Housing</h5><p><b>PMAY-Gramin</b></p></div>
+    <div class="card"><h5>🛣️ Roads</h5><p><b>PMGSY</b></p></div>
+    <div class="card"><h5>🏫 Schools</h5><p><b>Samagra Shiksha</b></p></div>
+    <div class="card"><h5>🏥 Health</h5><p><b>IPHS / NHM</b></p></div>
+    <div class="card"><h5>⚡ Power</h5><p><b>RDSS</b></p></div>
+    <div class="card"><h5>🚜 Land dev.</h5><p><b>MGNREGA</b></p></div>
+    <div class="card"><h5>🚻 Sanitation</h5><p><b>SBM-Gramin</b></p></div>
+  </div>
+  <p class="sub">This makes our output <b>fundable</b> — a DPR-ready convergence plan with scheme codes and ₹ figures.</p>
+</section>
+
+<!-- ══════════════════ GLASS BOX ══════════════════ -->
+<section id="xai">
+  <h2><span class="n">07</span>The "Why Is This Red?" Card — Our Winning Screen</h2>
+  <p>The PS lists <b>8 questions</b> a judge will ask when clicking a Red Zone. Our card <em>is</em> those questions.</p>
+
+  <div class="mock reveal">
+    <div class="mh"><span class="dot"></span><b>Mundakkai Hamlet 2</b>
+      <span class="sub" style="font:11px var(--mono)">h3 · 8a2f8d1e...</span>
+      <span class="pill">RED</span></div>
+
+    <div class="mrow"><div class="mk">Which hazard?</div><div class="mv">
+      <b>Landslide 0.81</b> <span class="tag r">GOVERNING</span> · compounded by cloudburst 0.62 · union <b>0.93</b></div></div>
+
+    <div class="mrow"><div class="mk">Which rule?</div><div class="mv">
+      <code>R-07</code> High landslide susceptibility + recurrent history<br>
+      <span class="sub">0.81 ≥ 0.75 threshold (margin +0.06) · 3 events in last decade ≥ 2</span></div></div>
+
+    <div class="mrow"><div class="mk">What contributed?</div><div class="mv">
+      <div class="cbar"><span class="cn">Slope > 32°</span><span class="ct"><i style="width:34%;background:var(--red)"></i></span><span class="cv">34%</span></div>
+      <div class="cbar"><span class="cn">Rainfall extremes</span><span class="ct"><i style="width:22%;background:var(--orange)"></i></span><span class="cv">22%</span></div>
+      <div class="cbar"><span class="cn">Lithology (phyllite)</span><span class="ct"><i style="width:18%;background:var(--yellow)"></i></span><span class="cv">18%</span></div>
+      <div class="cbar"><span class="cn">Housing fragility</span><span class="ct"><i style="width:14%;background:var(--accent)"></i></span><span class="cv">14%</span></div>
+      <div class="cbar"><span class="cn">Road-cut proximity</span><span class="ct"><i style="width:12%;background:var(--accent2)"></i></span><span class="cv">12%</span></div>
+      <span class="sub">SHAP values for ML + linear attribution for index components</span></div></div>
+
+    <div class="mrow"><div class="mk">Who is exposed?</div><div class="mv">
+      <b>198 people · 41 households</b> · 12 children &lt;6 · 19 elderly 60+ · 3 PwD<br>
+      <span class="sub">Method: dasymetric from Census 2011 · <b>not yet field-verified</b></span></div></div>
+
+    <div class="mrow"><div class="mk">Which datasets?</div><div class="mv">
+      GSI NLSM <span class="sub">(2023 · 1:50k)</span> · CartoDEM <span class="sub">(v3 · 30 m)</span> ·
+      IMD rainfall <span class="sub">(0.25° · 1901–2025)</span> · Census 2011 · Sentinel-1 <span class="sub">(2025-08-28)</span></div></div>
+
+    <div class="mrow"><div class="mk">How confident?</div><div class="mv">
+      <b>72%</b><div class="bar"><i style="width:72%"></i></div>
+      <span class="sub">▾ Census 14 years old · ▾ DEM 30 m coarse · ▾ No field verification ·
+      ▴ Model AUC 0.89 · ▴ 3 confirmed events</span></div></div>
+
+    <div class="mrow"><div class="mk">Who approved?</div><div class="mv">
+      Ruleset <code>uk_hill_v2.1</code> · owner <b>SDMA-UK</b> · approved <b>12 Mar 2026</b></div></div>
+
+    <div class="mrow"><div class="mk">Last updated?</div><div class="mv">
+      <b>28 Aug 2026, 04:12 IST</b> · trigger: <em>new Sentinel-1 pass</em> ·
+      <span class="tag o">CHANGED: Orange → Red</span></div></div>
+
+    <div class="mfoot">⚠ <b>Advisory only.</b> Not a legal habitability determination. Requires field verification and DDMA review.</div>
+  </div>
+
+  <div class="callout win reveal">
+    <b>Practise this: open it in under 20 seconds</b>
+    When a judge clicks a red hexagon, read this card aloud. It answers all 8 questions on one screen.
+    Most teams will have a coloured map and a shrug.
+  </div>
+</section>
+
+<!-- ══════════════════ PRIORITY ══════════════════ -->
+<section id="priority">
+  <h2><span class="n">08</span>Engine 3b — Priority Tiers &amp; Phasing</h2>
+  <p>The PS demands four priority tiers. We match the exact output table, then go further with BCR and budget optimisation.</p>
+
+  <div class="tbl reveal">
+  <table>
+    <tr><th>Habitation</th><th>Risk</th><th>Pop.</th><th>Safe site?</th><th>Priority</th><th>Our additions</th></tr>
+    <tr><td><strong>Village A</strong></td><td>91</td><td>600</td><td><span class="tick">Yes</span></td>
+      <td><span class="tag r">IMMEDIATE</span></td><td>88 hh · BCR 3.2 · ₹8.4 Cr</td></tr>
+    <tr><td><strong>Village B</strong></td><td>82</td><td>1,250</td><td>Partial</td>
+      <td><span class="tag o">SHORT-TERM</span></td><td>split 2 sites · BCR 2.1</td></tr>
+    <tr><td><strong>Village C</strong></td><td>69</td><td>340</td><td><span class="tick">Yes</span></td>
+      <td><span class="tag y">MEDIUM-TERM</span></td><td>BCR 1.4 · defer to FY28</td></tr>
+    <tr><td><strong>Village D</strong></td><td>51</td><td>780</td><td><span class="cross">No</span></td>
+      <td><span class="tag g">MITIGATE</span></td><td>slope stabilisation BCR 4.7</td></tr>
+  </table>
+  </div>
+
+  <div class="callout info reveal">
+    <b>Village D shows domain mastery</b>
+    Risk 51, no safe site, but mitigation BCR <b>4.7</b> — retaining walls are <em>four times better value</em> than relocation here.
+    A system that always recommends relocation is not intelligent.
+  </div>
+
+  <h3>All 7 PS scenarios fall out of one optimiser</h3>
+  <div class="grid g3 reveal">
+    <div class="card"><h5>Relocate entire population</h5><p class="sub">Remove budget cap → shows full cost.</p></div>
+    <div class="card"><h5>Highest-risk households only</h5><p class="sub">Tight budget → optimiser selects them.</p></div>
+    <div class="card"><h5>Strengthen in place</h5><p class="sub">Compare relocation BCR vs mitigation BCR.</p></div>
+    <div class="card"><h5>Split across two sites</h5><p class="sub">Capacity constraints force it; cohesion keeps families together.</p></div>
+    <div class="card"><h5>Site A vs Site B</h5><p class="sub">Fix site, re-solve, diff outcomes.</p></div>
+    <div class="card"><h5>Future population growth</h5><p class="sub">20-yr projection → capacity gaps reappear.</p></div>
+    <div class="card"><h5>Increased hazard severity</h5><p class="sub">CMIP6 climate deltas → Orange flips Red.</p></div>
+    <div class="card"><h5>Seasonal vs permanent</h5><p class="sub">Monsoon-only → evacuation plan, not relocation.</p></div>
+    <div class="card" style="border-color:rgba(124,92,255,.3)"><h5><span class="tag p">DAPP</span> Decision triggers</h5>
+      <p class="sub">"InSAR > 30 mm/yr for 2 quarters → auto-escalate to Red"</p></div>
+  </div>
+</section>
+
+<!-- ══════════════════ OUR EDGE ══════════════════ -->
+<section id="edge">
+  <h2><span class="n">⊕</span>What Makes Us Different</h2>
+
+  <h3>Ideas we rejected (and why other teams lose)</h3>
+  <div class="tbl reveal">
+  <table>
+    <tr><th>Shape</th><th>Why it loses</th><th>Verdict</th></tr>
+    <tr><td><strong>Multi-hazard GIS dashboard</strong></td>
+      <td>PS demands "more than a binary red/non-red map." Every team builds this. Answers zero of the ten questions.</td><td><span class="tag r">REJECT</span></td></tr>
+    <tr><td><strong>Deep-learning risk predictor</strong></td>
+      <td>Directly violates "no black box". Dies the moment a judge asks "why is this cell red?"</td><td><span class="tag r">REJECT</span></td></tr>
+    <tr><td><strong>Real-time early-warning system</strong></td>
+      <td><b>Wrong problem.</b> EWS exists nationally. This PS is about <em>permanent habitability and relocation</em>.</td><td><span class="tag r">REJECT</span></td></tr>
+    <tr><td><strong>Site-suitability calculator alone</strong></td>
+      <td>Only Engine 2. No Red Zones, no prioritisation, no risk quantification.</td><td><span class="tag r">REJECT</span></td></tr>
+    <tr style="background:rgba(34,197,94,.04)"><td><strong>Full hazard→decision chain</strong></td>
+      <td>Covers all 8 deliverables, satisfies all 3 non-negotiables, produces the PS's gold-standard output sentence.</td><td><span class="tag g">BUILD THIS</span></td></tr>
+  </table>
+  </div>
+
+  <h3>International lessons we absorbed</h3>
+  <div class="grid g3 reveal">
+    <div class="card"><h5>🇳🇿 NZ RiskScape</h5><p>H×E×V · scenario modelling → our risk spine.</p></div>
+    <div class="card"><h5>🇺🇸 FEMA NRI / Hazus</h5><p>SVI + EAL + BCR → our benefit–cost module.</p></div>
+    <div class="card"><h5>🇵🇭 GeoRiskPH</h5><p>One-click reports + attribution → our provenance card.</p></div>
+    <div class="card"><h5>🇯🇵 Japan collective relocation</h5><p>Higher-ground siting + livelihood analysis → Engine 2.</p></div>
+    <div class="card"><h5>🇳🇿 Managed retreat / DAPP</h5><p>P/A/A/R + triggers + phasing → our 4-option comparator.</p></div>
+    <div class="card" style="border-color:rgba(34,197,94,.3);background:rgba(34,197,94,.04)">
+      <h5><span class="tag g">OUR EDGE</span></h5>
+      <p><b>None of them chain</b> risk → site → capacity → budgeted plan, at sub-village granularity, with provenance on every number and consent capture.</p></div>
+  </div>
+
+  <h3>Three sentences — say them without notes</h3>
+  <div class="grid g3 reveal">
+    <div class="card" style="border-color:rgba(34,197,94,.3)"><h5>1 · The chain</h5>
+      <p>"We don't just find unsafe villages — we find them, find where those people can actually live,
+      compute how many that place can hold, and tell the Collector who to move first with the money he has."</p></div>
+    <div class="card" style="border-color:rgba(34,197,94,.3)"><h5>2 · The glass box</h5>
+      <p>"There is no colour on our map you cannot click and get a full audit trail for —
+      which hazard, which dataset, which threshold, whose approval, how confident."</p></div>
+    <div class="card" style="border-color:rgba(34,197,94,.3)"><h5>3 · The proof</h5>
+      <p>"We tested it backwards. Given only pre-event data, it flags the hamlets that were actually destroyed —
+      and picks the resettlement sites the government actually chose."</p></div>
+  </div>
+</section>
+
+<!-- ══════════════════ HINDCAST ══════════════════ -->
+<section id="proof">
+  <h2><span class="n">⌾</span>Hindcast Validation — Our Credibility Weapon</h2>
+  <p class="lead">Feed the system <b>only data available before</b> a known event. Check whether it would have raised the alarm.</p>
+
+  <div class="grid g2 reveal">
+    <div class="card">
+      <h5>🏔️ Wayanad Landslide (Jul 2024)</h5>
+      <p><b>Feed:</b> Only pre-2024 hazard, terrain, rainfall data</p>
+      <p><b>Expect:</b> Mundakkai–Chooralmala hamlets classify <b>RED</b>, landslide governing</p>
+    </div>
+    <div class="card">
+      <h5>🏚️ Joshimath Subsidence (Jan 2023)</h5>
+      <p><b>Feed:</b> InSAR velocity up to Dec 2022</p>
+      <p><b>Expect:</b> Rule R-01 fires on sustained creep → RED <b>before cracks appeared</b></p>
+    </div>
+    <div class="card">
+      <h5>🌊 Coastal Erosion, Odisha</h5>
+      <p><b>Feed:</b> Shoreline positions 1990–2015 only</p>
+      <p><b>Expect:</b> Erosion-rate projection condemns the settlement inside the 10-year line</p>
+    </div>
+    <div class="card" style="border-color:rgba(34,197,94,.3)">
+      <h5>✅ Resettlement site match</h5>
+      <p><b>Feed:</b> Run Engine 2 blind around an eroded village</p>
+      <p><b>Expect:</b> Our top-ranked candidate <b>matches the site the state actually built</b></p>
+    </div>
+  </div>
+
+  <div class="callout warn reveal">
+    <b>Rules for doing this honestly</b>
+    Hard data cutoff. No post-event imagery. Model trained outside the test district. If a test fails,
+    <b>report it and explain why</b>. A team showing one honest failure is <em>more</em> credible than a team claiming six perfect hits.
+  </div>
+</section>
+
+<!-- ══════════════════ DEMO ══════════════════ -->
+<section id="demo">
+  <h2><span class="n">▶</span>The 60-Second Demo Path</h2>
+  <p>One rehearsed click-path. Same order every time. Nothing typed live.</p>
+  <div class="tl reveal">
+    <div class="tli"><div class="tt">0:00 – 0:10 · Frame it</div><div class="th">District view, zones on</div>
+      <p>"Chamoli district. 412 habitations. 23 in multi-hazard Red Zones — 8,400 people."</p></div>
+    <div class="tli"><div class="tt">0:10 – 0:22 · Core insight</div><div class="th">Zoom into Village A</div>
+      <p>"Only the eastern hamlet is Red — <b>420 of 600 people</b>. Moving 88 instead of 250 households. Two-thirds cost reduction."</p></div>
+    <div class="tli"><div class="tt">0:22 – 0:34 · Glass box</div><div class="th">Click the red hex → provenance card</div>
+      <p>"Landslide 0.81, Rule R-07, slope 34%. GSI 2023, CartoDEM 30 m. Confidence 72%. SDMA approved March."</p></div>
+    <div class="tli"><div class="tt">0:34 – 0:44 · Engine 2 + 3</div><div class="th">"So where do they go?"</div>
+      <p>"Three auto-discovered sites. Site B wins but holds only 300 — binding constraint: water. ₹42L under JJM takes it to 640."</p></div>
+    <div class="tli"><div class="tt">0:44 – 0:54 · The decision</div><div class="th">Budget slider → phased plan</div>
+      <p>"₹8 Cr → 110 households, phase 1. BCR 3.2. Village D: slope stabilisation at 4.7 is the right answer."</p></div>
+    <div class="tli"><div class="tt">0:54 – 1:00 · Close the loop</div><div class="th">Approve → signed PDF</div>
+      <p>"DDMA reviews, SDMA signs. Out comes a DPR with scheme codes + GeoJSON. A decision, not a colour."</p></div>
+  </div>
+  <div class="callout dang reveal">
+    <b>Demo safety</b>
+    Everything precomputed. Zero live API calls. Recorded backup on USB. One person drives, one narrates.
+  </div>
+</section>
+
+<!-- ══════════════════ IMPACT ══════════════════ -->
+<section id="impact">
+  <h2><span class="n">☀</span>Real-World Impact</h2>
+  <div class="grid g2 reveal">
+    <div class="card"><h5>1 · Live unmet backlog</h5>
+      <p>Uttarakhand, Himachal, Sikkim, Assam, Odisha — hundreds of villages queued for rehabilitation with
+      <b>no systematic prioritisation tool</b>. Officers rank villages on files and site visits today.</p></div>
+    <div class="card"><h5>2 · Makes relocation fundable</h5>
+      <p>BCR + scheme-convergence output converts "this village is unsafe" into a <b>financeable DPR annexure</b>
+      with scheme codes and ₹ figures.</p></div>
+    <div class="card"><h5>3 · Makes relocation legitimate</h5>
+      <p>Provenance + audit + versioned thresholds + consent + grievance register = decisions that survive
+      an <b>RTI request, a PIL, and a village meeting</b>.</p></div>
+    <div class="card"><h5>4 · Reduces failed relocations</h5>
+      <p>Scoring livelihood continuity and social disruption stops the pattern of <b>half-empty colonies and families walking back</b>.</p></div>
+    <div class="card"><h5>5 · Creates a public good</h5>
+      <p>Open, versioned <b>Habitation Risk Registry</b> keyed to LGD codes — reusable for damage assessment, land-use regulation, insurance design.</p></div>
+    <div class="card"><h5>6 · Fills a documented global gap</h5>
+      <p>The PS states it: no country has combined all five (risk + sites + capacity + phasing + explainability) in one system. <b>We do.</b></p></div>
+  </div>
+  <div class="callout win reveal">
+    <b>The line to end the pitch on</b>
+    "Every rupee spent moving the wrong village is a rupee not spent saving the right one.
+    PUNARVAAS is how a Collector proves which is which — and can show his working."
+  </div>
+</section>
+
+<!-- ══════════════════ GUARDRAILS ══════════════════ -->
+<section id="guard">
+  <h2><span class="n">⚠</span>Guardrails — 7 Claims We Must Never Make</h2>
+  <p>The PS dedicates a whole section to this. Violating it in the demo is an instant loss.</p>
+
+  <div class="tbl reveal">
+  <table>
+    <tr><th style="width:40%">Forbidden claim</th><th>What we say instead</th></tr>
+    <tr><td><span class="cross">✕</span> "AI will automatically relocate people."</td>
+      <td>AI ranks and explains. <b>Humans decide.</b> Relocation requires DDMA + SDMA approval.</td></tr>
+    <tr><td><span class="cross">✕</span> "This site is legally approved."</td>
+      <td>"Legally <b>screened</b> against available layers; statutory clearance is separate."</td></tr>
+    <tr><td><span class="cross">✕</span> "The model can order forced displacement."</td>
+      <td>"No household is scheduled without recorded consent." <b>Consent is a hard constraint in the optimiser.</b></td></tr>
+    <tr><td><span class="cross">✕</span> "Every Red Zone is permanently uninhabitable."</td>
+      <td>"Unacceptable risk <b>under current conditions</b> — mitigation can de-escalate."</td></tr>
+    <tr><td><span class="cross">✕</span> "100% accuracy."</td>
+      <td>"AUC 0.89, confidence scores shown, known limitations documented."</td></tr>
+    <tr><td><span class="cross">✕</span> "Software replaces field surveys."</td>
+      <td>"It <b>targets</b> field surveys where they change decisions most."</td></tr>
+    <tr><td><span class="cross">✕</span> "Satellite data determines capacity."</td>
+      <td>"Capacity needs CGWB groundwater, facility records and ground verification."</td></tr>
+  </table>
+  </div>
+  <div class="callout info reveal">
+    <b>Turn this into a slide</b>
+    <b>"What our system deliberately does not claim."</b> It reads as maturity and pre-empts the hardest Q&amp;A questions.
+  </div>
+</section>
+
+<!-- ══════════════════ TECHNICAL APPROACH ══════════════════ -->
+<section id="techapproach">
+  <h2><span class="n">⚙</span>Technical Approach</h2>
+  <p class="lead">Our technology choices are driven by three constraints: <b>geospatial-native</b> processing, <b>explainability by construction</b>, and <b>on-premise deployability</b> for sovereign Indian data.</p>
+
+  <!-- ── TECHNOLOGY STACK ── -->
+  <h3>Technology Stack</h3>
+  <div class="ts-grid reveal">
+
+    <div class="ts-card ts1">
+      <div class="ts-icon">🖥️</div>
+      <h5>Frontend & Visualization</h5>
+      <ul class="ts-items">
+        <li><span class="ts-dot"></span><b>React 18 + TypeScript</b></li>
+        <li><span class="ts-dot"></span><b>MapLibre GL JS</b> — OSS map renderer</li>
+        <li><span class="ts-dot"></span><b>deck.gl H3 Layer</b> — hexagonal overlay</li>
+        <li><span class="ts-dot"></span><b>Vite</b> — build tooling</li>
+        <!-- #toadd any additional frontend libraries -->
+      </ul>
+    </div>
+
+    <div class="ts-card ts2">
+      <div class="ts-icon">⚡</div>
+      <h5>Backend & API</h5>
+      <ul class="ts-items">
+        <li><span class="ts-dot"></span><b>FastAPI</b> — async Python API</li>
+        <li><span class="ts-dot"></span><b>PostgreSQL + PostGIS</b> — geospatial DB</li>
+        <li><span class="ts-dot"></span><b>H3-py</b> — hex indexing</li>
+        <li><span class="ts-dot"></span><b>Redis</b> — caching layer</li>
+        <!-- #toadd any additional backend services -->
+      </ul>
+    </div>
+
+    <div class="ts-card ts3">
+      <div class="ts-icon">🤖</div>
+      <h5>ML Algorithms & Libraries</h5>
+      <ul class="ts-items">
+        <li><span class="ts-dot"></span><b>XGBoost + SHAP</b> — explainable ML</li>
+        <li><span class="ts-dot"></span><b>Scikit-learn</b> — preprocessing & metrics</li>
+        <li><span class="ts-dot"></span><b>SciPy</b> — statistical models (GEV)</li>
+        <!-- #toadd TensorFlow / PyTorch if used -->
+        <!-- #toadd any NLP or CV libraries -->
+      </ul>
+    </div>
+
+    <div class="ts-card ts4">
+      <div class="ts-icon">🌍</div>
+      <h5>Geospatial Processing</h5>
+      <ul class="ts-items">
+        <li><span class="ts-dot"></span><b>GDAL / Rasterio</b> — raster I/O</li>
+        <li><span class="ts-dot"></span><b>WhiteboxTools</b> — HAND, slope</li>
+        <li><span class="ts-dot"></span><b>Google Earth Engine</b> — satellite data</li>
+        <li><span class="ts-dot"></span><b>GeoPandas / Shapely</b> — vector ops</li>
+        <!-- #toadd any additional geospatial tools -->
+      </ul>
+    </div>
+
+    <div class="ts-card ts5">
+      <div class="ts-icon">📊</div>
+      <h5>Decision Science & Optimization</h5>
+      <ul class="ts-items">
+        <li><span class="ts-dot"></span><b>OR-Tools (CP-SAT)</b> — constrained optimizer</li>
+        <li><span class="ts-dot"></span><b>AHP / TOPSIS</b> — multi-criteria ranking</li>
+        <li><span class="ts-dot"></span><b>YAML Rule Engine</b> — versioned thresholds</li>
+        <!-- #toadd any additional optimization tools -->
+      </ul>
+    </div>
+
+    <div class="ts-card ts6">
+      <div class="ts-icon">☁️</div>
+      <h5>Platform & DevOps</h5>
+      <ul class="ts-items">
+        <li><span class="ts-dot"></span><b>Docker Compose</b> — containerization</li>
+        <li><span class="ts-dot"></span><b>Keycloak</b> — RBAC auth</li>
+        <li><span class="ts-dot"></span><b>OGC WMS/WFS</b> — interop standards</li>
+        <li><span class="ts-dot"></span><b>On-Premise Ready</b> — NIC / State DC</li>
+        <!-- #toadd CI/CD pipeline details -->
+      </ul>
+    </div>
+
+    <div class="ts-card ts7">
+      <div class="ts-icon">📄</div>
+      <h5>Reports & Output</h5>
+      <ul class="ts-items">
+        <li><span class="ts-dot"></span><b>Jinja2 + WeasyPrint</b> — PDF generation</li>
+        <li><span class="ts-dot"></span><b>Pydantic v2</b> — data contracts</li>
+        <li><span class="ts-dot"></span><b>GeoJSON / GeoPackage</b> — spatial export</li>
+        <!-- #toadd any additional reporting tools -->
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- #toadd: Programming Languages section if needed (Python, TypeScript, SQL) -->
+  <!-- #toadd: Database schemas or data models -->
+  <!-- #toadd: Security & authentication details beyond Keycloak -->
+
+  <!-- ── SYSTEM ARCHITECTURE ── -->
+  <h3>System Architecture</h3>
+  <p>End-to-end data flow from raw inputs through three chained engines to a signed, budgeted relocation plan.</p>
+
+  <div class="arch-container reveal">
+    <svg viewBox="0 0 1100 680" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;min-width:900px">
+      <defs>
+        <linearGradient id="ga1" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#4da3ff"/><stop offset="100%" stop-color="#7c5cff"/></linearGradient>
+        <linearGradient id="ga2" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ef4444"/><stop offset="100%" stop-color="#f97316"/></linearGradient>
+        <linearGradient id="ga3" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#22c55e"/><stop offset="100%" stop-color="#06d6d0"/></linearGradient>
+        <linearGradient id="ga4" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#eab308"/><stop offset="100%" stop-color="#f97316"/></linearGradient>
+        <linearGradient id="ga5" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#7c5cff"/><stop offset="100%" stop-color="#f472b6"/></linearGradient>
+        <filter id="archglow"><feGaussianBlur stdDeviation="2" result="blur"/><feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+        <marker id="arrowBlue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0,0 8,3 0,6" fill="#4da3ff" opacity=".8"/>
+        </marker>
+        <marker id="arrowRed" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0,0 8,3 0,6" fill="#ef4444" opacity=".8"/>
+        </marker>
+        <marker id="arrowGreen" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0,0 8,3 0,6" fill="#22c55e" opacity=".8"/>
+        </marker>
+        <marker id="arrowYellow" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0,0 8,3 0,6" fill="#eab308" opacity=".8"/>
+        </marker>
+        <marker id="arrowPurple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0,0 8,3 0,6" fill="#7c5cff" opacity=".8"/>
+        </marker>
+      </defs>
+
+      <!-- ═══ ROW 1: DATA INPUTS ═══ -->
+      <!-- Start badge -->
+      <rect x="15" y="30" width="70" height="32" rx="16" fill="#22c55e"/>
+      <text x="50" y="51" text-anchor="middle" fill="#080e1e" font-family="Inter,sans-serif" font-size="12" font-weight="800">START</text>
+
+      <!-- Data Source boxes -->
+      <rect x="120" y="18" width="140" height="56" rx="10" fill="rgba(77,163,255,.08)" stroke="rgba(77,163,255,.3)" stroke-width="1"/>
+      <text x="190" y="38" text-anchor="middle" fill="#9ccfff" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" letter-spacing="1">HAZARD DATA</text>
+      <text x="190" y="55" text-anchor="middle" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">GSI · IMD · NRSC · SAR</text>
+
+      <rect x="290" y="18" width="140" height="56" rx="10" fill="rgba(77,163,255,.08)" stroke="rgba(77,163,255,.3)" stroke-width="1"/>
+      <text x="360" y="38" text-anchor="middle" fill="#9ccfff" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" letter-spacing="1">CENSUS & EXPOSURE</text>
+      <text x="360" y="55" text-anchor="middle" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">Census · BMTPC · OSM</text>
+
+      <rect x="460" y="18" width="140" height="56" rx="10" fill="rgba(77,163,255,.08)" stroke="rgba(77,163,255,.3)" stroke-width="1"/>
+      <text x="530" y="38" text-anchor="middle" fill="#9ccfff" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" letter-spacing="1">TERRAIN & DEM</text>
+      <text x="530" y="55" text-anchor="middle" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">CartoDEM · Sentinel</text>
+
+      <rect x="630" y="18" width="140" height="56" rx="10" fill="rgba(77,163,255,.08)" stroke="rgba(77,163,255,.3)" stroke-width="1"/>
+      <text x="700" y="38" text-anchor="middle" fill="#9ccfff" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" letter-spacing="1">LAND & LEGAL</text>
+      <text x="700" y="55" text-anchor="middle" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">FSI · Bhu-Naksha · CRZ</text>
+
+      <!-- #toadd: additional data source boxes here -->
+
+      <!-- Arrows from START to Data -->
+      <line x1="85" y1="46" x2="118" y2="46" stroke="#4da3ff" stroke-width="1.5" marker-end="url(#arrowBlue)" opacity=".6"/>
+
+      <!-- ═══ ROW 2: PROCESSING LAYER ═══ -->
+      <rect x="120" y="110" width="650" height="50" rx="12" fill="rgba(77,163,255,.05)" stroke="rgba(77,163,255,.15)" stroke-width="1" stroke-dasharray="4,3"/>
+      <text x="445" y="133" text-anchor="middle" fill="#5e7394" font-family="JetBrains Mono,monospace" font-size="10" letter-spacing="2">GEOSPATIAL PROCESSING LAYER — GDAL · Rasterio · WhiteboxTools · GEE · H3-py</text>
+      <text x="445" y="149" text-anchor="middle" fill="#3d5478" font-family="Inter,sans-serif" font-size="9">Ingestion → Reprojection → H3 Hexagonal Indexing (~120m) → Dasymetric Disaggregation</text>
+
+      <!-- Arrows: data row → processing -->
+      <line x1="190" y1="74" x2="190" y2="108" stroke="#4da3ff" stroke-width="1.2" marker-end="url(#arrowBlue)" opacity=".5"/>
+      <line x1="360" y1="74" x2="360" y2="108" stroke="#4da3ff" stroke-width="1.2" marker-end="url(#arrowBlue)" opacity=".5"/>
+      <line x1="530" y1="74" x2="530" y2="108" stroke="#4da3ff" stroke-width="1.2" marker-end="url(#arrowBlue)" opacity=".5"/>
+      <line x1="700" y1="74" x2="700" y2="108" stroke="#4da3ff" stroke-width="1.2" marker-end="url(#arrowBlue)" opacity=".5"/>
+
+      <!-- ═══ ROW 3: THREE ENGINES ═══ -->
+      <!-- Engine 1: Risk -->
+      <rect x="40" y="200" width="300" height="130" rx="14" fill="rgba(239,68,68,.06)" stroke="rgba(239,68,68,.3)" stroke-width="1.5"/>
+      <text x="190" y="224" text-anchor="middle" fill="#fca5a5" font-family="JetBrains Mono,monospace" font-size="10" font-weight="700" letter-spacing="1.5">ENGINE 1 — RISK ENGINE</text>
+      <text x="190" y="248" text-anchor="middle" fill="#f0f5ff" font-family="Inter,sans-serif" font-size="13" font-weight="700">Multi-Hazard Risk Scoring</text>
+      <!-- sub-items in engine 1 -->
+      <text x="75" y="272" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">• XGBoost + SHAP (landslide)</text>
+      <text x="75" y="286" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">• HAND model (flood)</text>
+      <text x="75" y="300" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">• InSAR velocity (subsidence)</text>
+      <text x="220" y="272" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">• GEV extreme rainfall</text>
+      <text x="220" y="286" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">• Bankline erosion rate</text>
+      <text x="220" y="300" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">• Union: H=1−Π(1−hᵢ)</text>
+      <!-- Output label -->
+      <rect x="110" y="315" width="160" height="22" rx="5" fill="rgba(239,68,68,.15)" stroke="rgba(239,68,68,.3)" stroke-width="1"/>
+      <text x="190" y="330" text-anchor="middle" fill="#fca5a5" font-family="JetBrains Mono,monospace" font-size="9" font-weight="600">Red / Orange / Yellow / Green</text>
+
+      <!-- Engine 2: Site -->
+      <rect x="400" y="200" width="300" height="130" rx="14" fill="rgba(34,197,94,.06)" stroke="rgba(34,197,94,.3)" stroke-width="1.5"/>
+      <text x="550" y="224" text-anchor="middle" fill="#86efac" font-family="JetBrains Mono,monospace" font-size="10" font-weight="700" letter-spacing="1.5">ENGINE 2 — SITE ENGINE</text>
+      <text x="550" y="248" text-anchor="middle" fill="#f0f5ff" font-family="Inter,sans-serif" font-size="13" font-weight="700">Safe-Site Discovery & Ranking</text>
+      <text x="435" y="272" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">• Exclusion funnel (7 filters)</text>
+      <text x="435" y="286" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">• Legal: CRZ, forest, protected</text>
+      <text x="435" y="300" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">• AHP-weighted TOPSIS rank</text>
+      <text x="600" y="272" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">• 13 suitability criteria</text>
+      <text x="600" y="286" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">• Livelihood continuity</text>
+      <text x="600" y="300" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">• Social disruption score</text>
+      <rect x="475" y="315" width="150" height="22" rx="5" fill="rgba(34,197,94,.15)" stroke="rgba(34,197,94,.3)" stroke-width="1"/>
+      <text x="550" y="330" text-anchor="middle" fill="#86efac" font-family="JetBrains Mono,monospace" font-size="9" font-weight="600">Ranked Sites + Capacity</text>
+
+      <!-- Engine 3: Plan -->
+      <rect x="760" y="200" width="300" height="130" rx="14" fill="rgba(124,92,255,.06)" stroke="rgba(124,92,255,.3)" stroke-width="1.5"/>
+      <text x="910" y="224" text-anchor="middle" fill="#c4b5fd" font-family="JetBrains Mono,monospace" font-size="10" font-weight="700" letter-spacing="1.5">ENGINE 3 — PLAN ENGINE</text>
+      <text x="910" y="248" text-anchor="middle" fill="#f0f5ff" font-family="Inter,sans-serif" font-size="13" font-weight="700">Priority, Budget & Phasing</text>
+      <text x="795" y="272" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">• Carrying capacity (Liebig)</text>
+      <text x="795" y="286" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">• OR-Tools CP-SAT optimizer</text>
+      <text x="795" y="300" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">• Benefit–Cost Ratio (BCR)</text>
+      <text x="950" y="272" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">• 4-tier prioritization</text>
+      <text x="950" y="286" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">• Scheme convergence ₹</text>
+      <text x="950" y="300" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">• Consent as constraint</text>
+      <rect x="838" y="315" width="145" height="22" rx="5" fill="rgba(124,92,255,.15)" stroke="rgba(124,92,255,.3)" stroke-width="1"/>
+      <text x="910" y="330" text-anchor="middle" fill="#c4b5fd" font-family="JetBrains Mono,monospace" font-size="9" font-weight="600">Priority + Budget + BCR</text>
+
+      <!-- Arrows: processing → engines -->
+      <line x1="300" y1="160" x2="190" y2="198" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrowRed)" opacity=".5"/>
+      <line x1="445" y1="160" x2="445" y2="160" stroke="none"/>
+      <line x1="445" y1="160" x2="550" y2="198" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arrowGreen)" opacity=".5"/>
+
+      <!-- Arrow: Engine 1 → Engine 2 -->
+      <path d="M340 265 L398 265" stroke="url(#ga2)" stroke-width="2" fill="none" marker-end="url(#arrowRed)" filter="url(#archglow)">
+        <animate attributeName="stroke-dashoffset" from="40" to="0" dur="2.5s" repeatCount="indefinite"/>
+      </path>
+      <text x="370" y="258" text-anchor="middle" fill="#5e7394" font-family="Inter,sans-serif" font-size="8">Red zones</text>
+
+      <!-- Arrow: Engine 2 → Engine 3 -->
+      <path d="M700 265 L758 265" stroke="url(#ga3)" stroke-width="2" fill="none" marker-end="url(#arrowGreen)" filter="url(#archglow)">
+        <animate attributeName="stroke-dashoffset" from="40" to="0" dur="2.5s" repeatCount="indefinite"/>
+      </path>
+      <text x="730" y="258" text-anchor="middle" fill="#5e7394" font-family="Inter,sans-serif" font-size="8">Ranked sites</text>
+
+      <!-- ═══ ROW 4: YAML RULE ENGINE (cross-cutting) ═══ -->
+      <rect x="40" y="370" width="1020" height="40" rx="10" fill="rgba(234,179,8,.05)" stroke="rgba(234,179,8,.2)" stroke-width="1" stroke-dasharray="6,3"/>
+      <text x="550" y="395" text-anchor="middle" fill="#fde047" font-family="JetBrains Mono,monospace" font-size="10" font-weight="700" letter-spacing="2">VERSIONED YAML RULE ENGINE — Thresholds · Zone Classification · SDMA Approval · Audit Trail</text>
+
+      <!-- Arrows: engines → rule layer -->
+      <line x1="190" y1="337" x2="190" y2="368" stroke="#eab308" stroke-width="1" marker-end="url(#arrowYellow)" opacity=".4"/>
+      <line x1="550" y1="337" x2="550" y2="368" stroke="#eab308" stroke-width="1" marker-end="url(#arrowYellow)" opacity=".4"/>
+      <line x1="910" y1="337" x2="910" y2="368" stroke="#eab308" stroke-width="1" marker-end="url(#arrowYellow)" opacity=".4"/>
+
+      <!-- ═══ ROW 5: OUTPUTS ═══ -->
+      <!-- Glass Box Card -->
+      <rect x="40" y="445" width="200" height="80" rx="12" fill="rgba(239,68,68,.06)" stroke="rgba(239,68,68,.25)" stroke-width="1.5"/>
+      <text x="140" y="468" text-anchor="middle" fill="#fca5a5" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" letter-spacing="1">GLASS BOX CARD</text>
+      <text x="140" y="488" text-anchor="middle" fill="#dbe8fa" font-family="Inter,sans-serif" font-size="11" font-weight="600">"Why Is This Red?"</text>
+      <text x="140" y="505" text-anchor="middle" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">8 provenance questions</text>
+
+      <!-- Dashboard -->
+      <rect x="280" y="445" width="200" height="80" rx="12" fill="rgba(77,163,255,.06)" stroke="rgba(77,163,255,.25)" stroke-width="1.5"/>
+      <text x="380" y="468" text-anchor="middle" fill="#9ccfff" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" letter-spacing="1">MAP DASHBOARD</text>
+      <text x="380" y="488" text-anchor="middle" fill="#dbe8fa" font-family="Inter,sans-serif" font-size="11" font-weight="600">MapLibre + H3 Overlay</text>
+      <text x="380" y="505" text-anchor="middle" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">Interactive zone explorer</text>
+
+      <!-- Relocation Plan -->
+      <rect x="520" y="445" width="200" height="80" rx="12" fill="rgba(34,197,94,.06)" stroke="rgba(34,197,94,.25)" stroke-width="1.5"/>
+      <text x="620" y="468" text-anchor="middle" fill="#86efac" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" letter-spacing="1">RELOCATION PLAN</text>
+      <text x="620" y="488" text-anchor="middle" fill="#dbe8fa" font-family="Inter,sans-serif" font-size="11" font-weight="600">Phased + Budgeted</text>
+      <text x="620" y="505" text-anchor="middle" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">DPR with scheme codes</text>
+
+      <!-- Signed PDF -->
+      <rect x="760" y="445" width="200" height="80" rx="12" fill="rgba(124,92,255,.06)" stroke="rgba(124,92,255,.25)" stroke-width="1.5"/>
+      <text x="860" y="468" text-anchor="middle" fill="#c4b5fd" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" letter-spacing="1">SIGNED OUTPUT</text>
+      <text x="860" y="488" text-anchor="middle" fill="#dbe8fa" font-family="Inter,sans-serif" font-size="11" font-weight="600">PDF + GeoJSON</text>
+      <text x="860" y="505" text-anchor="middle" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">DDMA → SDMA approval</text>
+
+      <!-- #toadd: additional output boxes -->
+
+      <!-- Arrows: rule layer → outputs -->
+      <line x1="140" y1="410" x2="140" y2="443" stroke="#ef4444" stroke-width="1.2" marker-end="url(#arrowRed)" opacity=".5"/>
+      <line x1="380" y1="410" x2="380" y2="443" stroke="#4da3ff" stroke-width="1.2" marker-end="url(#arrowBlue)" opacity=".5"/>
+      <line x1="620" y1="410" x2="620" y2="443" stroke="#22c55e" stroke-width="1.2" marker-end="url(#arrowGreen)" opacity=".5"/>
+      <line x1="860" y1="410" x2="860" y2="443" stroke="#7c5cff" stroke-width="1.2" marker-end="url(#arrowPurple)" opacity=".5"/>
+
+      <!-- ═══ ROW 6: FEEDBACK LOOP ═══ -->
+      <rect x="200" y="560" width="220" height="55" rx="12" fill="rgba(6,214,208,.06)" stroke="rgba(6,214,208,.25)" stroke-width="1.5"/>
+      <text x="310" y="583" text-anchor="middle" fill="#67e8e4" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" letter-spacing="1">FIELD VERIFICATION</text>
+      <text x="310" y="601" text-anchor="middle" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">Surveyor app · household roster · consent</text>
+
+      <rect x="480" y="560" width="220" height="55" rx="12" fill="rgba(244,114,182,.06)" stroke="rgba(244,114,182,.25)" stroke-width="1.5"/>
+      <text x="590" y="583" text-anchor="middle" fill="#f9a8d4" font-family="JetBrains Mono,monospace" font-size="9" font-weight="700" letter-spacing="1">HINDCAST VALIDATION</text>
+      <text x="590" y="601" text-anchor="middle" fill="#a0b8d6" font-family="Inter,sans-serif" font-size="10">Pre-event data → verify against known events</text>
+
+      <!-- Feedback arrows (curved back up) -->
+      <path d="M310 560 Q310 540 310 527" stroke="#06d6d0" stroke-width="1.2" fill="none" marker-end="url(#arrowBlue)" opacity=".4"/>
+      <path d="M590 560 Q590 540 590 527" stroke="#f472b6" stroke-width="1.2" fill="none" marker-end="url(#arrowPurple)" opacity=".4"/>
+
+      <!-- #toadd: monitoring/alert loop arrows -->
+
+      <!-- ═══ END BADGE ═══ -->
+      <rect x="990" y="470" width="70" height="32" rx="16" fill="#ef4444"/>
+      <text x="1025" y="491" text-anchor="middle" fill="#fff" font-family="Inter,sans-serif" font-size="12" font-weight="800">END</text>
+      <line x1="960" y1="485" x2="988" y2="485" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arrowRed)" opacity=".6"/>
+
+      <!-- ═══ ANNOTATIONS ═══ -->
+      <!-- #toadd: additional annotations, labels, or callouts -->
+    </svg>
+  </div>
+
+  <!-- Architecture Legend -->
+  <div class="arch-legend reveal">
+    <div class="al-item"><div class="al-swatch" style="background:rgba(77,163,255,.6)"></div>Data Ingestion & Processing</div>
+    <div class="al-item"><div class="al-swatch" style="background:rgba(239,68,68,.6)"></div>Engine 1 — Risk Scoring</div>
+    <div class="al-item"><div class="al-swatch" style="background:rgba(34,197,94,.6)"></div>Engine 2 — Site Discovery</div>
+    <div class="al-item"><div class="al-swatch" style="background:rgba(124,92,255,.6)"></div>Engine 3 — Plan & Budget</div>
+    <div class="al-item"><div class="al-swatch" style="background:rgba(234,179,8,.6)"></div>YAML Rule Engine</div>
+    <div class="al-item"><div class="al-swatch" style="background:rgba(6,214,208,.6)"></div>Feedback Loop</div>
+  </div>
+
+  <!-- #toadd: Detailed data flow description or sequence diagram -->
+  <!-- #toadd: API endpoint listing -->
+  <!-- #toadd: Deployment architecture (on-prem topology diagram) -->
+
+  <div class="callout info reveal">
+    <b>Architecture principle</b>
+    Every arrow is a <b>typed data contract</b> (Pydantic v2). Every engine publishes provenance metadata alongside results.
+    The chain can run end-to-end on a <b>single Docker Compose stack</b> — no cloud vendor lock-in.
+  </div>
+</section>
+
+<!-- ══════════════════ BUILD ══════════════════ -->
+<section id="build">
+  <h2><span class="n">⚒</span>How We Build It</h2>
+
+  <h3>Tech Stack — chosen for 3 reasons</h3>
+  <p><b>Geospatial-native</b> · <b>Explainable by construction</b> · <b>Deployable on-premise</b> (Indian data cannot sit on foreign cloud).</p>
+
+  <div class="grid g3 reveal">
+    <div class="card"><h5>Frontend</h5>
+      <div class="tech-strip"><span class="chip">React 18 + TypeScript</span><span class="chip">MapLibre GL JS</span><span class="chip">deck.gl H3</span><span class="chip">Vite</span></div></div>
+    <div class="card"><h5>Backend</h5>
+      <div class="tech-strip"><span class="chip">FastAPI</span><span class="chip">PostgreSQL + PostGIS</span><span class="chip">H3-py</span><span class="chip">Redis</span></div></div>
+    <div class="card"><h5>Geo &amp; ML</h5>
+      <div class="tech-strip"><span class="chip">XGBoost + SHAP</span><span class="chip">GDAL / rasterio</span><span class="chip">WhiteboxTools</span><span class="chip">GEE</span></div></div>
+    <div class="card"><h5>Decision Science</h5>
+      <div class="tech-strip"><span class="chip">OR-Tools (CP-SAT)</span><span class="chip">AHP / TOPSIS</span><span class="chip">SciPy</span></div></div>
+    <div class="card"><h5>Reports</h5>
+      <div class="tech-strip"><span class="chip">Jinja2 + WeasyPrint</span><span class="chip">Pydantic v2</span><span class="chip">YAML rules</span></div></div>
+    <div class="card"><h5>Platform</h5>
+      <div class="tech-strip"><span class="chip">Docker Compose</span><span class="chip">Keycloak RBAC</span><span class="chip">OGC WMS/WFS</span><span class="chip">On-prem ready</span></div></div>
+  </div>
+
+  <h3>Data — all Indian, all citable</h3>
+  <div class="grid g3 reveal">
+    <div class="card" style="text-align:center">
+      <div style="font:900 32px var(--mono);background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent">14+</div>
+      <p>Hazard datasets</p><p class="sub">GSI · NRSC · IMD · Copernicus</p></div>
+    <div class="card" style="text-align:center">
+      <div style="font:900 32px var(--mono);background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent">10+</div>
+      <p>Exposure &amp; vulnerability layers</p><p class="sub">Census · BMTPC · OSM · HMIS</p></div>
+    <div class="card" style="text-align:center">
+      <div style="font:900 32px var(--mono);background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent">7+</div>
+      <p>Land, legal &amp; resource layers</p><p class="sub">CGWB · FSI · Bhu-Naksha · CMIP6</p></div>
+  </div>
+  <p class="sub">Every layer is a <b>real, named, government or open source</b> with a resolution and a date.
+  When a judge asks "where did this come from?", the answer is never "we generated it."
+  Full dataset listing is in <code>plan.md</code>.</p>
+
+  <h3>36-Hour Timeline</h3>
+  <div class="flow reveal">
+    <div class="step"><span class="num">H0–H4</span><h5>Foundation</h5><p>Data contracts, downloads, skeleton.</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="num">H4–H12</span><h5>Engine 1</h5><p>Hazards, zones, map renders real data.</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="num">H12–H20</span><h5>Card + E2</h5><p>Provenance card + site discovery.</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="num">H20–H27</span><h5>E3 + Plan</h5><p>Capacity, priority, BCR, PDF.</p></div>
+    <div class="arrow">→</div>
+    <div class="step"><span class="num">H27–H32</span><h5>Polish</h5><p>Hindcast, diff view, guardrails.</p></div>
+    <div class="arrow">→</div>
+    <div class="step" style="border-color:rgba(239,68,68,.3)"><span class="num" style="background:var(--red)">H32–H36</span><h5>Rehearsal Only</h5><p>No new code. Backup video. 5 run-throughs.</p></div>
+  </div>
+  <div class="callout dang reveal">
+    <b>The one rule that saves this project</b>
+    If we fall behind, we <b>cut breadth, never the chain</b>.
+    One district with all three engines working and explainable beats five districts with a pretty map.
+    <b>The chain is the product.</b>
+  </div>
+</section>
+
+<div class="foot">
+  <b>PUNARVAAS</b> · Solution Brief v2.0 · SIH 2026 · MHA / NDRF · Disaster Management<br>
+  Derived from <code>SIH.pdf</code> · execution details in <code>plan.md</code>
+</div>
+
+</main>
+</div>
+
+<script>
+// ── Scroll-spy navigation ──
+const links=[...document.querySelectorAll('#nav a')];
+const secs=links.map(a=>document.querySelector(a.getAttribute('href'))).filter(Boolean);
+function spy(){
+  const y=window.scrollY+140; let cur=0;
+  secs.forEach((s,i)=>{ if(s.offsetTop<=y) cur=i; });
+  links.forEach(l=>l.classList.remove('on'));
+  if(links[cur]) links[cur].classList.add('on');
+}
+window.addEventListener('scroll',spy,{passive:true});
+window.addEventListener('load',spy); spy();
+
+// ── Reveal on scroll ──
+const revealObserver = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(e.isIntersecting){
+      e.target.classList.add('visible');
+      // Animate bars inside
+      e.target.querySelectorAll('.ct i,.cm i,.bar i').forEach(b=>{
+        const w=b.style.width; b.style.width='0';
+        b.style.transition='width .9s cubic-bezier(.2,.8,.2,1)';
+        requestAnimationFrame(()=>requestAnimationFrame(()=>b.style.width=w));
+      });
+    }
+  });
+},{threshold:.15});
+document.querySelectorAll('.reveal').forEach(el=>revealObserver.observe(el));
+
+// ── Counter animation for KPIs ──
+const counterObserver = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{
+    if(!e.isIntersecting) return;
+    e.target.querySelectorAll('.kv[data-count]').forEach(kv=>{
+      const target = parseInt(kv.dataset.count);
+      const duration = 1200;
+      const start = performance.now();
+      function tick(now){
+        const elapsed = now - start;
+        const progress = Math.min(elapsed/duration,1);
+        const eased = 1 - Math.pow(1-progress,3);
+        kv.textContent = Math.round(target*eased);
+        if(progress<1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+    counterObserver.unobserve(e.target);
+  });
+},{threshold:.5});
+document.querySelectorAll('.kpi').forEach(el=>counterObserver.observe(el));
+</script>
+</body>
+</html>

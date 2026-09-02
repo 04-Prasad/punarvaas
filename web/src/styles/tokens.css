@@ -1,0 +1,97 @@
+/*
+ * PUNARVAAS · design tokens.
+ *
+ * One theme, two surfaces. The palette is not decorative: RED / ORANGE /
+ * YELLOW / GREEN are the four zone classes in the district ruleset, so they are
+ * defined once here and every chip, hex fill, legend swatch and chart bar reads
+ * from the same variable. If a zone colour is wrong on the map and right in the
+ * legend, the console is lying about the data — so it cannot be possible.
+ *
+ * Zone hues are chosen to stay distinguishable under deuteranopia (the two most
+ * consequential classes, RED and GREEN, differ in lightness by 18 points as well
+ * as in hue) and to survive a projector's washed-out gamma.
+ */
+:root {
+  /* zone classes — same values as reports/charts.py ZONE_COLOR */
+  --red: #c1272d;      --red-soft: #e8b4b6;
+  --orange: #e07b39;   --orange-soft: #f3d3ba;
+  --yellow: #cfa72e;   --yellow-soft: #eee0ab;
+  --green: #3f8f5f;    --green-soft: #bcdcc7;
+
+  /* intervention tiers */
+  --imm: #a4161a; --short: #d1642a; --med: #c8a02a; --mit: #2f7d6f;
+
+  --accent: #1f6f8b;
+  --accent-2: #7b4b94;
+
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+  --sans: "Inter", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: "SF Mono", ui-monospace, "Cascadia Mono", Menlo, Consolas, monospace;
+
+  --r-sm: 4px; --r-md: 7px; --r-lg: 11px;
+  --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px; --sp-5: 24px; --sp-6: 32px;
+
+  --shadow-1: 0 1px 2px rgba(16,20,26,.09), 0 1px 1px rgba(16,20,26,.05);
+  --shadow-2: 0 4px 14px rgba(16,20,26,.13), 0 1px 3px rgba(16,20,26,.07);
+  --shadow-3: 0 18px 48px rgba(16,20,26,.22);
+
+  --topbar-h: 52px; --tabs-h: 40px; --status-h: 26px;
+  --rail-w: 306px; --panel-w: 400px;
+
+  --ease: cubic-bezier(.22,.61,.36,1);
+}
+
+body[data-theme="light"] {
+  --ink: #14171c;
+  --body: #333a44;
+  --muted: #6b7481;
+  --faint: #98a1ad;
+  --rule: #dfe3e9;
+  --rule-strong: #c3cad4;
+  --surface: #ffffff;
+  --surface-2: #f7f8fa;
+  --surface-3: #eef1f5;
+  --canvas: #eaedf1;         /* map background */
+  /* Unbuilt ground in the "only where people live" view. Deliberately a
+     neutral, un-alarming grey: it is not a fifth zone and must not read as one. */
+  --bare: #d8dde4;
+  --hex-stroke: rgba(255,255,255,.62);
+  --grid-line: rgba(20,23,28,.06);
+  --tint-accent: #eef5f8;
+  --tint-warn: #fdf6ef;
+  --tint-bad: #fdf0f0;
+  --tint-good: #eef7f1;
+  --select: rgba(31,111,139,.15);
+}
+
+body[data-theme="dark"] {
+  --ink: #f2f5f8;
+  --body: #c6ccd6;
+  --muted: #8c96a4;
+  --faint: #6b7480;
+  --rule: #262c35;
+  --rule-strong: #38404b;
+  --surface: #14181e;
+  --surface-2: #1a1f26;
+  --surface-3: #222831;
+  --canvas: #0c0f13;
+  --bare: #1b2028;
+  --hex-stroke: rgba(0,0,0,.42);
+  --grid-line: rgba(255,255,255,.05);
+  --tint-accent: #10222a;
+  --tint-warn: #2a1e12;
+  --tint-bad: #2a1315;
+  --tint-good: #12241a;
+  --select: rgba(96,181,209,.22);
+
+  --red: #e0484e; --orange: #f0954f; --yellow: #e3bd45; --green: #56ac76;
+  --imm: #e0484e; --short: #ec8a4e; --med: #ddb63f; --mit: #45a394;
+  --accent: #5fb6d6; --accent-2: #b189cc;
+  --shadow-1: 0 1px 2px rgba(0,0,0,.5);
+  --shadow-2: 0 4px 14px rgba(0,0,0,.55);
+  --shadow-3: 0 18px 48px rgba(0,0,0,.66);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+}

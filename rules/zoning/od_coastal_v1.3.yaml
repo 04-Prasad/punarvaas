@@ -1,0 +1,162 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# PUNARVAAS zoning ruleset — Odisha coastal / deltaic districts
+# Note how the numbers differ from the hill ruleset: 2 m of freeboard is
+# decisive on a delta and irrelevant in a Himalayan valley. One national
+# threshold set would be wrong in both places, which is exactly why rulesets are
+# per-terrain and owned by the state authority.
+# ═══════════════════════════════════════════════════════════════════════════
+version: od_coastal_v1.3
+name: Odisha coastal multi-hazard habitability zoning
+applies_to: [kendrapara, jagatsinghpur, bhadrak, puri, balasore, ganjam]
+owner: Odisha State Disaster Management Authority
+approved_by: "OSDMA Technical Committee (illustrative — pending real adoption)"
+approved_at: "2026-02-28"
+precedence: highest_severity_wins
+# h_union is the ANNUAL probability of at least one damaging event, so a
+# threshold of 0.25 reads as "expected more often than once every four years".
+# Thresholds stated as return periods are arguable by a District Magistrate in a
+# way that a dimensionless index never is.
+default_zone: GREEN
+notes: >
+  Advisory classification for planning. CRZ notification and coastal setback
+  rules apply independently and are not superseded by this ruleset.
+
+rules:
+  # ── RED ────────────────────────────────────────────────────────────────────
+  - id: C-01
+    label: Shoreline retreat will consume the site within 15 years
+    zone: RED
+    match: all
+    conditions:
+      - "years_to_loss <= 15"
+      - "erosion_rate_m_yr >= 2.0"
+      - "population >= 1"
+    action: Plan relocation; hard protection not economically justified
+    rationale: >
+      The Satabhaya case. Sea walls at a retreat hot-spot transfer erosion
+      downdrift and buy a decade at high cost; relocation is the durable answer.
+
+  - id: C-02
+    label: Below design storm surge with no protective embankment
+    zone: RED
+    match: all
+    conditions:
+      - "h_surge >= 0.75"
+      - "elevation_m <= 3.0"
+      - "population >= 1"
+    action: Relocation assessment; cyclone shelter access within 2 km in the interim
+    rationale: >
+      Ground below the 100-year surge level with kutcha housing is where
+      cyclone mortality concentrates.
+
+  - id: C-03
+    label: Compound coastal hazard
+    zone: RED
+    match: all
+    conditions:
+      - "h_union >= 0.40"        # deltas are inherently higher-frequency
+      - "hazard_count >= 3"
+      - "population >= 5"
+    action: Relocation assessment; integrated coastal protection review
+    rationale: Erosion plus surge plus flooding acting together on the same cell.
+
+  - id: C-04
+    label: Permanently waterlogged and saline
+    zone: RED
+    match: all
+    conditions:
+      - "h_flood >= 0.88"
+      - "hand_m <= 0.6"
+      - "population >= 3"
+    action: Relocation assessment; livelihood transition support
+    rationale: >
+      Land that no longer drains cannot support housing, sanitation or
+      agriculture, so the habitation loses both safety and livelihood.
+
+  # ── ORANGE ─────────────────────────────────────────────────────────────────
+  - id: C-05
+    label: Erosion will reach the site within the 30-year horizon
+    zone: ORANGE
+    match: all
+    conditions:
+      - "years_to_loss <= 30"
+      - "erosion_rate_m_yr >= 1.0"
+    action: Reserve a relocation site now; begin phased withdrawal planning
+    rationale: >
+      Acquiring land takes years. Starting when the sea is 30 years away is the
+      difference between a planned move and an emergency camp.
+
+  - id: C-06
+    label: Storm-surge exposure with partial protection
+    zone: ORANGE
+    match: all
+    conditions:
+      - "h_surge >= 0.55"
+      - "population >= 1"
+    action: Embankment strengthening, shelter capacity, mangrove restoration
+    rationale: Mangrove belts measurably reduce surge run-up and are cheap per km.
+
+  - id: C-07
+    label: Recurrent flood inundation
+    zone: ORANGE
+    match: all
+    conditions:
+      - "h_flood >= 0.70"
+      - "hand_m <= 1.8"
+    action: Plinth raising, drainage, flood-resilient housing design
+    rationale: Repeated inundation drives asset erosion and school dropout.
+
+  - id: C-08
+    label: High cyclone wind exposure with fragile housing
+    zone: ORANGE
+    match: all
+    conditions:
+      - "h_cyclone >= 0.60"
+      - "v_structural >= 0.70"
+    action: PMAY-G pucca conversion; roof strengthening programme
+    rationale: >
+      Wind risk is the one coastal hazard that engineering genuinely solves —
+      a pucca roof changes the outcome, so retrofit beats relocation here.
+
+  - id: C-09
+    label: Elevated multi-hazard union
+    zone: ORANGE
+    match: all
+    conditions:
+      - "h_union >= 0.22"        # ≈ 1-in-4.5-years
+      - "population >= 1"
+    action: Detailed coastal hazard investigation
+    rationale: Aggregate exposure high even without a single dominant hazard.
+
+  # ── YELLOW ─────────────────────────────────────────────────────────────────
+  - id: C-10
+    label: Moderate coastal hazard requiring regulation
+    zone: YELLOW
+    match: any
+    conditions:
+      - "h_union >= 0.12"        # ≈ 1-in-8-years
+      - "hand_m <= 2.5"
+      - "erosion_rate_m_yr >= 0.5"
+    action: Enforce setback and plinth norms; monitor shoreline annually
+    rationale: Habitable with controls; annual shoreline review is inexpensive.
+
+  - id: C-11
+    label: Ground subsidence from sediment compaction
+    zone: YELLOW
+    match: all
+    conditions:
+      - "insar_velocity_mm_yr <= -6"
+    action: Groundwater abstraction review; levelling survey
+    rationale: >
+      Deltaic subsidence is slow but compounds relative sea-level rise, and it
+      quietly invalidates embankment design levels over decades.
+
+  - id: C-12
+    label: Isolation during cyclone season
+    zone: YELLOW
+    match: all
+    conditions:
+      - "v_isolation >= 0.60"
+      - "population >= 10"
+    action: All-weather connectivity; pre-positioned shelter stock
+    rationale: Island and creek-side hamlets become unreachable exactly when help is needed.

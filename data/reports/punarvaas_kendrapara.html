@@ -1,0 +1,2529 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PUNARVAAS · Kendrapara, Odisha — Hazard Zonation, Carrying Capacity and Relocation Priority</title>
+<style>
+  :root{
+    --ink:#16181d; --body:#2b2f36; --muted:#666e7a; --rule:#d8dce2; --paper:#fff;
+    --tint:#f6f7f9; --accent:#1f6f8b; --red:#c1272d; --orange:#e07b39;
+    --yellow:#cfa72e; --green:#3f8f5f;
+    --imm:#a4161a; --short:#d1642a; --med:#c8a02a; --mit:#2f7d6f;
+    --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,"Times New Roman",serif;
+    --sans:"Inter","Helvetica Neue",Arial,"Segoe UI",system-ui,sans-serif;
+    --mono:"SF Mono",ui-monospace,"Cascadia Mono",Menlo,Consolas,monospace;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:#eceef1;color:var(--body);font:16px/1.62 var(--serif);
+       font-feature-settings:"kern" 1,"liga" 1;}
+  .sheet{max-width:210mm;margin:0 auto;background:var(--paper);padding:26mm 20mm 24mm;
+         box-shadow:0 1px 3px rgba(0,0,0,.14);}
+  h1,h2,h3,h4{font-family:var(--sans);color:var(--ink);font-weight:650;line-height:1.22;
+              letter-spacing:-.011em;margin:0}
+  h1{font-size:27px}
+  h2{font-size:19px;margin:34px 0 4px;padding-top:13px;border-top:2px solid var(--ink)}
+  h3{font-size:15.5px;margin:22px 0 5px}
+  h4{font-size:13px;margin:15px 0 3px;text-transform:uppercase;letter-spacing:.07em;
+     color:var(--muted);font-weight:640}
+  p{margin:.55em 0}
+  a{color:var(--accent)}
+  .sec-no{font-family:var(--mono);font-size:.72em;color:var(--muted);margin-right:.6em;
+          font-weight:400;letter-spacing:0}
+  .lede{font-size:17.5px;line-height:1.56}
+  .small{font-size:13px;line-height:1.5}
+  .muted{color:var(--muted)}
+  .mono{font-family:var(--mono);font-size:.88em}
+
+  /* masthead */
+  .mast{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;
+        border-bottom:3px double var(--ink);padding-bottom:11px}
+  .wordmark{font-family:var(--sans);font-weight:760;font-size:20px;letter-spacing:.16em;
+            color:var(--ink)}
+  .wordmark span{display:block;font-size:11px;letter-spacing:.05em;font-weight:520;
+                 color:var(--muted);margin-top:2px}
+  .mast .meta{text-align:right;font:11.5px/1.5 var(--mono);color:var(--muted)}
+  .doctitle{margin:16px 0 0}
+  .subtitle{font-family:var(--sans);font-size:14px;color:var(--muted);margin-top:5px}
+
+  /* banners */
+  .banner{border-left:4px solid var(--orange);background:#fdf6ef;padding:11px 14px;
+          margin:15px 0;font-size:13.5px;line-height:1.55}
+  .banner.hard{border-left-color:var(--red);background:#fdf1f1}
+  .banner.calm{border-left-color:var(--accent);background:#f0f6f9}
+  .banner b{font-family:var(--sans);font-size:12px;letter-spacing:.05em;
+            text-transform:uppercase;display:block;margin-bottom:2px;color:var(--ink)}
+
+  /* KPI */
+  .kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--rule);
+        border:1px solid var(--rule);margin:16px 0}
+  .kpi{background:var(--paper);padding:11px 12px}
+  .kpi .k{font:11px/1.3 var(--sans);text-transform:uppercase;letter-spacing:.055em;
+          color:var(--muted)}
+  .kpi .v{font:22px/1.15 var(--sans);font-weight:680;color:var(--ink);margin-top:4px;
+          font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+  .kpi .n{font-size:11.5px;color:var(--muted);line-height:1.35;margin-top:3px}
+
+  /* tables */
+  table{width:100%;border-collapse:collapse;margin:11px 0;font:12.5px/1.42 var(--sans);
+        font-variant-numeric:tabular-nums}
+  caption{caption-side:top;text-align:left;font:12px/1.4 var(--sans);color:var(--muted);
+          padding-bottom:5px}
+  th,td{padding:5px 7px;border-bottom:1px solid var(--rule);vertical-align:top;text-align:left}
+  thead th{border-bottom:1.5px solid var(--ink);font-weight:640;color:var(--ink);
+           font-size:11.5px;text-transform:uppercase;letter-spacing:.035em}
+  tbody tr:nth-child(even){background:#fafbfc}
+  td.n,th.n{text-align:right;white-space:nowrap}
+  tfoot td{border-top:1.5px solid var(--ink);border-bottom:none;font-weight:640;color:var(--ink)}
+
+  /* chips */
+  .chip{display:inline-block;padding:1px 7px;border-radius:9px;font:10.5px/1.6 var(--sans);
+        font-weight:650;letter-spacing:.045em;color:#fff;white-space:nowrap}
+  .t-IMMEDIATE{background:var(--imm)} .t-SHORT_TERM{background:var(--short)}
+  .t-MEDIUM_TERM{background:var(--med)} .t-MITIGATE{background:var(--mit)}
+  .z-RED{background:var(--red)} .z-ORANGE{background:var(--orange)}
+  .z-YELLOW{background:var(--yellow);color:#3a2f00} .z-GREEN{background:var(--green)}
+  .flag{display:inline-block;border:1px solid var(--orange);color:#8a4b12;background:#fdf6ef;
+        padding:0 5px;border-radius:3px;font:10px/1.6 var(--sans);font-weight:640}
+  .ok{color:var(--green);font-weight:640} .no{color:var(--red);font-weight:640}
+
+  /* figures */
+  figure{margin:15px 0;break-inside:avoid}
+  figcaption{font:11.5px/1.45 var(--sans);color:var(--muted);margin-top:5px}
+  svg.fig{display:block;overflow:visible;font-family:var(--sans)}
+  svg.fig text{fill:var(--body)}
+  .cl{font-size:11px}
+  .cv{font-size:11px;font-weight:640;fill:var(--ink)!important;font-variant-numeric:tabular-nums}
+  .cu{font-size:10px;fill:var(--muted)!important}
+  .ct{font-size:9.5px;fill:var(--muted)!important;text-anchor:middle}
+  .cr{font-size:9.5px;fill:var(--muted)!important;text-anchor:end}
+  .cc{font-size:10px;fill:var(--muted)!important;text-anchor:middle}
+  .nofig{font:12px var(--sans);color:var(--muted);font-style:italic}
+  .two{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+
+  /* case card */
+  .case{border:1px solid var(--rule);border-top:3px solid var(--ink);padding:14px 16px 16px;
+        margin:18px 0;break-inside:avoid}
+  .case.tier-IMMEDIATE{border-top-color:var(--imm)}
+  .case.tier-SHORT_TERM{border-top-color:var(--short)}
+  .case.tier-MEDIUM_TERM{border-top-color:var(--med)}
+  .case.tier-MITIGATE{border-top-color:var(--mit)}
+  .case h3{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .verdict{background:var(--tint);border-left:3px solid var(--accent);padding:9px 12px;
+           margin:10px 0;font-size:14px}
+  .verdict .act{font-family:var(--sans);font-weight:660;color:var(--ink)}
+  .facts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px 18px;margin:10px 0;
+         font:12px/1.45 var(--sans)}
+  .facts div{border-top:1px solid var(--rule);padding-top:4px}
+  .facts b{display:block;color:var(--muted);font-weight:520;font-size:10.5px;
+           text-transform:uppercase;letter-spacing:.045em}
+  .facts span{font-weight:640;color:var(--ink);font-variant-numeric:tabular-nums}
+
+  ol.chain{list-style:none;counter-reset:s;padding:0;margin:12px 0}
+  ol.chain li{counter-increment:s;position:relative;padding:8px 0 8px 40px;
+              border-bottom:1px solid var(--rule);font-size:14px}
+  ol.chain li::before{content:"E" counter(s);position:absolute;left:0;top:8px;
+              font:11px/1.7 var(--sans);font-weight:700;color:#fff;background:var(--ink);
+              width:26px;height:20px;border-radius:3px;text-align:center;letter-spacing:.02em}
+  ol.chain b{font-family:var(--sans);color:var(--ink)}
+  ul.tight{margin:.4em 0;padding-left:1.15em}
+  ul.tight li{margin:.24em 0}
+  dl.gloss{margin:10px 0;font-size:13.5px}
+  dl.gloss dt{font-family:var(--sans);font-weight:640;color:var(--ink);margin-top:9px;
+              font-size:12.5px}
+  dl.gloss dd{margin:1px 0 0 0;color:var(--body)}
+
+  .sign{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:26px}
+  .sign div{border-top:1px solid var(--ink);padding-top:6px;font:12px/1.5 var(--sans);
+            color:var(--muted);min-height:74px}
+  .sign b{display:block;color:var(--ink);font-size:13px}
+  .colophon{margin-top:26px;padding-top:10px;border-top:1px solid var(--rule);
+            font:11px/1.55 var(--mono);color:var(--muted);word-break:break-all}
+
+  @media print{
+    body{background:#fff;font-size:10.4pt}
+    .sheet{box-shadow:none;max-width:none;padding:0}
+    h2{break-after:avoid} h3{break-after:avoid} table{break-inside:auto}
+    tr{break-inside:avoid} thead{display:table-header-group}
+    .kpis{grid-template-columns:repeat(4,1fr)}
+    .pb{break-before:page}
+    a{color:inherit;text-decoration:none}
+  }
+  @page{size:A4;margin:16mm 14mm 18mm}
+  @media screen and (max-width:760px){
+    .sheet{padding:16px 14px}
+    .kpis{grid-template-columns:1fr 1fr} .two{grid-template-columns:1fr}
+    .facts{grid-template-columns:1fr 1fr}
+  }
+</style>
+</head>
+<body>
+<main class="sheet">
+
+<header class="mast">
+  <div class="wordmark">PUNARVAAS<span>पुनर्वास · hazard zonation, carrying capacity and relocation priority</span></div>
+  <div class="meta">
+    District screening report<br>
+    snapshot kendrapara-20260901-73e266c471ff<br>
+    ruleset od_coastal_v1.3 · grid H3 r10<br>
+    generated 01 September 2026, 17:35 IST
+  </div>
+</header>
+
+<h1 class="doctitle">Kendrapara district, Odisha</h1>
+<p class="subtitle">Sub-village hazard zonation · carrying-capacity assessment of relocation sites ·
+   immediate relocation needs for vulnerable habitations</p>
+
+<div class="banner hard">
+  <b>Not for operational use — synthetic inputs present</b>
+  This snapshot was produced with modelled stand-ins for one or more authoritative
+  datasets, listed and marked in section 8. The method, the thresholds and the
+  arithmetic are real; the ground truth is not. Every habitation-level finding in
+  this document must be confirmed by field verification before any household is
+  informed, any land is acquired, or any figure is published.
+</div>
+<div class="banner">
+  <b>Relaxed residual-hazard cap</b>
+  No land in this district meets the absolute resettlement cap of 1-in-17 years. The cap has been relaxed to the safest 10% of available land (1-in-9 years). Sites selected under a relaxed cap carry material residual risk and must be designed with cyclone shelter, raised plinth and evacuation access, not treated as safe ground.
+</div>
+
+<h2><span class="sec-no">1</span>What this district looks like</h2>
+<p class="lede">About 5,870 of 28,628 residents modelled across 27,791 cells live on land this screening classes as unacceptable, concentrated in 10 habitations. 1 require action inside the current financial year (Satabhaya).</p>
+<div class="kpis">
+  <div class="kpi"><div class="k">Population modelled</div>
+    <div class="v">28,628</div>
+    <div class="n">across 27,791 cells of 1.50 ha</div></div>
+  <div class="kpi"><div class="k">On unacceptable land</div>
+    <div class="v">5,870</div>
+    <div class="n">21% of modelled population</div></div>
+  <div class="kpi"><div class="k">Expected annual loss</div>
+    <div class="v">74.2<span class="n"> cr</span></div>
+    <div class="n">physical damage only; no value placed on life</div></div>
+  <div class="kpi"><div class="k">Habitations screened</div>
+    <div class="v">10</div>
+    <div class="n">1 immediate · 0 short-term ·
+        0 medium · 8 mitigate</div></div>
+</div>
+<p>293 cells are RED and 9,770 ORANGE — 21% of the district's modelled population stands on them.</p>
+
+<h4>The three questions this report answers</h4>
+<ol class="chain">
+  <li><b>Where is it unsafe, and for exactly whom?</b> Every 10-resolution
+      hex cell carries an annual probability of at least one damaging event from all perils
+      combined, and a population count disaggregated from Census village totals by building
+      footprint — so risk is reported for parts of a village, not for the village as a whole.</li>
+  <li><b>Which land could receive people, and how many will it hold?</b> Candidate sites are
+      built from the same cells, screened through nine hard constraints, ranked, and then sized
+      by the scarcest resource they have — with that resource named.</li>
+  <li><b>Who moves first, and what does it cost?</b> Each habitation gets a tier, a
+      recommended action, a benefit-cost comparison between moving and protecting in place,
+      and a funding phase under the district's annual budget.</li>
+</ol>
+
+<figure><svg class="fig" viewBox="0 0 620 276" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Population at risk by habitation" xmlns="http://www.w3.org/2000/svg"><title>Population at risk by habitation</title><desc>Population at risk by habitation. Largest: Barahipur 1,504, Gopalpur 934, Pentha 872.</desc><text x="0" y="24" class="cl">Barahipur</text><rect x="190" y="12" width="314.0" height="15" rx="2" fill="#c1272d"/><text x="512" y="24" class="cv">1,504</text><text x="0" y="50" class="cl">Gopalpur</text><rect x="190" y="38" width="195.0" height="15" rx="2" fill="#c1272d"/><text x="512" y="50" class="cv">934</text><text x="0" y="76" class="cl">Pentha</text><rect x="190" y="64" width="182.1" height="15" rx="2" fill="#e07b39"/><text x="512" y="76" class="cv">872</text><text x="0" y="102" class="cl">Kanhupur</text><rect x="190" y="90" width="181.8" height="15" rx="2" fill="#c1272d"/><text x="512" y="102" class="cv">871</text><text x="0" y="128" class="cl">Bagapatia</text><rect x="190" y="116" width="181.6" height="15" rx="2" fill="#e07b39"/><text x="512" y="128" class="cv">869</text><text x="0" y="154" class="cl">Satabhaya</text><rect x="190" y="142" width="85.9" height="15" rx="2" fill="#c1272d"/><text x="512" y="154" class="cv">412</text><text x="0" y="180" class="cl">Rajnagar</text><rect x="190" y="168" width="62.9" height="15" rx="2" fill="#e07b39"/><text x="512" y="180" class="cv">301</text><text x="0" y="206" class="cl">Jamboo</text><rect x="190" y="194" width="12.2" height="15" rx="2" fill="#e07b39"/><text x="512" y="206" class="cv">58</text><text x="0" y="232" class="cl">Talachua</text><rect x="190" y="220" width="10.2" height="15" rx="2" fill="#e07b39"/><text x="512" y="232" class="cv">49</text><text x="0" y="258" class="cl">Magarkanda</text><rect x="190" y="246" width="1.5" height="15" rx="2" fill="#e07b39"/><text x="512" y="258" class="cv">0</text><text x="190" y="275" class="cu">persons on RED or ORANGE land</text></svg>
+  <figcaption>Habitations ranked by the number of residents standing on RED or ORANGE land.
+  This ranking, not the district total, is what a relocation programme acts on.</figcaption></figure>
+
+<h2><span class="sec-no">2</span>The hazard picture</h2>
+<table>
+  <caption>Zone composition. RED and ORANGE are the zones in which new residential
+  construction is not permitted under the applied ruleset.</caption>
+  <thead><tr><th>Zone</th><th class="n">Cells</th><th class="n">Area (ha)</th>
+    <th class="n">Population</th><th class="n">Mean hazard</th>
+    <th class="n">Worst cell</th><th class="n">Mean confidence</th></tr></thead>
+  <tbody>
+    <tr><td><span class="chip z-GREEN">GREEN</span></td>
+      <td class="n">2</td>
+      <td class="n">3</td>
+      <td class="n">0</td>
+      <td class="n">1-in-9 yr</td>
+      <td class="n">1-in-8 yr</td>
+      <td class="n">34%</td></tr>
+    <tr><td><span class="chip z-ORANGE">ORANGE</span></td>
+      <td class="n">9,770</td>
+      <td class="n">14,701</td>
+      <td class="n">2,982</td>
+      <td class="n">1-in-1 yr</td>
+      <td class="n">1-in-1 yr</td>
+      <td class="n">32%</td></tr>
+    <tr><td><span class="chip z-RED">RED</span></td>
+      <td class="n">293</td>
+      <td class="n">441</td>
+      <td class="n">2,888</td>
+      <td class="n">1-in-2 yr</td>
+      <td class="n">1-in-1 yr</td>
+      <td class="n">33%</td></tr>
+    <tr><td><span class="chip z-YELLOW">YELLOW</span></td>
+      <td class="n">17,726</td>
+      <td class="n">26,673</td>
+      <td class="n">22,759</td>
+      <td class="n">1-in-5 yr</td>
+      <td class="n">1-in-1 yr</td>
+      <td class="n">33%</td></tr>
+  </tbody>
+</table>
+<div class="two">
+  <figure><svg class="fig" viewBox="0 0 620 76" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Modelled population by hazard zone" xmlns="http://www.w3.org/2000/svg"><title>Modelled population by hazard zone</title><desc>RED 2,888 (10%); ORANGE 2,982 (10%); YELLOW 22,759 (79%)</desc><rect x="0.0" y="0" width="62.5" height="20" fill="#c1272d"/><text x="31.3" y="33" class="cc">10%</text><rect x="62.5" y="0" width="64.6" height="20" fill="#e07b39"/><text x="94.8" y="33" class="cc">10%</text><rect x="127.1" y="0" width="492.9" height="20" fill="#cfa72e"/><text x="373.6" y="33" class="cc">79%</text><text x="0.0" y="58" class="cu">RED 2,888</text><text x="62.5" y="58" class="cu">ORANGE 2,982</text><text x="127.1" y="58" class="cu">YELLOW 22,759</text></svg><figcaption>Where the people are.</figcaption></figure>
+  <figure><svg class="fig" viewBox="0 0 620 76" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Land area by hazard zone (cells of 1.5 ha)" xmlns="http://www.w3.org/2000/svg"><title>Land area by hazard zone (cells of 1.5 ha)</title><desc>RED 293 (1%); ORANGE 9,770 (35%); YELLOW 17,726 (64%); GREEN 2 (0%)</desc><rect x="0.0" y="0" width="6.5" height="20" fill="#c1272d"/><rect x="6.5" y="0" width="218.0" height="20" fill="#e07b39"/><text x="115.5" y="33" class="cc">35%</text><rect x="224.5" y="0" width="395.5" height="20" fill="#cfa72e"/><text x="422.2" y="33" class="cc">64%</text><rect x="620.0" y="0" width="0.6" height="20" fill="#3f8f5f"/><text x="0.0" y="58" class="cu">RED 293</text><text x="6.5" y="58" class="cu">ORANGE 9,770</text><text x="224.5" y="58" class="cu">YELLOW 17,726</text></svg><figcaption>Where the land is. The two differ because
+    settlement concentrates: a small RED area can carry a large share of the population.</figcaption></figure>
+</div>
+<figure><svg class="fig" viewBox="0 0 620 276" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Expected annual loss by habitation" xmlns="http://www.w3.org/2000/svg"><title>Expected annual loss by habitation</title><desc>Expected annual loss by habitation. Largest: Rajnagar ₹29.9 crore, Barahipur ₹11.0 crore, Satabhaya ₹6.7 crore.</desc><text x="0" y="24" class="cl">Rajnagar</text><rect x="190" y="12" width="314.0" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="24" class="cv">₹29.9 crore</text><text x="0" y="50" class="cl">Barahipur</text><rect x="190" y="38" width="115.6" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="50" class="cv">₹11.0 crore</text><text x="0" y="76" class="cl">Satabhaya</text><rect x="190" y="64" width="70.2" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="76" class="cv">₹6.7 crore</text><text x="0" y="102" class="cl">Gopalpur</text><rect x="190" y="90" width="64.3" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="102" class="cv">₹6.1 crore</text><text x="0" y="128" class="cl">Bagapatia</text><rect x="190" y="116" width="52.7" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="128" class="cv">₹5.0 crore</text><text x="0" y="154" class="cl">Kanhupur</text><rect x="190" y="142" width="52.4" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="154" class="cv">₹5.0 crore</text><text x="0" y="180" class="cl">Pentha</text><rect x="190" y="168" width="50.9" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="180" class="cv">₹4.9 crore</text><text x="0" y="206" class="cl">Jamboo</text><rect x="190" y="194" width="23.5" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="206" class="cv">₹2.2 crore</text><text x="0" y="232" class="cl">Magarkanda</text><rect x="190" y="220" width="18.4" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="232" class="cv">₹1.8 crore</text><text x="0" y="258" class="cl">Talachua</text><rect x="190" y="246" width="16.9" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="258" class="cv">₹1.6 crore</text><text x="190" y="275" class="cu">₹ per year, damage only — no mortality valued</text></svg>
+  <figcaption>Expected annual loss = Σ (hazard probability × exposed value × vulnerability),
+  summed over perils. Mortality is deliberately not monetised, so these figures understate
+  total harm and should never be read as the full cost of inaction.</figcaption></figure>
+
+<h2><span class="sec-no">3</span>Habitations at risk</h2>
+<table>
+  <caption>All 10 habitations crossing the screening threshold, ordered by
+  population on unacceptable land. "Governing hazard" is the peril contributing most to the
+  combined annual probability at the worst cell.</caption>
+  <thead><tr><th>Habitation</th><th class="n">LGD</th><th class="n">Population</th>
+    <th class="n">At risk</th><th class="n">Share</th><th class="n">Households</th>
+    <th>Governing hazard</th><th class="n">Worst cell</th>
+    <th class="n">EAL</th><th class="n">Conf.</th></tr></thead>
+  <tbody>
+    <tr><td>Barahipur</td>
+      <td class="n mono">379006</td>
+      <td class="n">1,504</td>
+      <td class="n"><b>1,504</b></td>
+      <td class="n">100%</td>
+      <td class="n">350</td>
+      <td>Flood</td>
+      <td class="n">1-in-2 yr</td>
+      <td class="n">₹11.0 crore</td>
+      <td class="n">33%</td></tr>
+    <tr><td>Gopalpur</td>
+      <td class="n mono">379004</td>
+      <td class="n">934</td>
+      <td class="n"><b>934</b></td>
+      <td class="n">100%</td>
+      <td class="n">217</td>
+      <td>Flood</td>
+      <td class="n">1-in-2 yr</td>
+      <td class="n">₹6.1 crore</td>
+      <td class="n">34%</td></tr>
+    <tr><td>Pentha</td>
+      <td class="n mono">379005</td>
+      <td class="n">1,458</td>
+      <td class="n"><b>872</b></td>
+      <td class="n">60%</td>
+      <td class="n">339</td>
+      <td>Flood</td>
+      <td class="n">1-in-2 yr</td>
+      <td class="n">₹4.9 crore</td>
+      <td class="n">34%</td></tr>
+    <tr><td>Kanhupur</td>
+      <td class="n mono">379003</td>
+      <td class="n">871</td>
+      <td class="n"><b>871</b></td>
+      <td class="n">100%</td>
+      <td class="n">203</td>
+      <td>Flood</td>
+      <td class="n">1-in-1 yr</td>
+      <td class="n">₹5.0 crore</td>
+      <td class="n">33%</td></tr>
+    <tr><td>Bagapatia</td>
+      <td class="n mono">379002</td>
+      <td class="n">1,545</td>
+      <td class="n"><b>869</b></td>
+      <td class="n">56%</td>
+      <td class="n">359</td>
+      <td>Flood</td>
+      <td class="n">1-in-2 yr</td>
+      <td class="n">₹5.0 crore</td>
+      <td class="n">34%</td></tr>
+    <tr><td>Satabhaya</td>
+      <td class="n mono">379001</td>
+      <td class="n">412</td>
+      <td class="n"><b>412</b></td>
+      <td class="n">100%</td>
+      <td class="n">96</td>
+      <td>Erosion</td>
+      <td class="n">1-in-1 yr</td>
+      <td class="n">₹6.7 crore</td>
+      <td class="n">33%</td></tr>
+    <tr><td>Rajnagar</td>
+      <td class="n mono">379008</td>
+      <td class="n">19,007</td>
+      <td class="n"><b>301</b></td>
+      <td class="n">2%</td>
+      <td class="n">4,420</td>
+      <td>Cyclone wind</td>
+      <td class="n">1-in-2 yr</td>
+      <td class="n">₹29.9 crore</td>
+      <td class="n">35%</td></tr>
+    <tr><td>Jamboo</td>
+      <td class="n mono">379009</td>
+      <td class="n">1,034</td>
+      <td class="n"><b>58</b></td>
+      <td class="n">6%</td>
+      <td class="n">241</td>
+      <td>Flood</td>
+      <td class="n">1-in-4 yr</td>
+      <td class="n">₹2.2 crore</td>
+      <td class="n">34%</td></tr>
+    <tr><td>Talachua</td>
+      <td class="n mono">379010</td>
+      <td class="n">848</td>
+      <td class="n"><b>49</b></td>
+      <td class="n">6%</td>
+      <td class="n">197</td>
+      <td>Cyclone wind</td>
+      <td class="n">1-in-3 yr</td>
+      <td class="n">₹1.6 crore</td>
+      <td class="n">34%</td></tr>
+    <tr><td>Magarkanda</td>
+      <td class="n mono">379007</td>
+      <td class="n">1,016</td>
+      <td class="n"><b>0</b></td>
+      <td class="n">0%</td>
+      <td class="n">236</td>
+      <td>Cyclone wind</td>
+      <td class="n">1-in-5 yr</td>
+      <td class="n">₹1.8 crore</td>
+      <td class="n">34%</td></tr>
+  </tbody>
+  <tfoot><tr><td>District</td><td></td><td class="n">28,628</td>
+    <td class="n">5,870</td>
+    <td class="n">21%</td>
+    <td class="n">6,657</td>
+    <td></td><td></td><td class="n">₹74.2 crore</td><td></td></tr></tfoot>
+</table>
+<p class="small muted">Confidence is not a probability of being right. It is a composite of
+input vintage, resolution, model discrimination and whether the layer is synthetic — a low
+figure means "verify this before acting", not "this is safe".</p>
+
+<h2 class="pb"><span class="sec-no">4</span>Priority, recommended action and the reason for it</h2>
+<p>Four tiers. The tier is not a score threshold: it is the output of a decision rule that
+looks at whether the hazard is <i>active</i> (subsidence and erosion do not wait for a
+trigger), whether a receiving site actually exists with capacity for the people, and whether
+protecting in place buys more safety per rupee than moving.</p>
+<dl class="gloss">
+  <dt><span class="chip t-IMMEDIATE">IMMEDIATE</span></dt>
+  <dd>Relocate within the current financial year; hazard is active or land loss is imminent</dd>
+  <dt><span class="chip t-SHORT_TERM">SHORT TERM</span></dt>
+  <dd>Relocate within 1–3 years; high risk with a viable site identified</dd>
+  <dt><span class="chip t-MEDIUM_TERM">MEDIUM TERM</span></dt>
+  <dd>Plan relocation over 3–7 years; risk significant, site requires development</dd>
+  <dt><span class="chip t-MITIGATE">MITIGATE</span></dt>
+  <dd>Protect in place; mitigation is more effective per rupee than moving people</dd>
+</dl>
+<figure><svg class="fig" viewBox="0 0 620 68" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Persons at risk by intervention tier" xmlns="http://www.w3.org/2000/svg"><title>Persons at risk by intervention tier</title><desc>Persons at risk by intervention tier. Largest: Immediate (1) 412, Mitigate (8) 5,458.</desc><text x="0" y="24" class="cl">Immediate (1)</text><rect x="190" y="12" width="23.7" height="15" rx="2" fill="#a4161a"/><text x="512" y="24" class="cv">412</text><text x="0" y="50" class="cl">Mitigate (8)</text><rect x="190" y="38" width="314.0" height="15" rx="2" fill="#2f7d6f"/><text x="512" y="50" class="cv">5,458</text><text x="190" y="67" class="cu">persons</text></svg>
+  <figcaption>Persons at risk in each tier. MITIGATE is not a lesser finding — for a
+  flood-exposed habitation with a viable embankment, mitigation routinely returns several
+  rupees of avoided loss per rupee spent, which relocation cannot match.</figcaption></figure>
+
+<table>
+  <caption>Decision table. BCR compares the present value of avoided loss over 30 years
+  against capital cost; "recommended" is the higher of the two options, subject to the
+  override that an actively failing site cannot be protected in place.</caption>
+  <thead><tr><th>Habitation</th><th>Tier</th><th class="n">At risk</th>
+    <th class="n">HH</th><th>Site portfolio</th><th class="n">Coverage</th>
+    <th>Binding constraint</th><th class="n">BCR move</th><th class="n">BCR protect</th>
+    <th>Recommended</th><th class="n">Cost</th><th class="n">Phase</th></tr></thead>
+  <tbody>
+    <tr>
+      <td>Satabhaya</td>
+      <td><span class="chip t-IMMEDIATE">IMMEDIATE</span></td>
+      <td class="n">412</td>
+      <td class="n">96</td>
+      <td class="n">1 parcel</td>
+      <td class="n">100%</td>
+      <td>Water</td>
+      <td class="n">3.25</td>
+      <td class="n">2.78</td>
+      <td>Relocate</td>
+      <td class="n">₹22.4 crore</td>
+      <td class="n">1</td>
+    </tr>
+    <tr>
+      <td>Barahipur</td>
+      <td><span class="chip t-MITIGATE">MITIGATE</span></td>
+      <td class="n">1,504</td>
+      <td class="n">350</td>
+      <td class="n">2 parcels</td>
+      <td class="n">100%</td>
+      <td>Water</td>
+      <td class="n">1.09</td>
+      <td class="n">9.31</td>
+      <td>Mitigate</td>
+      <td class="n">₹7.3 crore</td>
+      <td class="n">1</td>
+    </tr>
+    <tr>
+      <td>Gopalpur</td>
+      <td><span class="chip t-MITIGATE">MITIGATE</span></td>
+      <td class="n">934</td>
+      <td class="n">217</td>
+      <td class="n">1 parcel</td>
+      <td class="n">100%</td>
+      <td>Water</td>
+      <td class="n">1.32</td>
+      <td class="n">8.33</td>
+      <td>Mitigate</td>
+      <td class="n">₹4.6 crore</td>
+      <td class="n">1</td>
+    </tr>
+    <tr>
+      <td>Pentha</td>
+      <td><span class="chip t-MITIGATE">MITIGATE</span></td>
+      <td class="n">872</td>
+      <td class="n">203</td>
+      <td class="n">1 parcel</td>
+      <td class="n">100%</td>
+      <td>Water</td>
+      <td class="n">1.13</td>
+      <td class="n">7.07</td>
+      <td>Mitigate</td>
+      <td class="n">₹4.3 crore</td>
+      <td class="n">1</td>
+    </tr>
+    <tr>
+      <td>Kanhupur</td>
+      <td><span class="chip t-MITIGATE">MITIGATE</span></td>
+      <td class="n">871</td>
+      <td class="n">202</td>
+      <td class="n">1 parcel</td>
+      <td class="n">100%</td>
+      <td>Water</td>
+      <td class="n">1.16</td>
+      <td class="n">7.28</td>
+      <td>Mitigate</td>
+      <td class="n">₹4.3 crore</td>
+      <td class="n">1</td>
+    </tr>
+    <tr>
+      <td>Bagapatia</td>
+      <td><span class="chip t-MITIGATE">MITIGATE</span></td>
+      <td class="n">870</td>
+      <td class="n">202</td>
+      <td class="n">1 parcel</td>
+      <td class="n">100%</td>
+      <td>Water</td>
+      <td class="n">1.17</td>
+      <td class="n">7.34</td>
+      <td>Mitigate</td>
+      <td class="n">₹4.2 crore</td>
+      <td class="n">1</td>
+    </tr>
+    <tr>
+      <td>Rajnagar</td>
+      <td><span class="chip t-MITIGATE">MITIGATE</span></td>
+      <td class="n">301</td>
+      <td class="n">70</td>
+      <td class="n">1 parcel</td>
+      <td class="n">100%</td>
+      <td>Water</td>
+      <td class="n">19.57</td>
+      <td class="n">93.55</td>
+      <td>Mitigate</td>
+      <td class="n">₹2.4 crore</td>
+      <td class="n">1</td>
+    </tr>
+    <tr>
+      <td>Jamboo</td>
+      <td><span class="chip t-MITIGATE">MITIGATE</span></td>
+      <td class="n">58</td>
+      <td class="n">14</td>
+      <td class="n">1 parcel</td>
+      <td class="n">100%</td>
+      <td>Water</td>
+      <td class="n">4.80</td>
+      <td class="n">48.64</td>
+      <td>Mitigate</td>
+      <td class="n">₹28.5 lakh</td>
+      <td class="n">1</td>
+    </tr>
+    <tr>
+      <td>Talachua</td>
+      <td><span class="chip t-MITIGATE">MITIGATE</span></td>
+      <td class="n">49</td>
+      <td class="n">11</td>
+      <td class="n">1 parcel</td>
+      <td class="n">100%</td>
+      <td>Water</td>
+      <td class="n">3.82</td>
+      <td class="n">31.10</td>
+      <td>Mitigate</td>
+      <td class="n">₹38.5 lakh</td>
+      <td class="n">1</td>
+    </tr>
+  </tbody>
+  <tfoot><tr><td>Total</td><td></td>
+    <td class="n">5,870</td>
+    <td class="n">1,365</td>
+    <td colspan="6"></td>
+    <td class="n">₹50.2 crore</td><td></td></tr></tfoot>
+</table>
+
+<h2><span class="sec-no">5</span>Habitation dossiers</h2>
+<p class="small muted">One card per habitation, in tier order. Each card carries the hazard
+reading, the receiving site or sites, the resource that caps how many people the land can hold,
+and the exclusion funnel that shows how much land was rejected and for what reason — the answer
+to "why not there?"</p>
+
+<article class="case tier-IMMEDIATE">
+  <h3><span>1. Satabhaya
+      <span class="mono muted" style="font-weight:400">LGD 379001</span></span>
+    <span class="chip t-IMMEDIATE">IMMEDIATE</span></h3>
+  <p class="lede" style="font-size:15px;margin-top:7px">Approximately
+    <b>412</b> of 412 residents
+    (96 households) face unacceptable risk from
+    <b>erosion</b>; the worst cell in this habitation carries a
+    1-in-1 yr chance of a damaging event in any year, i.e.
+    100% over a 30-year horizon.</p>
+
+  <div class="verdict">
+    <span class="act">Recommended action — Relocate this financial year</span><br>
+    Erosion is active over 100% of the habitation and a site with capacity for 1,141 persons is available
+  </div>
+
+  <div class="facts">
+    <div><b>Governing hazard</b><span>Erosion</span></div>
+    <div><b>Annual expected loss</b><span>₹6.7 crore</span></div>
+    <div><b>Confidence</b><span>33%</span></div>
+    <div><b>Candidate cells screened</b><span>27,791</span></div>
+    <div><b>Cells surviving all gates</b><span>342</span></div>
+    <div><b>Parcels formed</b><span>12</span></div>
+    <div><b>Site available</b>
+      <span class="ok">yes</span></div>
+    <div><b>Portfolio capacity</b><span>1,141 persons</span></div>
+    <div><b>Shortfall</b><span>0 persons</span></div>
+    <div><b>Capital cost</b><span>₹22.4 crore</span></div>
+    <div><b>PV avoided loss (30 yr)</b><span>₹73.0 crore</span></div>
+    <div><b>Cost per person moved</b><span>₹5.5 lakh</span></div>
+  </div>
+
+  <figure><svg class="fig" viewBox="0 0 620 52" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Satabhaya — worst-cell hazard, all perils combined" xmlns="http://www.w3.org/2000/svg"><title>Satabhaya — worst-cell hazard, all perils combined</title><desc>Satabhaya — worst-cell hazard, all perils combined: 0.9614 per year, about 1-in-1 years. Erosion governs; 100% chance of at least one damaging event in 30 years</desc><rect x="0.0" y="14" width="356.7" height="10" fill="#3f8f5f" opacity="0.85"/><rect x="356.7" y="14" width="74.0" height="10" fill="#cfa72e" opacity="0.85"/><rect x="430.6" y="14" width="81.0" height="10" fill="#e07b39" opacity="0.85"/><rect x="511.7" y="14" width="108.3" height="10" fill="#c1272d" opacity="0.85"/><line x1="46.7" y1="24" x2="46.7" y2="28" stroke="#666e7a"/><text x="46.7" y="37" class="ct">1-in-5000</text><line x1="201.7" y1="24" x2="201.7" y2="28" stroke="#666e7a"/><text x="201.7" y="37" class="ct">1-in-500</text><line x1="356.7" y1="24" x2="356.7" y2="28" stroke="#666e7a"/><text x="356.7" y="37" class="ct">1-in-50</text><line x1="465.0" y1="24" x2="465.0" y2="28" stroke="#666e7a"/><text x="465.0" y="37" class="ct">1-in-10</text><line x1="573.3" y1="24" x2="573.3" y2="28" stroke="#666e7a"/><text x="573.3" y="37" class="ct">1-in-2</text><polygon points="617.4,10 612.4,1 622.4,1" fill="#16181d"/><line x1="617.4" y1="10" x2="617.4" y2="26" stroke="#16181d" stroke-width="1.6"/><text x="0" y="50" class="cu">Erosion governs; 100% chance of at least one damaging event in 30 years</text></svg></figure>
+
+  <h4>Receiving site</h4>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Usable</th>
+      <th class="n">Holds</th><th>Binding</th><th class="n">Residual hazard</th>
+      <th class="n">Slope</th><th class="n">Road</th><th class="n">School</th>
+      <th class="n">Health</th><th class="n">TOPSIS</th><th class="n">Gap cost</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">379001-S10</td>
+        <td class="n">14.3 km</td>
+        <td class="n">7.5 ha</td>
+        <td class="n"><b>1,141</b></td>
+        <td>Water</td>
+        <td class="n">1-in-9 yr</td>
+        <td class="n">0.1°</td>
+        <td class="n">1.1 km</td>
+        <td class="n">1.3 km</td>
+        <td class="n">1.0 km</td>
+        <td class="n">0.83</td>
+        <td class="n">₹12.4 crore</td></tr>
+    </tbody>
+  </table>
+  <p class="small"><b>Why 379001-S10 ranks first —</b> ranked #1: water 0.71, road 0.75, health 1.00; 7.5 ha 14.3 km away, water binds at 1,141 persons, residual hazard 1-in-9 yr</p>
+  <h4>Carrying capacity of 379001-S10, resource by resource</h4>
+  <table>
+    <caption>Liebig's law of the minimum. Capacity is set by the scarcest
+    <i>site-intrinsic</i> resource — land and sustainable water yield, which cannot be
+    manufactured. Schooling, healthcare, road and power are <i>augmentable</i>: their absence
+    is a cost, priced below, not a ceiling. Reporting the minimum over everything would return
+    zero persons for every greenfield site in India.</caption>
+    <thead><tr><th>Resource</th><th class="n">Holds</th><th class="n">Available</th>
+      <th>Norm applied</th><th>Type</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Primary schooling</td>
+        <td class="n">0</td>
+        <td class="n">1.3 km</td>
+        <td class="small">1 km</td>
+        <td>augmentable</td>
+        <td class="small">no school within the RTE walking distance<br><span class="muted">Right to Education Act 2009, Schedule (neighbourhood norms)</span></td></tr>
+      <tr>
+        <td>All-weather access</td>
+        <td class="n">0</td>
+        <td class="n">1.1 km</td>
+        <td class="small">0.5 km</td>
+        <td>augmentable</td>
+        <td class="small">connected<br><span class="muted">PMGSY connectivity norm</span></td></tr>
+      <tr style="background:#fdf1f1">
+        <td>Drinking water <span class="flag">binds</span></td>
+        <td class="n">1,141</td>
+        <td class="n">62.8 kL/day</td>
+        <td class="small">55 litres/person/day</td>
+        <td>site-intrinsic</td>
+        <td class="small">coastal aquifer tubewell, discounted for salinity ingress<br><span class="muted">Jal Jeevan Mission guidelines, DDWS, MoJS (2019)</span></td></tr>
+      <tr>
+        <td>Developable land</td>
+        <td class="n">2,103</td>
+        <td class="n">7.5 ha</td>
+        <td class="small">100 m²/household</td>
+        <td>site-intrinsic</td>
+        <td class="small">65 % net-to-gross after roads, drains and open space<br><span class="muted">PMAY-G / state rehabilitation norms (typical 1–1.5 decimal)</span></td></tr>
+      <tr>
+        <td>Primary healthcare</td>
+        <td class="n">7,500</td>
+        <td class="n">1.0 km</td>
+        <td class="small">5 km</td>
+        <td>augmentable</td>
+        <td class="small">share of an existing PHC catchment assumed available<br><span class="muted">IPHS / NRHM accessibility norm</span></td></tr>
+      <tr>
+        <td>Sanctioned electrical load</td>
+        <td class="n">not limiting</td>
+        <td class="n">0.0 kW</td>
+        <td class="small">1 kW</td>
+        <td>augmentable</td>
+        <td class="small">assumed extendable from the nearest LT network; costed as a gap<br><span class="muted">RDSS / DISCOM rural domestic connection norm</span></td></tr>
+    </tbody>
+  </table>
+  <h4>What must be built, and which scheme pays</h4>
+  <table>
+    <caption>Augmentable deficits, priced at unit rates and mapped to the centrally sponsored
+    scheme that funds them. A gap with no scheme is a gap the district has to fund itself.</caption>
+    <thead><tr><th>Gap</th><th class="n">Quantity</th><th class="n">Cost</th>
+      <th>Scheme</th><th>Component</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Education</td>
+        <td class="n">2.0 classrooms</td>
+        <td class="n">₹28.0 lakh</td>
+        <td>Samagra Shiksha</td>
+        <td class="small">Additional classrooms</td></tr>
+      <tr>
+        <td>Road</td>
+        <td class="n">0.6 km of new road</td>
+        <td class="n">₹37.8 lakh</td>
+        <td>PMGSY-IV</td>
+        <td class="small">New connectivity / upgradation</td></tr>
+      <tr>
+        <td>Power</td>
+        <td class="n">119.6 kVA of transformer capacity</td>
+        <td class="n">₹21.5 lakh</td>
+        <td>RDSS</td>
+        <td class="small">Distribution transformer + LT line</td></tr>
+      <tr>
+        <td>Housing</td>
+        <td class="n">96.0 PMAY-G units</td>
+        <td class="n">₹11.5 crore</td>
+        <td>PMAY-G</td>
+        <td class="small">Unit assistance</td></tr>
+    </tbody>
+    <tfoot><tr><td>Total</td><td class="n"></td>
+      <td class="n">₹12.4 crore</td>
+      <td colspan="2" class="small">after closure the site holds
+        412 persons; the next constraint becomes
+        water</td></tr></tfoot>
+  </table>
+
+  <h4>Why not elsewhere — the exclusion funnel</h4>
+  <figure><svg class="fig" viewBox="0 0 620 246" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Site exclusion funnel" xmlns="http://www.w3.org/2000/svg"><title>Site exclusion funnel</title><desc>27,791 cells screened; 342 survived all 9 constraints.</desc><text x="0" y="11" class="cu">27,791 cells screened → 342 eligible</text><text x="0" y="36" class="cl">zone red</text><rect x="250" y="23" width="273.1" height="14" rx="2" fill="#1f6f8b"/><rect x="523.1" y="23" width="2.9" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="36" class="cv">−293 → 27,498</text><text x="0" y="60" class="cl">zone orange</text><rect x="250" y="47" width="176.1" height="14" rx="2" fill="#1f6f8b"/><rect x="426.1" y="47" width="97.0" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="60" class="cv">−9,770 → 17,728</text><text x="0" y="84" class="cl">residual hazard</text><rect x="250" y="71" width="17.6" height="14" rx="2" fill="#1f6f8b"/><rect x="267.6" y="71" width="158.5" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="84" class="cv">−15,955 → 1,773</text><text x="0" y="108" class="cl">slope</text><rect x="250" y="95" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="108" class="cv">−0 → 1,773</text><text x="0" y="132" class="cl">erosion</text><rect x="250" y="119" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="132" class="cv">−0 → 1,773</text><text x="0" y="156" class="cl">inundation</text><rect x="250" y="143" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="156" class="cv">−0 → 1,773</text><text x="0" y="180" class="cl">land class</text><rect x="250" y="167" width="3.5" height="14" rx="2" fill="#1f6f8b"/><rect x="253.5" y="167" width="14.1" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="180" class="cv">−1,418 → 355</text><text x="0" y="204" class="cl">already built</text><rect x="250" y="191" width="3.4" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="204" class="cv">−13 → 342</text><text x="0" y="228" class="cl">too far</text><rect x="250" y="215" width="3.4" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="228" class="cv">−0 → 342</text></svg>
+    <figcaption>Applied in this order, so each rejected cell is reported against the
+    <i>first</i> constraint it failed. Residual-hazard cap for this habitation:
+    0.12 per year
+    (8.7-year return period,
+    relaxed basis).</figcaption></figure>
+
+  <h4>Nearest rejected candidates</h4>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Holds</th>
+      <th class="n">TOPSIS</th><th>Why it was not accepted</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">379001-S2</td><td class="n">14.2 km</td>
+        <td class="n">2,349</td>
+        <td class="n">0.30</td>
+        <td class="small">TOPSIS closeness 0.30 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379001-S9</td><td class="n">17.1 km</td>
+        <td class="n">1,392</td>
+        <td class="n">0.28</td>
+        <td class="small">TOPSIS closeness 0.28 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379001-S1</td><td class="n">17.8 km</td>
+        <td class="n">2,506</td>
+        <td class="n">0.24</td>
+        <td class="small">TOPSIS closeness 0.24 below the 0.35 acceptance floor</td></tr>
+    </tbody>
+  </table>
+</article>
+<article class="case tier-MITIGATE">
+  <h3><span>2. Barahipur
+      <span class="mono muted" style="font-weight:400">LGD 379006</span></span>
+    <span class="chip t-MITIGATE">MITIGATE</span></h3>
+  <p class="lede" style="font-size:15px;margin-top:7px">Approximately
+    <b>1,504</b> of 1,504 residents
+    (350 households) face unacceptable risk from
+    <b>flood</b>; the worst cell in this habitation carries a
+    1-in-2 yr chance of a damaging event in any year, i.e.
+    100% over a 30-year horizon.</p>
+
+  <div class="verdict">
+    <span class="act">Recommended action — Protect in place — flood</span><br>
+    Mitigation BCR 9.31 exceeds relocation 1.09
+  </div>
+
+  <div class="facts">
+    <div><b>Governing hazard</b><span>Flood</span></div>
+    <div><b>Annual expected loss</b><span>₹11.0 crore</span></div>
+    <div><b>Confidence</b><span>33%</span></div>
+    <div><b>Candidate cells screened</b><span>27,791</span></div>
+    <div><b>Cells surviving all gates</b><span>342</span></div>
+    <div><b>Parcels formed</b><span>12</span></div>
+    <div><b>Site available</b>
+      <span class="ok">yes</span></div>
+    <div><b>Portfolio capacity</b><span>2,491 persons</span></div>
+    <div><b>Shortfall</b><span>0 persons</span></div>
+    <div><b>Capital cost</b><span>₹7.3 crore</span></div>
+    <div><b>PV avoided loss (30 yr)</b><span>₹68.3 crore</span></div>
+    <div><b>Cost per person moved</b><span>₹48,837</span></div>
+  </div>
+
+  <figure><svg class="fig" viewBox="0 0 620 52" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Barahipur — worst-cell hazard, all perils combined" xmlns="http://www.w3.org/2000/svg"><title>Barahipur — worst-cell hazard, all perils combined</title><desc>Barahipur — worst-cell hazard, all perils combined: 0.6094 per year, about 1-in-2 years. Flood governs; 100% chance of at least one damaging event in 30 years</desc><rect x="0.0" y="14" width="356.7" height="10" fill="#3f8f5f" opacity="0.85"/><rect x="356.7" y="14" width="74.0" height="10" fill="#cfa72e" opacity="0.85"/><rect x="430.6" y="14" width="81.0" height="10" fill="#e07b39" opacity="0.85"/><rect x="511.7" y="14" width="108.3" height="10" fill="#c1272d" opacity="0.85"/><line x1="46.7" y1="24" x2="46.7" y2="28" stroke="#666e7a"/><text x="46.7" y="37" class="ct">1-in-5000</text><line x1="201.7" y1="24" x2="201.7" y2="28" stroke="#666e7a"/><text x="201.7" y="37" class="ct">1-in-500</text><line x1="356.7" y1="24" x2="356.7" y2="28" stroke="#666e7a"/><text x="356.7" y="37" class="ct">1-in-50</text><line x1="465.0" y1="24" x2="465.0" y2="28" stroke="#666e7a"/><text x="465.0" y="37" class="ct">1-in-10</text><line x1="573.3" y1="24" x2="573.3" y2="28" stroke="#666e7a"/><text x="573.3" y="37" class="ct">1-in-2</text><polygon points="586.7,10 581.7,1 591.7,1" fill="#16181d"/><line x1="586.7" y1="10" x2="586.7" y2="26" stroke="#16181d" stroke-width="1.6"/><text x="0" y="50" class="cu">Flood governs; 100% chance of at least one damaging event in 30 years</text></svg></figure>
+
+  <h4>Receiving sites</h4>
+  <p class="small">No single parcel of buildable land in range is large enough, so the
+  recommendation is a <b>portfolio of 2 parcels</b> taken in rank order
+  until the households fit. This is how hill resettlement is actually done — one contiguous
+  bench of the required size rarely exists above 1,800 m.</p>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Usable</th>
+      <th class="n">Holds</th><th>Binding</th><th class="n">Residual hazard</th>
+      <th class="n">Slope</th><th class="n">Road</th><th class="n">School</th>
+      <th class="n">Health</th><th class="n">TOPSIS</th><th class="n">Gap cost</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">379006-S10</td>
+        <td class="n">12.0 km</td>
+        <td class="n">7.5 ha</td>
+        <td class="n"><b>1,141</b></td>
+        <td>Water</td>
+        <td class="n">1-in-9 yr</td>
+        <td class="n">0.1°</td>
+        <td class="n">1.1 km</td>
+        <td class="n">1.3 km</td>
+        <td class="n">1.0 km</td>
+        <td class="n">0.74</td>
+        <td class="n">₹33.7 crore</td></tr>
+      <tr><td class="mono">379006-S6</td>
+        <td class="n">11.3 km</td>
+        <td class="n">9.0 ha</td>
+        <td class="n"><b>1,349</b></td>
+        <td>Water</td>
+        <td class="n">1-in-9 yr</td>
+        <td class="n">0.0°</td>
+        <td class="n">1.6 km</td>
+        <td class="n">1.8 km</td>
+        <td class="n">1.5 km</td>
+        <td class="n">0.66</td>
+        <td class="n">₹40.1 crore</td></tr>
+    </tbody>
+  </table>
+  <p class="small"><b>Why 379006-S10 ranks first —</b> ranked #1: water 0.71, road 0.75, health 1.00; 7.5 ha 12.0 km away, water binds at 1,141 persons, residual hazard 1-in-9 yr</p>
+  <h4>Carrying capacity of 379006-S10, resource by resource</h4>
+  <table>
+    <caption>Liebig's law of the minimum. Capacity is set by the scarcest
+    <i>site-intrinsic</i> resource — land and sustainable water yield, which cannot be
+    manufactured. Schooling, healthcare, road and power are <i>augmentable</i>: their absence
+    is a cost, priced below, not a ceiling. Reporting the minimum over everything would return
+    zero persons for every greenfield site in India.</caption>
+    <thead><tr><th>Resource</th><th class="n">Holds</th><th class="n">Available</th>
+      <th>Norm applied</th><th>Type</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Primary schooling</td>
+        <td class="n">0</td>
+        <td class="n">1.3 km</td>
+        <td class="small">1 km</td>
+        <td>augmentable</td>
+        <td class="small">no school within the RTE walking distance<br><span class="muted">Right to Education Act 2009, Schedule (neighbourhood norms)</span></td></tr>
+      <tr>
+        <td>All-weather access</td>
+        <td class="n">0</td>
+        <td class="n">1.1 km</td>
+        <td class="small">0.5 km</td>
+        <td>augmentable</td>
+        <td class="small">connected<br><span class="muted">PMGSY connectivity norm</span></td></tr>
+      <tr style="background:#fdf1f1">
+        <td>Drinking water <span class="flag">binds</span></td>
+        <td class="n">1,141</td>
+        <td class="n">62.8 kL/day</td>
+        <td class="small">55 litres/person/day</td>
+        <td>site-intrinsic</td>
+        <td class="small">coastal aquifer tubewell, discounted for salinity ingress<br><span class="muted">Jal Jeevan Mission guidelines, DDWS, MoJS (2019)</span></td></tr>
+      <tr>
+        <td>Developable land</td>
+        <td class="n">2,103</td>
+        <td class="n">7.5 ha</td>
+        <td class="small">100 m²/household</td>
+        <td>site-intrinsic</td>
+        <td class="small">65 % net-to-gross after roads, drains and open space<br><span class="muted">PMAY-G / state rehabilitation norms (typical 1–1.5 decimal)</span></td></tr>
+      <tr>
+        <td>Primary healthcare</td>
+        <td class="n">7,500</td>
+        <td class="n">1.0 km</td>
+        <td class="small">5 km</td>
+        <td>augmentable</td>
+        <td class="small">share of an existing PHC catchment assumed available<br><span class="muted">IPHS / NRHM accessibility norm</span></td></tr>
+      <tr>
+        <td>Sanctioned electrical load</td>
+        <td class="n">not limiting</td>
+        <td class="n">0.0 kW</td>
+        <td class="small">1 kW</td>
+        <td>augmentable</td>
+        <td class="small">assumed extendable from the nearest LT network; costed as a gap<br><span class="muted">RDSS / DISCOM rural domestic connection norm</span></td></tr>
+    </tbody>
+  </table>
+  <h4>What must be built, and which scheme pays</h4>
+  <table>
+    <caption>Augmentable deficits, priced at unit rates and mapped to the centrally sponsored
+    scheme that funds them. A gap with no scheme is a gap the district has to fund itself.</caption>
+    <thead><tr><th>Gap</th><th class="n">Quantity</th><th class="n">Cost</th>
+      <th>Scheme</th><th>Component</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Education</td>
+        <td class="n">6.0 classrooms</td>
+        <td class="n">₹84.0 lakh</td>
+        <td>Samagra Shiksha</td>
+        <td class="small">Additional classrooms</td></tr>
+      <tr>
+        <td>Road</td>
+        <td class="n">0.6 km of new road</td>
+        <td class="n">₹37.8 lakh</td>
+        <td>PMGSY-IV</td>
+        <td class="small">New connectivity / upgradation</td></tr>
+      <tr>
+        <td>Power</td>
+        <td class="n">331.8 kVA of transformer capacity</td>
+        <td class="n">₹59.7 lakh</td>
+        <td>RDSS</td>
+        <td class="small">Distribution transformer + LT line</td></tr>
+      <tr>
+        <td>Housing</td>
+        <td class="n">266.0 PMAY-G units</td>
+        <td class="n">₹31.9 crore</td>
+        <td>PMAY-G</td>
+        <td class="small">Unit assistance</td></tr>
+    </tbody>
+    <tfoot><tr><td>Total</td><td class="n"></td>
+      <td class="n">₹33.7 crore</td>
+      <td colspan="2" class="small">after closure the site holds
+        1,141 persons; the next constraint becomes
+        water</td></tr></tfoot>
+  </table>
+
+  <h4>Why not elsewhere — the exclusion funnel</h4>
+  <figure><svg class="fig" viewBox="0 0 620 246" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Site exclusion funnel" xmlns="http://www.w3.org/2000/svg"><title>Site exclusion funnel</title><desc>27,791 cells screened; 342 survived all 9 constraints.</desc><text x="0" y="11" class="cu">27,791 cells screened → 342 eligible</text><text x="0" y="36" class="cl">zone red</text><rect x="250" y="23" width="273.1" height="14" rx="2" fill="#1f6f8b"/><rect x="523.1" y="23" width="2.9" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="36" class="cv">−293 → 27,498</text><text x="0" y="60" class="cl">zone orange</text><rect x="250" y="47" width="176.1" height="14" rx="2" fill="#1f6f8b"/><rect x="426.1" y="47" width="97.0" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="60" class="cv">−9,770 → 17,728</text><text x="0" y="84" class="cl">residual hazard</text><rect x="250" y="71" width="17.6" height="14" rx="2" fill="#1f6f8b"/><rect x="267.6" y="71" width="158.5" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="84" class="cv">−15,955 → 1,773</text><text x="0" y="108" class="cl">slope</text><rect x="250" y="95" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="108" class="cv">−0 → 1,773</text><text x="0" y="132" class="cl">erosion</text><rect x="250" y="119" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="132" class="cv">−0 → 1,773</text><text x="0" y="156" class="cl">inundation</text><rect x="250" y="143" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="156" class="cv">−0 → 1,773</text><text x="0" y="180" class="cl">land class</text><rect x="250" y="167" width="3.5" height="14" rx="2" fill="#1f6f8b"/><rect x="253.5" y="167" width="14.1" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="180" class="cv">−1,418 → 355</text><text x="0" y="204" class="cl">already built</text><rect x="250" y="191" width="3.4" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="204" class="cv">−13 → 342</text><text x="0" y="228" class="cl">too far</text><rect x="250" y="215" width="3.4" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="228" class="cv">−0 → 342</text></svg>
+    <figcaption>Applied in this order, so each rejected cell is reported against the
+    <i>first</i> constraint it failed. Residual-hazard cap for this habitation:
+    0.12 per year
+    (8.7-year return period,
+    relaxed basis).</figcaption></figure>
+
+  <h4>Nearest rejected candidates</h4>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Holds</th>
+      <th class="n">TOPSIS</th><th>Why it was not accepted</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">379006-S3</td><td class="n">13.9 km</td>
+        <td class="n">1,640</td>
+        <td class="n">0.35</td>
+        <td class="small">TOPSIS closeness 0.35 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379006-S9</td><td class="n">15.4 km</td>
+        <td class="n">1,392</td>
+        <td class="n">0.27</td>
+        <td class="small">TOPSIS closeness 0.27 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379006-S1</td><td class="n">16.3 km</td>
+        <td class="n">2,506</td>
+        <td class="n">0.23</td>
+        <td class="small">TOPSIS closeness 0.23 below the 0.35 acceptance floor</td></tr>
+    </tbody>
+  </table>
+</article>
+<article class="case tier-MITIGATE">
+  <h3><span>3. Gopalpur
+      <span class="mono muted" style="font-weight:400">LGD 379004</span></span>
+    <span class="chip t-MITIGATE">MITIGATE</span></h3>
+  <p class="lede" style="font-size:15px;margin-top:7px">Approximately
+    <b>934</b> of 934 residents
+    (217 households) face unacceptable risk from
+    <b>flood</b>; the worst cell in this habitation carries a
+    1-in-2 yr chance of a damaging event in any year, i.e.
+    100% over a 30-year horizon.</p>
+
+  <div class="verdict">
+    <span class="act">Recommended action — Protect in place — flood</span><br>
+    Mitigation BCR 8.33 exceeds relocation 1.32
+  </div>
+
+  <div class="facts">
+    <div><b>Governing hazard</b><span>Flood</span></div>
+    <div><b>Annual expected loss</b><span>₹6.1 crore</span></div>
+    <div><b>Confidence</b><span>34%</span></div>
+    <div><b>Candidate cells screened</b><span>27,791</span></div>
+    <div><b>Cells surviving all gates</b><span>342</span></div>
+    <div><b>Parcels formed</b><span>12</span></div>
+    <div><b>Site available</b>
+      <span class="ok">yes</span></div>
+    <div><b>Portfolio capacity</b><span>1,141 persons</span></div>
+    <div><b>Shortfall</b><span>0 persons</span></div>
+    <div><b>Capital cost</b><span>₹4.6 crore</span></div>
+    <div><b>PV avoided loss (30 yr)</b><span>₹38.0 crore</span></div>
+    <div><b>Cost per person moved</b><span>₹48,837</span></div>
+  </div>
+
+  <figure><svg class="fig" viewBox="0 0 620 52" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Gopalpur — worst-cell hazard, all perils combined" xmlns="http://www.w3.org/2000/svg"><title>Gopalpur — worst-cell hazard, all perils combined</title><desc>Gopalpur — worst-cell hazard, all perils combined: 0.5884 per year, about 1-in-2 years. Flood governs; 100% chance of at least one damaging event in 30 years</desc><rect x="0.0" y="14" width="356.7" height="10" fill="#3f8f5f" opacity="0.85"/><rect x="356.7" y="14" width="74.0" height="10" fill="#cfa72e" opacity="0.85"/><rect x="430.6" y="14" width="81.0" height="10" fill="#e07b39" opacity="0.85"/><rect x="511.7" y="14" width="108.3" height="10" fill="#c1272d" opacity="0.85"/><line x1="46.7" y1="24" x2="46.7" y2="28" stroke="#666e7a"/><text x="46.7" y="37" class="ct">1-in-5000</text><line x1="201.7" y1="24" x2="201.7" y2="28" stroke="#666e7a"/><text x="201.7" y="37" class="ct">1-in-500</text><line x1="356.7" y1="24" x2="356.7" y2="28" stroke="#666e7a"/><text x="356.7" y="37" class="ct">1-in-50</text><line x1="465.0" y1="24" x2="465.0" y2="28" stroke="#666e7a"/><text x="465.0" y="37" class="ct">1-in-10</text><line x1="573.3" y1="24" x2="573.3" y2="28" stroke="#666e7a"/><text x="573.3" y="37" class="ct">1-in-2</text><polygon points="584.3,10 579.3,1 589.3,1" fill="#16181d"/><line x1="584.3" y1="10" x2="584.3" y2="26" stroke="#16181d" stroke-width="1.6"/><text x="0" y="50" class="cu">Flood governs; 100% chance of at least one damaging event in 30 years</text></svg></figure>
+
+  <h4>Receiving site</h4>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Usable</th>
+      <th class="n">Holds</th><th>Binding</th><th class="n">Residual hazard</th>
+      <th class="n">Slope</th><th class="n">Road</th><th class="n">School</th>
+      <th class="n">Health</th><th class="n">TOPSIS</th><th class="n">Gap cost</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">379004-S10</td>
+        <td class="n">9.3 km</td>
+        <td class="n">7.5 ha</td>
+        <td class="n"><b>1,141</b></td>
+        <td>Water</td>
+        <td class="n">1-in-9 yr</td>
+        <td class="n">0.1°</td>
+        <td class="n">1.1 km</td>
+        <td class="n">1.3 km</td>
+        <td class="n">1.0 km</td>
+        <td class="n">0.95</td>
+        <td class="n">₹27.7 crore</td></tr>
+    </tbody>
+  </table>
+  <p class="small"><b>Why 379004-S10 ranks first —</b> ranked #1: water 0.71, road 0.75, health 1.00; 7.5 ha 9.3 km away, water binds at 1,141 persons, residual hazard 1-in-9 yr</p>
+  <h4>Carrying capacity of 379004-S10, resource by resource</h4>
+  <table>
+    <caption>Liebig's law of the minimum. Capacity is set by the scarcest
+    <i>site-intrinsic</i> resource — land and sustainable water yield, which cannot be
+    manufactured. Schooling, healthcare, road and power are <i>augmentable</i>: their absence
+    is a cost, priced below, not a ceiling. Reporting the minimum over everything would return
+    zero persons for every greenfield site in India.</caption>
+    <thead><tr><th>Resource</th><th class="n">Holds</th><th class="n">Available</th>
+      <th>Norm applied</th><th>Type</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Primary schooling</td>
+        <td class="n">0</td>
+        <td class="n">1.3 km</td>
+        <td class="small">1 km</td>
+        <td>augmentable</td>
+        <td class="small">no school within the RTE walking distance<br><span class="muted">Right to Education Act 2009, Schedule (neighbourhood norms)</span></td></tr>
+      <tr>
+        <td>All-weather access</td>
+        <td class="n">0</td>
+        <td class="n">1.1 km</td>
+        <td class="small">0.5 km</td>
+        <td>augmentable</td>
+        <td class="small">connected<br><span class="muted">PMGSY connectivity norm</span></td></tr>
+      <tr style="background:#fdf1f1">
+        <td>Drinking water <span class="flag">binds</span></td>
+        <td class="n">1,141</td>
+        <td class="n">62.8 kL/day</td>
+        <td class="small">55 litres/person/day</td>
+        <td>site-intrinsic</td>
+        <td class="small">coastal aquifer tubewell, discounted for salinity ingress<br><span class="muted">Jal Jeevan Mission guidelines, DDWS, MoJS (2019)</span></td></tr>
+      <tr>
+        <td>Developable land</td>
+        <td class="n">2,103</td>
+        <td class="n">7.5 ha</td>
+        <td class="small">100 m²/household</td>
+        <td>site-intrinsic</td>
+        <td class="small">65 % net-to-gross after roads, drains and open space<br><span class="muted">PMAY-G / state rehabilitation norms (typical 1–1.5 decimal)</span></td></tr>
+      <tr>
+        <td>Primary healthcare</td>
+        <td class="n">7,500</td>
+        <td class="n">1.0 km</td>
+        <td class="small">5 km</td>
+        <td>augmentable</td>
+        <td class="small">share of an existing PHC catchment assumed available<br><span class="muted">IPHS / NRHM accessibility norm</span></td></tr>
+      <tr>
+        <td>Sanctioned electrical load</td>
+        <td class="n">not limiting</td>
+        <td class="n">0.0 kW</td>
+        <td class="small">1 kW</td>
+        <td>augmentable</td>
+        <td class="small">assumed extendable from the nearest LT network; costed as a gap<br><span class="muted">RDSS / DISCOM rural domestic connection norm</span></td></tr>
+    </tbody>
+  </table>
+  <h4>What must be built, and which scheme pays</h4>
+  <table>
+    <caption>Augmentable deficits, priced at unit rates and mapped to the centrally sponsored
+    scheme that funds them. A gap with no scheme is a gap the district has to fund itself.</caption>
+    <thead><tr><th>Gap</th><th class="n">Quantity</th><th class="n">Cost</th>
+      <th>Scheme</th><th>Component</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Education</td>
+        <td class="n">5.0 classrooms</td>
+        <td class="n">₹70.0 lakh</td>
+        <td>Samagra Shiksha</td>
+        <td class="small">Additional classrooms</td></tr>
+      <tr>
+        <td>Road</td>
+        <td class="n">0.6 km of new road</td>
+        <td class="n">₹37.8 lakh</td>
+        <td>PMGSY-IV</td>
+        <td class="small">New connectivity / upgradation</td></tr>
+      <tr>
+        <td>Power</td>
+        <td class="n">271.5 kVA of transformer capacity</td>
+        <td class="n">₹48.9 lakh</td>
+        <td>RDSS</td>
+        <td class="small">Distribution transformer + LT line</td></tr>
+      <tr>
+        <td>Housing</td>
+        <td class="n">218.0 PMAY-G units</td>
+        <td class="n">₹26.2 crore</td>
+        <td>PMAY-G</td>
+        <td class="small">Unit assistance</td></tr>
+    </tbody>
+    <tfoot><tr><td>Total</td><td class="n"></td>
+      <td class="n">₹27.7 crore</td>
+      <td colspan="2" class="small">after closure the site holds
+        934 persons; the next constraint becomes
+        water</td></tr></tfoot>
+  </table>
+
+  <h4>Why not elsewhere — the exclusion funnel</h4>
+  <figure><svg class="fig" viewBox="0 0 620 246" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Site exclusion funnel" xmlns="http://www.w3.org/2000/svg"><title>Site exclusion funnel</title><desc>27,791 cells screened; 342 survived all 9 constraints.</desc><text x="0" y="11" class="cu">27,791 cells screened → 342 eligible</text><text x="0" y="36" class="cl">zone red</text><rect x="250" y="23" width="273.1" height="14" rx="2" fill="#1f6f8b"/><rect x="523.1" y="23" width="2.9" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="36" class="cv">−293 → 27,498</text><text x="0" y="60" class="cl">zone orange</text><rect x="250" y="47" width="176.1" height="14" rx="2" fill="#1f6f8b"/><rect x="426.1" y="47" width="97.0" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="60" class="cv">−9,770 → 17,728</text><text x="0" y="84" class="cl">residual hazard</text><rect x="250" y="71" width="17.6" height="14" rx="2" fill="#1f6f8b"/><rect x="267.6" y="71" width="158.5" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="84" class="cv">−15,955 → 1,773</text><text x="0" y="108" class="cl">slope</text><rect x="250" y="95" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="108" class="cv">−0 → 1,773</text><text x="0" y="132" class="cl">erosion</text><rect x="250" y="119" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="132" class="cv">−0 → 1,773</text><text x="0" y="156" class="cl">inundation</text><rect x="250" y="143" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="156" class="cv">−0 → 1,773</text><text x="0" y="180" class="cl">land class</text><rect x="250" y="167" width="3.5" height="14" rx="2" fill="#1f6f8b"/><rect x="253.5" y="167" width="14.1" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="180" class="cv">−1,418 → 355</text><text x="0" y="204" class="cl">already built</text><rect x="250" y="191" width="3.4" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="204" class="cv">−13 → 342</text><text x="0" y="228" class="cl">too far</text><rect x="250" y="215" width="3.4" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="228" class="cv">−0 → 342</text></svg>
+    <figcaption>Applied in this order, so each rejected cell is reported against the
+    <i>first</i> constraint it failed. Residual-hazard cap for this habitation:
+    0.12 per year
+    (8.7-year return period,
+    relaxed basis).</figcaption></figure>
+
+  <h4>Nearest rejected candidates</h4>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Holds</th>
+      <th class="n">TOPSIS</th><th>Why it was not accepted</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">379004-S8</td><td class="n">11.8 km</td>
+        <td class="n">1,407</td>
+        <td class="n">0.31</td>
+        <td class="small">TOPSIS closeness 0.31 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379004-S9</td><td class="n">12.1 km</td>
+        <td class="n">1,392</td>
+        <td class="n">0.29</td>
+        <td class="small">TOPSIS closeness 0.29 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379004-S1</td><td class="n">12.8 km</td>
+        <td class="n">2,506</td>
+        <td class="n">0.24</td>
+        <td class="small">TOPSIS closeness 0.24 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379004-S2</td><td class="n">12.5 km</td>
+        <td class="n">2,349</td>
+        <td class="n">0.24</td>
+        <td class="small">TOPSIS closeness 0.24 below the 0.35 acceptance floor</td></tr>
+    </tbody>
+  </table>
+</article>
+<article class="case tier-MITIGATE">
+  <h3><span>4. Pentha
+      <span class="mono muted" style="font-weight:400">LGD 379005</span></span>
+    <span class="chip t-MITIGATE">MITIGATE</span></h3>
+  <p class="lede" style="font-size:15px;margin-top:7px">Approximately
+    <b>872</b> of 1,458 residents
+    (203 households) face unacceptable risk from
+    <b>flood</b>; the worst cell in this habitation carries a
+    1-in-2 yr chance of a damaging event in any year, i.e.
+    100% over a 30-year horizon.</p>
+
+  <div class="verdict">
+    <span class="act">Recommended action — Protect in place — flood</span><br>
+    Mitigation BCR 7.07 exceeds relocation 1.13
+  </div>
+
+  <div class="facts">
+    <div><b>Governing hazard</b><span>Flood</span></div>
+    <div><b>Annual expected loss</b><span>₹4.9 crore</span></div>
+    <div><b>Confidence</b><span>34%</span></div>
+    <div><b>Candidate cells screened</b><span>27,791</span></div>
+    <div><b>Cells surviving all gates</b><span>342</span></div>
+    <div><b>Parcels formed</b><span>12</span></div>
+    <div><b>Site available</b>
+      <span class="ok">yes</span></div>
+    <div><b>Portfolio capacity</b><span>1,141 persons</span></div>
+    <div><b>Shortfall</b><span>0 persons</span></div>
+    <div><b>Capital cost</b><span>₹4.3 crore</span></div>
+    <div><b>PV avoided loss (30 yr)</b><span>₹30.1 crore</span></div>
+    <div><b>Cost per person moved</b><span>₹48,837</span></div>
+  </div>
+
+  <figure><svg class="fig" viewBox="0 0 620 52" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Pentha — worst-cell hazard, all perils combined" xmlns="http://www.w3.org/2000/svg"><title>Pentha — worst-cell hazard, all perils combined</title><desc>Pentha — worst-cell hazard, all perils combined: 0.4723 per year, about 1-in-2 years. Flood governs; 100% chance of at least one damaging event in 30 years</desc><rect x="0.0" y="14" width="356.7" height="10" fill="#3f8f5f" opacity="0.85"/><rect x="356.7" y="14" width="74.0" height="10" fill="#cfa72e" opacity="0.85"/><rect x="430.6" y="14" width="81.0" height="10" fill="#e07b39" opacity="0.85"/><rect x="511.7" y="14" width="108.3" height="10" fill="#c1272d" opacity="0.85"/><line x1="46.7" y1="24" x2="46.7" y2="28" stroke="#666e7a"/><text x="46.7" y="37" class="ct">1-in-5000</text><line x1="201.7" y1="24" x2="201.7" y2="28" stroke="#666e7a"/><text x="201.7" y="37" class="ct">1-in-500</text><line x1="356.7" y1="24" x2="356.7" y2="28" stroke="#666e7a"/><text x="356.7" y="37" class="ct">1-in-50</text><line x1="465.0" y1="24" x2="465.0" y2="28" stroke="#666e7a"/><text x="465.0" y="37" class="ct">1-in-10</text><line x1="573.3" y1="24" x2="573.3" y2="28" stroke="#666e7a"/><text x="573.3" y="37" class="ct">1-in-2</text><polygon points="569.5,10 564.5,1 574.5,1" fill="#16181d"/><line x1="569.5" y1="10" x2="569.5" y2="26" stroke="#16181d" stroke-width="1.6"/><text x="0" y="50" class="cu">Flood governs; 100% chance of at least one damaging event in 30 years</text></svg></figure>
+
+  <h4>Receiving site</h4>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Usable</th>
+      <th class="n">Holds</th><th>Binding</th><th class="n">Residual hazard</th>
+      <th class="n">Slope</th><th class="n">Road</th><th class="n">School</th>
+      <th class="n">Health</th><th class="n">TOPSIS</th><th class="n">Gap cost</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">379005-S10</td>
+        <td class="n">7.6 km</td>
+        <td class="n">7.5 ha</td>
+        <td class="n"><b>1,141</b></td>
+        <td>Water</td>
+        <td class="n">1-in-9 yr</td>
+        <td class="n">0.1°</td>
+        <td class="n">1.1 km</td>
+        <td class="n">1.3 km</td>
+        <td class="n">1.0 km</td>
+        <td class="n">0.97</td>
+        <td class="n">₹25.8 crore</td></tr>
+    </tbody>
+  </table>
+  <p class="small"><b>Why 379005-S10 ranks first —</b> ranked #1: water 0.71, road 0.75, health 1.00; 7.5 ha 7.6 km away, water binds at 1,141 persons, residual hazard 1-in-9 yr</p>
+  <h4>Carrying capacity of 379005-S10, resource by resource</h4>
+  <table>
+    <caption>Liebig's law of the minimum. Capacity is set by the scarcest
+    <i>site-intrinsic</i> resource — land and sustainable water yield, which cannot be
+    manufactured. Schooling, healthcare, road and power are <i>augmentable</i>: their absence
+    is a cost, priced below, not a ceiling. Reporting the minimum over everything would return
+    zero persons for every greenfield site in India.</caption>
+    <thead><tr><th>Resource</th><th class="n">Holds</th><th class="n">Available</th>
+      <th>Norm applied</th><th>Type</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Primary schooling</td>
+        <td class="n">0</td>
+        <td class="n">1.3 km</td>
+        <td class="small">1 km</td>
+        <td>augmentable</td>
+        <td class="small">no school within the RTE walking distance<br><span class="muted">Right to Education Act 2009, Schedule (neighbourhood norms)</span></td></tr>
+      <tr>
+        <td>All-weather access</td>
+        <td class="n">0</td>
+        <td class="n">1.1 km</td>
+        <td class="small">0.5 km</td>
+        <td>augmentable</td>
+        <td class="small">connected<br><span class="muted">PMGSY connectivity norm</span></td></tr>
+      <tr style="background:#fdf1f1">
+        <td>Drinking water <span class="flag">binds</span></td>
+        <td class="n">1,141</td>
+        <td class="n">62.8 kL/day</td>
+        <td class="small">55 litres/person/day</td>
+        <td>site-intrinsic</td>
+        <td class="small">coastal aquifer tubewell, discounted for salinity ingress<br><span class="muted">Jal Jeevan Mission guidelines, DDWS, MoJS (2019)</span></td></tr>
+      <tr>
+        <td>Developable land</td>
+        <td class="n">2,103</td>
+        <td class="n">7.5 ha</td>
+        <td class="small">100 m²/household</td>
+        <td>site-intrinsic</td>
+        <td class="small">65 % net-to-gross after roads, drains and open space<br><span class="muted">PMAY-G / state rehabilitation norms (typical 1–1.5 decimal)</span></td></tr>
+      <tr>
+        <td>Primary healthcare</td>
+        <td class="n">7,500</td>
+        <td class="n">1.0 km</td>
+        <td class="small">5 km</td>
+        <td>augmentable</td>
+        <td class="small">share of an existing PHC catchment assumed available<br><span class="muted">IPHS / NRHM accessibility norm</span></td></tr>
+      <tr>
+        <td>Sanctioned electrical load</td>
+        <td class="n">not limiting</td>
+        <td class="n">0.0 kW</td>
+        <td class="small">1 kW</td>
+        <td>augmentable</td>
+        <td class="small">assumed extendable from the nearest LT network; costed as a gap<br><span class="muted">RDSS / DISCOM rural domestic connection norm</span></td></tr>
+    </tbody>
+  </table>
+  <h4>What must be built, and which scheme pays</h4>
+  <table>
+    <caption>Augmentable deficits, priced at unit rates and mapped to the centrally sponsored
+    scheme that funds them. A gap with no scheme is a gap the district has to fund itself.</caption>
+    <thead><tr><th>Gap</th><th class="n">Quantity</th><th class="n">Cost</th>
+      <th>Scheme</th><th>Component</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Education</td>
+        <td class="n">4.0 classrooms</td>
+        <td class="n">₹56.0 lakh</td>
+        <td>Samagra Shiksha</td>
+        <td class="small">Additional classrooms</td></tr>
+      <tr>
+        <td>Road</td>
+        <td class="n">0.6 km of new road</td>
+        <td class="n">₹37.8 lakh</td>
+        <td>PMGSY-IV</td>
+        <td class="small">New connectivity / upgradation</td></tr>
+      <tr>
+        <td>Power</td>
+        <td class="n">253.5 kVA of transformer capacity</td>
+        <td class="n">₹45.6 lakh</td>
+        <td>RDSS</td>
+        <td class="small">Distribution transformer + LT line</td></tr>
+      <tr>
+        <td>Housing</td>
+        <td class="n">203.0 PMAY-G units</td>
+        <td class="n">₹24.4 crore</td>
+        <td>PMAY-G</td>
+        <td class="small">Unit assistance</td></tr>
+    </tbody>
+    <tfoot><tr><td>Total</td><td class="n"></td>
+      <td class="n">₹25.8 crore</td>
+      <td colspan="2" class="small">after closure the site holds
+        872 persons; the next constraint becomes
+        water</td></tr></tfoot>
+  </table>
+
+  <h4>Why not elsewhere — the exclusion funnel</h4>
+  <figure><svg class="fig" viewBox="0 0 620 246" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Site exclusion funnel" xmlns="http://www.w3.org/2000/svg"><title>Site exclusion funnel</title><desc>27,791 cells screened; 342 survived all 9 constraints.</desc><text x="0" y="11" class="cu">27,791 cells screened → 342 eligible</text><text x="0" y="36" class="cl">zone red</text><rect x="250" y="23" width="273.1" height="14" rx="2" fill="#1f6f8b"/><rect x="523.1" y="23" width="2.9" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="36" class="cv">−293 → 27,498</text><text x="0" y="60" class="cl">zone orange</text><rect x="250" y="47" width="176.1" height="14" rx="2" fill="#1f6f8b"/><rect x="426.1" y="47" width="97.0" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="60" class="cv">−9,770 → 17,728</text><text x="0" y="84" class="cl">residual hazard</text><rect x="250" y="71" width="17.6" height="14" rx="2" fill="#1f6f8b"/><rect x="267.6" y="71" width="158.5" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="84" class="cv">−15,955 → 1,773</text><text x="0" y="108" class="cl">slope</text><rect x="250" y="95" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="108" class="cv">−0 → 1,773</text><text x="0" y="132" class="cl">erosion</text><rect x="250" y="119" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="132" class="cv">−0 → 1,773</text><text x="0" y="156" class="cl">inundation</text><rect x="250" y="143" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="156" class="cv">−0 → 1,773</text><text x="0" y="180" class="cl">land class</text><rect x="250" y="167" width="3.5" height="14" rx="2" fill="#1f6f8b"/><rect x="253.5" y="167" width="14.1" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="180" class="cv">−1,418 → 355</text><text x="0" y="204" class="cl">already built</text><rect x="250" y="191" width="3.4" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="204" class="cv">−13 → 342</text><text x="0" y="228" class="cl">too far</text><rect x="250" y="215" width="3.4" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="228" class="cv">−0 → 342</text></svg>
+    <figcaption>Applied in this order, so each rejected cell is reported against the
+    <i>first</i> constraint it failed. Residual-hazard cap for this habitation:
+    0.12 per year
+    (8.7-year return period,
+    relaxed basis).</figcaption></figure>
+
+  <h4>Nearest rejected candidates</h4>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Holds</th>
+      <th class="n">TOPSIS</th><th>Why it was not accepted</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">379005-S8</td><td class="n">15.4 km</td>
+        <td class="n">1,407</td>
+        <td class="n">0.27</td>
+        <td class="small">TOPSIS closeness 0.27 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379005-S2</td><td class="n">16.3 km</td>
+        <td class="n">2,349</td>
+        <td class="n">0.22</td>
+        <td class="small">TOPSIS closeness 0.22 below the 0.35 acceptance floor</td></tr>
+    </tbody>
+  </table>
+</article>
+<article class="case tier-MITIGATE">
+  <h3><span>5. Kanhupur
+      <span class="mono muted" style="font-weight:400">LGD 379003</span></span>
+    <span class="chip t-MITIGATE">MITIGATE</span></h3>
+  <p class="lede" style="font-size:15px;margin-top:7px">Approximately
+    <b>871</b> of 871 residents
+    (202 households) face unacceptable risk from
+    <b>flood</b>; the worst cell in this habitation carries a
+    1-in-1 yr chance of a damaging event in any year, i.e.
+    100% over a 30-year horizon.</p>
+
+  <div class="verdict">
+    <span class="act">Recommended action — Protect in place — flood</span><br>
+    Mitigation BCR 7.28 exceeds relocation 1.16
+  </div>
+
+  <div class="facts">
+    <div><b>Governing hazard</b><span>Flood</span></div>
+    <div><b>Annual expected loss</b><span>₹5.0 crore</span></div>
+    <div><b>Confidence</b><span>33%</span></div>
+    <div><b>Candidate cells screened</b><span>27,791</span></div>
+    <div><b>Cells surviving all gates</b><span>342</span></div>
+    <div><b>Parcels formed</b><span>12</span></div>
+    <div><b>Site available</b>
+      <span class="ok">yes</span></div>
+    <div><b>Portfolio capacity</b><span>1,141 persons</span></div>
+    <div><b>Shortfall</b><span>0 persons</span></div>
+    <div><b>Capital cost</b><span>₹4.3 crore</span></div>
+    <div><b>PV avoided loss (30 yr)</b><span>₹31.0 crore</span></div>
+    <div><b>Cost per person moved</b><span>₹48,837</span></div>
+  </div>
+
+  <figure><svg class="fig" viewBox="0 0 620 52" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Kanhupur — worst-cell hazard, all perils combined" xmlns="http://www.w3.org/2000/svg"><title>Kanhupur — worst-cell hazard, all perils combined</title><desc>Kanhupur — worst-cell hazard, all perils combined: 0.9600 per year, about 1-in-1 years. Flood governs; 100% chance of at least one damaging event in 30 years</desc><rect x="0.0" y="14" width="356.7" height="10" fill="#3f8f5f" opacity="0.85"/><rect x="356.7" y="14" width="74.0" height="10" fill="#cfa72e" opacity="0.85"/><rect x="430.6" y="14" width="81.0" height="10" fill="#e07b39" opacity="0.85"/><rect x="511.7" y="14" width="108.3" height="10" fill="#c1272d" opacity="0.85"/><line x1="46.7" y1="24" x2="46.7" y2="28" stroke="#666e7a"/><text x="46.7" y="37" class="ct">1-in-5000</text><line x1="201.7" y1="24" x2="201.7" y2="28" stroke="#666e7a"/><text x="201.7" y="37" class="ct">1-in-500</text><line x1="356.7" y1="24" x2="356.7" y2="28" stroke="#666e7a"/><text x="356.7" y="37" class="ct">1-in-50</text><line x1="465.0" y1="24" x2="465.0" y2="28" stroke="#666e7a"/><text x="465.0" y="37" class="ct">1-in-10</text><line x1="573.3" y1="24" x2="573.3" y2="28" stroke="#666e7a"/><text x="573.3" y="37" class="ct">1-in-2</text><polygon points="617.3,10 612.3,1 622.3,1" fill="#16181d"/><line x1="617.3" y1="10" x2="617.3" y2="26" stroke="#16181d" stroke-width="1.6"/><text x="0" y="50" class="cu">Flood governs; 100% chance of at least one damaging event in 30 years</text></svg></figure>
+
+  <h4>Receiving site</h4>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Usable</th>
+      <th class="n">Holds</th><th>Binding</th><th class="n">Residual hazard</th>
+      <th class="n">Slope</th><th class="n">Road</th><th class="n">School</th>
+      <th class="n">Health</th><th class="n">TOPSIS</th><th class="n">Gap cost</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">379003-S10</td>
+        <td class="n">11.9 km</td>
+        <td class="n">7.5 ha</td>
+        <td class="n"><b>1,141</b></td>
+        <td>Water</td>
+        <td class="n">1-in-9 yr</td>
+        <td class="n">0.1°</td>
+        <td class="n">1.1 km</td>
+        <td class="n">1.3 km</td>
+        <td class="n">1.0 km</td>
+        <td class="n">0.90</td>
+        <td class="n">₹25.8 crore</td></tr>
+    </tbody>
+  </table>
+  <p class="small"><b>Why 379003-S10 ranks first —</b> ranked #1: water 0.71, road 0.75, health 1.00; 7.5 ha 11.9 km away, water binds at 1,141 persons, residual hazard 1-in-9 yr</p>
+  <h4>Carrying capacity of 379003-S10, resource by resource</h4>
+  <table>
+    <caption>Liebig's law of the minimum. Capacity is set by the scarcest
+    <i>site-intrinsic</i> resource — land and sustainable water yield, which cannot be
+    manufactured. Schooling, healthcare, road and power are <i>augmentable</i>: their absence
+    is a cost, priced below, not a ceiling. Reporting the minimum over everything would return
+    zero persons for every greenfield site in India.</caption>
+    <thead><tr><th>Resource</th><th class="n">Holds</th><th class="n">Available</th>
+      <th>Norm applied</th><th>Type</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Primary schooling</td>
+        <td class="n">0</td>
+        <td class="n">1.3 km</td>
+        <td class="small">1 km</td>
+        <td>augmentable</td>
+        <td class="small">no school within the RTE walking distance<br><span class="muted">Right to Education Act 2009, Schedule (neighbourhood norms)</span></td></tr>
+      <tr>
+        <td>All-weather access</td>
+        <td class="n">0</td>
+        <td class="n">1.1 km</td>
+        <td class="small">0.5 km</td>
+        <td>augmentable</td>
+        <td class="small">connected<br><span class="muted">PMGSY connectivity norm</span></td></tr>
+      <tr style="background:#fdf1f1">
+        <td>Drinking water <span class="flag">binds</span></td>
+        <td class="n">1,141</td>
+        <td class="n">62.8 kL/day</td>
+        <td class="small">55 litres/person/day</td>
+        <td>site-intrinsic</td>
+        <td class="small">coastal aquifer tubewell, discounted for salinity ingress<br><span class="muted">Jal Jeevan Mission guidelines, DDWS, MoJS (2019)</span></td></tr>
+      <tr>
+        <td>Developable land</td>
+        <td class="n">2,103</td>
+        <td class="n">7.5 ha</td>
+        <td class="small">100 m²/household</td>
+        <td>site-intrinsic</td>
+        <td class="small">65 % net-to-gross after roads, drains and open space<br><span class="muted">PMAY-G / state rehabilitation norms (typical 1–1.5 decimal)</span></td></tr>
+      <tr>
+        <td>Primary healthcare</td>
+        <td class="n">7,500</td>
+        <td class="n">1.0 km</td>
+        <td class="small">5 km</td>
+        <td>augmentable</td>
+        <td class="small">share of an existing PHC catchment assumed available<br><span class="muted">IPHS / NRHM accessibility norm</span></td></tr>
+      <tr>
+        <td>Sanctioned electrical load</td>
+        <td class="n">not limiting</td>
+        <td class="n">0.0 kW</td>
+        <td class="small">1 kW</td>
+        <td>augmentable</td>
+        <td class="small">assumed extendable from the nearest LT network; costed as a gap<br><span class="muted">RDSS / DISCOM rural domestic connection norm</span></td></tr>
+    </tbody>
+  </table>
+  <h4>What must be built, and which scheme pays</h4>
+  <table>
+    <caption>Augmentable deficits, priced at unit rates and mapped to the centrally sponsored
+    scheme that funds them. A gap with no scheme is a gap the district has to fund itself.</caption>
+    <thead><tr><th>Gap</th><th class="n">Quantity</th><th class="n">Cost</th>
+      <th>Scheme</th><th>Component</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Education</td>
+        <td class="n">4.0 classrooms</td>
+        <td class="n">₹56.0 lakh</td>
+        <td>Samagra Shiksha</td>
+        <td class="small">Additional classrooms</td></tr>
+      <tr>
+        <td>Road</td>
+        <td class="n">0.6 km of new road</td>
+        <td class="n">₹37.8 lakh</td>
+        <td>PMGSY-IV</td>
+        <td class="small">New connectivity / upgradation</td></tr>
+      <tr>
+        <td>Power</td>
+        <td class="n">253.1 kVA of transformer capacity</td>
+        <td class="n">₹45.6 lakh</td>
+        <td>RDSS</td>
+        <td class="small">Distribution transformer + LT line</td></tr>
+      <tr>
+        <td>Housing</td>
+        <td class="n">203.0 PMAY-G units</td>
+        <td class="n">₹24.4 crore</td>
+        <td>PMAY-G</td>
+        <td class="small">Unit assistance</td></tr>
+    </tbody>
+    <tfoot><tr><td>Total</td><td class="n"></td>
+      <td class="n">₹25.8 crore</td>
+      <td colspan="2" class="small">after closure the site holds
+        871 persons; the next constraint becomes
+        water</td></tr></tfoot>
+  </table>
+
+  <h4>Why not elsewhere — the exclusion funnel</h4>
+  <figure><svg class="fig" viewBox="0 0 620 246" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Site exclusion funnel" xmlns="http://www.w3.org/2000/svg"><title>Site exclusion funnel</title><desc>27,791 cells screened; 342 survived all 9 constraints.</desc><text x="0" y="11" class="cu">27,791 cells screened → 342 eligible</text><text x="0" y="36" class="cl">zone red</text><rect x="250" y="23" width="273.1" height="14" rx="2" fill="#1f6f8b"/><rect x="523.1" y="23" width="2.9" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="36" class="cv">−293 → 27,498</text><text x="0" y="60" class="cl">zone orange</text><rect x="250" y="47" width="176.1" height="14" rx="2" fill="#1f6f8b"/><rect x="426.1" y="47" width="97.0" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="60" class="cv">−9,770 → 17,728</text><text x="0" y="84" class="cl">residual hazard</text><rect x="250" y="71" width="17.6" height="14" rx="2" fill="#1f6f8b"/><rect x="267.6" y="71" width="158.5" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="84" class="cv">−15,955 → 1,773</text><text x="0" y="108" class="cl">slope</text><rect x="250" y="95" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="108" class="cv">−0 → 1,773</text><text x="0" y="132" class="cl">erosion</text><rect x="250" y="119" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="132" class="cv">−0 → 1,773</text><text x="0" y="156" class="cl">inundation</text><rect x="250" y="143" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="156" class="cv">−0 → 1,773</text><text x="0" y="180" class="cl">land class</text><rect x="250" y="167" width="3.5" height="14" rx="2" fill="#1f6f8b"/><rect x="253.5" y="167" width="14.1" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="180" class="cv">−1,418 → 355</text><text x="0" y="204" class="cl">already built</text><rect x="250" y="191" width="3.4" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="204" class="cv">−13 → 342</text><text x="0" y="228" class="cl">too far</text><rect x="250" y="215" width="3.4" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="228" class="cv">−0 → 342</text></svg>
+    <figcaption>Applied in this order, so each rejected cell is reported against the
+    <i>first</i> constraint it failed. Residual-hazard cap for this habitation:
+    0.12 per year
+    (8.7-year return period,
+    relaxed basis).</figcaption></figure>
+
+  <h4>Nearest rejected candidates</h4>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Holds</th>
+      <th class="n">TOPSIS</th><th>Why it was not accepted</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">379003-S8</td><td class="n">12.8 km</td>
+        <td class="n">1,407</td>
+        <td class="n">0.34</td>
+        <td class="small">TOPSIS closeness 0.34 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379003-S9</td><td class="n">14.7 km</td>
+        <td class="n">1,392</td>
+        <td class="n">0.29</td>
+        <td class="small">TOPSIS closeness 0.29 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379003-S2</td><td class="n">13.3 km</td>
+        <td class="n">2,349</td>
+        <td class="n">0.26</td>
+        <td class="small">TOPSIS closeness 0.26 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379003-S1</td><td class="n">15.3 km</td>
+        <td class="n">2,506</td>
+        <td class="n">0.24</td>
+        <td class="small">TOPSIS closeness 0.24 below the 0.35 acceptance floor</td></tr>
+    </tbody>
+  </table>
+</article>
+<article class="case tier-MITIGATE">
+  <h3><span>6. Bagapatia
+      <span class="mono muted" style="font-weight:400">LGD 379002</span></span>
+    <span class="chip t-MITIGATE">MITIGATE</span></h3>
+  <p class="lede" style="font-size:15px;margin-top:7px">Approximately
+    <b>870</b> of 1,545 residents
+    (202 households) face unacceptable risk from
+    <b>flood</b>; the worst cell in this habitation carries a
+    1-in-2 yr chance of a damaging event in any year, i.e.
+    100% over a 30-year horizon.</p>
+
+  <div class="verdict">
+    <span class="act">Recommended action — Protect in place — flood</span><br>
+    Mitigation BCR 7.34 exceeds relocation 1.17
+  </div>
+
+  <div class="facts">
+    <div><b>Governing hazard</b><span>Flood</span></div>
+    <div><b>Annual expected loss</b><span>₹5.0 crore</span></div>
+    <div><b>Confidence</b><span>34%</span></div>
+    <div><b>Candidate cells screened</b><span>27,791</span></div>
+    <div><b>Cells surviving all gates</b><span>342</span></div>
+    <div><b>Parcels formed</b><span>12</span></div>
+    <div><b>Site available</b>
+      <span class="ok">yes</span></div>
+    <div><b>Portfolio capacity</b><span>1,141 persons</span></div>
+    <div><b>Shortfall</b><span>0 persons</span></div>
+    <div><b>Capital cost</b><span>₹4.2 crore</span></div>
+    <div><b>PV avoided loss (30 yr)</b><span>₹31.2 crore</span></div>
+    <div><b>Cost per person moved</b><span>₹48,837</span></div>
+  </div>
+
+  <figure><svg class="fig" viewBox="0 0 620 52" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Bagapatia — worst-cell hazard, all perils combined" xmlns="http://www.w3.org/2000/svg"><title>Bagapatia — worst-cell hazard, all perils combined</title><desc>Bagapatia — worst-cell hazard, all perils combined: 0.4765 per year, about 1-in-2 years. Flood governs; 100% chance of at least one damaging event in 30 years</desc><rect x="0.0" y="14" width="356.7" height="10" fill="#3f8f5f" opacity="0.85"/><rect x="356.7" y="14" width="74.0" height="10" fill="#cfa72e" opacity="0.85"/><rect x="430.6" y="14" width="81.0" height="10" fill="#e07b39" opacity="0.85"/><rect x="511.7" y="14" width="108.3" height="10" fill="#c1272d" opacity="0.85"/><line x1="46.7" y1="24" x2="46.7" y2="28" stroke="#666e7a"/><text x="46.7" y="37" class="ct">1-in-5000</text><line x1="201.7" y1="24" x2="201.7" y2="28" stroke="#666e7a"/><text x="201.7" y="37" class="ct">1-in-500</text><line x1="356.7" y1="24" x2="356.7" y2="28" stroke="#666e7a"/><text x="356.7" y="37" class="ct">1-in-50</text><line x1="465.0" y1="24" x2="465.0" y2="28" stroke="#666e7a"/><text x="465.0" y="37" class="ct">1-in-10</text><line x1="573.3" y1="24" x2="573.3" y2="28" stroke="#666e7a"/><text x="573.3" y="37" class="ct">1-in-2</text><polygon points="570.1,10 565.1,1 575.1,1" fill="#16181d"/><line x1="570.1" y1="10" x2="570.1" y2="26" stroke="#16181d" stroke-width="1.6"/><text x="0" y="50" class="cu">Flood governs; 100% chance of at least one damaging event in 30 years</text></svg></figure>
+
+  <h4>Receiving site</h4>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Usable</th>
+      <th class="n">Holds</th><th>Binding</th><th class="n">Residual hazard</th>
+      <th class="n">Slope</th><th class="n">Road</th><th class="n">School</th>
+      <th class="n">Health</th><th class="n">TOPSIS</th><th class="n">Gap cost</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">379002-S10</td>
+        <td class="n">5.0 km</td>
+        <td class="n">7.5 ha</td>
+        <td class="n"><b>1,141</b></td>
+        <td>Water</td>
+        <td class="n">1-in-9 yr</td>
+        <td class="n">0.1°</td>
+        <td class="n">1.1 km</td>
+        <td class="n">1.3 km</td>
+        <td class="n">1.0 km</td>
+        <td class="n">0.96</td>
+        <td class="n">₹25.8 crore</td></tr>
+    </tbody>
+  </table>
+  <p class="small"><b>Why 379002-S10 ranks first —</b> ranked #1: water 0.71, road 0.75, health 1.00; 7.5 ha 5.0 km away, water binds at 1,141 persons, residual hazard 1-in-9 yr</p>
+  <h4>Carrying capacity of 379002-S10, resource by resource</h4>
+  <table>
+    <caption>Liebig's law of the minimum. Capacity is set by the scarcest
+    <i>site-intrinsic</i> resource — land and sustainable water yield, which cannot be
+    manufactured. Schooling, healthcare, road and power are <i>augmentable</i>: their absence
+    is a cost, priced below, not a ceiling. Reporting the minimum over everything would return
+    zero persons for every greenfield site in India.</caption>
+    <thead><tr><th>Resource</th><th class="n">Holds</th><th class="n">Available</th>
+      <th>Norm applied</th><th>Type</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Primary schooling</td>
+        <td class="n">0</td>
+        <td class="n">1.3 km</td>
+        <td class="small">1 km</td>
+        <td>augmentable</td>
+        <td class="small">no school within the RTE walking distance<br><span class="muted">Right to Education Act 2009, Schedule (neighbourhood norms)</span></td></tr>
+      <tr>
+        <td>All-weather access</td>
+        <td class="n">0</td>
+        <td class="n">1.1 km</td>
+        <td class="small">0.5 km</td>
+        <td>augmentable</td>
+        <td class="small">connected<br><span class="muted">PMGSY connectivity norm</span></td></tr>
+      <tr style="background:#fdf1f1">
+        <td>Drinking water <span class="flag">binds</span></td>
+        <td class="n">1,141</td>
+        <td class="n">62.8 kL/day</td>
+        <td class="small">55 litres/person/day</td>
+        <td>site-intrinsic</td>
+        <td class="small">coastal aquifer tubewell, discounted for salinity ingress<br><span class="muted">Jal Jeevan Mission guidelines, DDWS, MoJS (2019)</span></td></tr>
+      <tr>
+        <td>Developable land</td>
+        <td class="n">2,103</td>
+        <td class="n">7.5 ha</td>
+        <td class="small">100 m²/household</td>
+        <td>site-intrinsic</td>
+        <td class="small">65 % net-to-gross after roads, drains and open space<br><span class="muted">PMAY-G / state rehabilitation norms (typical 1–1.5 decimal)</span></td></tr>
+      <tr>
+        <td>Primary healthcare</td>
+        <td class="n">7,500</td>
+        <td class="n">1.0 km</td>
+        <td class="small">5 km</td>
+        <td>augmentable</td>
+        <td class="small">share of an existing PHC catchment assumed available<br><span class="muted">IPHS / NRHM accessibility norm</span></td></tr>
+      <tr>
+        <td>Sanctioned electrical load</td>
+        <td class="n">not limiting</td>
+        <td class="n">0.0 kW</td>
+        <td class="small">1 kW</td>
+        <td>augmentable</td>
+        <td class="small">assumed extendable from the nearest LT network; costed as a gap<br><span class="muted">RDSS / DISCOM rural domestic connection norm</span></td></tr>
+    </tbody>
+  </table>
+  <h4>What must be built, and which scheme pays</h4>
+  <table>
+    <caption>Augmentable deficits, priced at unit rates and mapped to the centrally sponsored
+    scheme that funds them. A gap with no scheme is a gap the district has to fund itself.</caption>
+    <thead><tr><th>Gap</th><th class="n">Quantity</th><th class="n">Cost</th>
+      <th>Scheme</th><th>Component</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Education</td>
+        <td class="n">4.0 classrooms</td>
+        <td class="n">₹56.0 lakh</td>
+        <td>Samagra Shiksha</td>
+        <td class="small">Additional classrooms</td></tr>
+      <tr>
+        <td>Road</td>
+        <td class="n">0.6 km of new road</td>
+        <td class="n">₹37.8 lakh</td>
+        <td>PMGSY-IV</td>
+        <td class="small">New connectivity / upgradation</td></tr>
+      <tr>
+        <td>Power</td>
+        <td class="n">252.8 kVA of transformer capacity</td>
+        <td class="n">₹45.5 lakh</td>
+        <td>RDSS</td>
+        <td class="small">Distribution transformer + LT line</td></tr>
+      <tr>
+        <td>Housing</td>
+        <td class="n">203.0 PMAY-G units</td>
+        <td class="n">₹24.4 crore</td>
+        <td>PMAY-G</td>
+        <td class="small">Unit assistance</td></tr>
+    </tbody>
+    <tfoot><tr><td>Total</td><td class="n"></td>
+      <td class="n">₹25.8 crore</td>
+      <td colspan="2" class="small">after closure the site holds
+        869 persons; the next constraint becomes
+        water</td></tr></tfoot>
+  </table>
+
+  <h4>Why not elsewhere — the exclusion funnel</h4>
+  <figure><svg class="fig" viewBox="0 0 620 246" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Site exclusion funnel" xmlns="http://www.w3.org/2000/svg"><title>Site exclusion funnel</title><desc>27,791 cells screened; 342 survived all 9 constraints.</desc><text x="0" y="11" class="cu">27,791 cells screened → 342 eligible</text><text x="0" y="36" class="cl">zone red</text><rect x="250" y="23" width="273.1" height="14" rx="2" fill="#1f6f8b"/><rect x="523.1" y="23" width="2.9" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="36" class="cv">−293 → 27,498</text><text x="0" y="60" class="cl">zone orange</text><rect x="250" y="47" width="176.1" height="14" rx="2" fill="#1f6f8b"/><rect x="426.1" y="47" width="97.0" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="60" class="cv">−9,770 → 17,728</text><text x="0" y="84" class="cl">residual hazard</text><rect x="250" y="71" width="17.6" height="14" rx="2" fill="#1f6f8b"/><rect x="267.6" y="71" width="158.5" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="84" class="cv">−15,955 → 1,773</text><text x="0" y="108" class="cl">slope</text><rect x="250" y="95" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="108" class="cv">−0 → 1,773</text><text x="0" y="132" class="cl">erosion</text><rect x="250" y="119" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="132" class="cv">−0 → 1,773</text><text x="0" y="156" class="cl">inundation</text><rect x="250" y="143" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="156" class="cv">−0 → 1,773</text><text x="0" y="180" class="cl">land class</text><rect x="250" y="167" width="3.5" height="14" rx="2" fill="#1f6f8b"/><rect x="253.5" y="167" width="14.1" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="180" class="cv">−1,418 → 355</text><text x="0" y="204" class="cl">already built</text><rect x="250" y="191" width="3.4" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="204" class="cv">−13 → 342</text><text x="0" y="228" class="cl">too far</text><rect x="250" y="215" width="3.4" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="228" class="cv">−0 → 342</text></svg>
+    <figcaption>Applied in this order, so each rejected cell is reported against the
+    <i>first</i> constraint it failed. Residual-hazard cap for this habitation:
+    0.12 per year
+    (8.7-year return period,
+    relaxed basis).</figcaption></figure>
+
+  <h4>Nearest rejected candidates</h4>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Holds</th>
+      <th class="n">TOPSIS</th><th>Why it was not accepted</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">379002-S9</td><td class="n">8.1 km</td>
+        <td class="n">1,392</td>
+        <td class="n">0.32</td>
+        <td class="small">TOPSIS closeness 0.32 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379002-S8</td><td class="n">10.8 km</td>
+        <td class="n">1,407</td>
+        <td class="n">0.27</td>
+        <td class="small">TOPSIS closeness 0.27 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379002-S1</td><td class="n">8.9 km</td>
+        <td class="n">2,506</td>
+        <td class="n">0.26</td>
+        <td class="small">TOPSIS closeness 0.26 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379002-S2</td><td class="n">11.8 km</td>
+        <td class="n">2,349</td>
+        <td class="n">0.22</td>
+        <td class="small">TOPSIS closeness 0.22 below the 0.35 acceptance floor</td></tr>
+    </tbody>
+  </table>
+</article>
+<article class="case tier-MITIGATE">
+  <h3><span>7. Rajnagar
+      <span class="mono muted" style="font-weight:400">LGD 379008</span></span>
+    <span class="chip t-MITIGATE">MITIGATE</span></h3>
+  <p class="lede" style="font-size:15px;margin-top:7px">Approximately
+    <b>301</b> of 19,007 residents
+    (70 households) face unacceptable risk from
+    <b>cyclone wind</b>; the worst cell in this habitation carries a
+    1-in-2 yr chance of a damaging event in any year, i.e.
+    100% over a 30-year horizon.</p>
+
+  <div class="verdict">
+    <span class="act">Recommended action — Protect in place — embankment</span><br>
+    Mitigation BCR 93.55 exceeds relocation 19.57
+  </div>
+
+  <div class="facts">
+    <div><b>Governing hazard</b><span>Cyclone wind</span></div>
+    <div><b>Annual expected loss</b><span>₹29.9 crore</span></div>
+    <div><b>Confidence</b><span>35%</span></div>
+    <div><b>Candidate cells screened</b><span>27,791</span></div>
+    <div><b>Cells surviving all gates</b><span>342</span></div>
+    <div><b>Parcels formed</b><span>12</span></div>
+    <div><b>Site available</b>
+      <span class="ok">yes</span></div>
+    <div><b>Portfolio capacity</b><span>1,141 persons</span></div>
+    <div><b>Shortfall</b><span>0 persons</span></div>
+    <div><b>Capital cost</b><span>₹2.4 crore</span></div>
+    <div><b>PV avoided loss (30 yr)</b><span>₹222.7 crore</span></div>
+    <div><b>Cost per person moved</b><span>₹79,070</span></div>
+  </div>
+
+  <figure><svg class="fig" viewBox="0 0 620 52" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Rajnagar — worst-cell hazard, all perils combined" xmlns="http://www.w3.org/2000/svg"><title>Rajnagar — worst-cell hazard, all perils combined</title><desc>Rajnagar — worst-cell hazard, all perils combined: 0.4378 per year, about 1-in-2 years. Cyclone wind governs; 100% chance of at least one damaging event in 30 years</desc><rect x="0.0" y="14" width="356.7" height="10" fill="#3f8f5f" opacity="0.85"/><rect x="356.7" y="14" width="74.0" height="10" fill="#cfa72e" opacity="0.85"/><rect x="430.6" y="14" width="81.0" height="10" fill="#e07b39" opacity="0.85"/><rect x="511.7" y="14" width="108.3" height="10" fill="#c1272d" opacity="0.85"/><line x1="46.7" y1="24" x2="46.7" y2="28" stroke="#666e7a"/><text x="46.7" y="37" class="ct">1-in-5000</text><line x1="201.7" y1="24" x2="201.7" y2="28" stroke="#666e7a"/><text x="201.7" y="37" class="ct">1-in-500</text><line x1="356.7" y1="24" x2="356.7" y2="28" stroke="#666e7a"/><text x="356.7" y="37" class="ct">1-in-50</text><line x1="465.0" y1="24" x2="465.0" y2="28" stroke="#666e7a"/><text x="465.0" y="37" class="ct">1-in-10</text><line x1="573.3" y1="24" x2="573.3" y2="28" stroke="#666e7a"/><text x="573.3" y="37" class="ct">1-in-2</text><polygon points="564.4,10 559.4,1 569.4,1" fill="#16181d"/><line x1="564.4" y1="10" x2="564.4" y2="26" stroke="#16181d" stroke-width="1.6"/><text x="0" y="50" class="cu">Cyclone wind governs; 100% chance of at least one damaging event in 30 years</text></svg></figure>
+
+  <h4>Receiving site</h4>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Usable</th>
+      <th class="n">Holds</th><th>Binding</th><th class="n">Residual hazard</th>
+      <th class="n">Slope</th><th class="n">Road</th><th class="n">School</th>
+      <th class="n">Health</th><th class="n">TOPSIS</th><th class="n">Gap cost</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">379008-S10</td>
+        <td class="n">2.3 km</td>
+        <td class="n">7.5 ha</td>
+        <td class="n"><b>1,141</b></td>
+        <td>Water</td>
+        <td class="n">1-in-9 yr</td>
+        <td class="n">0.1°</td>
+        <td class="n">1.1 km</td>
+        <td class="n">1.3 km</td>
+        <td class="n">1.0 km</td>
+        <td class="n">0.96</td>
+        <td class="n">₹9.3 crore</td></tr>
+    </tbody>
+  </table>
+  <p class="small"><b>Why 379008-S10 ranks first —</b> ranked #1: water 0.71, road 0.75, health 1.00; 7.5 ha 2.3 km away, water binds at 1,141 persons, residual hazard 1-in-9 yr</p>
+  <h4>Carrying capacity of 379008-S10, resource by resource</h4>
+  <table>
+    <caption>Liebig's law of the minimum. Capacity is set by the scarcest
+    <i>site-intrinsic</i> resource — land and sustainable water yield, which cannot be
+    manufactured. Schooling, healthcare, road and power are <i>augmentable</i>: their absence
+    is a cost, priced below, not a ceiling. Reporting the minimum over everything would return
+    zero persons for every greenfield site in India.</caption>
+    <thead><tr><th>Resource</th><th class="n">Holds</th><th class="n">Available</th>
+      <th>Norm applied</th><th>Type</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Primary schooling</td>
+        <td class="n">0</td>
+        <td class="n">1.3 km</td>
+        <td class="small">1 km</td>
+        <td>augmentable</td>
+        <td class="small">no school within the RTE walking distance<br><span class="muted">Right to Education Act 2009, Schedule (neighbourhood norms)</span></td></tr>
+      <tr>
+        <td>All-weather access</td>
+        <td class="n">0</td>
+        <td class="n">1.1 km</td>
+        <td class="small">0.5 km</td>
+        <td>augmentable</td>
+        <td class="small">connected<br><span class="muted">PMGSY connectivity norm</span></td></tr>
+      <tr style="background:#fdf1f1">
+        <td>Drinking water <span class="flag">binds</span></td>
+        <td class="n">1,141</td>
+        <td class="n">62.8 kL/day</td>
+        <td class="small">55 litres/person/day</td>
+        <td>site-intrinsic</td>
+        <td class="small">coastal aquifer tubewell, discounted for salinity ingress<br><span class="muted">Jal Jeevan Mission guidelines, DDWS, MoJS (2019)</span></td></tr>
+      <tr>
+        <td>Developable land</td>
+        <td class="n">2,103</td>
+        <td class="n">7.5 ha</td>
+        <td class="small">100 m²/household</td>
+        <td>site-intrinsic</td>
+        <td class="small">65 % net-to-gross after roads, drains and open space<br><span class="muted">PMAY-G / state rehabilitation norms (typical 1–1.5 decimal)</span></td></tr>
+      <tr>
+        <td>Primary healthcare</td>
+        <td class="n">7,500</td>
+        <td class="n">1.0 km</td>
+        <td class="small">5 km</td>
+        <td>augmentable</td>
+        <td class="small">share of an existing PHC catchment assumed available<br><span class="muted">IPHS / NRHM accessibility norm</span></td></tr>
+      <tr>
+        <td>Sanctioned electrical load</td>
+        <td class="n">not limiting</td>
+        <td class="n">0.0 kW</td>
+        <td class="small">1 kW</td>
+        <td>augmentable</td>
+        <td class="small">assumed extendable from the nearest LT network; costed as a gap<br><span class="muted">RDSS / DISCOM rural domestic connection norm</span></td></tr>
+    </tbody>
+  </table>
+  <h4>What must be built, and which scheme pays</h4>
+  <table>
+    <caption>Augmentable deficits, priced at unit rates and mapped to the centrally sponsored
+    scheme that funds them. A gap with no scheme is a gap the district has to fund itself.</caption>
+    <thead><tr><th>Gap</th><th class="n">Quantity</th><th class="n">Cost</th>
+      <th>Scheme</th><th>Component</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Education</td>
+        <td class="n">2.0 classrooms</td>
+        <td class="n">₹28.0 lakh</td>
+        <td>Samagra Shiksha</td>
+        <td class="small">Additional classrooms</td></tr>
+      <tr>
+        <td>Road</td>
+        <td class="n">0.6 km of new road</td>
+        <td class="n">₹37.8 lakh</td>
+        <td>PMGSY-IV</td>
+        <td class="small">New connectivity / upgradation</td></tr>
+      <tr>
+        <td>Power</td>
+        <td class="n">87.5 kVA of transformer capacity</td>
+        <td class="n">₹15.8 lakh</td>
+        <td>RDSS</td>
+        <td class="small">Distribution transformer + LT line</td></tr>
+      <tr>
+        <td>Housing</td>
+        <td class="n">71.0 PMAY-G units</td>
+        <td class="n">₹8.5 crore</td>
+        <td>PMAY-G</td>
+        <td class="small">Unit assistance</td></tr>
+    </tbody>
+    <tfoot><tr><td>Total</td><td class="n"></td>
+      <td class="n">₹9.3 crore</td>
+      <td colspan="2" class="small">after closure the site holds
+        301 persons; the next constraint becomes
+        water</td></tr></tfoot>
+  </table>
+
+  <h4>Why not elsewhere — the exclusion funnel</h4>
+  <figure><svg class="fig" viewBox="0 0 620 246" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Site exclusion funnel" xmlns="http://www.w3.org/2000/svg"><title>Site exclusion funnel</title><desc>27,791 cells screened; 342 survived all 9 constraints.</desc><text x="0" y="11" class="cu">27,791 cells screened → 342 eligible</text><text x="0" y="36" class="cl">zone red</text><rect x="250" y="23" width="273.1" height="14" rx="2" fill="#1f6f8b"/><rect x="523.1" y="23" width="2.9" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="36" class="cv">−293 → 27,498</text><text x="0" y="60" class="cl">zone orange</text><rect x="250" y="47" width="176.1" height="14" rx="2" fill="#1f6f8b"/><rect x="426.1" y="47" width="97.0" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="60" class="cv">−9,770 → 17,728</text><text x="0" y="84" class="cl">residual hazard</text><rect x="250" y="71" width="17.6" height="14" rx="2" fill="#1f6f8b"/><rect x="267.6" y="71" width="158.5" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="84" class="cv">−15,955 → 1,773</text><text x="0" y="108" class="cl">slope</text><rect x="250" y="95" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="108" class="cv">−0 → 1,773</text><text x="0" y="132" class="cl">erosion</text><rect x="250" y="119" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="132" class="cv">−0 → 1,773</text><text x="0" y="156" class="cl">inundation</text><rect x="250" y="143" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="156" class="cv">−0 → 1,773</text><text x="0" y="180" class="cl">land class</text><rect x="250" y="167" width="3.5" height="14" rx="2" fill="#1f6f8b"/><rect x="253.5" y="167" width="14.1" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="180" class="cv">−1,418 → 355</text><text x="0" y="204" class="cl">already built</text><rect x="250" y="191" width="3.4" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="204" class="cv">−13 → 342</text><text x="0" y="228" class="cl">too far</text><rect x="250" y="215" width="3.4" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="228" class="cv">−0 → 342</text></svg>
+    <figcaption>Applied in this order, so each rejected cell is reported against the
+    <i>first</i> constraint it failed. Residual-hazard cap for this habitation:
+    0.12 per year
+    (8.7-year return period,
+    relaxed basis).</figcaption></figure>
+
+  <h4>Nearest rejected candidates</h4>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Holds</th>
+      <th class="n">TOPSIS</th><th>Why it was not accepted</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">379008-S9</td><td class="n">6.0 km</td>
+        <td class="n">1,392</td>
+        <td class="n">0.34</td>
+        <td class="small">TOPSIS closeness 0.34 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379008-S1</td><td class="n">6.9 km</td>
+        <td class="n">2,506</td>
+        <td class="n">0.28</td>
+        <td class="small">TOPSIS closeness 0.28 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379008-S8</td><td class="n">10.8 km</td>
+        <td class="n">1,407</td>
+        <td class="n">0.25</td>
+        <td class="small">TOPSIS closeness 0.25 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379008-S2</td><td class="n">11.8 km</td>
+        <td class="n">2,349</td>
+        <td class="n">0.20</td>
+        <td class="small">TOPSIS closeness 0.20 below the 0.35 acceptance floor</td></tr>
+    </tbody>
+  </table>
+</article>
+<article class="case tier-MITIGATE">
+  <h3><span>8. Jamboo
+      <span class="mono muted" style="font-weight:400">LGD 379009</span></span>
+    <span class="chip t-MITIGATE">MITIGATE</span></h3>
+  <p class="lede" style="font-size:15px;margin-top:7px">Approximately
+    <b>58</b> of 1,034 residents
+    (14 households) face unacceptable risk from
+    <b>flood</b>; the worst cell in this habitation carries a
+    1-in-4 yr chance of a damaging event in any year, i.e.
+    100% over a 30-year horizon.</p>
+
+  <div class="verdict">
+    <span class="act">Recommended action — Protect in place — flood</span><br>
+    Mitigation BCR 48.64 exceeds relocation 4.80
+  </div>
+
+  <div class="facts">
+    <div><b>Governing hazard</b><span>Flood</span></div>
+    <div><b>Annual expected loss</b><span>₹2.2 crore</span></div>
+    <div><b>Confidence</b><span>34%</span></div>
+    <div><b>Candidate cells screened</b><span>27,791</span></div>
+    <div><b>Cells surviving all gates</b><span>342</span></div>
+    <div><b>Parcels formed</b><span>12</span></div>
+    <div><b>Site available</b>
+      <span class="ok">yes</span></div>
+    <div><b>Portfolio capacity</b><span>1,128 persons</span></div>
+    <div><b>Shortfall</b><span>0 persons</span></div>
+    <div><b>Capital cost</b><span>₹28.5 lakh</span></div>
+    <div><b>PV avoided loss (30 yr)</b><span>₹13.9 crore</span></div>
+    <div><b>Cost per person moved</b><span>₹48,837</span></div>
+  </div>
+
+  <figure><svg class="fig" viewBox="0 0 620 52" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Jamboo — worst-cell hazard, all perils combined" xmlns="http://www.w3.org/2000/svg"><title>Jamboo — worst-cell hazard, all perils combined</title><desc>Jamboo — worst-cell hazard, all perils combined: 0.2716 per year, about 1-in-4 years. Flood governs; 100% chance of at least one damaging event in 30 years</desc><rect x="0.0" y="14" width="356.7" height="10" fill="#3f8f5f" opacity="0.85"/><rect x="356.7" y="14" width="74.0" height="10" fill="#cfa72e" opacity="0.85"/><rect x="430.6" y="14" width="81.0" height="10" fill="#e07b39" opacity="0.85"/><rect x="511.7" y="14" width="108.3" height="10" fill="#c1272d" opacity="0.85"/><line x1="46.7" y1="24" x2="46.7" y2="28" stroke="#666e7a"/><text x="46.7" y="37" class="ct">1-in-5000</text><line x1="201.7" y1="24" x2="201.7" y2="28" stroke="#666e7a"/><text x="201.7" y="37" class="ct">1-in-500</text><line x1="356.7" y1="24" x2="356.7" y2="28" stroke="#666e7a"/><text x="356.7" y="37" class="ct">1-in-50</text><line x1="465.0" y1="24" x2="465.0" y2="28" stroke="#666e7a"/><text x="465.0" y="37" class="ct">1-in-10</text><line x1="573.3" y1="24" x2="573.3" y2="28" stroke="#666e7a"/><text x="573.3" y="37" class="ct">1-in-2</text><polygon points="532.3,10 527.3,1 537.3,1" fill="#16181d"/><line x1="532.3" y1="10" x2="532.3" y2="26" stroke="#16181d" stroke-width="1.6"/><text x="0" y="50" class="cu">Flood governs; 100% chance of at least one damaging event in 30 years</text></svg></figure>
+
+  <h4>Receiving site</h4>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Usable</th>
+      <th class="n">Holds</th><th>Binding</th><th class="n">Residual hazard</th>
+      <th class="n">Slope</th><th class="n">Road</th><th class="n">School</th>
+      <th class="n">Health</th><th class="n">TOPSIS</th><th class="n">Gap cost</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">379009-S12</td>
+        <td class="n">4.8 km</td>
+        <td class="n">7.5 ha</td>
+        <td class="n"><b>1,128</b></td>
+        <td>Water</td>
+        <td class="n">1-in-9 yr</td>
+        <td class="n">0.0°</td>
+        <td class="n">2.0 km</td>
+        <td class="n">2.3 km</td>
+        <td class="n">8.1 km</td>
+        <td class="n">0.64</td>
+        <td class="n">₹3.7 crore</td></tr>
+    </tbody>
+  </table>
+  <p class="small"><b>Why 379009-S12 ranks first —</b> ranked #1: water 0.71, road 0.48, land 1.00; 7.5 ha 4.8 km away, water binds at 1,128 persons, residual hazard 1-in-9 yr</p>
+  <h4>Carrying capacity of 379009-S12, resource by resource</h4>
+  <table>
+    <caption>Liebig's law of the minimum. Capacity is set by the scarcest
+    <i>site-intrinsic</i> resource — land and sustainable water yield, which cannot be
+    manufactured. Schooling, healthcare, road and power are <i>augmentable</i>: their absence
+    is a cost, priced below, not a ceiling. Reporting the minimum over everything would return
+    zero persons for every greenfield site in India.</caption>
+    <thead><tr><th>Resource</th><th class="n">Holds</th><th class="n">Available</th>
+      <th>Norm applied</th><th>Type</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Primary schooling</td>
+        <td class="n">0</td>
+        <td class="n">2.3 km</td>
+        <td class="small">1 km</td>
+        <td>augmentable</td>
+        <td class="small">no school within the RTE walking distance<br><span class="muted">Right to Education Act 2009, Schedule (neighbourhood norms)</span></td></tr>
+      <tr>
+        <td>Primary healthcare</td>
+        <td class="n">0</td>
+        <td class="n">8.1 km</td>
+        <td class="small">5 km</td>
+        <td>augmentable</td>
+        <td class="small">no health facility within the IPHS distance<br><span class="muted">IPHS / NRHM accessibility norm</span></td></tr>
+      <tr>
+        <td>All-weather access</td>
+        <td class="n">0</td>
+        <td class="n">2.0 km</td>
+        <td class="small">0.5 km</td>
+        <td>augmentable</td>
+        <td class="small">connected<br><span class="muted">PMGSY connectivity norm</span></td></tr>
+      <tr style="background:#fdf1f1">
+        <td>Drinking water <span class="flag">binds</span></td>
+        <td class="n">1,128</td>
+        <td class="n">62.1 kL/day</td>
+        <td class="small">55 litres/person/day</td>
+        <td>site-intrinsic</td>
+        <td class="small">coastal aquifer tubewell, discounted for salinity ingress<br><span class="muted">Jal Jeevan Mission guidelines, DDWS, MoJS (2019)</span></td></tr>
+      <tr>
+        <td>Developable land</td>
+        <td class="n">2,103</td>
+        <td class="n">7.5 ha</td>
+        <td class="small">100 m²/household</td>
+        <td>site-intrinsic</td>
+        <td class="small">65 % net-to-gross after roads, drains and open space<br><span class="muted">PMAY-G / state rehabilitation norms (typical 1–1.5 decimal)</span></td></tr>
+      <tr>
+        <td>Sanctioned electrical load</td>
+        <td class="n">not limiting</td>
+        <td class="n">0.0 kW</td>
+        <td class="small">1 kW</td>
+        <td>augmentable</td>
+        <td class="small">assumed extendable from the nearest LT network; costed as a gap<br><span class="muted">RDSS / DISCOM rural domestic connection norm</span></td></tr>
+    </tbody>
+  </table>
+  <h4>What must be built, and which scheme pays</h4>
+  <table>
+    <caption>Augmentable deficits, priced at unit rates and mapped to the centrally sponsored
+    scheme that funds them. A gap with no scheme is a gap the district has to fund itself.</caption>
+    <thead><tr><th>Gap</th><th class="n">Quantity</th><th class="n">Cost</th>
+      <th>Scheme</th><th>Component</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Education</td>
+        <td class="n">1.0 classrooms</td>
+        <td class="n">₹14.0 lakh</td>
+        <td>Samagra Shiksha</td>
+        <td class="small">Additional classrooms</td></tr>
+      <tr>
+        <td>Health</td>
+        <td class="n">1.0 sub-centre</td>
+        <td class="n">₹85.0 lakh</td>
+        <td>National Health Mission</td>
+        <td class="small">New sub-centre / PHC upgradation</td></tr>
+      <tr>
+        <td>Road</td>
+        <td class="n">1.5 km of new road</td>
+        <td class="n">₹95.7 lakh</td>
+        <td>PMGSY-IV</td>
+        <td class="small">New connectivity / upgradation</td></tr>
+      <tr>
+        <td>Power</td>
+        <td class="n">17.0 kVA of transformer capacity</td>
+        <td class="n">₹3.1 lakh</td>
+        <td>RDSS</td>
+        <td class="small">Distribution transformer + LT line</td></tr>
+      <tr>
+        <td>Housing</td>
+        <td class="n">14.0 PMAY-G units</td>
+        <td class="n">₹1.7 crore</td>
+        <td>PMAY-G</td>
+        <td class="small">Unit assistance</td></tr>
+    </tbody>
+    <tfoot><tr><td>Total</td><td class="n"></td>
+      <td class="n">₹3.7 crore</td>
+      <td colspan="2" class="small">after closure the site holds
+        58 persons; the next constraint becomes
+        water</td></tr></tfoot>
+  </table>
+
+  <h4>Why not elsewhere — the exclusion funnel</h4>
+  <figure><svg class="fig" viewBox="0 0 620 246" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Site exclusion funnel" xmlns="http://www.w3.org/2000/svg"><title>Site exclusion funnel</title><desc>27,791 cells screened; 342 survived all 9 constraints.</desc><text x="0" y="11" class="cu">27,791 cells screened → 342 eligible</text><text x="0" y="36" class="cl">zone red</text><rect x="250" y="23" width="273.1" height="14" rx="2" fill="#1f6f8b"/><rect x="523.1" y="23" width="2.9" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="36" class="cv">−293 → 27,498</text><text x="0" y="60" class="cl">zone orange</text><rect x="250" y="47" width="176.1" height="14" rx="2" fill="#1f6f8b"/><rect x="426.1" y="47" width="97.0" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="60" class="cv">−9,770 → 17,728</text><text x="0" y="84" class="cl">residual hazard</text><rect x="250" y="71" width="17.6" height="14" rx="2" fill="#1f6f8b"/><rect x="267.6" y="71" width="158.5" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="84" class="cv">−15,955 → 1,773</text><text x="0" y="108" class="cl">slope</text><rect x="250" y="95" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="108" class="cv">−0 → 1,773</text><text x="0" y="132" class="cl">erosion</text><rect x="250" y="119" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="132" class="cv">−0 → 1,773</text><text x="0" y="156" class="cl">inundation</text><rect x="250" y="143" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="156" class="cv">−0 → 1,773</text><text x="0" y="180" class="cl">land class</text><rect x="250" y="167" width="3.5" height="14" rx="2" fill="#1f6f8b"/><rect x="253.5" y="167" width="14.1" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="180" class="cv">−1,418 → 355</text><text x="0" y="204" class="cl">already built</text><rect x="250" y="191" width="3.4" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="204" class="cv">−13 → 342</text><text x="0" y="228" class="cl">too far</text><rect x="250" y="215" width="3.4" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="228" class="cv">−0 → 342</text></svg>
+    <figcaption>Applied in this order, so each rejected cell is reported against the
+    <i>first</i> constraint it failed. Residual-hazard cap for this habitation:
+    0.12 per year
+    (8.7-year return period,
+    relaxed basis).</figcaption></figure>
+
+  <h4>Nearest rejected candidates</h4>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Holds</th>
+      <th class="n">TOPSIS</th><th>Why it was not accepted</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">379009-S3</td><td class="n">14.4 km</td>
+        <td class="n">1,640</td>
+        <td class="n">0.30</td>
+        <td class="small">TOPSIS closeness 0.30 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379009-S9</td><td class="n">16.2 km</td>
+        <td class="n">1,392</td>
+        <td class="n">0.24</td>
+        <td class="small">TOPSIS closeness 0.24 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379009-S1</td><td class="n">17.3 km</td>
+        <td class="n">2,506</td>
+        <td class="n">0.20</td>
+        <td class="small">TOPSIS closeness 0.20 below the 0.35 acceptance floor</td></tr>
+    </tbody>
+  </table>
+</article>
+<article class="case tier-MITIGATE">
+  <h3><span>9. Talachua
+      <span class="mono muted" style="font-weight:400">LGD 379010</span></span>
+    <span class="chip t-MITIGATE">MITIGATE</span></h3>
+  <p class="lede" style="font-size:15px;margin-top:7px">Approximately
+    <b>49</b> of 848 residents
+    (11 households) face unacceptable risk from
+    <b>cyclone wind</b>; the worst cell in this habitation carries a
+    1-in-3 yr chance of a damaging event in any year, i.e.
+    100% over a 30-year horizon.</p>
+
+  <div class="verdict">
+    <span class="act">Recommended action — Protect in place — embankment</span><br>
+    Mitigation BCR 31.10 exceeds relocation 3.82
+  </div>
+
+  <div class="facts">
+    <div><b>Governing hazard</b><span>Cyclone wind</span></div>
+    <div><b>Annual expected loss</b><span>₹1.6 crore</span></div>
+    <div><b>Confidence</b><span>34%</span></div>
+    <div><b>Candidate cells screened</b><span>27,791</span></div>
+    <div><b>Cells surviving all gates</b><span>342</span></div>
+    <div><b>Parcels formed</b><span>12</span></div>
+    <div><b>Site available</b>
+      <span class="ok">yes</span></div>
+    <div><b>Portfolio capacity</b><span>1,128 persons</span></div>
+    <div><b>Shortfall</b><span>0 persons</span></div>
+    <div><b>Capital cost</b><span>₹38.5 lakh</span></div>
+    <div><b>PV avoided loss (30 yr)</b><span>₹12.0 crore</span></div>
+    <div><b>Cost per person moved</b><span>₹79,070</span></div>
+  </div>
+
+  <figure><svg class="fig" viewBox="0 0 620 52" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Talachua — worst-cell hazard, all perils combined" xmlns="http://www.w3.org/2000/svg"><title>Talachua — worst-cell hazard, all perils combined</title><desc>Talachua — worst-cell hazard, all perils combined: 0.3425 per year, about 1-in-3 years. Cyclone wind governs; 100% chance of at least one damaging event in 30 years</desc><rect x="0.0" y="14" width="356.7" height="10" fill="#3f8f5f" opacity="0.85"/><rect x="356.7" y="14" width="74.0" height="10" fill="#cfa72e" opacity="0.85"/><rect x="430.6" y="14" width="81.0" height="10" fill="#e07b39" opacity="0.85"/><rect x="511.7" y="14" width="108.3" height="10" fill="#c1272d" opacity="0.85"/><line x1="46.7" y1="24" x2="46.7" y2="28" stroke="#666e7a"/><text x="46.7" y="37" class="ct">1-in-5000</text><line x1="201.7" y1="24" x2="201.7" y2="28" stroke="#666e7a"/><text x="201.7" y="37" class="ct">1-in-500</text><line x1="356.7" y1="24" x2="356.7" y2="28" stroke="#666e7a"/><text x="356.7" y="37" class="ct">1-in-50</text><line x1="465.0" y1="24" x2="465.0" y2="28" stroke="#666e7a"/><text x="465.0" y="37" class="ct">1-in-10</text><line x1="573.3" y1="24" x2="573.3" y2="28" stroke="#666e7a"/><text x="573.3" y="37" class="ct">1-in-2</text><polygon points="547.9,10 542.9,1 552.9,1" fill="#16181d"/><line x1="547.9" y1="10" x2="547.9" y2="26" stroke="#16181d" stroke-width="1.6"/><text x="0" y="50" class="cu">Cyclone wind governs; 100% chance of at least one damaging event in 30 years</text></svg></figure>
+
+  <h4>Receiving site</h4>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Usable</th>
+      <th class="n">Holds</th><th>Binding</th><th class="n">Residual hazard</th>
+      <th class="n">Slope</th><th class="n">Road</th><th class="n">School</th>
+      <th class="n">Health</th><th class="n">TOPSIS</th><th class="n">Gap cost</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">379010-S12</td>
+        <td class="n">2.0 km</td>
+        <td class="n">7.5 ha</td>
+        <td class="n"><b>1,128</b></td>
+        <td>Water</td>
+        <td class="n">1-in-9 yr</td>
+        <td class="n">0.0°</td>
+        <td class="n">2.0 km</td>
+        <td class="n">2.3 km</td>
+        <td class="n">8.1 km</td>
+        <td class="n">0.68</td>
+        <td class="n">₹3.4 crore</td></tr>
+    </tbody>
+  </table>
+  <p class="small"><b>Why 379010-S12 ranks first —</b> ranked #1: water 0.71, livelihood continuity 1.00, road 0.48; 7.5 ha 2.0 km away, water binds at 1,128 persons, residual hazard 1-in-9 yr</p>
+  <h4>Carrying capacity of 379010-S12, resource by resource</h4>
+  <table>
+    <caption>Liebig's law of the minimum. Capacity is set by the scarcest
+    <i>site-intrinsic</i> resource — land and sustainable water yield, which cannot be
+    manufactured. Schooling, healthcare, road and power are <i>augmentable</i>: their absence
+    is a cost, priced below, not a ceiling. Reporting the minimum over everything would return
+    zero persons for every greenfield site in India.</caption>
+    <thead><tr><th>Resource</th><th class="n">Holds</th><th class="n">Available</th>
+      <th>Norm applied</th><th>Type</th><th>Basis</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Primary schooling</td>
+        <td class="n">0</td>
+        <td class="n">2.3 km</td>
+        <td class="small">1 km</td>
+        <td>augmentable</td>
+        <td class="small">no school within the RTE walking distance<br><span class="muted">Right to Education Act 2009, Schedule (neighbourhood norms)</span></td></tr>
+      <tr>
+        <td>Primary healthcare</td>
+        <td class="n">0</td>
+        <td class="n">8.1 km</td>
+        <td class="small">5 km</td>
+        <td>augmentable</td>
+        <td class="small">no health facility within the IPHS distance<br><span class="muted">IPHS / NRHM accessibility norm</span></td></tr>
+      <tr>
+        <td>All-weather access</td>
+        <td class="n">0</td>
+        <td class="n">2.0 km</td>
+        <td class="small">0.5 km</td>
+        <td>augmentable</td>
+        <td class="small">connected<br><span class="muted">PMGSY connectivity norm</span></td></tr>
+      <tr style="background:#fdf1f1">
+        <td>Drinking water <span class="flag">binds</span></td>
+        <td class="n">1,128</td>
+        <td class="n">62.1 kL/day</td>
+        <td class="small">55 litres/person/day</td>
+        <td>site-intrinsic</td>
+        <td class="small">coastal aquifer tubewell, discounted for salinity ingress<br><span class="muted">Jal Jeevan Mission guidelines, DDWS, MoJS (2019)</span></td></tr>
+      <tr>
+        <td>Developable land</td>
+        <td class="n">2,103</td>
+        <td class="n">7.5 ha</td>
+        <td class="small">100 m²/household</td>
+        <td>site-intrinsic</td>
+        <td class="small">65 % net-to-gross after roads, drains and open space<br><span class="muted">PMAY-G / state rehabilitation norms (typical 1–1.5 decimal)</span></td></tr>
+      <tr>
+        <td>Sanctioned electrical load</td>
+        <td class="n">not limiting</td>
+        <td class="n">0.0 kW</td>
+        <td class="small">1 kW</td>
+        <td>augmentable</td>
+        <td class="small">assumed extendable from the nearest LT network; costed as a gap<br><span class="muted">RDSS / DISCOM rural domestic connection norm</span></td></tr>
+    </tbody>
+  </table>
+  <h4>What must be built, and which scheme pays</h4>
+  <table>
+    <caption>Augmentable deficits, priced at unit rates and mapped to the centrally sponsored
+    scheme that funds them. A gap with no scheme is a gap the district has to fund itself.</caption>
+    <thead><tr><th>Gap</th><th class="n">Quantity</th><th class="n">Cost</th>
+      <th>Scheme</th><th>Component</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Education</td>
+        <td class="n">1.0 classrooms</td>
+        <td class="n">₹14.0 lakh</td>
+        <td>Samagra Shiksha</td>
+        <td class="small">Additional classrooms</td></tr>
+      <tr>
+        <td>Health</td>
+        <td class="n">1.0 sub-centre</td>
+        <td class="n">₹85.0 lakh</td>
+        <td>National Health Mission</td>
+        <td class="small">New sub-centre / PHC upgradation</td></tr>
+      <tr>
+        <td>Road</td>
+        <td class="n">1.5 km of new road</td>
+        <td class="n">₹95.7 lakh</td>
+        <td>PMGSY-IV</td>
+        <td class="small">New connectivity / upgradation</td></tr>
+      <tr>
+        <td>Power</td>
+        <td class="n">14.2 kVA of transformer capacity</td>
+        <td class="n">₹2.6 lakh</td>
+        <td>RDSS</td>
+        <td class="small">Distribution transformer + LT line</td></tr>
+      <tr>
+        <td>Housing</td>
+        <td class="n">12.0 PMAY-G units</td>
+        <td class="n">₹1.4 crore</td>
+        <td>PMAY-G</td>
+        <td class="small">Unit assistance</td></tr>
+    </tbody>
+    <tfoot><tr><td>Total</td><td class="n"></td>
+      <td class="n">₹3.4 crore</td>
+      <td colspan="2" class="small">after closure the site holds
+        49 persons; the next constraint becomes
+        water</td></tr></tfoot>
+  </table>
+
+  <h4>Why not elsewhere — the exclusion funnel</h4>
+  <figure><svg class="fig" viewBox="0 0 620 246" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Site exclusion funnel" xmlns="http://www.w3.org/2000/svg"><title>Site exclusion funnel</title><desc>27,791 cells screened; 342 survived all 9 constraints.</desc><text x="0" y="11" class="cu">27,791 cells screened → 342 eligible</text><text x="0" y="36" class="cl">zone red</text><rect x="250" y="23" width="273.1" height="14" rx="2" fill="#1f6f8b"/><rect x="523.1" y="23" width="2.9" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="36" class="cv">−293 → 27,498</text><text x="0" y="60" class="cl">zone orange</text><rect x="250" y="47" width="176.1" height="14" rx="2" fill="#1f6f8b"/><rect x="426.1" y="47" width="97.0" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="60" class="cv">−9,770 → 17,728</text><text x="0" y="84" class="cl">residual hazard</text><rect x="250" y="71" width="17.6" height="14" rx="2" fill="#1f6f8b"/><rect x="267.6" y="71" width="158.5" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="84" class="cv">−15,955 → 1,773</text><text x="0" y="108" class="cl">slope</text><rect x="250" y="95" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="108" class="cv">−0 → 1,773</text><text x="0" y="132" class="cl">erosion</text><rect x="250" y="119" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="132" class="cv">−0 → 1,773</text><text x="0" y="156" class="cl">inundation</text><rect x="250" y="143" width="17.6" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="156" class="cv">−0 → 1,773</text><text x="0" y="180" class="cl">land class</text><rect x="250" y="167" width="3.5" height="14" rx="2" fill="#1f6f8b"/><rect x="253.5" y="167" width="14.1" height="14" rx="2" fill="#e3e7ec"/><text x="538" y="180" class="cv">−1,418 → 355</text><text x="0" y="204" class="cl">already built</text><rect x="250" y="191" width="3.4" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="204" class="cv">−13 → 342</text><text x="0" y="228" class="cl">too far</text><rect x="250" y="215" width="3.4" height="14" rx="2" fill="#1f6f8b"/><text x="538" y="228" class="cv">−0 → 342</text></svg>
+    <figcaption>Applied in this order, so each rejected cell is reported against the
+    <i>first</i> constraint it failed. Residual-hazard cap for this habitation:
+    0.12 per year
+    (8.7-year return period,
+    relaxed basis).</figcaption></figure>
+
+  <h4>Nearest rejected candidates</h4>
+  <table>
+    <thead><tr><th>Site</th><th class="n">Distance</th><th class="n">Holds</th>
+      <th class="n">TOPSIS</th><th>Why it was not accepted</th></tr></thead>
+    <tbody>
+      <tr><td class="mono">379010-S3</td><td class="n">11.9 km</td>
+        <td class="n">1,640</td>
+        <td class="n">0.30</td>
+        <td class="small">TOPSIS closeness 0.30 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379010-S9</td><td class="n">13.8 km</td>
+        <td class="n">1,392</td>
+        <td class="n">0.23</td>
+        <td class="small">TOPSIS closeness 0.23 below the 0.35 acceptance floor</td></tr>
+      <tr><td class="mono">379010-S1</td><td class="n">14.9 km</td>
+        <td class="n">2,506</td>
+        <td class="n">0.20</td>
+        <td class="small">TOPSIS closeness 0.20 below the 0.35 acceptance floor</td></tr>
+    </tbody>
+  </table>
+</article>
+
+<h2 class="pb"><span class="sec-no">6</span>How sites were chosen</h2>
+<p>Two decisions had to be made explicit and defensible: which land is
+<i>permissible</i>, and among permissible land, which is <i>preferable</i>. They are handled
+separately and deliberately, because conflating them is how a ranking ends up recommending
+forest land with an excellent score.</p>
+
+<h3>Permissible — nine hard constraints, applied in order</h3>
+<p class="small">The order matters. A cell is reported against the first constraint it fails, so
+cheap and definitive tests come first and judgement calls come last. That way "rejected: inside
+a RED zone" is never displaced by "rejected: too far".</p>
+<ol class="chain" style="counter-reset:none;list-style:decimal;padding-left:1.4em">
+  <li style="padding-left:0"><b>Zone RED</b> — inside a red zone declared by the district ruleset.</li>
+  <li style="padding-left:0"><b>Zone ORANGE</b> — not permitted for new residential layout.</li>
+  <li style="padding-left:0"><b>Residual hazard</b> — combined annual probability above the
+      resettlement cap. A site is never risk-free; the cap states how much residual risk the
+      state is prepared to accept, and it is printed on every funnel above.</li>
+  <li style="padding-left:0"><b>Slope</b> — above the NDMA habitable-slope norm
+      (15°).</li>
+  <li style="padding-left:0"><b>Erosion</b> — land predicted lost inside the planning horizon.
+      Moving a village onto a retreating shoreline is a 20-year problem, not a solution.</li>
+  <li style="padding-left:0"><b>Inundation</b> — below the flood or surge screening level.</li>
+  <li style="padding-left:0"><b>Land class</b> — forest, CRZ or private land not readily available.</li>
+  <li style="padding-left:0"><b>Already built</b> — occupied at settlement density.</li>
+  <li style="padding-left:0"><b>Distance</b> — beyond what households accept from their origin.
+      Livelihood, school and kinship ties are why relocation colonies stand empty when this is ignored.</li>
+</ol>
+<p class="small muted">Surviving cells are grouped into contiguous parcels by hex adjacency
+before ranking, because a site is a parcel: you cannot lay a road, a water line and a school
+across cells that do not touch.</p>
+
+<h3>Preferable — AHP weights, then TOPSIS ranking</h3>
+<figure><svg class="fig" viewBox="0 0 620 250" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Siting criteria weights (AHP principal eigenvector)" xmlns="http://www.w3.org/2000/svg"><title>Siting criteria weights (AHP principal eigenvector)</title><desc>Siting criteria weights (AHP principal eigenvector). Largest: Water 25.9%, Road 18.6%, Livelihood continuity 12.8%.</desc><text x="0" y="24" class="cl">Water</text><rect x="190" y="12" width="314.0" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="24" class="cv">25.9%</text><text x="0" y="50" class="cl">Road</text><rect x="190" y="38" width="225.1" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="50" class="cv">18.6%</text><text x="0" y="76" class="cl">Livelihood continuity</text><rect x="190" y="64" width="155.0" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="76" class="cv">12.8%</text><text x="0" y="102" class="cl">Health</text><rect x="190" y="90" width="149.3" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="102" class="cv">12.3%</text><text x="0" y="128" class="cl">Land</text><rect x="190" y="116" width="92.2" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="128" class="cv">7.6%</text><text x="0" y="154" class="cl">Social disruption</text><rect x="190" y="142" width="88.1" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="154" class="cv">7.3%</text><text x="0" y="180" class="cl">Education</text><rect x="190" y="168" width="85.3" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="180" class="cv">7.0%</text><text x="0" y="206" class="cl">Expansion</text><rect x="190" y="194" width="53.8" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="206" class="cv">4.4%</text><text x="0" y="232" class="cl">Power</text><rect x="190" y="220" width="50.0" height="15" rx="2" fill="#1f6f8b"/><text x="512" y="232" class="cv">4.1%</text><text x="190" y="249" class="cu">weight</text></svg>
+  <figcaption>Criteria weights from the principal eigenvector of the pairwise-comparison
+  matrix (Saaty 1980). Consistency ratio <b>0.0118</b>
+  against the 0.10 admissibility threshold, λ<sub>max</sub> =
+  9.137 — the judgement matrix is consistent.</figcaption></figure>
+<p class="small">CR ≤ 0.10 ⇒ judgements are internally consistent</p>
+<div class="banner calm">
+  <b>Why fixed weights rather than a learned model</b>
+  There is no labelled corpus of "correct" resettlement sites in India to train on — the
+  historical record contains sites chosen for reasons no one wrote down, including some that
+  failed. So the weights come from a structured expert judgement whose internal consistency can
+  be tested and whose numbers a District Magistrate can change and re-run. A learned weighting
+  would be more impressive and less accountable.
+</div>
+
+<h3>Acceptance rules</h3>
+<ul class="tight small">
+  <li>A parcel is accepted only above a TOPSIS closeness of
+      <b>0.35</b> — a site cannot merely be the best of a bad set.</li>
+  <li>It must hold at least <b>10 households</b>; below
+      that the per-household cost of a road, a water scheme and a school is indefensible.</li>
+  <li>A portfolio is accepted only if it covers at least
+      <b>50%</b> of the people at risk.
+      Partial coverage is reported as a shortfall rather than hidden.</li>
+</ul>
+<figure><svg class="fig" viewBox="0 0 620 250" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Every candidate site: distance from origin against carrying capacity" xmlns="http://www.w3.org/2000/svg"><title>Every candidate site: distance from origin against carrying capacity</title><desc>108 points. distance from origin (km) 0.0–18.9; capacity (persons) up to 2,757.</desc><line x1="52" y1="216.0" x2="610" y2="216.0" stroke="#d8dce2"/><text x="46" y="219.5" class="cr">0</text><line x1="52" y1="165.5" x2="610" y2="165.5" stroke="#d8dce2"/><text x="46" y="169.0" class="cr">689</text><line x1="52" y1="115.0" x2="610" y2="115.0" stroke="#d8dce2"/><text x="46" y="118.5" class="cr">1,378</text><line x1="52" y1="64.5" x2="610" y2="64.5" stroke="#d8dce2"/><text x="46" y="68.0" class="cr">2,068</text><line x1="52" y1="14.0" x2="610" y2="14.0" stroke="#d8dce2"/><text x="46" y="17.5" class="cr">2,757</text><text x="52.0" y="238" class="ct">0.0</text><text x="331.0" y="238" class="ct">9.4</text><text x="610.0" y="238" class="ct">18.9</text><circle cx="406.5" cy="132.4" r="4" fill="#3f8f5f" opacity="0.8"><title>379006-S10 · Barahipur · 1,141 persons · 12.0 km · accepted</title></circle><circle cx="326.9" cy="132.4" r="4" fill="#3f8f5f" opacity="0.8"><title>379004-S10 · Gopalpur · 1,141 persons · 9.3 km · accepted</title></circle><circle cx="276.0" cy="132.4" r="4" fill="#3f8f5f" opacity="0.8"><title>379005-S10 · Pentha · 1,141 persons · 7.6 km · accepted</title></circle><circle cx="402.9" cy="132.4" r="4" fill="#3f8f5f" opacity="0.8"><title>379003-S10 · Kanhupur · 1,141 persons · 11.9 km · accepted</title></circle><circle cx="199.4" cy="132.4" r="4" fill="#3f8f5f" opacity="0.8"><title>379002-S10 · Bagapatia · 1,141 persons · 5.0 km · accepted</title></circle><circle cx="474.6" cy="132.4" r="4" fill="#3f8f5f" opacity="0.8"><title>379001-S10 · Satabhaya · 1,141 persons · 14.3 km · accepted</title></circle><circle cx="120.4" cy="132.4" r="4" fill="#3f8f5f" opacity="0.8"><title>379008-S10 · Rajnagar · 1,141 persons · 2.3 km · accepted</title></circle><circle cx="195.5" cy="133.3" r="4" fill="#3f8f5f" opacity="0.8"><title>379009-S12 · Jamboo · 1,128 persons · 4.8 km · accepted</title></circle><circle cx="110.9" cy="133.3" r="4" fill="#3f8f5f" opacity="0.8"><title>379010-S12 · Talachua · 1,128 persons · 2.0 km · accepted</title></circle><circle cx="385.8" cy="117.1" r="4" fill="#3f8f5f" opacity="0.8"><title>379006-S6 · Barahipur · 1,349 persons · 11.3 km · accepted</title></circle><circle cx="314.2" cy="117.1" r="4" fill="#3f8f5f" opacity="0.8"><title>379004-S6 · Gopalpur · 1,349 persons · 8.9 km · accepted</title></circle><circle cx="283.7" cy="117.1" r="4" fill="#3f8f5f" opacity="0.8"><title>379005-S6 · Pentha · 1,349 persons · 7.8 km · accepted</title></circle><circle cx="388.7" cy="117.1" r="4" fill="#3f8f5f" opacity="0.8"><title>379003-S6 · Kanhupur · 1,349 persons · 11.4 km · accepted</title></circle><circle cx="188.4" cy="117.1" r="4" fill="#3f8f5f" opacity="0.8"><title>379002-S6 · Bagapatia · 1,349 persons · 4.6 km · accepted</title></circle><circle cx="458.6" cy="117.1" r="4" fill="#3f8f5f" opacity="0.8"><title>379001-S6 · Satabhaya · 1,349 persons · 13.7 km · accepted</title></circle><circle cx="110.6" cy="117.1" r="4" fill="#3f8f5f" opacity="0.8"><title>379008-S6 · Rajnagar · 1,349 persons · 2.0 km · accepted</title></circle><circle cx="196.1" cy="103.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379009-S5 · Jamboo · 1,542 persons · 4.9 km · accepted</title></circle><circle cx="109.7" cy="103.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379010-S5 · Talachua · 1,542 persons · 1.9 km · accepted</title></circle><circle cx="330.7" cy="133.3" r="4" fill="#3f8f5f" opacity="0.8"><title>379006-S12 · Barahipur · 1,128 persons · 9.4 km · accepted</title></circle><circle cx="333.1" cy="97.5" r="4" fill="#3f8f5f" opacity="0.8"><title>379004-S4 · Gopalpur · 1,617 persons · 9.5 km · accepted</title></circle><circle cx="283.1" cy="130.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379005-S11 · Pentha · 1,173 persons · 7.8 km · accepted</title></circle><circle cx="408.3" cy="97.5" r="4" fill="#3f8f5f" opacity="0.8"><title>379003-S4 · Kanhupur · 1,617 persons · 12.0 km · accepted</title></circle><circle cx="206.8" cy="97.5" r="4" fill="#3f8f5f" opacity="0.8"><title>379002-S4 · Bagapatia · 1,617 persons · 5.2 km · accepted</title></circle><circle cx="436.1" cy="133.3" r="4" fill="#3f8f5f" opacity="0.8"><title>379001-S12 · Satabhaya · 1,128 persons · 13.0 km · accepted</title></circle><circle cx="127.2" cy="97.5" r="4" fill="#3f8f5f" opacity="0.8"><title>379008-S4 · Rajnagar · 1,617 persons · 2.5 km · accepted</title></circle><circle cx="406.2" cy="132.4" r="4" fill="#3f8f5f" opacity="0.8"><title>379009-S10 · Jamboo · 1,141 persons · 12.0 km · accepted</title></circle><circle cx="333.7" cy="132.4" r="4" fill="#3f8f5f" opacity="0.8"><title>379010-S10 · Talachua · 1,141 persons · 9.5 km · accepted</title></circle><circle cx="316.5" cy="103.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379006-S5 · Barahipur · 1,542 persons · 8.9 km · accepted</title></circle><circle cx="357.7" cy="130.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379004-S11 · Gopalpur · 1,173 persons · 10.3 km · accepted</title></circle><circle cx="294.3" cy="97.5" r="4" fill="#3f8f5f" opacity="0.8"><title>379005-S4 · Pentha · 1,617 persons · 8.2 km · accepted</title></circle><circle cx="391.7" cy="133.3" r="4" fill="#3f8f5f" opacity="0.8"><title>379003-S12 · Kanhupur · 1,128 persons · 11.5 km · accepted</title></circle><circle cx="231.3" cy="130.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379002-S11 · Bagapatia · 1,173 persons · 6.1 km · accepted</title></circle><circle cx="478.7" cy="97.5" r="4" fill="#3f8f5f" opacity="0.8"><title>379001-S4 · Satabhaya · 1,617 persons · 14.4 km · accepted</title></circle><circle cx="155.9" cy="130.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379008-S11 · Rajnagar · 1,173 persons · 3.5 km · accepted</title></circle><circle cx="173.3" cy="112.9" r="4" fill="#3f8f5f" opacity="0.8"><title>379009-S8 · Jamboo · 1,407 persons · 4.1 km · accepted</title></circle><circle cx="137.5" cy="112.9" r="4" fill="#3f8f5f" opacity="0.8"><title>379010-S8 · Talachua · 1,407 persons · 2.9 km · accepted</title></circle><circle cx="406.5" cy="97.5" r="4" fill="#3f8f5f" opacity="0.8"><title>379006-S4 · Barahipur · 1,617 persons · 12.0 km · accepted</title></circle><circle cx="348.8" cy="133.3" r="4" fill="#3f8f5f" opacity="0.8"><title>379004-S12 · Gopalpur · 1,128 persons · 10.0 km · accepted</title></circle><circle cx="268.3" cy="115.3" r="4" fill="#3f8f5f" opacity="0.8"><title>379005-S7 · Pentha · 1,374 persons · 7.3 km · accepted</title></circle><circle cx="434.6" cy="130.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379003-S11 · Kanhupur · 1,173 persons · 12.9 km · accepted</title></circle><circle cx="247.6" cy="115.3" r="4" fill="#3f8f5f" opacity="0.8"><title>379002-S7 · Bagapatia · 1,374 persons · 6.6 km · accepted</title></circle><circle cx="421.3" cy="103.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379001-S5 · Satabhaya · 1,542 persons · 12.5 km · accepted</title></circle><circle cx="184.0" cy="115.3" r="4" fill="#3f8f5f" opacity="0.8"><title>379008-S7 · Rajnagar · 1,374 persons · 4.5 km · accepted</title></circle><circle cx="376.3" cy="117.1" r="4" fill="#3f8f5f" opacity="0.8"><title>379009-S6 · Jamboo · 1,349 persons · 11.0 km · accepted</title></circle><circle cx="303.2" cy="117.1" r="4" fill="#3f8f5f" opacity="0.8"><title>379010-S6 · Talachua · 1,349 persons · 8.5 km · accepted</title></circle><circle cx="444.7" cy="130.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379006-S11 · Barahipur · 1,173 persons · 13.3 km · accepted</title></circle><circle cx="331.3" cy="103.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379004-S5 · Gopalpur · 1,542 persons · 9.4 km · accepted</title></circle><circle cx="282.2" cy="95.8" r="4" fill="#3f8f5f" opacity="0.8"><title>379005-S3 · Pentha · 1,640 persons · 7.8 km · accepted</title></circle><circle cx="375.4" cy="103.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379003-S5 · Kanhupur · 1,542 persons · 10.9 km · accepted</title></circle><circle cx="293.2" cy="133.3" r="4" fill="#3f8f5f" opacity="0.8"><title>379002-S12 · Bagapatia · 1,128 persons · 8.2 km · accepted</title></circle><circle cx="506.8" cy="130.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379001-S11 · Satabhaya · 1,173 persons · 15.4 km · accepted</title></circle><circle cx="177.8" cy="95.8" r="4" fill="#3f8f5f" opacity="0.8"><title>379008-S3 · Rajnagar · 1,640 persons · 4.2 km · accepted</title></circle><circle cx="177.2" cy="43.9" r="4" fill="#3f8f5f" opacity="0.8"><title>379009-S2 · Jamboo · 2,349 persons · 4.2 km · accepted</title></circle><circle cx="319.8" cy="97.5" r="4" fill="#3f8f5f" opacity="0.8"><title>379010-S4 · Talachua · 1,617 persons · 9.1 km · accepted</title></circle><circle cx="354.4" cy="112.9" r="4" fill="#3f8f5f" opacity="0.8"><title>379006-S8 · Barahipur · 1,407 persons · 10.2 km · accepted</title></circle><circle cx="367.7" cy="115.3" r="4" fill="#3f8f5f" opacity="0.8"><title>379004-S7 · Gopalpur · 1,374 persons · 10.7 km · accepted</title></circle><circle cx="430.5" cy="133.3" r="4" fill="#3f8f5f" opacity="0.8"><title>379005-S12 · Pentha · 1,128 persons · 12.8 km · accepted</title></circle><circle cx="444.4" cy="115.3" r="4" fill="#3f8f5f" opacity="0.8"><title>379003-S7 · Kanhupur · 1,374 persons · 13.3 km · accepted</title></circle><circle cx="275.1" cy="103.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379002-S5 · Bagapatia · 1,542 persons · 7.5 km · accepted</title></circle><circle cx="517.5" cy="115.3" r="4" fill="#3f8f5f" opacity="0.8"><title>379001-S7 · Satabhaya · 1,374 persons · 15.7 km · accepted</title></circle><circle cx="282.5" cy="133.3" r="4" fill="#3f8f5f" opacity="0.8"><title>379008-S12 · Rajnagar · 1,128 persons · 7.8 km · accepted</title></circle><circle cx="395.2" cy="97.5" r="4" fill="#3f8f5f" opacity="0.8"><title>379009-S4 · Jamboo · 1,617 persons · 11.6 km · accepted</title></circle><circle cx="163.6" cy="43.9" r="4" fill="#3f8f5f" opacity="0.8"><title>379010-S2 · Talachua · 2,349 persons · 3.8 km · accepted</title></circle><circle cx="466.0" cy="115.3" r="4" fill="#3f8f5f" opacity="0.8"><title>379006-S7 · Barahipur · 1,374 persons · 14.0 km · accepted</title></circle><circle cx="371.3" cy="95.8" r="4" fill="#3f8f5f" opacity="0.8"><title>379004-S3 · Gopalpur · 1,640 persons · 10.8 km · accepted</title></circle><circle cx="412.4" cy="103.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379005-S5 · Pentha · 1,542 persons · 12.2 km · accepted</title></circle><circle cx="447.9" cy="95.8" r="4" fill="#3f8f5f" opacity="0.8"><title>379003-S3 · Kanhupur · 1,640 persons · 13.4 km · accepted</title></circle><circle cx="247.9" cy="95.8" r="4" fill="#3f8f5f" opacity="0.8"><title>379002-S3 · Bagapatia · 1,640 persons · 6.6 km · accepted</title></circle><circle cx="461.2" cy="112.9" r="4" fill="#3f8f5f" opacity="0.8"><title>379001-S8 · Satabhaya · 1,407 persons · 13.8 km · accepted</title></circle><circle cx="266.5" cy="103.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379008-S5 · Rajnagar · 1,542 persons · 7.2 km · accepted</title></circle><circle cx="449.4" cy="130.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379009-S11 · Jamboo · 1,173 persons · 13.4 km · accepted</title></circle><circle cx="376.3" cy="130.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379010-S11 · Talachua · 1,173 persons · 11.0 km · accepted</title></circle><circle cx="366.0" cy="43.9" r="4" fill="#3f8f5f" opacity="0.8"><title>379006-S2 · Barahipur · 2,349 persons · 10.6 km · accepted</title></circle><circle cx="402.1" cy="112.9" r="4" fill="#e07b39" opacity="0.8"><title>379004-S8 · Gopalpur · 1,407 persons · 11.8 km · rejected</title></circle><circle cx="297.9" cy="114.0" r="4" fill="#3f8f5f" opacity="0.8"><title>379005-S9 · Pentha · 1,392 persons · 8.3 km · accepted</title></circle><circle cx="430.5" cy="112.9" r="4" fill="#e07b39" opacity="0.8"><title>379003-S8 · Kanhupur · 1,407 persons · 12.8 km · rejected</title></circle><circle cx="290.8" cy="114.0" r="4" fill="#e07b39" opacity="0.8"><title>379002-S9 · Bagapatia · 1,392 persons · 8.1 km · rejected</title></circle><circle cx="521.0" cy="95.8" r="4" fill="#3f8f5f" opacity="0.8"><title>379001-S3 · Satabhaya · 1,640 persons · 15.8 km · accepted</title></circle><circle cx="228.1" cy="114.0" r="4" fill="#e07b39" opacity="0.8"><title>379008-S9 · Rajnagar · 1,392 persons · 6.0 km · rejected</title></circle><circle cx="489.3" cy="115.3" r="4" fill="#3f8f5f" opacity="0.8"><title>379009-S7 · Jamboo · 1,374 persons · 14.8 km · accepted</title></circle><circle cx="420.1" cy="115.3" r="4" fill="#3f8f5f" opacity="0.8"><title>379010-S7 · Talachua · 1,374 persons · 12.4 km · accepted</title></circle><circle cx="464.5" cy="95.8" r="4" fill="#e07b39" opacity="0.8"><title>379006-S3 · Barahipur · 1,640 persons · 13.9 km · rejected</title></circle><circle cx="409.2" cy="114.0" r="4" fill="#e07b39" opacity="0.8"><title>379004-S9 · Gopalpur · 1,392 persons · 12.1 km · rejected</title></circle><circle cx="308.5" cy="32.4" r="4" fill="#3f8f5f" opacity="0.8"><title>379005-S1 · Pentha · 2,506 persons · 8.7 km · accepted</title></circle><circle cx="485.5" cy="114.0" r="4" fill="#e07b39" opacity="0.8"><title>379003-S9 · Kanhupur · 1,392 persons · 14.7 km · rejected</title></circle><circle cx="371.0" cy="112.9" r="4" fill="#e07b39" opacity="0.8"><title>379002-S8 · Bagapatia · 1,407 persons · 10.8 km · rejected</title></circle><circle cx="472.2" cy="43.9" r="4" fill="#e07b39" opacity="0.8"><title>379001-S2 · Satabhaya · 2,349 persons · 14.2 km · rejected</title></circle><circle cx="257.1" cy="32.4" r="4" fill="#e07b39" opacity="0.8"><title>379008-S1 · Rajnagar · 2,506 persons · 6.9 km · rejected</title></circle><circle cx="477.5" cy="95.8" r="4" fill="#e07b39" opacity="0.8"><title>379009-S3 · Jamboo · 1,640 persons · 14.4 km · rejected</title></circle><circle cx="405.3" cy="95.8" r="4" fill="#e07b39" opacity="0.8"><title>379010-S3 · Talachua · 1,640 persons · 11.9 km · rejected</title></circle><circle cx="509.2" cy="114.0" r="4" fill="#e07b39" opacity="0.8"><title>379006-S9 · Barahipur · 1,392 persons · 15.4 km · rejected</title></circle><circle cx="429.9" cy="32.4" r="4" fill="#e07b39" opacity="0.8"><title>379004-S1 · Gopalpur · 2,506 persons · 12.8 km · rejected</title></circle><circle cx="506.8" cy="112.9" r="4" fill="#e07b39" opacity="0.8"><title>379005-S8 · Pentha · 1,407 persons · 15.4 km · rejected</title></circle><circle cx="445.8" cy="43.9" r="4" fill="#e07b39" opacity="0.8"><title>379003-S2 · Kanhupur · 2,349 persons · 13.3 km · rejected</title></circle><circle cx="315.1" cy="32.4" r="4" fill="#e07b39" opacity="0.8"><title>379002-S1 · Bagapatia · 2,506 persons · 8.9 km · rejected</title></circle><circle cx="558.6" cy="114.0" r="4" fill="#e07b39" opacity="0.8"><title>379001-S9 · Satabhaya · 1,392 persons · 17.1 km · rejected</title></circle><circle cx="370.1" cy="112.9" r="4" fill="#e07b39" opacity="0.8"><title>379008-S8 · Rajnagar · 1,407 persons · 10.8 km · rejected</title></circle><circle cx="532.5" cy="114.0" r="4" fill="#e07b39" opacity="0.8"><title>379009-S9 · Jamboo · 1,392 persons · 16.2 km · rejected</title></circle><circle cx="461.8" cy="114.0" r="4" fill="#e07b39" opacity="0.8"><title>379010-S9 · Talachua · 1,392 persons · 13.8 km · rejected</title></circle><circle cx="533.1" cy="32.4" r="4" fill="#e07b39" opacity="0.8"><title>379006-S1 · Barahipur · 2,506 persons · 16.3 km · rejected</title></circle><circle cx="422.5" cy="43.9" r="4" fill="#e07b39" opacity="0.8"><title>379004-S2 · Gopalpur · 2,349 persons · 12.5 km · rejected</title></circle><circle cx="534.6" cy="43.9" r="4" fill="#e07b39" opacity="0.8"><title>379005-S2 · Pentha · 2,349 persons · 16.3 km · rejected</title></circle><circle cx="505.3" cy="32.4" r="4" fill="#e07b39" opacity="0.8"><title>379003-S1 · Kanhupur · 2,506 persons · 15.3 km · rejected</title></circle><circle cx="399.7" cy="43.9" r="4" fill="#e07b39" opacity="0.8"><title>379002-S2 · Bagapatia · 2,349 persons · 11.8 km · rejected</title></circle><circle cx="578.4" cy="32.4" r="4" fill="#e07b39" opacity="0.8"><title>379001-S1 · Satabhaya · 2,506 persons · 17.8 km · rejected</title></circle><circle cx="401.2" cy="43.9" r="4" fill="#e07b39" opacity="0.8"><title>379008-S2 · Rajnagar · 2,349 persons · 11.8 km · rejected</title></circle><circle cx="563.6" cy="32.4" r="4" fill="#e07b39" opacity="0.8"><title>379009-S1 · Jamboo · 2,506 persons · 17.3 km · rejected</title></circle><circle cx="494.4" cy="32.4" r="4" fill="#e07b39" opacity="0.8"><title>379010-S1 · Talachua · 2,506 persons · 14.9 km · rejected</title></circle><text x="331" y="249" class="cc">distance from origin (km)</text><text x="10" y="115" class="cc" transform="rotate(-90 10 115)">capacity (persons)</text></svg>
+  <figcaption>Every candidate parcel in the district: distance from its origin habitation
+  against carrying capacity. Green accepted, orange rejected. The visible frontier is the real
+  trade-off — nearby land is small, and large land is far.</figcaption></figure>
+<figure><svg class="fig" viewBox="0 0 620 42" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="What limits capacity, across all candidate sites" xmlns="http://www.w3.org/2000/svg"><title>What limits capacity, across all candidate sites</title><desc>What limits capacity, across all candidate sites. Largest: Water 108 sites.</desc><text x="0" y="24" class="cl">Water</text><rect x="190" y="12" width="314.0" height="15" rx="2" fill="#cfa72e"/><text x="512" y="24" class="cv">108 sites</text><text x="190" y="41" class="cu">Liebig&#x27;s minimum, over site-intrinsic resources only</text></svg>
+  <figcaption>What actually limits capacity across 108 candidate parcels
+  (78 accepted). If water dominates this chart, the district's relocation
+  programme is a water-supply programme.</figcaption></figure>
+
+<h2><span class="sec-no">7</span>Phasing under the budget</h2>
+<p>Habitations are funded tier-first, and within a tier by an <b>exact 0/1 knapsack</b> over
+avoided loss subject to the annual budget of
+₹300.0 crore. Greedy benefit-per-rupee selection was rejected because
+it reliably funds four cheap medium-risk habitations ahead of one expensive IMMEDIATE one —
+arithmetically efficient and indefensible in front of the people left behind.</p>
+<figure><svg class="fig" viewBox="0 0 620 156" width="100%" preserveAspectRatio="xMinYMin meet" role="img" aria-label="Phasing: cost and present-value benefit" xmlns="http://www.w3.org/2000/svg"><title>Phasing: cost and present-value benefit</title><desc>phase 1 9 habitations, ₹50 crore; phase 2 0 habitations, ₹0 crore; phase 3 0 habitations, ₹0 crore</desc><g class="lgd"><rect x="116" y="2" width="9" height="9" fill="#a4161a"/><text x="129" y="10.5" class="cu">capital cost</text><rect x="208" y="2" width="9" height="9" fill="#2f7d6f"/><text x="221" y="10.5" class="cu">PV benefit (30 yr)</text></g><text x="0" y="37" class="cl">Phase 1</text><text x="0" y="54" class="cu">9 hab · 5,870 ppl</text><rect x="116" y="22" width="34.1" height="10" rx="2" fill="#a4161a"/><rect x="116" y="35" width="354.0" height="10" rx="2" fill="#2f7d6f"/><text x="476" y="32" class="cv">₹50 cr → ₹520 cr</text><text x="476" y="51" class="cu">BCR 10.37</text><text x="0" y="79" class="cl">Phase 2</text><text x="0" y="96" class="cu">0 hab · 0 ppl</text><rect x="116" y="64" width="0.8" height="10" rx="2" fill="#a4161a"/><rect x="116" y="77" width="0.8" height="10" rx="2" fill="#2f7d6f"/><text x="476" y="74" class="cv">₹0 cr → ₹0 cr</text><text x="476" y="93" class="cu">BCR 0.00</text><text x="0" y="121" class="cl">Phase 3</text><text x="0" y="138" class="cu">0 hab · 0 ppl</text><rect x="116" y="106" width="0.8" height="10" rx="2" fill="#a4161a"/><rect x="116" y="119" width="0.8" height="10" rx="2" fill="#2f7d6f"/><text x="476" y="116" class="cv">₹0 cr → ₹0 cr</text><text x="476" y="135" class="cu">BCR 0.00</text></svg>
+  <figcaption>Capital cost against present-value avoided loss, by phase. Benefit is discounted
+  at the social rate over 30 years and counts avoided physical damage only.</figcaption></figure>
+<table>
+  <thead><tr><th>Phase</th><th class="n">Habitations</th><th class="n">Households</th>
+    <th class="n">Persons</th><th class="n">Capital cost</th>
+    <th class="n">PV benefit</th><th class="n">BCR</th></tr></thead>
+  <tbody>
+    <tr><td>Phase 1</td>
+      <td class="n">9</td><td class="n">1,365</td>
+      <td class="n">5,870</td><td class="n">₹50.2 crore</td>
+      <td class="n">₹520.1 crore</td>
+      <td class="n">10.37</td></tr>
+    <tr><td>Phase 2</td>
+      <td class="n">0</td><td class="n">0</td>
+      <td class="n">0</td><td class="n">₹0</td>
+      <td class="n">₹0</td>
+      <td class="n">—</td></tr>
+    <tr><td>Phase 3</td>
+      <td class="n">0</td><td class="n">0</td>
+      <td class="n">0</td><td class="n">₹0</td>
+      <td class="n">₹0</td>
+      <td class="n">—</td></tr>
+  </tbody>
+</table>
+
+<h2 class="pb"><span class="sec-no">8</span>Where every number came from</h2>
+<table>
+  <caption>Input datasets in this snapshot. Synthetic rows are stand-ins produced by this
+  system; they are physically plausible and they are not measurements.</caption>
+  <thead><tr><th>Dataset</th><th>Role</th><th>Vintage</th><th class="n">Resolution</th>
+    <th>Source</th><th>Licence</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr style="background:#fdf6ef">
+      <td>SYNTHETIC rainfall AMS</td><td>GEV extreme-rainfall return levels (cloudburst hazard)</td><td class="n">60 annual maxima</td>
+      <td class="n">0.25° grid</td><td class="small">SYNTHETIC annual maxima (coastal_delta)</td>
+      <td class="small"></td>
+      <td><span class="flag">synthetic</span></td></tr>
+    <tr style="background:#fdf6ef">
+      <td>SYNTHETIC road network</td><td>accessibility, isolation, site scoring</td><td class="n">generated</td>
+      <td class="n">polyline</td><td class="small">stand-in for OSM highway=* + PMGSY inventory</td>
+      <td class="small"></td>
+      <td><span class="flag">synthetic</span></td></tr>
+    <tr style="background:#fdf6ef">
+      <td>SYNTHETIC deformation field</td><td>active ground subsidence (the Joshimath signal)</td><td class="n">generated</td>
+      <td class="n">~30–90 m</td><td class="small">SYNTHETIC deformation field (NOT a measurement)</td>
+      <td class="small"></td>
+      <td><span class="flag">synthetic</span></td></tr>
+    <tr style="background:#fdf6ef">
+      <td>SYNTHETIC mangrove belt</td><td>cyclone wind + surge attenuation</td><td class="n">generated</td>
+      <td class="n">~120 m</td><td class="small">stand-in for ISFR mangrove cover / Bhitarkanika sanctuary</td>
+      <td class="small"></td>
+      <td><span class="flag">synthetic</span></td></tr>
+    <tr style="background:#fdf6ef">
+      <td>Building footprints (SYNTHETIC stand-in)</td><td>dasymetric weights: area × storeys × P(residential)</td><td class="n">generated</td>
+      <td class="n">footprint polygon</td><td class="small">stand-in for OSM / Google Open Buildings / MS Buildings</td>
+      <td class="small"></td>
+      <td><span class="flag">synthetic</span></td></tr>
+    <tr style="background:#fdf6ef">
+      <td>SYNTHETIC shoreline/bankline change</td><td>erosion hazard, years-to-loss</td><td class="n">1990–2024 equivalent</td>
+      <td class="n">30 m</td><td class="small">stand-in for NCCR Shoreline Change Atlas / Landsat EPR</td>
+      <td class="small"></td>
+      <td><span class="flag">synthetic</span></td></tr>
+    <tr style="background:#fdf6ef">
+      <td>Sentinel-1 GRD inundation frequency (SYNTHETIC stand-in)</td><td>observed flood frequency, complements HAND</td><td class="n">36 passes</td>
+      <td class="n">10 m → 120 m cell</td><td class="small">stand-in for Copernicus/Planetary Computer S1 GRD</td>
+      <td class="small"></td>
+      <td><span class="flag">synthetic</span></td></tr>
+    <tr style="background:#fdf6ef">
+      <td>SYNTHETIC facility registry</td><td>service access + critical exposure</td><td class="n">generated</td>
+      <td class="n">point</td><td class="small">stand-in for OSM amenity + Census Village Amenities + UDISE+</td>
+      <td class="small"></td>
+      <td><span class="flag">synthetic</span></td></tr>
+    <tr style="background:#fdf6ef">
+      <td>SYNTHETIC DEM</td><td>terrain: slope, aspect, curvature, HAND, TWI, relief</td><td class="n">generated</td>
+      <td class="n">30 m</td><td class="small">SYNTHETIC terrain generator (coastal_delta, seeded)</td>
+      <td class="small"></td>
+      <td><span class="flag">synthetic</span></td></tr>
+    <tr style="background:#fdf6ef">
+      <td>Census 2011 PCA (SYNTHETIC stand-in)</td><td>village population, households, SC/ST, literacy</td><td class="n">2011 → projected to 2026</td>
+      <td class="n">village</td><td class="small">stand-in for censusindia.gov.in PCA + HH tables</td>
+      <td class="small"></td>
+      <td><span class="flag">synthetic</span></td></tr>
+    <tr>
+      <td>IS 875-3:2015 basic wind speed</td><td>cyclone wind hazard</td><td class="n">2015</td>
+      <td class="n">zone</td><td class="small">Bureau of Indian Standards</td>
+      <td class="small"></td>
+      <td><span class="ok">authoritative</span></td></tr>
+    <tr>
+      <td>IS 1893-1:2016 seismic zoning</td><td>seismic hazard + site amplification</td><td class="n">2016</td>
+      <td class="n">district</td><td class="small">Bureau of Indian Standards</td>
+      <td class="small"></td>
+      <td><span class="ok">authoritative</span></td></tr>
+    <tr>
+      <td>Storm-surge height–frequency curve</td><td>surge inundation screening</td><td class="n">10-yr & 100-yr anchors</td>
+      <td class="n">coastal segment</td><td class="small">published Odisha coast surge studies (screening only)</td>
+      <td class="small"></td>
+      <td><span class="ok">authoritative</span></td></tr>
+  </tbody>
+</table>
+<p class="small">Snapshot <span class="mono">kendrapara-20260901-73e266c471ff</span> ·
+  ruleset <span class="mono">od_coastal_v1.3</span> ·
+  grid backend <span class="mono">local</span> ·
+  created <span class="mono">2026-09-01T11:42:04.860666+00:00</span>. Re-running this
+  snapshot id with the same ruleset reproduces every figure in this document.</p>
+
+<h3>Extreme-value fit — design rainfall</h3>
+<p class="small">GEV (annual maxima, 1-day) fitted to 60 years of annual maxima:
+  location 158.6 mm, scale 34.4 mm,
+  shape ξ = 0.17 (heavy-tailed — the largest events are
+  substantially larger than a Gumbel fit would suggest, which is why a fitted shape parameter is
+  used rather than assumed zero).
+  Return levels: 25-yr 304 mm ·
+  50-yr 348 mm ·
+  100-yr 398 mm.
+  Source: SYNTHETIC annual maxima (coastal_delta) <span class="flag">synthetic</span>.</p>
+
+<h3>Norms applied</h3>
+<table>
+  <caption>Every threshold in this report is a published Indian norm, cited. None is a
+  parameter this system invented.</caption>
+  <thead><tr><th>Norm</th><th class="n">Value</th><th>Unit</th><th>Source</th></tr></thead>
+  <tbody>
+    <tr><td>Health access km</td><td class="n">5.0</td><td>km</td>
+      <td class="small">IPHS / NRHM accessibility norm</td></tr>
+    <tr><td>House carpet m2</td><td class="n">25</td><td>m²</td>
+      <td class="small">PMAY-G unit norm (25 m² incl. hygienic cooking space)</td></tr>
+    <tr><td>Household size coastal</td><td class="n">4.3</td><td>persons</td>
+      <td class="small">Census of India 2011, HH-01</td></tr>
+    <tr><td>Household size hill</td><td class="n">4.8</td><td>persons</td>
+      <td class="small">Census of India 2011, HH-01</td></tr>
+    <tr><td>Livelihood land ha</td><td class="n">0.4</td><td>ha</td>
+      <td class="small">Agriculture Census marginal-holding class (<1 ha)</td></tr>
+    <tr><td>Phc population hill</td><td class="n">20000</td><td>persons</td>
+      <td class="small">Indian Public Health Standards 2022</td></tr>
+    <tr><td>Phc population plain</td><td class="n">30000</td><td>persons</td>
+      <td class="small">Indian Public Health Standards 2022</td></tr>
+    <tr><td>Plot area m2</td><td class="n">100</td><td>m²/household</td>
+      <td class="small">PMAY-G / state rehabilitation norms (typical 1–1.5 decimal)</td></tr>
+    <tr><td>Power kw household</td><td class="n">1.0</td><td>kW</td>
+      <td class="small">RDSS / DISCOM rural domestic connection norm</td></tr>
+    <tr><td>Road access km</td><td class="n">0.5</td><td>km</td>
+      <td class="small">PMGSY connectivity norm</td></tr>
+    <tr><td>Safe slope deg</td><td class="n">15.0</td><td>degrees</td>
+      <td class="small">NDMA landslide guidelines / hill-town planning practice</td></tr>
+    <tr><td>Sanitation lpcd grey</td><td class="n">44</td><td>litres/person/day</td>
+      <td class="small">SBM-G Phase II greywater planning (≈80% of supply)</td></tr>
+    <tr><td>School primary km</td><td class="n">1.0</td><td>km</td>
+      <td class="small">Right to Education Act 2009, Schedule (neighbourhood norms)</td></tr>
+    <tr><td>School upper primary km</td><td class="n">3.0</td><td>km</td>
+      <td class="small">Right to Education Act 2009, Schedule</td></tr>
+    <tr><td>Students per classroom</td><td class="n">30</td><td>students</td>
+      <td class="small">RTE / Samagra Shiksha PTR norm</td></tr>
+    <tr><td>Subcentre population hill</td><td class="n">3000</td><td>persons</td>
+      <td class="small">Indian Public Health Standards 2022</td></tr>
+    <tr><td>Water lpcd</td><td class="n">55</td><td>litres/person/day</td>
+      <td class="small">Jal Jeevan Mission guidelines, DDWS, MoJS (2019)</td></tr>
+  </tbody>
+</table>
+
+<h2><span class="sec-no">9</span>What this analysis cannot do</h2>
+<p>A screening tool that presents itself as a survey gets people killed. The following are
+limits of method, not bugs, and they are stated here so that a reader can decide what weight to
+put on each finding.</p>
+<dl class="gloss">
+  <dt>It is a screening, not a geotechnical investigation.</dt>
+  <dd>Nothing here substitutes for borehole logs, a slope-stability analysis or a site
+    inspection. The output identifies <i>where to send an engineer</i>, in what order.</dd>
+
+  <dt>Population is disaggregated, not counted.</dt>
+  <dd>Census village totals are redistributed within the village by building footprint area,
+    storey estimate and probability of residential use, and the village total is conserved
+    exactly. A cell-level count is therefore an expectation, not a roll of residents. Village
+    totals are as good as the Census; cell values are as good as the footprint layer.</dd>
+
+  <dt>Land availability is the weakest input.</dt>
+  <dd>Ownership and land class drive the largest single exclusion in most funnels above, and it
+    is the layer most likely to be a stand-in. A site on land that turns out to be private or
+    forest is not a site. Revenue-record verification must precede any acquisition step.</dd>
+
+  <dt>Hazard interaction is approximated.</dt>
+  <dd>Perils are combined as independent annual probabilities with a coupling term for known
+    cascades. Real cascades — a landslide-dammed river breaching, a cyclone on a saturated
+    catchment — are correlated in ways a product of marginals understates. Where a coupling
+    term applies it is reported per cell.</dd>
+
+  <dt>No value is placed on human life.</dt>
+  <dd>Every benefit-cost ratio in this report counts avoided physical damage only. Mortality is
+    excluded deliberately: a value of statistical life makes relocation look profitable for
+    reasons the state should decide politically, not arithmetically. Every BCR here is therefore
+    a <b>lower bound</b> on the case for acting.</dd>
+
+  <dt>Effectiveness is never assumed complete.</dt>
+  <dd>No mitigation option is credited with eliminating risk, and no relocation is credited with
+    zero residual hazard — the receiving site's own residual probability is carried through and
+    printed.</dd>
+
+  <dt>Consent is not modelled.</dt>
+  <dd>Distance caps stand in for a social process they cannot replace. Households refuse to move
+    for reasons — grazing rights, a shrine, a fishing landing, a school-going child — that no
+    raster contains. Gram Sabha consultation is a precondition, not a downstream step.</dd>
+
+  <dt>This snapshot contains synthetic inputs.</dt>
+  <dd>Marked row by row in section 8. Figures are internally consistent and externally
+    unverified. Publishing any habitation-level number from this snapshot as fact would be a
+    misrepresentation.</dd>
+</dl>
+
+<h3>What would change these answers</h3>
+<ul class="tight">
+  <li>A real ownership and land-class layer would move sites in or out of the funnel at gate 7 —
+      the single highest-leverage data substitution available.</li>
+  <li>The GSI landslide inventory would replace the trained susceptibility surface and change
+      cell-level probabilities, though the ranking of habitations is driven mainly by
+      subsidence and slope, which are observed.</li>
+  <li>CGWB block groundwater status and the JJM source register would replace the inferred water
+      yield, which is the binding constraint on
+      108 of
+      108 candidate parcels here — so it directly sets capacity.</li>
+  <li>A district-agreed residual-hazard cap and travel-distance limit would replace the defaults
+      used above. Both are policy choices, both are printed, and both can be changed and re-run
+      in under a second per district.</li>
+</ul>
+
+<h2><span class="sec-no">10</span>Recommendation and approval</h2>
+<p>Subject to field verification of the habitations in section 5, the district administration is
+recommended to:</p>
+<ol class="tight">
+  <li>Issue notice and begin land acquisition for the
+      <b>1 IMMEDIATE habitation(s)</b> covering
+      412 persons at risk, capital requirement
+      ₹22.4 crore, inside the current financial year.</li>
+  <li>Sanction in-place mitigation for the <b>8 MITIGATE habitation(s)</b>
+      (5,458 persons), where protection returns more avoided loss per
+      rupee than relocation.</li>
+  <li>Replace the synthetic inputs listed in section 8 and re-run this screening before any
+      household is informed or any figure is published.</li>
+</ol>
+
+<div class="sign">
+  <div><b>Prepared by</b>PUNARVAAS screening pipeline, snapshot kendrapara-20260901-73e266c471ff<br>
+    Generated 01 September 2026, 17:35 IST</div>
+  <div><b>Verified by</b>Tehsildar / Revenue Inspector<br>Signature and date</div>
+  <div><b>Recommended by</b>District Disaster Management Authority<br>Signature and date</div>
+  <div><b>Approved by</b>District Magistrate / Collector, Kendrapara<br>Signature and date</div>
+</div>
+
+<div class="colophon">
+  PUNARVAAS · kendrapara · kendrapara-20260901-73e266c471ff · ruleset od_coastal_v1.3 ·
+  27,791 cells · 10 habitations · 108 candidate
+  parcels (78 accepted) · Σ capital ₹50,15,63,486 ·
+  Σ PV benefit ₹5,20,11,90,786<br>
+  Advisory output of a decision-support screening. Not a legal notification of hazard zonation
+  and not a substitute for site investigation.
+</div>
+
+</main>
+</body>
+</html>

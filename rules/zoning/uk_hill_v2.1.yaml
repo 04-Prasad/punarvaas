@@ -1,0 +1,174 @@
+# ═══════════════════════════════════════════════════════════════════════════
+# PUNARVAAS zoning ruleset — Uttarakhand hill districts
+# Thresholds are POLICY, not model output. They are owned and signed by the
+# authority named below. Changing a number here changes zoning for thousands of
+# people, so the file is versioned and every classified cell records its rule id.
+# ═══════════════════════════════════════════════════════════════════════════
+version: uk_hill_v2.1
+name: Uttarakhand hill multi-hazard habitability zoning
+applies_to: [chamoli, rudraprayag, pithoragarh, uttarkashi, bageshwar]
+owner: State Disaster Management Authority, Uttarakhand
+approved_by: "SDMA-UK Technical Committee (illustrative — pending real adoption)"
+approved_at: "2026-03-12"
+precedence: highest_severity_wins
+# h_union is the ANNUAL probability of at least one damaging event, so a
+# threshold of 0.25 reads as "expected more often than once every four years".
+# Thresholds stated as return periods are arguable by a District Magistrate in a
+# way that a dimensionless index never is.
+default_zone: GREEN
+notes: >
+  Advisory classification for planning. Not a legal habitability determination.
+  RED means "unacceptable residual risk for permanent habitation on current
+  evidence", not "condemned". Every RED cell requires field verification before
+  any relocation order is issued.
+
+rules:
+  # ── RED ────────────────────────────────────────────────────────────────────
+  - id: R-01
+    label: Active ground subsidence measured by InSAR
+    zone: RED
+    match: all
+    conditions:
+      - "insar_velocity_mm_yr <= -35"
+      - "population >= 1"
+    action: Immediate field verification; halt new construction; prepare relocation case
+    rationale: >
+      Sustained line-of-sight subsidence beyond -35 mm/yr indicates an actively
+      deforming slope. Structural retrofitting cannot stabilise a moving mass,
+      which is why this rule leads directly to a relocation assessment.
+
+  - id: R-02
+    label: Land loss to erosion within the planning horizon
+    zone: RED
+    match: all
+    conditions:
+      - "years_to_loss <= 15"
+      - "erosion_rate_m_yr >= 1.0"
+      - "population >= 1"
+    action: Plan relocation; no protective works justified
+    rationale: When land physically ceases to exist there is nothing to retrofit.
+
+  - id: R-03
+    label: Very high landslide susceptibility with recurrent history
+    zone: RED
+    match: all
+    conditions:
+      - "h_landslide >= 0.78"
+      - "events_per_decade >= 2"
+      - "population >= 1"
+    action: Relocation assessment; interim slope monitoring and evacuation drill
+    rationale: >
+      Modelled susceptibility corroborated by an observed event record. Two
+      independent lines of evidence is the bar for a RED call.
+
+  - id: R-04
+    label: Compound multi-hazard exposure
+    zone: RED
+    match: all
+    conditions:
+      - "h_union >= 0.28"        # ≈ a damaging event more often than 1-in-4-years
+      - "hazard_count >= 3"
+      - "population >= 5"
+    action: Relocation assessment; cascade-scenario contingency plan
+    rationale: >
+      Three or more strong hazards in one cell is the cascade signature
+      (cloudburst to landslide to valley blockage to outburst flood). Mitigating
+      one hazard leaves the chain intact.
+
+  - id: R-05
+    label: GLOF / flash-flood corridor with dwellings on the channel floor
+    zone: RED
+    match: all
+    conditions:
+      - "h_glof >= 0.55"
+      - "hand_m <= 12"
+      - "population >= 1"
+    action: Relocation of channel-floor dwellings; siren-based warning in the interim
+    rationale: Surge arrival times in steep Himalayan valleys leave minutes, not hours.
+
+  - id: R-06
+    label: Extreme slope with dwellings
+    zone: RED
+    match: all
+    conditions:
+      - "slope_deg >= 45"
+      - "population >= 3"
+    action: Structural audit; relocation assessment
+    rationale: >
+      Above ~45 degrees the slope is at or beyond the residual friction angle of
+      most Himalayan colluvium; foundations rely on the very material that fails.
+
+  # ── ORANGE ─────────────────────────────────────────────────────────────────
+  - id: R-07
+    label: High landslide susceptibility without confirmed event history
+    zone: ORANGE
+    match: all
+    conditions:
+      - "h_landslide >= 0.70"
+      - "population >= 1"
+    action: Field verification, slope stabilisation appraisal, restrict new construction
+    rationale: Model-only evidence warrants investigation, not displacement.
+
+  - id: R-08
+    label: Measurable creep below the immediate-action threshold
+    zone: ORANGE
+    match: all
+    conditions:
+      - "insar_velocity_mm_yr <= -18"
+    action: Install ground instrumentation; quarterly InSAR review
+    rationale: Creep frequently accelerates; early instrumentation is cheap.
+
+  - id: R-09
+    label: Flash-flood exposure on the valley floor
+    zone: ORANGE
+    match: all
+    conditions:
+      - "h_flood >= 0.62"
+      - "hand_m <= 8"
+      - "population >= 1"
+    action: Flood-proofing, plinth raising, evacuation route marking
+    rationale: Low freeboard above a steep channel with a short response time.
+
+  - id: R-10
+    label: Cloudburst-prone steep slope
+    zone: ORANGE
+    match: all
+    conditions:
+      - "h_cloudburst >= 0.65"
+      - "slope_deg >= 28"
+    action: Drainage works, catchment treatment, rain-triggered alerting
+    rationale: Extreme short-duration rainfall on steep colluvium is the dominant trigger.
+
+  - id: R-11
+    label: Elevated multi-hazard union
+    zone: ORANGE
+    match: all
+    conditions:
+      - "h_union >= 0.15"        # ≈ 1-in-7-years
+      - "population >= 1"
+    action: Detailed hazard investigation and mitigation plan
+    rationale: Aggregate exposure high even where no single hazard dominates.
+
+  # ── YELLOW ─────────────────────────────────────────────────────────────────
+  - id: R-12
+    label: Moderate hazard requiring construction regulation
+    zone: YELLOW
+    match: any
+    conditions:
+      - "h_union >= 0.08"        # ≈ 1-in-12-years
+      - "slope_deg >= 30"
+      - "insar_velocity_mm_yr <= -8"
+    action: Regulate new construction; enforce hill-building bye-laws; monitor
+    rationale: Habitable with engineering controls and periodic review.
+
+  - id: R-13
+    label: Accessibility and isolation concern
+    zone: YELLOW
+    match: all
+    conditions:
+      - "v_isolation >= 0.62"
+      - "population >= 10"
+    action: Connectivity investment under PMGSY; pre-position relief supplies
+    rationale: >
+      Low hazard but high consequence if cut off — the population cannot be
+      evacuated or supplied during the monsoon.

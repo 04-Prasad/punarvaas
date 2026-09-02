@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "punarvaas",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["-m", "tools.serve", "--port", "8137"],
+      "port": 8137,
+      "autoPort": false
+    }
+  ]
+}
