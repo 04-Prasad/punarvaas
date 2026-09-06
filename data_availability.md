@@ -1,6 +1,6 @@
 # Dataset Availability Report
 
-_Generated 2026-09-02 13:28 by `scripts/check_data.py`_
+_Generated 2026-09-06 20:20 by `scripts/check_data.py`_
 
 
 ## Portal reachability
@@ -27,3 +27,40 @@ _Generated 2026-09-02 13:28 by `scripts/check_data.py`_
 | [Google Open Buildings](https://sites.research.google/open-buildings/) | open | ✅ OK 200 | building footprints (dasymetric) | open download |
 | [HydroSHEDS](https://www.hydrosheds.org/) | open | ✅ OK 200 | drainage network for HAND | open |
 | [WorldPop](https://www.worldpop.org/) | open | ✅ OK 200 | 100m population (cross-check) | open |
+
+## Per-district probes
+
+### Chamoli — Uttarakhand
+
+- **Hazards:** landslide, GLOF, subsidence, cloudburst, seismic IV
+- **Why:** Joshimath subsidence 2023 (published InSAR); Rishiganga/Raini 2021 GLOF-type flood
+- **OSM buildings in 0.1° sample:** 123 (OK)
+- **Copernicus S1 (180d):** None
+
+| Planetary Computer collection | Scenes | Purpose |
+|---|---|---|
+| `sentinel-1-grd` | 1 | SAR — flood inundation frequency |
+| `sentinel-2-l2a` | 1 | optical — LULC/bankline/change |
+| `nasadem` | 1 | DEM 30m |
+| `cop-dem-glo-30` | 1 | Copernicus DEM 30m |
+| `alos-dem` | 1 | ALOS DEM 30m |
+| `esa-worldcover` | 1 | 10m land cover |
+| `io-lulc-9-class` | 1 | 9-class LULC |
+
+### Kendrapara — Odisha
+
+- **Hazards:** coastal erosion, cyclone, storm surge, flood
+- **Why:** Satabhaya lost to sea -> Bagapatia resettlement = COMPLETED govt relocation to validate Engine 2 against
+- **OSM buildings in 0.1° sample:** 1 (OK)
+- **Copernicus S1 (180d):** None
+
+| Planetary Computer collection | Scenes | Purpose |
+|---|---|---|
+| `sentinel-1-grd` | 1 | SAR — flood inundation frequency |
+| `sentinel-2-l2a` | 1 | optical — LULC/bankline/change |
+| `nasadem` | 1 | DEM 30m |
+| `cop-dem-glo-30` | 1 | Copernicus DEM 30m |
+| `alos-dem` | 1 | ALOS DEM 30m |
+| `esa-worldcover` | 1 | 10m land cover |
+| `io-lulc-9-class` | 1 | 9-class LULC |
+

@@ -47,3 +47,7 @@ service-account*.json
 *.db
 *.db-shm
 *.db-wal
+
+# Claude Code
+.claude.claude/
+data/*.db.backup

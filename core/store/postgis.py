@@ -66,31 +66,239 @@ class PostgisStore:
                         " VALUES (%s,%s,%s,%s)",
                         (actor, action, subject, jdumps(detail or {}, default=str)))
 
-    def ingest_district(self, district: str) -> dict:
-        """COPY the Engine 1/2 Parquet output in, hex boundary as real geometry."""
-        import pandas as pd                   # noqa: PLC0415
+def ingest_district(self, district: str) -> dict:
+    """Load Engine 1 Parquet output into the canonical PostGIS schema."""
+    import pandas as pd
 
-        from core.grid.hexgrid import Grid    # noqa: PLC0415
-        src = DATA / "processed" / district
-        cells = pd.read_parquet(src / "cells.parquet")
-        grid = Grid.for_district(district)
-        cols = list(cells.columns)
-        with self.db.cursor() as cur:
-            cur.execute("DELETE FROM hex_feature WHERE district = %s", (district,))
-            # COPY for the bulk attributes — orders of magnitude faster than
-            # per-row INSERT for a 28,000-cell district — then one UPDATE pass to
-            # attach geometry, because COPY cannot call ST_GeomFromGeoJSON.
-            with cur.copy(f"COPY hex_feature ({', '.join(cols)}) FROM STDIN") as cp:
-                for row in cells.itertuples(index=False):
-                    cp.write_row(row)
-            cur.executemany(
-                "UPDATE hex_feature SET geom = ST_SetSRID(ST_GeomFromGeoJSON(%s), 4326)"
-                " WHERE h3_index = %s",
-                [(jdumps({"type": "Polygon",
-                              "coordinates": [grid.cell_to_geojson_ring(h3)]}), h3)
-                 for h3 in cells["h3_index"]])
-        self.audit("pipeline", "ingest_district", district, {"cells": len(cells)})
-        return {"district": district, "cells": len(cells)}
+    from core.grid.hexgrid import Grid
+
+    src = DATA / "processed" / district
+    cells = pd.read_parquet(src / "cells.parquet")
+    grid = Grid.for_district(district)
+
+    # Parquet -> canonical DB columns.
+    # Fields such as lat/lon are represented spatially by centroid/geom.
+    db_columns = [
+        "h3_index",
+        "snapshot_id",
+        "h3_res",
+        "h3_res8",
+        "h3_res9",
+        "lgd_state_code",
+        "lgd_district_code",
+        "lgd_block_code",
+        "lgd_village_code",
+        "district",
+        "block",
+        "village_name",
+        "habitation_name",
+        "geom",
+        "centroid",
+        "area_m2",
+        "elevation_m",
+        "slope_deg",
+        "aspect_deg",
+        "curvature",
+        "twi",
+        "hand_m",
+        "relief_m",
+        "distance_to_stream_m",
+        "h_landslide",
+        "h_flood",
+        "h_erosion",
+        "h_cloudburst",
+        "h_seismic",
+        "h_glof",
+        "h_cyclone",
+        "h_surge",
+        "h_subsidence",
+        "insar_velocity_mm_yr",
+        "events_per_decade",
+        "erosion_rate_m_yr",
+        "distance_to_bankline_m",
+        "rain_1d_100yr_mm",
+        "pga_g",
+        "h_union",
+        "hazard_count",
+        "governing_hazard",
+        "compound_bonus",
+        "population",
+        "households",
+        "buildings_count",
+        "built_area_m2",
+        "children_u6",
+        "elderly_60p",
+        "pwd_count",
+        "sc_st_population",
+        "critical_facilities",
+        "v_structural",
+        "v_social",
+        "v_accessibility",
+        "v_isolation",
+        "v_index",
+        "risk_score",
+        "risk_ci_low",
+        "risk_ci_high",
+        "eap_annual",
+        "eal_annual_inr",
+        "zone",
+        "rule_id",
+        "ruleset_version",
+        "confidence",
+        "confidence_notes",
+        "contributions",
+        "field_verified",
+        "verified_at",
+        "verified_by",
+        "is_synthetic",
+    ]
+
+    # Values for fields not present in the Engine 1 Parquet contract.
+    if "h3_res" not in cells:
+        cells["h3_res"] = 10
+
+    if "lgd_block_code" not in cells:
+        cells["lgd_block_code"] = None
+
+    if "block" not in cells:
+        cells["block"] = None
+
+    if "habitation_name" not in cells:
+        cells["habitation_name"] = None
+
+    if "critical_facilities" not in cells:
+        cells["critical_facilities"] = [{} for _ in range(len(cells))]
+
+    if "confidence_notes" not in cells:
+        cells["confidence_notes"] = [{} for _ in range(len(cells))]
+
+    if "contributions" not in cells:
+        cells["contributions"] = [[] for _ in range(len(cells))]
+
+    if "verified_at" not in cells:
+        cells["verified_at"] = None
+
+    if "verified_by" not in cells:
+        cells["verified_by"] = None
+
+    if "field_verified" not in cells:
+        cells["field_verified"] = False
+
+    # The snapshot table is referenced by hex_features.snapshot_id.
+    # Create a minimal snapshot record for this processed dataset if needed.
+    snapshot_id = str(cells["snapshot_id"].iloc[0])
+
+    with self.db.cursor() as cur:
+        cur.execute(
+            """
+            INSERT INTO snapshot (
+                snapshot_id,
+                district_code,
+                ruleset_version,
+                trigger,
+                input_manifest,
+                contains_synthetic
+            )
+            VALUES (%s, %s, %s, %s, %s, %s)
+            ON CONFLICT (snapshot_id) DO NOTHING
+            """,
+            (
+                snapshot_id,
+                district,
+                str(cells["ruleset_version"].iloc[0]),
+                "manual",
+                "{}",
+                bool(cells["is_synthetic"].any()),
+            ),
+        )
+
+        cur.execute(
+            "DELETE FROM hex_features WHERE district = %s",
+            (district,),
+        )
+
+        # Build INSERT explicitly so Parquet-only columns cannot accidentally
+        # break the database contract.
+        placeholders = ", ".join(["%s"] * len(db_columns))
+
+        # geom and centroid are generated from the H3 cell geometry.
+        insert_columns = [
+            c for c in db_columns
+            if c not in ("geom", "centroid")
+        ]
+
+        insert_sql = f"""
+            INSERT INTO hex_features (
+                {", ".join(insert_columns)},
+                geom,
+                centroid
+            )
+            VALUES (
+                {", ".join(["%s"] * len(insert_columns))},
+                ST_SetSRID(ST_GeomFromGeoJSON(%s), 4326),
+                ST_SetSRID(
+                    ST_MakePoint(%s, %s),
+                    4326
+                )
+            )
+        """
+
+        for _, row in cells.iterrows():
+            values = []
+
+            for col in insert_columns:
+                value = row[col]
+
+                # pandas NaN must become SQL NULL.
+                if pd.isna(value):
+                    value = None
+
+                # JSONB fields need JSON-compatible values.
+                if col in (
+                    "critical_facilities",
+                    "confidence_notes",
+                    "contributions",
+                ):
+                    if value is None:
+                        value = {}
+                    elif not isinstance(value, (dict, list)):
+                        value = {}
+
+                values.append(value)
+
+            h3 = row["h3_index"]
+
+            ring = grid.cell_to_geojson_ring(h3)
+
+            geojson = {
+                "type": "Polygon",
+                "coordinates": [ring],
+            }
+
+            lat = float(row["lat"])
+            lon = float(row["lon"])
+
+            cur.execute(
+                insert_sql,
+                tuple(values)
+                + (
+                    jdumps(geojson),
+                    lon,
+                    lat,
+                ),
+            )
+
+    self.audit(
+        "pipeline",
+        "ingest_district",
+        district,
+        {"cells": len(cells)},
+    )
+
+    return {
+        "district": district,
+        "cells": len(cells),
+    }
 
     # ── reads ───────────────────────────────────────────────────────────────
     def _rows(self, sql: str, args=()) -> list[dict]:
@@ -104,20 +312,20 @@ class PostgisStore:
             "SELECT district, MAX(snapshot_id) AS snapshot_id, COUNT(*) AS cells,"
             " SUM(population) AS population, SUM(eal_annual_inr) AS eal_annual_inr,"
             " bool_or(is_synthetic) AS contains_synthetic"
-            " FROM hex_feature GROUP BY district")
+            " FROM hex_features GROUP BY district")
 
     def zone_summary(self, district: str) -> list[dict]:
         return self._rows(
             "SELECT zone::text AS zone, COUNT(*) AS cells, SUM(population) AS population,"
             " AVG(h_union) AS h_union_mean, MAX(h_union) AS h_union_max,"
-            " AVG(confidence) AS confidence FROM hex_feature"
+            " AVG(confidence) AS confidence FROM hex_features"
             " WHERE district = %s GROUP BY zone", (district,))
 
     def cells(self, district: str, bbox: tuple | None = None, zone: str | None = None,
               limit: int = 40_000) -> list[dict]:
         sql = ("SELECT h3_index, lat, lon, zone::text AS zone, h_union, risk_score,"
                " population, governing_hazard, confidence, village_name,"
-               " ST_AsGeoJSON(geom) AS boundary FROM hex_feature WHERE district = %s")
+               " ST_AsGeoJSON(geom) AS boundary FROM hex_features WHERE district = %s")
         args: list = [district]
         if bbox:
             # This is the line the GiST index exists for.
@@ -145,7 +353,7 @@ class PostgisStore:
         rows = self._rows(
             "SELECT h3_index, lat, lon, zone::text AS zone, h_union, risk_score,"
             " population, confidence, governing_hazard, village_name"
-            " FROM hex_feature WHERE district = %s ORDER BY h3_index", (district,))
+            " FROM hex_features WHERE district = %s ORDER BY h3_index", (district,))
         ids = [r["h3_index"] for r in rows]
         pfx = _common_prefix(ids)
         zones, hazards, villages = _Codes(), _Codes(), _Codes()
@@ -167,7 +375,7 @@ class PostgisStore:
 
     def cell(self, h3_index: str) -> dict | None:
         rows = self._rows("SELECT *, ST_AsGeoJSON(geom) AS boundary_json"
-                          " FROM hex_feature WHERE h3_index = %s", (h3_index,))
+                          " FROM hex_features WHERE h3_index = %s", (h3_index,))
         if not rows:
             return None
         r = rows[0]

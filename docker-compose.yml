@@ -1,55 +1,48 @@
-# PUNARVAAS local stack.
-# Deliberate: geo toolchain lives in containers, never apt-installed on the host.
 name: punarvaas
 
 services:
-  db:
-    image: postgis/postgis:16-3.4
-    container_name: pv_db
-    environment:
-      POSTGRES_DB: punarvaas
-      POSTGRES_USER: pv
-      POSTGRES_PASSWORD: pv_dev_only
-      # NOTE: dev credential. Override via .env for anything shared.
-    ports: ["5433:5432"]
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-      - ./db/migrations:/docker-entrypoint-initdb.d:ro
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U pv -d punarvaas"]
-      interval: 5s
-      timeout: 5s
-      retries: 20
-
   api:
-    build: { context: ., dockerfile: docker/api.Dockerfile }
+    build:
+      context: .
+      dockerfile: docker/api.Dockerfile
     container_name: pv_api
     environment:
-      PV_DSN: postgresql://pv:pv_dev_only@db:5432/punarvaas
-      PV_STORE: postgis
-    ports: ["8000:8000"]
-    volumes: [".:/app"]
-    depends_on:
-      db: { condition: service_healthy }
-    command: uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
-
-  # Geo sidecar: run GDAL/OGR here. `docker compose run --rm gdal ogrinfo ...`
-  gdal:
-    image: ghcr.io/osgeo/gdal:ubuntu-small-3.9.3
-    container_name: pv_gdal
-    volumes: [".:/work"]
-    working_dir: /work
-    entrypoint: ["/bin/bash"]
-    profiles: ["tools"]
+      PV_STORE: sqlite
+      PV_SQLITE: /app/data/punarvaas.db
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data/punarvaas.db:/app/data/punarvaas.db
+    command:
+      - uvicorn
+      - api.main:app
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+    restart: unless-stopped
 
   web:
     image: node:20-alpine
     container_name: pv_web
     working_dir: /app
-    volumes: ["./web:/app"]
-    ports: ["5173:5173"]
-    command: sh -c "npm install && npm run dev -- --host 0.0.0.0"
-    profiles: ["web"]
+    volumes:
+      - ./web:/app
+    ports:
+      - "5173:5173"
+    command:
+      - sh
+      - -c
+      - npm install && npm run dev -- --host 0.0.0.0
+    restart: unless-stopped
 
-volumes:
-  pgdata:
+  gdal:
+    image: ghcr.io/osgeo/gdal:ubuntu-small-3.9.3
+    container_name: pv_gdal
+    volumes:
+      - .:/work
+    working_dir: /work
+    entrypoint:
+      - /bin/bash
+    profiles:
+      - tools
