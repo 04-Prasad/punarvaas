@@ -54,3 +54,5 @@ data/*.db.backup
 
 
 data/punarvaas.db.gz
+.vercel
+.env*

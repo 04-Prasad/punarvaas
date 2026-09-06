@@ -11,5 +11,6 @@
       "source": "/((?!api/).*)",
       "destination": "/web/dist/$1"
     }
-  ]
+  ],
+  "installCommand": "pip install -r requirements-vercel.txt && cd web && npm ci"
 }
