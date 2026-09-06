@@ -51,3 +51,6 @@ service-account*.json
 # Claude Code
 .claude/
 data/*.db.backup
+
+
+data/punarvaas.db.gz
