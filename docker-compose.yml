@@ -6,13 +6,17 @@ services:
       context: .
       dockerfile: docker/api.Dockerfile
     container_name: pv_api
+
     environment:
       PV_STORE: sqlite
       PV_SQLITE: /app/data/punarvaas.db
-    ports:
-      - "8000:8000"
+
     volumes:
-      - ./data/punarvaas.db:/app/data/punarvaas.db
+      - ./data:/app/data
+
+    expose:
+      - "8000"
+
     command:
       - uvicorn
       - api.main:app
@@ -20,29 +24,46 @@ services:
       - 0.0.0.0
       - --port
       - "8000"
+
     restart: unless-stopped
 
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health')"
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s
+
   web:
-    image: node:20-alpine
+    build:
+      context: .
+      dockerfile: docker/web.Dockerfile
     container_name: pv_web
-    working_dir: /app
-    volumes:
-      - ./web:/app
+
     ports:
-      - "5173:5173"
-    command:
-      - sh
-      - -c
-      - npm install && npm run dev -- --host 0.0.0.0
+      - "8081:80"
+
+    depends_on:
+      api:
+        condition: service_healthy
+
     restart: unless-stopped
 
   gdal:
     image: ghcr.io/osgeo/gdal:ubuntu-small-3.9.3
     container_name: pv_gdal
+
     volumes:
       - .:/work
+
     working_dir: /work
+
     entrypoint:
       - /bin/bash
+
     profiles:
       - tools
