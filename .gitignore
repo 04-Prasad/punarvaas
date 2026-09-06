@@ -49,5 +49,5 @@ service-account*.json
 *.db-wal
 
 # Claude Code
-.claude.claude/
+.claude/
 data/*.db.backup
