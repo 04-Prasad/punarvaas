@@ -1,0 +1,45 @@
+FROM node:20-alpine AS web
+
+WORKDIR /web
+COPY web/package.json web/package-lock.json ./
+RUN npm ci
+COPY web/ ./
+RUN npm run build
+
+FROM python:3.12-slim
+
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    gdal-bin \
+    libgdal-dev \
+    build-essential \
+    libpango-1.0-0 \
+    libpangoft2-1.0-0 \
+    && rm -rf /var/lib/apt/lists/*
+
+WORKDIR /app
+
+COPY requirements-full.txt .
+
+RUN pip install --no-cache-dir \
+    fastapi uvicorn pydantic pydantic-settings python-multipart \
+    libsql==0.1.11
+
+RUN pip install --no-cache-dir \
+    numpy pandas scipy
+
+RUN pip install --no-cache-dir \
+    PyYAML Jinja2 \
+    psycopg[binary] SQLAlchemy GeoAlchemy2 alembic \
+    h3 shapely pyproj geopandas rasterio rioxarray xarray \
+    whitebox pystac-client planetary-computer odc-stac \
+    pyarrow scikit-learn xgboost shap pymcdm \
+    weasyprint prefect redis pytest httpx ruff
+
+COPY . .
+
+RUN rm -rf /app/web && mkdir -p /app/web
+COPY --from=web /web/dist /app/web
+
+EXPOSE 80
+
+CMD ["sh", "-c", "uvicorn api.main:app --host 0.0.0.0 --port ${PORT:-80}"]
