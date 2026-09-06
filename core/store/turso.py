@@ -5,7 +5,39 @@ import os
 
 import libsql
 
-from core.store.sqlite import _Codes, _common_prefix, _r
+
+class _Codes:
+    def __init__(self):
+        self.values: list[str] = []
+        self._index: dict[str, int] = {}
+
+    def code(self, value) -> int:
+        value = "" if value is None else str(value)
+        if value not in self._index:
+            self._index[value] = len(self.values)
+            self.values.append(value)
+        return self._index[value]
+
+
+def _common_prefix(values: list[str]) -> str:
+    if not values:
+        return ""
+    prefix = values[0]
+    for value in values[1:]:
+        n = min(len(prefix), len(value))
+        i = 0
+        while i < n and prefix[i] == value[i]:
+            i += 1
+        prefix = prefix[:i]
+        if not prefix:
+            break
+    return prefix
+
+
+def _r(value, digits: int):
+    if value is None:
+        return None
+    return round(float(value), digits)
 
 
 class TursoStore:
