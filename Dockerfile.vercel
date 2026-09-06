@@ -16,6 +16,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY api ./api
 COPY core ./core
 COPY reports ./reports
+COPY rules ./rules
 COPY web ./web
 
 RUN rm -rf /app/web && mkdir -p /app/web
