@@ -7,13 +7,11 @@ uvicorn[standard]==0.34.0
 pydantic==2.10.4
 pydantic-settings==2.7.0
 python-multipart==0.0.20
-
 # db
 psycopg[binary]==3.2.3
 SQLAlchemy==2.0.36
 GeoAlchemy2==0.16.0
 alembic==1.14.0
-
 # grid + geo
 h3==4.2.1
 shapely==2.0.6
@@ -23,12 +21,10 @@ rasterio==1.4.3
 rioxarray==0.18.1
 xarray==2024.11.0
 whitebox==2.3.6
-
 # stac / acquisition
 pystac-client==0.8.5
 planetary-computer==1.0.0
 odc-stac==0.3.10
-
 # science
 numpy==2.1.3
 pandas==2.2.3
@@ -38,18 +34,16 @@ scikit-learn==1.6.0
 xgboost==2.1.3
 shap==0.46.0
 pymcdm==1.2.0
-ortools==9.11.4210
-
 # rules / reports
 PyYAML==6.0.2
 Jinja2==3.1.5
 WeasyPrint==63.1
-
 # orchestration
 prefect==3.1.11
 redis==5.2.1
-
 # dev
 pytest==8.3.4
 httpx==0.28.1
 ruff==0.8.4
+libsql==0.1.11
+libsql-client
