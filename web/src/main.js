@@ -8,6 +8,9 @@
  * that is a smaller price than a toolchain nobody in the office can rebuild.
  */
 import { Console } from "./console/app.js";
+import * as Leaflet from '../vendor/leaflet/leaflet-src.esm.js';
+
+globalThis.PunarvaasLeaflet = Leaflet;
 
 const app = new Console();
 window.__punarvaas = app;          // one handle, for debugging in the field

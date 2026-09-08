@@ -17,6 +17,8 @@ import { createState, urlPresent, onUrlChange, prefs } from "../lib/state.js";
 import { qs, qsa, on, html, raw, mount, esc, debounce } from "../lib/dom.js";
 import { num, pct, rp, dp2, titleCase, coord } from "../lib/fmt.js";
 import { HexMap } from "../map/hexmap.js";
+import { geographyFor } from "../map/geography.js";
+import { renderMapContext } from "../components/mapcontext.js";
 import { renderLegend, renderMapControls, METRICS } from "../components/legend.js";
 import { renderRail } from "../components/rail.js";
 import { renderCellCard } from "../components/cellcard.js";
@@ -35,7 +37,8 @@ export class Console {
       theme: qs("#theme"), help: qs("#help"), report: qs("#reportlink"),
       banner: qs("#banner"), app: qs("#app"), rail: qs("#rail"), panel: qs("#panel"),
       stage: qs("#stage"), mapwrap: qs(".mapwrap"), canvas: qs("#map"), doc: qs("#doc"),
-      tip: qs("#tip"), mapctl: qs("#mapctl"), legend: qs("#legend"),
+      tip: qs("#tip"), mapctl: qs("#mapctl"), legend: qs("#legend"), context: qs("#mapcontext"),
+      basemapstatus: qs("#basemap-status"),
       scalebar: qs("#scalebar"), loading: qs("#maploading"),
       statcount: qs("#statcount"), statcursor: qs("#statcursor"),
       statzoom: qs("#statzoom"), statnote: qs("#statnote"), helpdlg: qs("#helpdlg"),
@@ -58,6 +61,10 @@ export class Console {
       onHover: (i, pos) => this.onHover(i, pos),
       onPick: (i) => this.onPickCell(i),
       onView: (v) => this.onView(v),
+      onBasemapStatus: (message) => {
+        this.el.basemapstatus.hidden = !message;
+        mount(this.el.basemapstatus, message ? html`${message} <button class="btn" data-act="retry-basemap">Retry</button>` : "");
+      },
     });
     this.map.setTheme(this.theme);
 
@@ -72,8 +79,7 @@ export class Console {
       const r = await api.districts();
       this.districts = r.districts || [];
       if (!this.districts.length) {
-        return this.fail("The store is empty. Run the pipeline and then "
-          + "`python3 -m tools.ingest` to load a district.");
+        return this.fail("No district data is available. Ask the data administrator to load a published snapshot, then retry.");
       }
       mount(this.el.district, html`${this.districts.map((d) =>
         html`<option value="${d.district}">${d.name} · ${d.state}</option>`)}`);
@@ -88,11 +94,28 @@ export class Console {
   }
 
   async loadDistrict(code) {
-    this.busy("Loading district…");
     const d = this.districts.find((x) => x.district === code);
+    if (!d) return this.fail("That district is not available. Select a listed district.");
+    const loadId = this._loadId = (this._loadId || 0) + 1;
+    const current = () => this._loadId === loadId && this.state.get().district === code;
+    this.busy("Loading district…");
+    this._cellData = null;
+    this.map.select(-1);
+    this.map.setOverlays({});
+    this.map.setGeography(geographyFor(code));
+    this.el.context.hidden = true;
     this.district = d;
-    this.el.snapshot.textContent = d.snapshot_id;
-    this.el.snapshot.title = `Immutable snapshot · every figure on screen is reproducible from ${d.snapshot_id}`;
+    this.el.snapshot.dataset.id = d.snapshot_id;
+    this.el.snapshot.title = `Immutable snapshot · every number on screen is reproducible from ${d.snapshot_id} · the API is read-only and cannot change a published risk figure`;
+    // Append or update the ID text node that sits after the lock icon + label.
+    let idNode = this.el.snapshot.querySelector(".snapid");
+    if (!idNode) {
+      idNode = document.createElement("span");
+      idNode.className = "snapid mono";
+      this.el.snapshot.appendChild(idNode);
+    }
+    idNode.textContent = d.snapshot_id;
+
     this.el.report.href = api.reportUrl(code);
     this.banner(d.warning);
 
@@ -103,19 +126,27 @@ export class Console {
     // before the slower artefacts land.
     const gridP = cache.grid ? Promise.resolve(cache.grid)
       : api.grid(code).then((g) => (cache.grid = decodeGrid(g)));
-    const rest = Promise.all([
+    // Attach rejection handlers immediately, even while the grid is pending.
+    const rest = Promise.allSettled([
       cache.zones || api.zones(code).then((z) => (cache.zones = z.zones)),
       cache.habs || api.habitations(code).then((h) => (cache.habs = h.habitations)),
-      cache.plan || api.plan(code).then((p) => (cache.plan = p)).catch(() => (cache.plan = null)),
+      cache.plan || api.plan(code).then((p) => (cache.plan = p)),
     ]);
 
     try {
       const grid = await gridP;
+      if (!current()) return;
       this.map.setGrid(grid);
+      const results = await rest;
+      if (!current()) return;
+      for (const r of results.slice(0, 2)) if (r.status === "rejected") throw r.reason;
+      cache.planError = results[2].status === "rejected" ? results[2].reason : null;
+      if (cache.planError) console.error("Unable to load relocation plan", cache.planError);
       this.idle();
-      await rest;
     } catch (e) {
-      return this.fail(e instanceof ApiError ? e.message : String(e));
+      if (!current()) return;
+      console.error("Unable to load district", e);
+      return this.fail("Unable to load this district. Check the connection and retry.");
     }
     this.renderAll();
 
@@ -129,7 +160,12 @@ export class Console {
   renderAll() {
     const s = this.state.get();
     const c = this.data[s.district] || {};
-    qsa(".tabs button").forEach((b) => b.setAttribute("aria-selected", String(b.dataset.tab === s.tab)));
+    qsa(".tabs button").forEach((b) => {
+      const selected = b.dataset.tab === s.tab;
+      b.setAttribute("aria-selected", String(selected));
+      b.tabIndex = selected ? 0 : -1;
+    });
+    this.el.stage.setAttribute("aria-labelledby", `tab-${s.tab}`);
     const isDoc = DOC_TABS.includes(s.tab);
     this.el.mapwrap.hidden = isDoc;
     this.el.doc.hidden = !isDoc;
@@ -137,6 +173,10 @@ export class Console {
     this.el.app.classList.toggle("nopanel", false);
     this.el.rail.hidden = isDoc;
     this.el.panel.hidden = isDoc;
+    this.el.railbtn.hidden = isDoc;
+    this.el.panelbtn.hidden = isDoc;
+    if (isDoc) this.drawer(null, false);
+    this.syncDrawers();
 
     if (isDoc) {
       // The cell counters describe the map; leaving them up beside a document
@@ -145,7 +185,7 @@ export class Console {
       this.el.statcursor.textContent = "";
       this.el.statzoom.textContent = "";
       this.el.statnote.textContent = s.tab === "plan"
-        ? "Phasing is an exact 0/1 knapsack per year, not a greedy benefit–cost sort."
+        ? "Budget phasing uses a conservative ₹1 lakh cost grid, within each priority tier."
         : "Every figure here is reproducible from the snapshot identifier in the title bar.";
       this.el.tip.hidden = true;
       return this.renderDoc();
@@ -156,28 +196,43 @@ export class Console {
     // the one that was missing (a hash change) is what made shared links lie.
     if (this.map.metric !== s.metric) this.map.setMetric(s.metric);
 
-    renderRail(this.el.rail, {
-      district: this.district, zones: c.zones, habs: c.habs, plan: c.plan, selHab: s.hab,
-      grid: c.grid,
-    });
+    // If data is still loading (grid arrived but habs/zones haven't yet),
+    // show a holding state so the rail is never a blank white column.
+    if (!c.zones || !c.habs) {
+      if (!this.el.rail.querySelector(".railskeleton")) {
+        mount(this.el.rail, html`<div class="railhead railskeleton"><h2>${this.district?.name || "Loading…"}</h2><div class="sub">Loading district data…</div></div>`);
+      }
+    } else {
+      renderRail(this.el.rail, {
+        district: this.district, zones: c.zones, habs: c.habs, plan: c.plan, selHab: s.hab,
+        grid: c.grid,
+      });
+      this.filterHabitations();
+    }
     const builtOnly = Boolean(s.built) && s.tab !== "sites";
     if (this.map.builtOnly !== builtOnly) this.map.setBuiltOnly(builtOnly);
     renderMapControls(this.el.mapctl, {
       metric: s.metric, builtOnly: s.built, grid: c.grid, forceAll: s.tab === "sites",
+      geography: this.map.geography,
+      overview: this.map.isOverview?.(),
+      basemap: this.map.basemap, opacity: this.map.opacity,
     });
+    renderMapContext(this.el.context, { geography: this.map.geography, grid: c.grid });
     renderLegend(this.el.legend, {
       map: this.map, grid: c.grid, zoneStats: c.zones, metric: s.metric,
     });
     this.renderPanel();
-    this.el.statnote.textContent = c.grid?.geometry?.mode === "prototype"
-      ? "Cells drawn from one prototype ring — congruent by construction on this projection."
-      : "";
+    this.el.statnote.textContent = "Demo zones over geographic imagery. Uncoloured areas are not assessed.";
   }
 
   async renderDoc() {
-    const s = this.state.get();
+    const s = { ...this.state.get() };
+    const requestId = this._docId = (this._docId || 0) + 1;
     const c = this.data[s.district] || {};
     if (s.tab === "plan") {
+      if (c.planError) return mount(this.el.doc, html`<div class="sheet"><div class="callout warn" role="alert">
+        <b>Relocation plan unavailable.</b> No planning conclusion can be drawn from a failed request.
+        <button class="btn" data-retry="district">Retry plan</button></div></div>`);
       return renderPlanView(this.el.doc, {
         district: this.district, plan: c.plan, habs: c.habs, selHab: s.hab,
       });
@@ -186,18 +241,24 @@ export class Console {
     try {
       const [method, weights, model, manifest, ruleset] = await Promise.all([
         c.method || api.methodology().then((x) => (c.method = x)),
-        c.weights || api.weights(s.district).then((x) => (c.weights = x)).catch(() => null),
-        c.model || api.model(s.district).then((x) => (c.model = x)).catch(() => null),
-        c.manifest || api.manifest(s.district).then((x) => (c.manifest = x)).catch(() => null),
-        c.ruleset || api.ruleset(s.district).then((x) => (c.ruleset = x)).catch(() => null),
+        c.weights || api.weights(s.district).then((x) => (c.weights = x)),
+        c.model !== undefined ? c.model : api.model(s.district).then((x) => (c.model = x)).catch((e) => {
+          if (e instanceof ApiError && e.status === 404) return (c.model = null);
+          throw e;
+        }),
+        c.manifest || api.manifest(s.district).then((x) => (c.manifest = x)),
+        c.ruleset || api.ruleset(s.district).then((x) => (c.ruleset = x)),
       ]);
-      if (this.state.get().tab !== "method") return;
+      if (this.state.get().tab !== "method" || this.state.get().district !== s.district || this._docId !== requestId) return;
       renderMethodView(this.el.doc, {
         district: this.district, method, weights, model, manifest, ruleset, grid: c.grid,
       });
     } catch (e) {
+      if (this.state.get().tab !== "method" || this.state.get().district !== s.district || this._docId !== requestId) return;
+      console.error("Unable to load methodology", e);
       mount(this.el.doc, html`<div class="sheet"><div class="callout bad">
-        <b>Could not load the method page.</b> ${String(e.message || e)}</div></div>`);
+        <b>Could not load the method page.</b> Check the connection and retry.
+        <button class="btn" data-retry="method">Retry</button></div></div>`);
     }
   }
 
@@ -214,29 +275,42 @@ export class Console {
         <path d="M24 6l16 9v18l-16 9-16-9V15z" fill="none" stroke="currentColor" stroke-width="1.6"/>
         <path d="M24 15l8 4.5v9L24 33l-8-4.5v-9z" fill="none" stroke="currentColor" stroke-width="1.2"/>
       </svg>
-      <p><b>Click any cell</b> for its full provenance — the rule that classified it, the
-        hazards behind the number, who is exposed, and how confident the inputs are.</p>
-      <p>Or pick a habitation from the list on the left to see where its residents could
-        go and whether that land can actually take them.</p>
+      <p><b>Start with the highest-risk cell.</b> Click any hexagon on the map to see
+        exactly which rule classified it, which hazards drove the number, who is exposed,
+        and how confident the inputs are.</p>
+      <p>Or pick a habitation from the list on the left to see where its residents
+        could go, whether that land can take them, and what the move would cost.</p>
     </div></div>`);
   }
 
   async renderHab(lgd) {
-    const s = this.state.get();
+    const s = { ...this.state.get() };
+    const requestId = this._habId = (this._habId || 0) + 1;
+    const current = () => this._habId === requestId && this.state.get().district === s.district
+      && this.state.get().hab === lgd && !this.state.get().cell && !DOC_TABS.includes(this.state.get().tab);
     const c = this.data[s.district] || {};
     const hab = (c.habs || []).find((h) => h.lgd_village_code === lgd);
     if (!hab) return;
     const plan = (c.plan?.habitations || []).find((h) => h.lgd_village_code === lgd);
-    renderHabCard(this.el.panel, { hab, plan, sites: c.sites, funnelData: c.funnels?.[lgd] });
+    const render = () => renderHabCard(this.el.panel, { hab, plan, sites: c.sites,
+      funnelData: c.funnels?.[lgd], siteError: c.siteError, planError: c.planError,
+      explainCell: this.habCell(lgd) });
+    render();
     if (!c.sites || !c.funnels) {
-      const [sitesR, funnelsR] = await Promise.all([
-        c.sites ? { sites: c.sites } : api.sites(s.district).catch(() => ({ sites: [] })),
-        c.funnels || api.funnels(s.district).catch(() => ({})),
-      ]);
-      c.sites = sitesR.sites || c.sites || [];
-      c.funnels = c.funnels || funnelsR;
-      if (this.state.get().hab !== lgd) return;
-      renderHabCard(this.el.panel, { hab, plan, sites: c.sites, funnelData: c.funnels?.[lgd] });
+      try {
+        const [sitesR, funnelsR] = await Promise.all([
+          c.sites ? { sites: c.sites } : api.sites(s.district),
+          c.funnels || api.funnels(s.district),
+        ]);
+        c.sites = sitesR.sites || [];
+        c.funnels = funnelsR || {};
+        c.siteError = null;
+      } catch (e) {
+        console.error("Unable to load candidate sites", e);
+        c.siteError = true;
+      }
+      if (!current()) return;
+      render();
       this.paintSiteOverlay(lgd);
     } else {
       this.paintSiteOverlay(lgd);
@@ -324,20 +398,27 @@ export class Console {
   }
 
   async showCell(id) {
-    const c = this.data[this.state.get().district] || {};
+    const district = this.state.get().district;
+    const requestId = this._cellId = (this._cellId || 0) + 1;
+    const current = () => this._cellId === requestId && this.state.get().district === district
+      && this.state.get().cell === id && !DOC_TABS.includes(this.state.get().tab);
+    const c = this.data[district] || {};
     const i = c.grid ? c.grid.indexOfCell(id) : -1;
     if (i >= 0) this.map.select(i);
     mount(this.el.panel, html`<div class="panelbody"><p class="empty">Loading cell…</p></div>`);
     try {
       const x = await api.explain(id);
+      if (!current()) return;
       this._cellData = x;
-      if (this.state.get().cell !== id) return;
       renderCellCard(this.el.panel, x);
       this.el.panel.scrollTop = 0;
       if (this.narrow()) this.drawer("panel", true);
     } catch (e) {
+      if (!current()) return;
+      console.error("Unable to load cell explanation", e);
       mount(this.el.panel, html`<div class="panelbody"><div class="callout bad">
-        <b>Could not load that cell.</b> ${String(e.message || e)}</div></div>`);
+        <b>Could not load that cell.</b> Check the connection and retry.
+        <button class="btn" data-retry="cell">Retry</button></div></div>`);
     }
   }
 
@@ -363,11 +444,30 @@ export class Console {
     this.paintSiteOverlay(lgd);
   }
 
+  /** Existing cell explanation, reachable from the habitation without a mouse. */
+  habCell(lgd) {
+    const c = this.data[this.state.get().district] || {};
+    const hab = (c.habs || []).find((h) => h.lgd_village_code === lgd);
+    if (!hab || !c.grid) return null;
+    const vi = c.grid.vocab.village.indexOf(hab.village_name);
+    let best = -1;
+    for (let i = 0; i < c.grid.n; i++) {
+      if (c.grid.village[i] !== vi || !(c.grid.pop[i] > 0)) continue;
+      if (best < 0 || c.grid.hUnion[i] > c.grid.hUnion[best]) best = i;
+    }
+    return best < 0 ? null : c.grid.cellId(best);
+  }
+
   onView(v) {
     const s = this.state.get();
     // While a document tab is up the canvas is hidden and zero-sized; its
     // culling counts would be a lie about a page that has no map on it.
     if (DOC_TABS.includes(s.tab)) return;
+    const overview = String(Boolean(v.overview));
+    if (this.el.mapwrap.dataset.overview !== overview) {
+      this.el.mapwrap.dataset.overview = overview;
+      for (const detail of this.el.mapwrap.querySelectorAll(".metric-controls, .legend-content")) detail.open = !v.overview;
+    }
     const c = this.data[s.district] || {};
     this.el.statcount.textContent = !c.grid ? ""
       : v.builtOnly
@@ -375,7 +475,7 @@ export class Console {
         : `${num(v.drawn)} of ${num(c.grid.n)} cells in view`;
     this.el.statzoom.textContent = `${v.mPerPx < 10 ? v.mPerPx.toFixed(1) : Math.round(v.mPerPx)} m/px`;
     // A scale bar snapped to a round number of metres, sized to fit.
-    const targets = [10, 25, 50, 100, 250, 500, 1000, 2000, 5000, 10_000];
+    const targets = [10, 25, 50, 100, 250, 500, 1000, 2000, 5000, 10_000, 25_000, 50_000, 100_000, 250_000, 500_000, 1_000_000];
     const want = 110 * v.mPerPx;
     const m = targets.find((t) => t >= want) || targets[targets.length - 1];
     const px = m / v.mPerPx;
@@ -391,10 +491,18 @@ export class Console {
   idle() { this.el.loading.hidden = true; }
 
   fail(msg) {
+    console.error("Console data unavailable:", msg);
     this.idle();
+    this.map.clear();
+    this.el.context.hidden = true;
+    this.map.setOverlays({});
+    this._cellData = null;
+    mount(this.el.panel, html`<div class="panelbody"><p class="empty">Select a district after data is available.</p></div>`);
+    mount(this.el.doc, html`<div class="sheet"><p class="empty">District data is unavailable. Use Retry above.</p></div>`);
+    for (const key of ["statcount", "statcursor", "statzoom", "statnote"]) this.el[key].textContent = "";
     this.el.banner.hidden = false;
     this.el.banner.className = "banner bad";
-    this.el.banner.innerHTML = `<b>Cannot show data.</b> ${esc(msg)}`;
+    this.el.banner.innerHTML = `<b>Cannot show data.</b> ${esc(msg)} <button class="btn" data-retry="start">Retry</button>`;
     mount(this.el.rail, html`<div class="railhead"><h2>No data</h2>
       <div class="sub">${msg}</div></div>`);
   }
@@ -405,7 +513,7 @@ export class Console {
     b.hidden = false;
     b.className = "banner" + (warning.level === "warning" ? "" : " bad");
     const n = (warning.datasets || []).length;
-    b.innerHTML = `<b>Synthetic inputs.</b> ${esc(warning.message)}`
+    b.innerHTML = `<b>Demo data · synthetic inputs.</b> ${esc(warning.message)}`
       + (n ? ` <span class="muted">${n} datasets are placeholders — see Method &amp; provenance.</span>` : "")
       + `<button class="x" aria-label="Dismiss">×</button>`;
   }
@@ -424,13 +532,17 @@ export class Console {
           <kbd>4</kbd><span>switch tab</span>
           <kbd>/</kbd><span>search habitations, or paste a cell id</span>
           <kbd>↑ ↓ ← →</kbd><span>pan the map (hold <kbd>Shift</kbd> to pan further)</span>
-          <kbd>+</kbd><span>zoom in · <kbd>−</kbd> zoom out · <kbd>f</kbd> fit the district</span>
+          <kbd>+</kbd><span>zoom in · <kbd>−</kbd> zoom out · <kbd>f</kbd> fit the zoned area</span>
           <kbd>m</kbd><span>cycle the map metric</span>
           <kbd>Esc</kbd><span>clear the selection</span>
           <kbd>?</kbd><span>this dialog</span>
         </div>
         <h5>Reading the colours</h5>
-        <p>Zone colours are the regulatory classes from the signed ruleset and match the
+        <p>Satellite and Streets show geographic context beneath the demo zones. Use
+          <b>Zone opacity</b> to reveal the ground beneath a cell. Unoccupied cells are
+          transparent when <b>Only where people live</b> is enabled. Basemap imagery
+          is background context, not a hazard forecast.</p>
+        <p>Zone colours are the planning classes from the versioned ruleset and match the
           printed report exactly. Hazard is drawn on a <b>log</b> scale and population on a
           <b>square-root</b> scale — on linear ramps both maps would claim the district is
           uniformly safe.</p>
@@ -443,6 +555,30 @@ export class Console {
 
   _bind() {
     const S = this.state;
+
+    on(document, "click", "[data-retry]", (e, b) => {
+      if (b.dataset.retry === "start") return this.start();
+      if (b.dataset.retry === "district") return this.loadDistrict(S.get().district);
+      if (b.dataset.retry === "method") return this.renderDoc();
+      if (b.dataset.retry === "cell") return this.showCell(S.get().cell);
+      if (b.dataset.retry === "sites") return this.renderHab(S.get().hab);
+    });
+    on(document, "click", "[data-explain-cell]", (e, b) => {
+      S.set({ tab: "risk", cell: b.dataset.explainCell, hab: null });
+      this.renderAll();
+      this.showCell(b.dataset.explainCell);
+    });
+    on(document, "keydown", ".tabs button", (e, b) => {
+      const buttons = qsa(".tabs button");
+      const i = buttons.indexOf(b);
+      const index = e.key === "ArrowRight" ? (i + 1) % buttons.length
+        : e.key === "ArrowLeft" ? (i + buttons.length - 1) % buttons.length
+        : e.key === "Home" ? 0 : e.key === "End" ? buttons.length - 1 : null;
+      if (index === null) return;
+      e.preventDefault();
+      buttons[index].focus();
+      buttons[index].click();
+    });
 
     this.el.district.addEventListener("change", (e) => {
       S.set({ district: e.target.value, cell: null, hab: null });
@@ -461,9 +597,22 @@ export class Console {
     });
     on(document, "click", "[data-act]", (e, b) => {
       const a = b.dataset.act;
-      if (a === "fit") this.map.fit();
+      if (a === "fit") this.map.fit("risk");
+      if (a === "state") this.map.fit("state");
+      if (a === "district") this.map.fit("district");
       if (a === "in") this.map.zoomBy(1.6);
       if (a === "out") this.map.zoomBy(1 / 1.6);
+      if (a === "retry-basemap") this.map.setBasemap(this.map.basemap);
+    });
+    on(document, "click", "[data-basemap]", (e, button) => {
+      this.map.setBasemap(button.dataset.basemap);
+      this.el.mapctl.querySelectorAll("[data-basemap]").forEach(b =>
+        b.setAttribute("aria-pressed", String(b.dataset.basemap === this.map.basemap)));
+    });
+    on(document, "input", "#zone-opacity", (e, input) => {
+      this.map.setOpacity(Number(input.value) / 100);
+      const output = this.el.mapctl.querySelector("output[for='zone-opacity']");
+      if (output) output.textContent = `${input.value}%`;
     });
     on(document, "change", "[data-zone]", (e, cb) => {
       const hidden = new Set(this.map.hidden);
@@ -503,6 +652,7 @@ export class Console {
     });
 
     addEventListener("keydown", (e) => {
+      if (e.altKey || e.ctrlKey || e.metaKey || this.el.helpdlg.open) return;
       const typing = /^(INPUT|TEXTAREA|SELECT)$/.test(e.target.tagName);
       if (e.key === "/" && !typing) { e.preventDefault(); this.el.search.focus(); return; }
       if (e.key === "?" && !typing) { e.preventDefault(); this.el.helpdlg.showModal(); return; }
@@ -552,7 +702,10 @@ export class Console {
     });
 
     // A tab switch changes the grid columns, so the canvas has to re-measure.
-    new ResizeObserver(debounce(() => this.map.resize(), 60)).observe(this.el.stage);
+    new ResizeObserver(debounce(() => {
+      this.map.resize();
+      this.syncDrawers();
+    }, 60)).observe(this.el.stage);
 
     // Toggle, not open: the handle reports `aria-expanded`, so pressing it again
     // has to be what closes the thing it opened.
@@ -578,7 +731,33 @@ export class Console {
       this.el[k === "rail" ? "railbtn" : "panelbtn"].setAttribute("aria-expanded", String(on));
     }
     this.el.scrim.classList.toggle("on", Boolean(open && which));
+    this.syncDrawers();
     if (open && which) this.el[which].focus?.();
+  }
+
+  syncDrawers() {
+    const narrow = this.narrow();
+    for (const k of ["rail", "panel"]) {
+      const closed = narrow && !this.el[k].classList.contains("open");
+      if (closed && this.el[k].contains(document.activeElement)) {
+        this.el[k === "rail" ? "railbtn" : "panelbtn"].focus();
+      }
+      this.el[k].inert = closed;
+    }
+    if (!narrow) this.el.scrim.classList.remove("on");
+  }
+
+  filterHabitations() {
+    const needle = this.el.search.value.trim().toLowerCase();
+    let first = null;
+    qsa(".hab", this.el.rail).forEach((b) => {
+      const hit = !needle || b.textContent.toLowerCase().includes(needle);
+      b.hidden = !hit;
+      if (hit && !first) first = b;
+    });
+    const empty = qs(".search-empty", this.el.rail);
+    if (empty) empty.hidden = Boolean(first) || !needle;
+    return first;
   }
 
   /** Search does two things: filters the habitation list, and accepts a pasted
@@ -594,13 +773,7 @@ export class Console {
       await this.showCell(c.grid.cellId(i));
       return;
     }
-    const needle = q.toLowerCase();
-    let first = null;
-    qsa(".hab", this.el.rail).forEach((b) => {
-      const hit = !needle || b.textContent.toLowerCase().includes(needle);
-      b.hidden = !hit;
-      if (hit && !first) first = b;
-    });
+    const first = this.filterHabitations();
     if (commit && first) { this.selectHab(first.dataset.hab, { center: true }); this.renderAll(); }
   }
 }

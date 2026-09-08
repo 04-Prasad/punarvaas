@@ -29,6 +29,7 @@ button, select, input { font: inherit; color: inherit; }
 
 /* ── topbar ─────────────────────────────────────────────────────────── */
 .topbar {
+  grid-row: 1;
   display: flex; align-items: center; gap: var(--sp-3);
   padding: 0 var(--sp-3); background: var(--surface);
   border-bottom: 1px solid var(--rule); box-shadow: var(--shadow-1); z-index: 20;
@@ -55,9 +56,14 @@ button, select, input { font: inherit; color: inherit; }
 }
 .search input::placeholder { color: var(--faint); }
 .snapchip {
+  max-width: 300px; min-width: 0;
+  display: inline-flex; align-items: center;
   font: 11px/1 var(--mono); color: var(--muted); background: var(--surface-3);
   border: 1px solid var(--rule); border-radius: 20px; padding: 5px 10px; white-space: nowrap;
+  cursor: default;
 }
+.snaplabel { font-family: var(--sans); font-size: 10.5px; margin-right: 4px; opacity: .8; letter-spacing: .01em; }
+.snapid { letter-spacing: .02em; overflow: hidden; text-overflow: ellipsis; }
 .iconbtn {
   width: 30px; height: 30px; display: grid; place-items: center; border-radius: var(--r-md);
   border: 1px solid transparent; background: transparent; color: var(--muted); cursor: pointer;
@@ -76,6 +82,7 @@ button, select, input { font: inherit; color: inherit; }
 
 /* ── banner ─────────────────────────────────────────────────────────── */
 .banner {
+  grid-row: 2; flex-wrap: wrap;
   padding: 8px 16px; font-size: 12.5px; line-height: 1.45; background: var(--tint-warn);
   border-bottom: 1px solid var(--rule); color: var(--body);
   display: flex; align-items: center; gap: 10px;
@@ -85,11 +92,12 @@ button, select, input { font: inherit; color: inherit; }
 .banner .x { margin-left: auto; }
 
 /* ── tabs ───────────────────────────────────────────────────────────── */
-.tabs { display: flex; gap: 0; background: var(--surface); border-bottom: 1px solid var(--rule); padding: 0 var(--sp-3); }
+.tabs { grid-row: 3; display: flex; gap: 0; background: var(--surface); border-bottom: 1px solid var(--rule); padding: 0 var(--sp-3); overflow-x: auto; }
 .tabs button {
   position: relative; border: 0; background: transparent; cursor: pointer;
   padding: 0 15px; font-size: 12.8px; font-weight: 600; color: var(--muted);
   display: flex; align-items: center; gap: 7px;
+  flex-shrink: 0; min-height: 36px;
 }
 .tabs button b {
   width: 17px; height: 17px; border-radius: 4px; background: var(--surface-3);
@@ -104,6 +112,7 @@ button, select, input { font: inherit; color: inherit; }
 
 /* ── main grid ──────────────────────────────────────────────────────── */
 #app {
+  grid-row: 4;
   position: relative;   /* the drawers and their scrim are positioned against this,
                            not against the viewport — otherwise a drawer slides
                            over the topbar and the tab bar it is meant to sit under */
@@ -114,16 +123,64 @@ button, select, input { font: inherit; color: inherit; }
 #app.nopanel { grid-template-columns: var(--rail-w) 1fr; }
 
 .rail {
+  min-width: 0;
   background: var(--surface); border-right: 1px solid var(--rule);
   overflow-y: auto; overscroll-behavior: contain; min-height: 0;
 }
 .panel {
+  min-width: 0;
   background: var(--surface); border-left: 1px solid var(--rule);
   overflow-y: auto; overscroll-behavior: contain; min-height: 0;
 }
 .stage { position: relative; min-width: 0; min-height: 0; display: grid; }
 .mapwrap { position: relative; overflow: hidden; background: var(--canvas); }
-#map { display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; }
+.mapwrap { container-type: size; --map-land: #e4ede2; --map-district: #cbdedc; --map-border: #66847b; }
+[data-theme="dark"] .mapwrap { --map-land: #253631; --map-district: #304b4b; --map-border: #97b1a6; }
+/* Canvas colours are read from body, matching the existing palette resolver. */
+body { --map-land: #e4ede2; --map-district: #cbdedc; --map-border: #66847b; }
+body[data-theme="dark"] { --map-land: #253631; --map-district: #304b4b; --map-border: #97b1a6; }
+.mapcontext { position: absolute; right: var(--sp-3); bottom: 12px; width: 170px; padding: 8px; }
+.state-locator { display: block; width: 100%; background: none; color: var(--ink); border: 0; padding: 0; cursor: pointer; text-align: left; }
+.state-locator:hover .context-state { text-decoration: underline; }
+.context-state { display: block; font-size: 13px; font-weight: 700; }
+.context-district { display: block; font-size: 10.5px; color: var(--muted); }
+.state-locator svg { display: block; width: 100%; height: 116px; }
+.locator-state { fill: var(--map-land); stroke: var(--map-border); stroke-width: 1; }
+.locator-district { fill: var(--map-district); stroke: var(--accent); stroke-width: 1.2; }
+.locator-coverage { fill: var(--ink); stroke: var(--surface); stroke-width: 1.5; }
+.mapcontext p, .mapcontext a { font-size: 9px; line-height: 1.4; display: block; margin-top: 4px; }
+.mapcontext p { color: var(--muted); }
+@container (max-width: 520px) {
+  .mapcontext { width: 136px; }
+  .state-locator svg { height: 72px; }
+  .legend { min-width: 0; max-width: calc(100% - 170px); }
+  .legend .rows > div { flex-wrap: wrap; }
+}
+@container (max-height: 560px) {
+  .state-locator svg { display: none; }
+}
+#map { position: absolute; inset: 0; display: block; width: 100%; height: 100%; cursor: grab; touch-action: none; z-index: 0; background: var(--canvas); font-family: var(--sans); }
+#map .leaflet-control-attribution { max-width: min(620px, 95vw); font-size: 9px; color: #26313c; background: rgba(255,255,255,.9); }
+#map .leaflet-control-attribution a { color: #174e70; }
+.mapctl, .legend, .mapcontext, .scalebar { z-index: 5; }
+.mapcontext { bottom: 48px; }
+.maploading { z-index: 12; }
+.tip { z-index: 9; }
+.basemap-controls { width: 100%; }
+.opacity-control { display: flex; justify-content: space-between; margin-top: 9px; font-size: 11px; color: var(--body); }
+#zone-opacity { width: 100%; accent-color: var(--accent); cursor: pointer; }
+.basemap-status { position: absolute; z-index: 8; top: 12px; left: 12px; max-width: min(320px, calc(100% - 24px)); font-size: 11px; }
+.hab-map-label span { display: block; width: max-content; transform: translate(-50%, -22px); color: #fff; font: 600 11px/1.3 var(--sans); text-shadow: -1px -1px 2px #111, 1px 1px 2px #111; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) {
+  #map .leaflet-zoom-animated, #map .leaflet-tile, #map .leaflet-pan-anim .leaflet-tile { transition: none !important; }
+}
+/* Media-query fallback for engines without container queries. */
+@media (max-width: 520px) {
+  .mapcontext { width: 136px; }
+  .state-locator svg { display: none; }
+  .mapwrap .legend { min-width: 0; max-width: calc(100% - 170px); }
+  .mapwrap .legend .rows > div { flex-wrap: wrap; }
+}
 #map:active { cursor: grabbing; }
 .doc { overflow-y: auto; background: var(--surface-2); min-height: 0; }
 
@@ -164,6 +221,8 @@ button, select, input { font: inherit; color: inherit; }
   margin-left: 0; font-family: var(--sans); font-size: 11.5px; color: var(--body); font-weight: 550;
 }
 .mapctl .card .note { color: var(--muted); font-size: 10.5px; line-height: 1.4; margin-top: 5px; }
+.metric-controls summary, .legend-content summary { cursor: pointer; font-size: 11px; font-weight: 650; color: var(--ink); }
+.metric-controls[open] summary, .legend-content[open] summary { margin-bottom: 9px; }
 
 .legend {
   position: absolute; left: var(--sp-3); bottom: 34px; background: var(--surface);
@@ -194,6 +253,9 @@ button, select, input { font: inherit; color: inherit; }
 .legend .rows span:last-child { color: var(--muted); font-size: 9.5px; font-family: var(--mono); }
 .legend .rows i { width: 11px; height: 11px; border-radius: 2px; flex: none; }
 .legend .note { color: var(--muted); margin-top: 6px; font-size: 10.5px; line-height: 1.4; }
+@container (max-width: 520px) {
+  .mapwrap .legend { min-width: 0; max-width: calc(100% - 170px); }
+}
 .legend .barerow { margin-top: 7px; padding-top: 6px; border-top: 1px solid var(--rule); }
 .legend .barerow i { border: 1px solid var(--rule-strong); }
 .legend .barerow .ct { flex: 1; color: var(--body); }
@@ -223,6 +285,7 @@ button, select, input { font: inherit; color: inherit; }
 
 /* ── status bar ─────────────────────────────────────────────────────── */
 .statusbar {
+  grid-row: 5;
   display: flex; align-items: center; gap: var(--sp-4); padding: 0 var(--sp-3);
   background: var(--surface); border-top: 1px solid var(--rule);
   font: 10.5px/1 var(--mono); color: var(--muted); white-space: nowrap; overflow: hidden;
@@ -232,6 +295,7 @@ button, select, input { font: inherit; color: inherit; }
 .railhead { padding: var(--sp-3) var(--sp-3) var(--sp-2); border-bottom: 1px solid var(--rule); }
 .railhead h2 { font-size: 15px; }
 .railhead .sub { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+.decisionchain { margin: 8px 0 0; font-size: 11px; line-height: 1.5; color: var(--body); }
 .kpigrid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--rule); border-bottom: 1px solid var(--rule); }
 .kpi { background: var(--surface); padding: 8px 11px; }
 .kpi .k { display: block; font-size: 9.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); }
@@ -256,7 +320,7 @@ button, select, input { font: inherit; color: inherit; }
 .hab .rt { grid-column: 3; grid-row: 1 / span 2; text-align: right; font-variant-numeric: tabular-nums;
            display: grid; gap: 2px; justify-items: end; }
 .hab .rt .big { font-weight: 700; color: var(--ink); font-size: 13px; }
-.hab .rt .sm { font-size: 10px; color: var(--muted); }
+.hab .rt .sm { font-size: 10px; }
 
 .chip {
   display: inline-block; padding: 1px 7px; border-radius: 20px; color: #fff;
@@ -266,6 +330,9 @@ button, select, input { font: inherit; color: inherit; }
 .chip.t-MEDIUM_TERM { background: var(--med); } .chip.t-MITIGATE { background: var(--mit); }
 .chip.z-RED { background: var(--red); } .chip.z-ORANGE { background: var(--orange); }
 .chip.z-YELLOW { background: var(--yellow); } .chip.z-GREEN { background: var(--green); }
+.chip.t-SHORT_TERM, .chip.t-MEDIUM_TERM, .chip.z-ORANGE, .chip.z-YELLOW,
+.chip.z-GREEN { color: #14171c; }
+body[data-theme="dark"] .chip { color: #101318; }
 .chip.ghost { background: transparent; color: var(--muted); border: 1px solid var(--rule-strong); }
 .flag {
   display: inline-block; border: 1px solid var(--orange); color: var(--orange);
@@ -276,19 +343,25 @@ button, select, input { font: inherit; color: inherit; }
 .panelhead {
   position: sticky; top: 0; z-index: 2; background: var(--surface);
   padding: var(--sp-3); border-bottom: 1px solid var(--rule);
-  display: flex; align-items: flex-start; gap: var(--sp-2);
+  display: flex; flex-direction: column; align-items: flex-start; gap: 3px;
+  overflow-wrap: anywhere;
 }
 .panelhead h3 { font-size: 15px; }
 .panelhead .sub { font-size: 11px; color: var(--muted); margin-top: 2px; font-family: var(--mono); }
 .panelbody { padding: var(--sp-3); }
 .block { margin-bottom: var(--sp-4); }
+.panelbody > .callout { margin-bottom: var(--sp-3); }
+.panelaction { margin-top: 10px; }
+.panelaction .btn { text-align: left; }
+.resource-label { display: block; font-size: 10px; }
+.tableaction { padding: 2px 0; border: 0; background: transparent; color: var(--accent); font-weight: 650; text-align: left; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; }
 .block > h5 {
   font-size: 10px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
   margin-bottom: 7px; padding-bottom: 4px; border-bottom: 1px solid var(--rule); font-weight: 650;
 }
 .lede { font-size: 13.5px; line-height: 1.55; color: var(--body); }
 .lede b { color: var(--ink); }
-.kv { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font-size: 12px; }
+.kv { display: grid; grid-template-columns: minmax(0, 42%) minmax(0, 1fr); gap: 3px 12px; font-size: 12px; overflow-wrap: anywhere; }
 .kv dt { color: var(--muted); }
 .kv dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; color: var(--ink); font-weight: 600; }
 /* Right-aligned bold is right for a figure and wrong for a sentence. Definition
@@ -329,6 +402,8 @@ button, select, input { font: inherit; color: inherit; }
 table.data { width: 100%; border-collapse: collapse; font-size: 11.5px; font-variant-numeric: tabular-nums; }
 table.data th, table.data td { padding: 4px 6px; border-bottom: 1px solid var(--rule); text-align: left; vertical-align: top; }
 table.data thead th { font-size: 9.5px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); border-bottom: 1.5px solid var(--rule-strong); font-weight: 650; }
+/* In a scrollable document, keep the column headers visible. */
+.sheet .scrollx table.data thead th { position: sticky; top: 0; background: var(--surface); z-index: 1; }
 table.data td.n, table.data th.n { text-align: right; white-space: nowrap; }
 table.data tbody tr.hot { background: var(--tint-bad); }
 table.data tbody tr.pick { cursor: pointer; }
@@ -347,7 +422,9 @@ table.data.tight tbody th .sw {
 }
 
 .cond { display: grid; gap: 4px; }
-.cond > div { display: grid; grid-template-columns: 12px 1fr auto; gap: 7px; align-items: baseline; font-size: 11.5px; }
+.cond > div { display: grid; grid-template-columns: 12px minmax(0, 1fr); gap: 2px 7px; align-items: baseline; font-size: 11.5px; }
+.cond .mg { grid-column: 2; overflow-wrap: anywhere; }
+.cond code { overflow-wrap: anywhere; }
 .cond .pass { color: var(--green); font-weight: 700; }
 .cond .fail { color: var(--red); font-weight: 700; }
 .cond code { font-family: var(--mono); font-size: 10.5px; color: var(--ink); }
@@ -422,6 +499,10 @@ kbd {
 
 /* ── responsive ─────────────────────────────────────────────────────── */
 @media (max-width: 1280px) { :root { --rail-w: 268px; --panel-w: 350px; } }
+@media (min-width: 1181px) and (max-width: 1440px) {
+  .search input { width: 180px; }
+  .snapchip { max-width: 240px; }
+}
 /* 1180, not 1080: with both surfaces inline a 1100px laptop leaves the map 482px
    of a 1100px window, which is the wrong split for a console whose primary
    object is the map. Below this the panel becomes a drawer and the map gets the
@@ -452,6 +533,23 @@ kbd {
   .tabs button b { display: none; }
   .docgrid, .sheet .kpigrid { grid-template-columns: 1fr; }
   .search input { width: 108px; }
+}
+@media (max-width: 600px) {
+  :root { --topbar-h: 96px; }
+  .topbar { flex-wrap: wrap; gap: 6px; padding: 8px 12px; }
+  .topbar .spacer { display: none; }
+  .districtpick { flex: 1; min-width: 0; }
+  .districtpick select { width: 100%; min-width: 0; }
+  .search { order: 2; flex: 1 0 100%; }
+  .search input { width: 100%; }
+  .tabs { padding: 0 4px; }
+  .tabs button { padding: 0 10px; }
+  .banner { padding: 6px 12px; gap: 4px; }
+  .sheet { padding: 20px 16px 40px; }
+}
+@media (max-height: 720px) {
+  .mapctl { max-height: 46%; overflow-y: auto; }
+  .legend { max-height: 40%; overflow-y: auto; }
 }
 
 @media print {

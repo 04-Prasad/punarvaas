@@ -82,6 +82,30 @@ def build_cells(d: District, window: str = "demo", seed: int = 5,
         f"{int(T['streams'].sum()):,} drainage px")
 
     cells = grid.cells_in_bbox(bbox)
+    from core.ingest.land import coastal_land, screen_land_cells
+    reference = coastal_land(d.key)
+    if reference is not None:
+        land, metadata, checksum = reference
+        rb = metadata['bbox']
+        if not (rb[0] <= bbox[0] and rb[1] <= bbox[1] and rb[2] >= bbox[2] and rb[3] >= bbox[3]):
+            raise ValueError('Requested coastal window exceeds the land reference coverage; provide a matching land mask.')
+        keep = screen_land_cells(grid, cells, land)
+        total = len(cells)
+        cells = [cell for cell, valid in zip(cells, keep) if valid]
+        if not cells:
+            raise ValueError('No complete coastal land cells inside this window.')
+        man.add(name='Coastal reference land/water screening', role='exclude water/wetlands from residential cells and candidate sites',
+                vintage=metadata['retrieved_at'], resolution='OSM vector polygons; complete hexagon containment',
+                source=metadata['source'], licence=metadata['licence'], checksum=checksum,
+                notes=f'{total - len(cells)} cells excluded; {len(cells)} land cells retained. {metadata["notes"]}')
+        import hashlib
+        anchor_path = DATA / 'reference' / d.key / 'demo-anchors.json'
+        man.add(name='OSM-anchored SYNTHETIC coastal habitations', role='locations for generated population and buildings',
+                vintage=metadata['retrieved_at'], resolution='mapped place nodes / residential polygons',
+                source='OpenStreetMap contributors; data/reference/kendrapara/demo-anchors.json',
+                licence='ODbL 1.0', checksum=hashlib.sha256(anchor_path.read_bytes()).hexdigest(), is_synthetic=True,
+                notes='Place anchors are mapped; populations, unnamed cluster labels and LGD-format identifiers are synthetic placeholders.')
+        log(f'coastal land screen: {len(cells):,}/{total:,} complete hexagons retained')
     lat, lon = grid.centroids(cells)
     df = pd.DataFrame({"h3_index": cells, "lat": lat, "lon": lon})
     df["h3_res8"] = [grid.parent(c, 8) for c in cells]
@@ -190,6 +214,14 @@ def add_geo_hazards(df, d: District, man: Manifest, ctx: dict, seed: int = 5):
     if d.terrain == "coastal_delta":
         dist, rate = erosion.synthetic_shoreline(df, seed=seed + 26)
         src = "stand-in for NCCR Shoreline Change Atlas / Landsat EPR"
+        coast, coast_synthetic = coastline(d)
+        if not coast_synthetic:
+            dist = distance_to_lines(lat, lon, [coast])
+            src = 'OSM coastline distance with SYNTHETIC retreat rates'
+            man.add(name='OpenStreetMap reference coastline', role='distance to mapped coast',
+                    vintage='2026-09-08 extract', resolution='OSM vector',
+                    source='OpenStreetMap contributors (ODbL 1.0)',
+                    notes='Reference geometry; retreat rates remain synthetic.')
         df["distance_to_coast_m"] = dist
     else:
         dist, rate = erosion.synthetic_bankline(df, seed=seed + 27)
@@ -266,7 +298,13 @@ def add_exposure(df, d: District, man: Manifest, ctx: dict, villages, seed: int 
     """Dasymetric population, then the demographic and facility columns."""
     log, grid = ctx["log"], ctx["grid"]
     dem, T = ctx["dem"], ctx["terrain"]
-    buildings, b_syn = load_buildings(d, villages, dem, T["slope"], seed=seed + 73)
+    allowed_cells = set(df['h3_index']) if d.key == 'kendrapara' else None
+    buildings, b_syn = load_buildings(d, villages, dem, T["slope"], seed=seed + 73,
+                                     allowed_cells=allowed_cells, grid=grid)
+    if allowed_cells is not None:
+        mapped = grid.latlng_to_cell(buildings['lat'].to_numpy(float), buildings['lon'].to_numpy(float))
+        if any(cell not in allowed_cells for cell in mapped):
+            raise ValueError('Building data contains water or out-of-coverage cells; validate the source before allocating population.')
     ex = disaggregate(buildings, villages, grid, district_key=d.key)
 
     df = df.merge(ex, on="h3_index", how="left")
@@ -455,6 +493,8 @@ def run(district_key: str, window: str = "demo", seed: int = 5,
         fac.to_csv(out / "facilities.csv", index=False)
         (out / "manifest.json").write_text(json.dumps(man.as_dict(), indent=2))
         if ls_model is not None:
+            if ls_model.booster is not None:
+                ls_model.booster.save_model(out / "model_landslide_booster.json")
             # mu/sd are part of the model, not a training artefact: without them
             # the saved coefficients cannot be turned back into a prediction or a
             # Shapley value, and the provenance card silently loses its

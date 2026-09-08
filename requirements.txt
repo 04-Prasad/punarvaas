@@ -2,9 +2,10 @@ fastapi
 uvicorn
 pydantic
 python-multipart
-libsql==0.1.11
 numpy
 pandas
+pyarrow
 scipy
+shapely>=2.0,<3
 PyYAML
 Jinja2

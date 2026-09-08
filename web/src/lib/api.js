@@ -17,7 +17,10 @@ const BASE = "/api";
 
 export class ApiError extends Error {
   constructor(status, message, path) {
-    super(message);
+    const text = typeof message === "string" ? message
+      : Array.isArray(message) ? message.map((e) => e.msg || "Invalid request").join("; ")
+      : "The requested data could not be loaded.";
+    super(text);
     this.name = "ApiError";
     this.status = status;
     this.path = path;

@@ -9,6 +9,7 @@
 import { html, raw, mount } from "../lib/dom.js";
 import { num, pct, rp, dp2 } from "../lib/fmt.js";
 import { ZONE_LIGHT, HAZARD_COLORS } from "../lib/color.js";
+import { BASEMAPS } from '../../map-config.js';
 
 export const METRICS = [
   { key: "zone", label: "Zone", hint: "Regulatory class from the signed ruleset" },
@@ -24,7 +25,8 @@ export function renderLegend(el, { map, grid, zoneStats, metric }) {
   const body = metric === "zone" ? zoneLegend(grid, zoneStats, map, Boolean(map?.builtOnly))
     : metric === "governing_hazard" ? hazardLegend(grid)
     : rampLegend(map, metric, grid);
-  return mount(el, html`${body}${map?.builtOnly ? bareNote(grid) : ""}`);
+  return mount(el, html`<details class="legend-content" ${raw(map?.isOverview?.() ? "" : "open")}>
+    <summary>Legend &amp; filters</summary>${body}${map?.builtOnly ? bareNote(grid) : ""}</details>`);
 }
 
 /** The grey has to mean something stated, or it reads as missing data. */
@@ -32,7 +34,7 @@ function bareNote(grid) {
   const bare = Math.max(0, (grid.n || 0) - (grid.inhabitedCells || 0));
   return html`<div class="rows barerow">
     <div><i style="background:var(--bare)"></i>
-      <span class="ct">Open ground</span><b>${num(bare)} cells</b></div>
+      <span class="ct">Open ground · transparent</span><b>${num(bare)} cells</b></div>
   </div>`;
 }
 
@@ -99,17 +101,24 @@ function rampLegend(map, metric, grid) {
 }
 
 /** Map control cluster: metric segmented control plus view actions. */
-export function renderMapControls(el, { metric, builtOnly, grid, forceAll }) {
+export function renderMapControls(el, { metric, builtOnly, grid, forceAll, geography, overview,
+  basemap = 'satellite', opacity = 0.76 }) {
   const segs = METRICS.map((m) => html`<button data-metric="${m.key}" title="${m.hint}"
       aria-pressed="${m.key === metric}">${m.label}</button>`);
   const inh = grid?.inhabitedCells || 0;
   const share = grid?.n ? inh / grid.n : 0;
   return mount(el, html`
-    <div class="card">
-      <h5>Colour cells by</h5>
+    <div class="card basemap-controls">
+      <div class="seg" role="group" aria-label="Basemap">${Object.entries(BASEMAPS).map(([key, item]) => html`
+        <button data-basemap="${key}" aria-pressed="${key === basemap}">${item.label}</button>`)}</div>
+      <label class="opacity-control" for="zone-opacity">Zone opacity <output for="zone-opacity">${Math.round(opacity * 100)}%</output></label>
+      <input id="zone-opacity" type="range" min="0" max="100" step="1" value="${Math.round(opacity * 100)}" aria-label="Zone overlay opacity">
+    </div>
+    <details class="card metric-controls" ${raw(overview ? "" : "open")}>
+      <summary>Colour cells by · ${METRICS.find(m => m.key === metric)?.label || metric}</summary>
       <div class="seg" role="group" aria-label="Map metric">${segs}</div>
       <label class="toggle wide ${forceAll ? "off" : ""}"
-             title="Grey out the cells with no dwellings in them">
+             title="Leave ground without dwellings transparent so the basemap remains visible">
         <input type="checkbox" id="builtonly" ${raw(builtOnly && !forceAll ? "checked" : "")}
                ${raw(forceAll ? "disabled" : "")}>
         <span class="ct">Only where people live</span>
@@ -120,12 +129,14 @@ export function renderMapControls(el, { metric, builtOnly, grid, forceAll }) {
         : grid ? html`<p class="note">${num(inh)} of ${num(grid.n)} cells
             (${pct(share, 1)}) hold a dwelling — about ${num(grid.inhabitedHouses, 0)} houses.</p>`
         : ""}
-    </div>
+    </details>
     <div class="card">
       <div class="seg" role="group" aria-label="View">
-        <button data-act="fit" title="Fit the whole district (f)">Fit</button>
-        <button data-act="in" title="Zoom in (+)">+</button>
-        <button data-act="out" title="Zoom out (−)">−</button>
+        ${geography ? html`<button data-act="state" title="Show the whole ${geography.stateName} state">State</button>
+          <button data-act="district" title="Show ${geography.districtName} district boundary">District</button>` : ""}
+        <button data-act="fit" title="Zoom to the risk cells (f)">Risk area</button>
+        <button data-act="in" title="Zoom in (+)" aria-label="Zoom in">+</button>
+        <button data-act="out" title="Zoom out (−)" aria-label="Zoom out">−</button>
       </div>
     </div>`);
 }

@@ -29,10 +29,14 @@ TIER_ORDER = {"IMMEDIATE": 0, "SHORT_TERM": 1, "MEDIUM_TERM": 2, "MITIGATE": 3}
 
 def knapsack(costs: np.ndarray, values: np.ndarray, budget: float,
              grid: float = LAKH) -> np.ndarray:
-    """Exact 0/1 knapsack. Returns a boolean selection mask."""
-    c = np.maximum(np.rint(np.asarray(costs, float) / grid).astype(int), 0)
+    """Exact on a conservative cost grid. Returns a boolean selection mask.
+
+    Round costs up and the budget down so grid precision cannot authorise
+    spending more rupees than are available. Sub-grid slack may remain unused.
+    """
+    c = np.maximum(np.ceil(np.asarray(costs, float) / grid).astype(int), 0)
     v = np.asarray(values, float)
-    B = int(max(np.rint(budget / grid), 0))
+    B = int(max(np.floor(budget / grid), 0))
     n = len(c)
     if n == 0 or B == 0:
         return np.zeros(n, bool)

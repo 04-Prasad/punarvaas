@@ -571,11 +571,13 @@ across cells that do not touch.</p>
 
 <h2><span class="sec-no">7</span>Phasing under the budget</h2>
 {% if phase_summary %}
-<p>Habitations are funded tier-first, and within a tier by an <b>exact 0/1 knapsack</b> over
-avoided loss subject to the annual budget of
-{{ plan_meta.annual_budget_inr|inr }}. Greedy benefit-per-rupee selection was rejected because
-it reliably funds four cheap medium-risk habitations ahead of one expensive IMMEDIATE one —
-arithmetically efficient and indefensible in front of the people left behind.</p>
+<p>Habitations are funded tier-first, and within a tier by <b>0/1 knapsack</b> over
+avoided loss subject to the annual budget of {{ plan_meta.annual_budget_inr|inr }}.
+Costs round up and the available budget rounds down on a conservative ₹1 lakh grid.
+The optimisation is exact on that grid; it can leave sub-grid funding unused.</p>
+<p class="small"><b>Land allocation is pending.</b> Portfolios are assessed independently
+for each habitation and can share physical parcels. Resolve overlaps before treating this
+screening plan as simultaneous relocation commitments.</p>
 <figure>{{ figs.phases|safe }}
   <figcaption>Capital cost against present-value avoided loss, by phase. Benefit is discounted
   at the social rate over 30 years and counts avoided physical damage only.</figcaption></figure>
@@ -639,18 +641,26 @@ arithmetically efficient and indefensible in front of the people left behind.</p
 <h3>Model card — landslide susceptibility</h3>
 <table>
   <tbody>
-    <tr><th style="width:26%">Form</th><td>L2-regularised logistic regression
-      (<span class="mono">{{ model.kind }}</span>) on standardised terrain predictors</td></tr>
+    <tr><th style="width:26%">Form</th><td><span class="mono">{{ model.kind }}</span>
+      on terrain predictors</td></tr>
+    {% if not model.kind.startswith('xgboost') %}
     <tr><th>Predictors</th><td class="mono small">
       {% for f in model.features %}{{ f }} β={{ '%+.3f'|format(model.coef[loop.index0]) }}{{ ' · ' if not loop.last }}{% endfor %}
       <br>intercept {{ '%+.3f'|format(model.intercept) }}
       (uncorrected {{ '%+.3f'|format(model.intercept_raw) }})</td></tr>
+    {% endif %}
     <tr><th>Training set</th><td>{{ model.n_pos|num }} positive cells,
       {{ model.n_neg|num }} negative cells</td></tr>
     <tr><th>Discrimination</th><td>AUC {{ '%.4f'|format(model.auc_train) }} in-sample;
-      <b>{{ '%.4f'|format(model.auc_cv) }}</b> under spatially blocked cross-validation.
-      The blocked figure is the honest one — random k-fold on autocorrelated terrain leaks
-      neighbouring cells across the split and inflates AUC.</td></tr>
+      <b>{{ '%.4f'|format(model.auc_cv) }}</b> under random-fold cross-validation.
+      Nearby terrain can occur across folds. Spatially blocked and dated-event validation
+      are not implemented; synthetic-inventory AUC is not real-world accuracy.</td></tr>
+    {% if model.kind.startswith('xgboost') %}
+    <tr><th>Calibration and attribution</th><td>TreeSHAP uses the saved XGBoost booster.
+      The logistic model's prior correction is not applied in the tree prediction path.
+      Calibration against observed events remains necessary before annual-risk figures
+      can support operational decisions.</td></tr>
+    {% else %}
     <tr><th>Prevalence correction</th><td>King &amp; Zeng (2001) prior correction to a true
       prevalence of {{ model.true_prevalence|pct(2) }}. Without it a case-control sample
       ranks cells correctly and reports absolute probabilities that are wrong by an order of
@@ -662,6 +672,7 @@ arithmetically efficient and indefensible in front of the people left behind.</p
       the prediction. Standardisation means μ and σ are persisted with the coefficients;
       without them the saved model cannot be turned back into either a prediction or an
       attribution.</td></tr>
+    {% endif %}
     <tr><th>Known limits</th><td class="small">Trained on a synthetic inventory in this
       snapshot: the coefficients are indicative of the direction and rough magnitude of terrain
       relationships, not calibrated to observed failures in {{ d.name }}. Substitute the GSI

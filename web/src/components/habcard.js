@@ -18,7 +18,7 @@ import { html, mount } from "../lib/dom.js";
 import { num, inr, inrFull, pct, rp, km, ha, dp2, titleCase, sent } from "../lib/fmt.js";
 import { funnel, coverage, scatter, hbars, meter } from "../lib/charts.js";
 
-export function renderHabCard(el, { hab, plan, sites, funnelData, onFocusSite }) {
+export function renderHabCard(el, { hab, plan, sites, funnelData, onFocusSite, siteError, planError, explainCell }) {
   if (!hab) return mount(el, "");
   const p = plan || {};
   const port = p.site_portfolio || {};
@@ -42,13 +42,19 @@ export function renderHabCard(el, { hab, plan, sites, funnelData, onFocusSite })
         ${meter(p.return_period_yr || 1 / Math.max(hab.h_union_max, 1e-9))}
         <div class="facts">
           <div><b>people at risk</b><span>${num(hab.pop_at_risk)}</span></div>
-          <div><b>households</b><span>${num(p.households_at_risk ?? hab.households, 0)}</span></div>
+          <div><b>${p.households_at_risk != null ? "affected households" : "total households"}</b><span>${num(p.households_at_risk ?? hab.households, 0)}</span></div>
           <div><b>of the habitation</b><span>${pct(hab.frac_at_risk, 0)}</span></div>
           <div><b>expected annual loss</b><span>${inr(hab.eal_annual_inr)}</span></div>
           <div><b>cells in RED</b><span>${num(hab.red_cells)}</span></div>
           <div><b>input confidence</b><span>${pct(hab.confidence, 0)}</span></div>
         </div>
+        ${explainCell ? html`<p class="panelaction"><button class="btn" data-explain-cell="${explainCell}">
+          Why this risk? Inspect highest-hazard occupied cell</button></p>` : ""}
       </div>
+
+      ${planError ? html`<div class="callout warn" role="alert"><b>Relocation plan unavailable.</b>
+        <button class="btn" data-retry="district">Retry plan</button></div>` : !plan ? html`
+        <div class="callout">No relocation assessment is recorded for this habitation.</div>` : ""}
 
       ${p.recommended_action ? html`<div class="block">
         <h5>Recommendation</h5>
@@ -72,7 +78,7 @@ export function renderHabCard(el, { hab, plan, sites, funnelData, onFocusSite })
           clears 1.0 on assets alone clears it before lives are counted at all.</p>
       </div>` : ""}
 
-      <div class="block">
+      ${plan ? html`<div class="block">
         <h5>Can the receiving land take them?</h5>
         ${coverage(hab.pop_at_risk || 0, port.capacity_persons || 0, { w: 340 })}
         <dl class="kv">
@@ -80,17 +86,21 @@ export function renderHabCard(el, { hab, plan, sites, funnelData, onFocusSite })
             ${ha(port.usable_ha)} usable · within ${km(port.max_distance_km)}</dd>
           <dt>Coverage</dt><dd><b>${pct(port.coverage_frac, 0)}</b> of the people at risk${
             port.shortfall_persons > 0 ? html` · <b>${num(port.shortfall_persons)} unplaced</b>` : ""}</dd>
-          <dt>Binding constraint</dt><dd><b>${titleCase(port.binding_constraint)}</b>${
+          <dt>Limiting resource</dt><dd><b>${titleCase(port.binding_constraint) || "No selected site"}</b>${
             port.next_binding_constraint ? html` <span class="muted">→ then ${titleCase(port.next_binding_constraint)}</span>` : ""}</dd>
           <dt>Service gaps</dt><dd>${inr(port.total_gap_cost_inr)} to bring services to norm</dd>
         </dl>
         ${port.note ? html`<p class="muted">${sent(port.note)}</p>` : ""}
         ${port.coverage_frac < 1 ? html`<div class="callout warn">
-          <b>The land is the constraint, not the willingness.</b>
-          ${num(port.shortfall_persons)} people cannot be placed inside this district's
-          zoning-cleared land at norm-compliant density. That is a finding for the state,
-          not a rounding error to be absorbed.</div>` : ""}
-      </div>
+          <b>Capacity deficit: ${num(port.shortfall_persons)} people.</b>
+          The screened portfolio does not cover everyone at risk. Review additional
+          land and service options before deciding the relocation scope.</div>` : ""}
+      </div>` : ""}
+
+      ${siteError ? html`<div class="callout warn" role="alert"><b>Candidate sites could not be loaded.</b>
+        This does not mean no suitable site exists. <button class="btn" data-retry="sites">Retry sites</button></div>`
+        : !sites ? html`<p class="empty" role="status">Loading candidate sites and capacity…</p>`
+        : !mine.length ? html`<p class="empty">No candidate sites are recorded for this habitation.</p>` : ""}
 
       ${chosen.length ? html`<div class="block">
         <h5>Chosen sites</h5>
@@ -98,7 +108,7 @@ export function renderHabCard(el, { hab, plan, sites, funnelData, onFocusSite })
           <thead><tr><th>Site</th><th class="n">Places</th><th class="n">Distance</th>
             <th class="n">Score</th><th>Bound by</th></tr></thead>
           <tbody>${chosen.map((s) => html`<tr class="pick" data-site="${s.site_id}">
-            <td><b class="mono">${s.site_id.slice(-8)}</b></td>
+            <td><button class="tableaction mono" aria-label="Locate site ${s.site_id}">${s.site_id.slice(-8)}</button></td>
             <td class="n">${num(s.capacity_persons, 0)}</td>
             <td class="n">${km(s.distance_km)}</td>
             <td class="n">${dp2(s.topsis_closeness)}</td>
@@ -106,6 +116,18 @@ export function renderHabCard(el, { hab, plan, sites, funnelData, onFocusSite })
         </table></div>
         <p class="muted">Ranked by TOPSIS closeness against AHP weights. Click a row to
           centre the map on that site.</p>
+      </div>` : ""}
+
+      ${mine.some((s) => s.accepted && !ids.has(s.site_id)) ? html`<div class="block">
+        <h5>Alternative candidate sites</h5>
+        <div class="scrollx"><table class="data"><thead><tr><th>Site</th><th class="n">Places</th>
+          <th class="n">Distance</th><th class="n">Score</th><th>Limiting resource</th></tr></thead>
+          <tbody>${mine.filter((s) => s.accepted && !ids.has(s.site_id)).map((s) => html`
+            <tr class="pick" data-site="${s.site_id}"><td><button class="tableaction mono"
+              aria-label="Locate alternative site ${s.site_id}">${s.site_id.slice(-8)}</button></td>
+              <td class="n">${num(s.capacity_persons, 0)}</td><td class="n">${km(s.distance_km)}</td>
+              <td class="n">${dp2(s.topsis_closeness)}</td><td>${titleCase(s.binding_constraint)}</td></tr>`)}</tbody>
+        </table></div><p class="muted">Passed acceptance checks; not selected in this habitation's portfolio.</p>
       </div>` : ""}
 
       ${best ? capacityBlock(best) : ""}
@@ -157,16 +179,21 @@ function capacityBlock(s) {
   const augment = per.filter((r) => r.augmentable);
   const gaps = s.gaps || [];
   const row = (r) => html`<tr class="${r.resource === s.binding_constraint ? "hot" : ""}">
-    <td>${r.label || titleCase(r.resource)}</td>
+    <td>${r.label || titleCase(r.resource)}${r.resource === s.binding_constraint ? html`<b class="resource-label">Limiting resource</b>` : ""}</td>
     <td class="n">${r.limiting ? num(r.capacity_persons, 0) : "no ceiling"}</td>
     <td class="n">${num(r.available, 1)} ${r.unit || ""}</td>
     <td class="mono">${r.norm}</td></tr>`;
   return html`<div class="block">
     <h5>Carrying capacity of ${s.site_id.slice(-8)}</h5>
+    <p class="muted">${s.in_portfolio ? "Selected in this habitation's portfolio"
+      : s.accepted ? "Alternative candidate" : "Not accepted — shown for comparison"}.</p>
     <p class="lede">Capacity is the <b>minimum</b> over the resources that cannot be
       built — land and water — at <b>${num(s.capacity_persons, 0)} persons</b>
       (${num(s.capacity_households, 0)} households), bound by
       <b>${titleCase(s.binding_constraint)}</b>.</p>
+    <dl class="kv"><dt>Capacity with current services</dt><dd>${num(s.capacity_persons_today, 0)} people</dd>
+      <dt>Capacity after development</dt><dd>${num(s.capacity_persons, 0)} people</dd></dl>
+    <p class="muted">Candidate assessment only. Confirm water yield, land availability and service readiness before relocation.</p>
     <div class="scrollx"><table class="data">
       <thead><tr><th>Resource</th><th class="n">Ceiling</th><th class="n">Available</th>
         <th>Norm</th></tr></thead>

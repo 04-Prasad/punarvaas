@@ -1,8 +1,9 @@
 """
 PUNARVAAS · settlements, buildings, and the administrative key.
 
-Village names and LGD codes here are real public records (Local Government
-Directory). **Population and building footprints are synthetic** until the
+Demo identifiers use the LGD format and are placeholders. Odisha demo anchors
+come from mapped OSM settlements/residential areas. Population and footprints
+are synthetic until the
 Census PCA tables and a building-footprint layer are ingested — the
 `is_synthetic` flag rides along on every record and every downstream screen.
 
@@ -15,6 +16,7 @@ Real paths:
 from __future__ import annotations
 
 from dataclasses import dataclass
+import json
 
 import numpy as np
 import pandas as pd
@@ -52,18 +54,12 @@ CHAMOLI_VILLAGES = [
     ("056010", "Tapovan",          30.5905, 79.6120, 0.64, False),
 ]
 
-KENDRAPARA_VILLAGES = [
-    ("379001", "Satabhaya",        20.6620, 87.0290, 0.74, False),
-    ("379002", "Bagapatia",        20.6180, 86.9520, 0.46, False),
-    ("379003", "Kanhupur",         20.6480, 87.0110, 0.71, False),
-    ("379004", "Gopalpur",         20.6350, 86.9880, 0.68, False),
-    ("379005", "Pentha",           20.5860, 86.9760, 0.65, False),
-    ("379006", "Barahipur",        20.6720, 86.9950, 0.70, False),
-    ("379007", "Magarkanda",       20.5720, 86.9310, 0.62, False),
-    ("379008", "Rajnagar",         20.5990, 86.9180, 0.44, True),
-    ("379009", "Jamboo",           20.7020, 86.9430, 0.69, False),
-    ("379010", "Talachua",         20.6890, 86.9200, 0.67, False),
-]
+def coastal_demo_rows():
+    """Mapped anchors, with explicitly synthetic populations and placeholder IDs."""
+    path = DATA / 'reference/kendrapara/demo-anchors.json'
+    anchors = json.loads(path.read_text())['anchors']
+    return [(a['lgd_village_code'], a['name'], a['lat'], a['lon'],
+             0.44 if a['is_town'] else 0.65, a['is_town']) for a in anchors]
 
 
 def load_villages(d: District, seed: int = 77) -> tuple[list[Village], bool]:
@@ -78,7 +74,7 @@ def load_villages(d: District, seed: int = 77) -> tuple[list[Village], bool]:
         return vs, False
 
     rng = np.random.default_rng(seed)
-    rows = CHAMOLI_VILLAGES if d.key == "chamoli" else KENDRAPARA_VILLAGES
+    rows = CHAMOLI_VILLAGES if d.key == "chamoli" else coastal_demo_rows()
     hh_size = 4.8 if d.terrain == "hill" else 4.3
     out = []
     for code, name, lat, lon, kutcha, is_town in rows:
@@ -91,7 +87,7 @@ def load_villages(d: District, seed: int = 77) -> tuple[list[Village], bool]:
 
 
 def load_buildings(d: District, villages: list[Village], dem, slope,
-                   seed: int = 78) -> tuple[pd.DataFrame, bool]:
+                   seed: int = 78, allowed_cells=None, grid=None) -> tuple[pd.DataFrame, bool]:
     """Building footprint centroids with area, storeys, and residential flag.
 
     Synthetic footprints are not scattered at random: they cluster around the
@@ -123,6 +119,8 @@ def load_buildings(d: District, villages: list[Village], dem, slope,
             b = dem.bounds
             if not (b[0] < lon < b[2] and b[1] < lat < b[3]):
                 continue
+            if allowed_cells is not None and grid.latlng_to_cell(lat, lon) not in allowed_cells:
+                continue
             sl = float(slope.sample(lat, lon))
             limit = 34.0 if d.terrain == "hill" else 8.0
             if sl > limit or rng.uniform() > np.exp(-sl / (limit * 0.65)):
@@ -142,6 +140,8 @@ def load_buildings(d: District, villages: list[Village], dem, slope,
             recs.append((f"{v.lgd_village_code}-B{k:05d}", v.lgd_village_code,
                          lat, lon, area, st, is_res))
             k += 1
+        if allowed_cells is not None and k < n + n_nonres:
+            raise ValueError(f'Insufficient screened land for synthetic buildings at {v.name}; revise the demo anchor.')
     t = pd.DataFrame(recs, columns=["building_id", "lgd_village_code", "lat", "lon",
                                     "area_m2", "storeys", "is_residential"])
     return t, True
@@ -160,6 +160,9 @@ def load_critical_facilities(d: District, villages: list[Village],
     if p.exists():
         return pd.read_csv(p), False
     rng = np.random.default_rng(seed)
+    from core.ingest.land import coastal_land
+    from shapely.geometry import Point
+    reference = coastal_land(d.key)
     recs = []
     for v in villages:
         kinds = ["anganwadi"]
@@ -168,9 +171,15 @@ def load_critical_facilities(d: District, villages: list[Village],
         if v.is_town: kinds += ["water_works", "police", "shelter"]
         if d.terrain == "coastal_delta" and v.population > 600: kinds.append("shelter")
         for kind in kinds:
+            for attempt in range(300):
+                flat = v.lat + rng.normal(0, 0.0016)
+                flon = v.lon + rng.normal(0, 0.0016)
+                if reference is None or reference[0].covers(Point(flon, flat)):
+                    break
+            else:
+                raise ValueError(f'No screened land for synthetic facility at {v.name}')
             recs.append((f"{v.lgd_village_code}-{kind}", v.lgd_village_code, kind,
-                         v.lat + rng.normal(0, 0.0016),
-                         v.lon + rng.normal(0, 0.0016),
+                         flat, flon,
                          int(rng.integers(30, 260)) if kind == "school" else 0))
     return pd.DataFrame(recs, columns=["facility_id", "lgd_village_code", "kind",
                                        "lat", "lon", "capacity"]), True

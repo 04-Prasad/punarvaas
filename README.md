@@ -173,6 +173,19 @@ SIH_2026/
 
 ## 🚀 Getting Started
 
+### Windows: one-command start
+
+Open Command Prompt in the project folder and run:
+
+```cmd
+run.cmd
+```
+
+The launcher creates `.venv` when needed, installs missing packages from
+`requirements.txt`, and opens the API and web application at
+`http://127.0.0.1:8000`. Press `Ctrl+C` to stop it. PowerShell activation is not
+required. Run `run.cmd --check` to verify setup without starting the server.
+
 ### Prerequisites
 
 - **Python 3.11+**

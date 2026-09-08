@@ -97,7 +97,7 @@ def compute(site_cells, d: District, usable_ha: float,
     caps.append(ResourceCapacity(
         "road", "All-weather access", road_cap, road_km, "km",
         rkm, "km", NORMS["road_access_km"].source,
-        note=("connected" if np.isfinite(road_cap) else "no all-weather road; "
+        note=("connected" if np.isinf(road_cap) else "no all-weather road; "
               "site is unusable until connectivity is built")))
 
     # Power is rarely binding at village scale but must be costed.

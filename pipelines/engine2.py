@@ -58,9 +58,26 @@ def load_engine1(d: District) -> tuple[pd.DataFrame, pd.DataFrame, dict]:
         raise SystemExit(f"Engine 1 output missing for {d.key}. "
                          f"Run:  python -m pipelines.engine1 --district {d.key}")
     cells = pd.read_parquet(out / "cells.parquet")
+    if d.key == 'kendrapara':
+        from core.ingest.land import coastal_land, screen_land_cells
+        if not screen_land_cells(Grid.for_district(d.key), cells['h3_index'], coastal_land(d.key)[0]).all():
+            raise ValueError('Coastal cells cross the land boundary. Rebuild Engine 1 before site discovery.')
     villages = pd.read_parquet(out / "villages.parquet")
     man = json.loads((out / "manifest.json").read_text())
     return cells, villages, man
+
+
+def _representative_land_point(cells, d, weights=None):
+    """Keep a parcel's map marker on land even when its mean falls in a water hole."""
+    lat = float(np.average(cells['lat'], weights=weights))
+    lon = float(np.average(cells['lon'], weights=weights))
+    if d.key == 'kendrapara':
+        from core.ingest.land import coastal_land
+        from shapely.geometry import Point
+        if not coastal_land(d.key)[0].covers(Point(lon, lat)):
+            nearest = int(np.argmin(haversine_m(lat, lon, cells['lat'], cells['lon'])))
+            lat, lon = float(cells.iloc[nearest]['lat']), float(cells.iloc[nearest]['lon'])
+    return lat, lon
 
 
 def _water_source_km(site_cells, all_cells) -> float:
@@ -82,8 +99,7 @@ def discover_for_origin(cells: pd.DataFrame, d: District, grid: Grid,
     hot = own[own["zone"].isin(("RED", "ORANGE"))]
     src = hot if len(hot) else own
     wt = np.clip(src["population"].to_numpy(float), 1e-6, None)
-    olat = float(np.average(src["lat"], weights=wt))
-    olon = float(np.average(src["lon"], weights=wt))
+    olat, olon = _representative_land_point(src, d, wt)
 
     funnel = Funnel(total=len(cells))
     alive, first_fail, funnel, dist_km = eligible_mask(cells, d, olat, olon, funnel)
@@ -108,9 +124,10 @@ def discover_for_origin(cells: pd.DataFrame, d: District, grid: Grid,
         caps, binding, cap_max, cap_now = capacity_of(sc, d, usable_ha, school_km,
                                                       health_km, road_km)
         gap = gap_closure(caps, min(pop_risk, cap_max), d)
+        site_lat, site_lon = _representative_land_point(sc, d)
         sites.append(dict(
             site_id=f"{origin['lgd_village_code']}-S{rank0 + 1}",
-            centroid_lat=float(sc["lat"].mean()), centroid_lon=float(sc["lon"].mean()),
+            centroid_lat=site_lat, centroid_lon=site_lon,
             cells=[str(x) for x in sc["h3_index"]],
             n_cells=len(idx), usable_ha=round(usable_ha, 2),
             distance_km=round(dkm, 2),

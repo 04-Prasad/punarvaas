@@ -6,7 +6,11 @@
 <meta name="color-scheme" content="light dark">
 <meta name="description" content="PUNARVAAS — sub-village hazard zonation, carrying-capacity assessment of relocation sites, and immediate relocation needs for vulnerable habitations.">
 <title>PUNARVAAS · relocation decision console</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="/src/styles/tokens.css">
+<link rel="stylesheet" href="/vendor/leaflet/leaflet.css">
 <link rel="stylesheet" href="/src/styles/console.css">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 2l12 7v14l-12 7L4 23V9z' fill='%23c1272d'/%3E%3Cpath d='M16 9l6 3.5v7L16 23l-6-3.5v-7z' fill='%23fff'/%3E%3C/svg%3E">
 </head>
@@ -22,7 +26,7 @@
     </svg>
     <div class="brandtext">
       <b>PUNARVAAS</b>
-      <span>पुनर्वास · relocation decision console</span>
+      <span>पुनर्वास · disaster relocation planning</span>
     </div>
   </div>
 
@@ -31,7 +35,12 @@
     <select id="district" aria-label="Select district"></select>
   </label>
 
-  <div id="snapshot" class="snapchip" title="Immutable snapshot identifier"></div>
+  <div id="snapshot" class="snapchip"
+       title="Immutable snapshot · every number on screen is reproducible from this ID · the API is read-only and cannot change a published risk figure"
+       aria-label="Snapshot ID">
+    <svg viewBox="0 0 12 12" width="11" height="11" aria-hidden="true" style="margin-right:3px;opacity:.65;flex-shrink:0"><path d="M9 5V3.5a3 3 0 00-6 0V5H2v6h8V5H9zm-4.5 0V3.5a1.5 1.5 0 013 0V5h-3z" fill="currentColor"/></svg>
+    <span class="snaplabel">Snapshot&#8202;</span>
+  </div>
 
   <div class="spacer"></div>
 
@@ -48,8 +57,8 @@
     <svg viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="7" fill="none" stroke="currentColor" stroke-width="1.5"/><path d="M6.1 6a1.9 1.9 0 113.5 1c-.5.7-1.3.9-1.5 1.7v.5" fill="none" stroke="currentColor" stroke-width="1.5"/><circle cx="8" cy="12" r=".9" fill="currentColor"/></svg>
   </button>
   <a id="reportlink" class="btn" href="#" target="_blank" rel="noopener"
-     title="Open the signed PDF-ready report for this district">
-    <span>Signed report</span>
+     title="Open the printable district report for review and approval">
+    <span>District report</span>
     <svg viewBox="0 0 16 16" class="ico" aria-hidden="true"><path d="M6 3h7v7M13 3L4 12" stroke="currentColor" stroke-width="1.6" fill="none"/></svg>
   </a>
 </header>
@@ -57,14 +66,14 @@
 <div id="banner" class="banner" role="status" hidden></div>
 
 <nav class="tabs" role="tablist" aria-label="Workspace">
-  <button role="tab" data-tab="risk"   aria-selected="true"><b>1</b> Where is it unsafe</button>
-  <button role="tab" data-tab="sites"  aria-selected="false"><b>2</b> Where can people go</button>
-  <button role="tab" data-tab="plan"   aria-selected="false"><b>3</b> Who moves first</button>
-  <button role="tab" data-tab="method" aria-selected="false"><b>4</b> Method &amp; provenance</button>
+  <button role="tab" id="tab-risk" data-tab="risk" aria-controls="stage" aria-selected="true"><b>1</b> Where is it unsafe</button>
+  <button role="tab" id="tab-sites" data-tab="sites" aria-controls="stage" tabindex="-1" aria-selected="false"><b>2</b> Where can people go</button>
+  <button role="tab" id="tab-plan" data-tab="plan" aria-controls="stage" tabindex="-1" aria-selected="false"><b>3</b> Who moves first</button>
+  <button role="tab" id="tab-method" data-tab="method" aria-controls="stage" tabindex="-1" aria-selected="false"><b>4</b> Method &amp; provenance</button>
 </nav>
 
 <main id="app">
-  <aside id="rail" class="rail" aria-label="District navigation"></aside>
+  <aside id="rail" class="rail" tabindex="-1" aria-label="District navigation"></aside>
 
   <!-- Below 1080px the rail and the panel become drawers. These are their handles;
        above that width the stylesheet hides them and both surfaces are always open. -->
@@ -82,20 +91,22 @@
   </button>
   <button id="scrim" class="scrim" tabindex="-1" aria-label="Close panel"></button>
 
-  <section id="stage" class="stage">
+  <section id="stage" class="stage" role="tabpanel" aria-labelledby="tab-risk" tabindex="0">
     <div class="mapwrap">
-      <canvas id="map" tabindex="0" role="img"
-              aria-label="Hazard zonation map. Use the habitation list for an accessible equivalent."></canvas>
+      <div id="map" tabindex="0" role="region"
+           aria-label="Interactive geographic risk map. Pan with arrow keys, zoom with plus or minus, or use the habitation list to inspect cells."></div>
+      <div id="basemap-status" class="basemap-status card" role="status" hidden></div>
       <div id="tip" class="tip" hidden aria-hidden="true"></div>
       <div id="mapctl" class="mapctl"></div>
       <div id="legend" class="legend"></div>
+      <div id="mapcontext" class="mapcontext card" hidden></div>
       <div id="scalebar" class="scalebar"><span></span><i></i></div>
-      <div id="maploading" class="maploading" hidden><div class="spin"></div><p></p></div>
+      <div id="maploading" class="maploading" role="status" hidden><div class="spin"></div><p></p></div>
     </div>
     <div id="doc" class="doc" hidden></div>
   </section>
 
-  <aside id="panel" class="panel" aria-live="polite" aria-label="Details"></aside>
+  <aside id="panel" class="panel" tabindex="-1" aria-live="polite" aria-label="Details"></aside>
 </main>
 
 <footer class="statusbar">

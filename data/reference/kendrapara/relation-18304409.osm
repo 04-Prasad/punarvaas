@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="openstreetmap-cgimap 2.1.0 (2942763 spike-08.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+ <node id="1000050969" visible="true" version="1" changeset="6435237" timestamp="2010-11-22T21:12:30Z" user="PlaneMad" uid="1306" lat="20.5958616" lon="86.8550356"/>
+ <node id="1000050985" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5980786" lon="86.8507759"/>
+ <node id="1000051012" visible="true" version="3" changeset="62865921" timestamp="2018-09-24T03:24:49Z" user="eg_ggts" uid="8392809" lat="20.5904291" lon="86.8575910"/>
+ <node id="1000051034" visible="true" version="2" changeset="62968308" timestamp="2018-09-27T07:45:44Z" user="icecreamfan" uid="7629876" lat="20.5919032" lon="86.8510920"/>
+ <node id="1000051078" visible="true" version="3" changeset="62968308" timestamp="2018-09-27T07:45:44Z" user="icecreamfan" uid="7629876" lat="20.5917124" lon="86.8550080"/>
+ <node id="1000051115" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5975324" lon="86.8494481"/>
+ <node id="1000051126" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.6011870" lon="86.8508317"/>
+ <node id="1000051140" visible="true" version="2" changeset="62968308" timestamp="2018-09-27T07:45:44Z" user="icecreamfan" uid="7629876" lat="20.5936909" lon="86.8520093"/>
+ <node id="1000051171" visible="true" version="2" changeset="62968308" timestamp="2018-09-27T07:45:44Z" user="icecreamfan" uid="7629876" lat="20.5945496" lon="86.8525994"/>
+ <node id="1000051292" visible="true" version="1" changeset="6435237" timestamp="2010-11-22T21:12:48Z" user="PlaneMad" uid="1306" lat="20.5951520" lon="86.8553767"/>
+ <node id="1000051298" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5970666" lon="86.8545389"/>
+ <node id="1000051331" visible="true" version="3" changeset="180743349" timestamp="2026-04-01T22:49:51Z" user="dmgroom_ct" uid="437598" lat="20.5909185" lon="86.8545206"/>
+ <node id="1000051345" visible="true" version="2" changeset="62865921" timestamp="2018-09-24T03:24:49Z" user="eg_ggts" uid="8392809" lat="20.5913928" lon="86.8520144"/>
+ <node id="1000051380" visible="true" version="4" changeset="180743349" timestamp="2026-04-01T22:49:51Z" user="dmgroom_ct" uid="437598" lat="20.5904921" lon="86.8588328"/>
+ <node id="1000051423" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.6006121" lon="86.8497189"/>
+ <node id="1000051433" visible="true" version="2" changeset="62968308" timestamp="2018-09-27T07:45:44Z" user="icecreamfan" uid="7629876" lat="20.5918881" lon="86.8534201"/>
+ <node id="1000051552" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5968242" lon="86.8539968"/>
+ <node id="1000051556" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5976098" lon="86.8536433"/>
+ <node id="1000051568" visible="true" version="2" changeset="62968308" timestamp="2018-09-27T07:45:44Z" user="icecreamfan" uid="7629876" lat="20.5944391" lon="86.8556249"/>
+ <node id="1000051574" visible="true" version="3" changeset="62865921" timestamp="2018-09-24T03:24:49Z" user="eg_ggts" uid="8392809" lat="20.5908620" lon="86.8558887"/>
+ <node id="1000051586" visible="true" version="2" changeset="62968308" timestamp="2018-09-27T07:45:44Z" user="icecreamfan" uid="7629876" lat="20.5926263" lon="86.8503731"/>
+ <node id="1000051613" visible="true" version="3" changeset="180743349" timestamp="2026-04-01T22:49:51Z" user="dmgroom_ct" uid="437598" lat="20.5915115" lon="86.8585378"/>
+ <node id="1000051670" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5998684" lon="86.8495566"/>
+ <node id="1000051689" visible="true" version="1" changeset="6435237" timestamp="2010-11-22T21:13:08Z" user="PlaneMad" uid="1306" lat="20.5921436" lon="86.8522008"/>
+ <node id="1000051877" visible="true" version="1" changeset="6435237" timestamp="2010-11-22T21:13:13Z" user="PlaneMad" uid="1306" lat="20.5963228" lon="86.8544672"/>
+ <node id="1000051901" visible="true" version="1" changeset="6435237" timestamp="2010-11-22T21:13:14Z" user="PlaneMad" uid="1306" lat="20.5957126" lon="86.8557330"/>
+ <node id="1000051919" visible="true" version="1" changeset="6435237" timestamp="2010-11-22T21:13:14Z" user="PlaneMad" uid="1306" lat="20.5950314" lon="86.8559452"/>
+ <node id="1000051962" visible="true" version="2" changeset="62968308" timestamp="2018-09-27T07:45:44Z" user="icecreamfan" uid="7629876" lat="20.5921543" lon="86.8507433"/>
+ <node id="1000052047" visible="true" version="3" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5890157" lon="86.8586370"/>
+ <node id="1000052120" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.6005792" lon="86.8503246"/>
+ <node id="1000052168" visible="true" version="3" changeset="62865921" timestamp="2018-09-24T03:24:50Z" user="eg_ggts" uid="8392809" lat="20.5898145" lon="86.8572315"/>
+ <node id="1000058534" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5974106" lon="86.8508118"/>
+ <node id="1000058544" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5963469" lon="86.8553664"/>
+ <node id="1000058557" visible="true" version="2" changeset="62968308" timestamp="2018-09-27T07:45:44Z" user="icecreamfan" uid="7629876" lat="20.5939370" lon="86.8532377"/>
+ <node id="1000058583" visible="true" version="2" changeset="62968308" timestamp="2018-09-27T07:45:44Z" user="icecreamfan" uid="7629876" lat="20.5936759" lon="86.8507808"/>
+ <node id="1000058619" visible="true" version="2" changeset="62864858" timestamp="2018-09-24T01:56:50Z" user="eg_ggts" uid="8392809" lat="20.5896139" lon="86.8585341"/>
+ <node id="1000058658" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5984550" lon="86.8485773"/>
+ <node id="1000058664" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5982393" lon="86.8489974"/>
+ <node id="1000058809" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5971421" lon="86.8532244"/>
+ <node id="1000058819" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5997553" lon="86.8487014"/>
+ <node id="1000058828" visible="true" version="2" changeset="62968308" timestamp="2018-09-27T07:45:44Z" user="icecreamfan" uid="7629876" lat="20.5940575" lon="86.8545949"/>
+ <node id="1000058877" visible="true" version="2" changeset="62968308" timestamp="2018-09-27T07:45:44Z" user="icecreamfan" uid="7629876" lat="20.5930532" lon="86.8503731"/>
+ <node id="1000059001" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5991756" lon="86.8488966"/>
+ <node id="1000059010" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5978988" lon="86.8522719"/>
+ <node id="1000059031" visible="true" version="3" changeset="62865921" timestamp="2018-09-24T03:24:50Z" user="eg_ggts" uid="8392809" lat="20.5907426" lon="86.8570734"/>
+ <node id="1000059105" visible="true" version="4" changeset="180743349" timestamp="2026-04-01T22:49:51Z" user="dmgroom_ct" uid="437598" lat="20.5919384" lon="86.8574005"/>
+ <node id="1000059136" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5976668" lon="86.8488581"/>
+ <node id="1000059146" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5987743" lon="86.8480068"/>
+ <node id="1000059167" visible="true" version="2" changeset="62968308" timestamp="2018-09-27T07:45:44Z" user="icecreamfan" uid="7629876" lat="20.5926615" lon="86.8511939"/>
+ <node id="1000059191" visible="true" version="2" changeset="62968308" timestamp="2018-09-27T07:45:44Z" user="icecreamfan" uid="7629876" lat="20.5949463" lon="86.8550241"/>
+ <node id="5933552108" visible="true" version="1" changeset="62968308" timestamp="2018-09-27T07:45:43Z" user="icecreamfan" uid="7629876" lat="20.5933645" lon="86.8511724"/>
+ <node id="5933552109" visible="true" version="1" changeset="62968308" timestamp="2018-09-27T07:45:43Z" user="icecreamfan" uid="7629876" lat="20.5929929" lon="86.8510330"/>
+ <node id="5933552110" visible="true" version="1" changeset="62968308" timestamp="2018-09-27T07:45:43Z" user="icecreamfan" uid="7629876" lat="20.5923853" lon="86.8515962"/>
+ <node id="5933552111" visible="true" version="1" changeset="62968308" timestamp="2018-09-27T07:45:43Z" user="icecreamfan" uid="7629876" lat="20.5947053" lon="86.8534630"/>
+ <node id="5933552113" visible="true" version="1" changeset="62968308" timestamp="2018-09-27T07:45:43Z" user="icecreamfan" uid="7629876" lat="20.5911500" lon="86.8528998"/>
+ <node id="5933552114" visible="true" version="1" changeset="62968308" timestamp="2018-09-27T07:45:43Z" user="icecreamfan" uid="7629876" lat="20.5906277" lon="86.8573683"/>
+ <node id="5933552115" visible="true" version="2" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5901154" lon="86.8572396"/>
+ <node id="5933552116" visible="true" version="1" changeset="62968308" timestamp="2018-09-27T07:45:43Z" user="icecreamfan" uid="7629876" lat="20.5899799" lon="86.8586719"/>
+ <node id="5933552117" visible="true" version="2" changeset="180743349" timestamp="2026-04-01T22:49:51Z" user="dmgroom_ct" uid="437598" lat="20.5911299" lon="86.8588543"/>
+ <node id="5933552118" visible="true" version="2" changeset="180743349" timestamp="2026-04-01T22:49:51Z" user="dmgroom_ct" uid="437598" lat="20.5918279" lon="86.8581730"/>
+ <node id="12354110996" visible="true" version="1" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5981729" lon="86.8481575"/>
+ <node id="12354110997" visible="true" version="1" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5988304" lon="86.8486565"/>
+ <node id="12354110998" visible="true" version="1" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5993552" lon="86.8483219"/>
+ <node id="12354110999" visible="true" version="1" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5981200" lon="86.8493569"/>
+ <node id="12354111000" visible="true" version="1" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5974772" lon="86.8519698"/>
+ <node id="12354111020" visible="true" version="1" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5887148" lon="86.8582119"/>
+ <node id="12354111021" visible="true" version="1" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5893102" lon="86.8577951"/>
+ <node id="12354111022" visible="true" version="1" changeset="159320212" timestamp="2024-11-19T11:28:48Z" user="PicaPico" uid="1787380" lat="20.5884043" lon="86.8577734"/>
+ <node id="13700044305" visible="true" version="1" changeset="180743349" timestamp="2026-04-01T22:49:51Z" user="dmgroom_ct" uid="437598" lat="20.5990646" lon="86.8481643"/>
+ <node id="13700044306" visible="true" version="1" changeset="180743349" timestamp="2026-04-01T22:49:51Z" user="dmgroom_ct" uid="437598" lat="20.5984614" lon="86.8480504"/>
+ <node id="13700044409" visible="true" version="1" changeset="180743349" timestamp="2026-04-01T22:49:51Z" user="dmgroom_ct" uid="437598" lat="20.5917777" lon="86.8564832"/>
+ <way id="86162253" visible="true" version="6" changeset="180743349" timestamp="2026-04-01T22:49:51Z" user="dmgroom_ct" uid="437598">
+  <nd ref="5933552117"/>
+  <nd ref="1000051613"/>
+  <nd ref="5933552118"/>
+  <nd ref="1000059105"/>
+  <nd ref="13700044409"/>
+  <nd ref="1000051078"/>
+  <nd ref="1000051433"/>
+  <nd ref="1000051689"/>
+  <nd ref="5933552110"/>
+  <nd ref="1000059167"/>
+  <nd ref="5933552109"/>
+  <nd ref="5933552108"/>
+  <nd ref="1000051140"/>
+  <nd ref="1000058557"/>
+  <nd ref="1000058828"/>
+  <nd ref="1000051568"/>
+  <nd ref="1000051919"/>
+  <nd ref="1000051901"/>
+  <nd ref="1000058544"/>
+  <nd ref="1000051298"/>
+  <nd ref="1000051556"/>
+  <nd ref="1000059010"/>
+  <nd ref="1000050985"/>
+  <nd ref="12354110999"/>
+  <nd ref="1000058664"/>
+  <nd ref="1000058658"/>
+  <nd ref="12354110997"/>
+  <nd ref="1000059001"/>
+  <nd ref="1000051670"/>
+  <nd ref="1000052120"/>
+  <nd ref="1000051126"/>
+  <nd ref="1000051423"/>
+  <nd ref="1000058819"/>
+ </way>
+ <way id="1495307035" visible="true" version="1" changeset="180743349" timestamp="2026-04-01T22:49:51Z" user="dmgroom_ct" uid="437598">
+  <nd ref="13700044306"/>
+  <nd ref="12354110996"/>
+  <nd ref="1000059136"/>
+  <nd ref="1000051115"/>
+  <nd ref="1000058534"/>
+  <nd ref="12354111000"/>
+  <nd ref="1000058809"/>
+  <nd ref="1000051552"/>
+  <nd ref="1000051877"/>
+  <nd ref="1000050969"/>
+  <nd ref="1000051292"/>
+  <nd ref="1000059191"/>
+  <nd ref="5933552111"/>
+  <nd ref="1000051171"/>
+  <nd ref="1000058583"/>
+  <nd ref="1000058877"/>
+  <nd ref="1000051586"/>
+  <nd ref="1000051962"/>
+  <nd ref="1000051034"/>
+  <nd ref="1000051345"/>
+  <nd ref="5933552113"/>
+ </way>
+ <way id="1495307036" visible="true" version="1" changeset="180743349" timestamp="2026-04-01T22:49:51Z" user="dmgroom_ct" uid="437598">
+  <nd ref="1000058819"/>
+  <nd ref="12354110998"/>
+  <nd ref="13700044305"/>
+  <nd ref="1000059146"/>
+  <nd ref="13700044306"/>
+ </way>
+ <way id="1495307040" visible="true" version="1" changeset="180743349" timestamp="2026-04-01T22:49:51Z" user="dmgroom_ct" uid="437598">
+  <nd ref="1000051331"/>
+  <nd ref="1000051574"/>
+ </way>
+ <way id="1495307041" visible="true" version="1" changeset="180743349" timestamp="2026-04-01T22:49:51Z" user="dmgroom_ct" uid="437598">
+  <nd ref="5933552113"/>
+  <nd ref="1000051331"/>
+ </way>
+ <way id="1495307043" visible="true" version="1" changeset="180743349" timestamp="2026-04-01T22:49:51Z" user="dmgroom_ct" uid="437598">
+  <nd ref="1000051574"/>
+  <nd ref="1000059031"/>
+  <nd ref="5933552114"/>
+  <nd ref="1000051012"/>
+  <nd ref="5933552115"/>
+  <nd ref="1000052168"/>
+  <nd ref="12354111021"/>
+  <nd ref="12354111022"/>
+  <nd ref="12354111020"/>
+  <nd ref="1000052047"/>
+  <nd ref="1000058619"/>
+  <nd ref="5933552116"/>
+  <nd ref="1000051380"/>
+  <nd ref="5933552117"/>
+ </way>
+ <relation id="18304409" visible="true" version="2" changeset="180743349" timestamp="2026-04-01T22:49:51Z" user="dmgroom_ct" uid="437598">
+  <member type="way" ref="1495307043" role="outer"/>
+  <member type="way" ref="86162253" role="outer"/>
+  <member type="way" ref="1495307036" role="outer"/>
+  <member type="way" ref="1495307035" role="outer"/>
+  <member type="way" ref="1495307041" role="outer"/>
+  <member type="way" ref="1495307040" role="outer"/>
+  <tag k="natural" v="water"/>
+  <tag k="type" v="multipolygon"/>
+  <tag k="water" v="river"/>
+ </relation>
+</osm>

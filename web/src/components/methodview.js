@@ -19,6 +19,7 @@ export function renderMethodView(el, { district, method, weights, model, manifes
   const wRows = Object.entries(w).sort((a, b) => b[1] - a[1])
     .map(([k, v]) => ({ label: titleCase(k), value: v, text: pct(v, 1) }));
   const u = method?.union || {};
+  const approval = ruleset?.approval || ruleset || {};
 
   return mount(el, html`<div class="sheet">
     <h2>Method &amp; provenance${district ? ` — ${district.name}` : ""}</h2>
@@ -57,11 +58,11 @@ export function renderMethodView(el, { district, method, weights, model, manifes
     <dl class="kv prose">
       <dt>Method</dt><dd>${sent(method?.exposure?.method || "")}</dd>
       <dt>Weight</dt><dd class="mono">${method?.exposure?.weight || "—"}</dd>
-      <dt>Invariant</dt><dd><b>${sent(method?.exposure?.invariant || "")}</b></dd>
+      <dt>Mass balance</dt><dd>Population is distributed from growth-adjusted input totals.</dd>
     </dl>
-    <p class="muted">The invariant is the one that matters for auditability: whatever the
-      disaggregation does inside a village, the village total still equals the Census
-      total. A dasymetric surface that quietly invents people is worse than no surface.</p>
+    <p class="muted">The disaggregation distributes each input village total after the
+      configured growth adjustment. Cells crossing village boundaries are labelled with
+      the dominant village, so displayed habitation rollups need boundary-level verification.</p>
     ${grid ? html`<div class="callout">
       <b>Why the map defaults to “only where people live”.</b>
       This district is ${num(grid.n)} cells of 1.5 ha, and
@@ -78,6 +79,10 @@ export function renderMethodView(el, { district, method, weights, model, manifes
       it by default.</div>` : ""}
 
     <h3>3 · Calibration</h3>
+    ${model?.kind?.startsWith("xgboost") ? html`<div class="callout warn">
+      <b>This snapshot uses XGBoost.</b> The prior correction below applies to the logistic
+      model. The tree prediction path does not apply that correction; its annual-risk
+      interpretation needs calibration against observed events.</div>` : ""}
     <dl class="kv prose">
       <dt>Method</dt><dd>${sent(method?.calibration?.method || "")}</dd>
       <dt>Why</dt><dd>${sent(method?.calibration?.why || "")}</dd>
@@ -89,13 +94,13 @@ export function renderMethodView(el, { district, method, weights, model, manifes
       <thead><tr><th>Property</th><th>Value</th><th>Why it is reported</th></tr></thead>
       <tbody>
         <tr><td>Form</td><td>${model.kind}</td>
-          <td>Linear in the log-odds, so its Shapley attribution is exact rather than
-            sampled.</td></tr>
+          <td>${model.kind?.startsWith("xgboost") ? "Tree ensemble; attribution uses the persisted booster."
+            : "Linear in the log-odds; attribution uses the persisted coefficients."}</td></tr>
         <tr><td>AUC, in-sample</td><td>${dp3(model.auc_train)}</td>
           <td>Reported only so it can be compared with the next row.</td></tr>
-        <tr><td>AUC, blocked CV</td><td><b>${dp3(model.auc_cv)}</b></td>
-          <td>The honest figure. Folds are spatially blocked so one landslide scar cannot
-            appear in both training and test.</td></tr>
+        <tr><td>AUC, random-fold CV</td><td><b>${dp3(model.auc_cv)}</b></td>
+          <td>Random folds can share nearby terrain. Spatially blocked and dated-event
+            validation are not implemented here.</td></tr>
         <tr><td>Inventory</td><td>${num(model.n_pos)} positive · ${num(model.n_neg)} negative</td>
           <td>Presence-only inventories are unbalanced; the count sets the prior.</td></tr>
         <tr><td>True prevalence</td><td>${pct(model.true_prevalence, 2)}</td>
@@ -108,7 +113,9 @@ export function renderMethodView(el, { district, method, weights, model, manifes
           <td>Without them the coefficients cannot be applied to a new cell, and no SHAP
             value can be recomputed later. A model card without μ/σ is not reproducible.</td></tr>
       </tbody>
-    </table></div>` : html`<div class="callout">
+    </table></div>` : district?.terrain === "hill" ? html`<div class="callout warn">
+      <b>No model card is recorded for this district.</b> Model performance cannot be verified from this snapshot.
+    </div>` : html`<div class="callout">
       <b>No supervised model runs in this district.</b>
       Landslide susceptibility is the only hazard here learned from an inventory,
       and a deltaic district has no landslide inventory to learn from. Its hazards
@@ -125,7 +132,7 @@ export function renderMethodView(el, { district, method, weights, model, manifes
     <dl class="kv prose">
       <dt>Method</dt><dd>${weights?.method || "AHP, principal eigenvector"}</dd>
       <dt>Consistency ratio</dt><dd><b>${dp3(weights?.consistency_ratio)}</b>
-        ${weights?.acceptable ? "· within Saaty's 0.10 limit" : "· ABOVE the 0.10 limit"}</dd>
+        ${weights?.acceptable === true ? "· within Saaty's 0.10 limit" : weights?.acceptable === false ? "· ABOVE the 0.10 limit" : "· not recorded"}</dd>
       <dt>λ max</dt><dd>${dp3(weights?.lambda_max)}</dd>
     </dl>
     <div class="callout">
@@ -153,10 +160,10 @@ export function renderMethodView(el, { district, method, weights, model, manifes
     <h3>7 · Zoning thresholds and who approved them</h3>
     ${ruleset ? html`<dl class="kv">
       <dt>Ruleset</dt><dd class="mono">${ruleset.ruleset_version || ruleset.version || "—"}</dd>
-      <dt>Owner</dt><dd>${ruleset.owner || "—"}</dd>
-      <dt>Approved by</dt><dd>${ruleset.approved_by || "—"}
-        ${ruleset.approved_at ? `on ${ruleset.approved_at}` : ""}</dd>
-      <dt>File</dt><dd class="mono">${ruleset.file || "—"}</dd>
+      <dt>Owner</dt><dd>${approval.owner || "—"}</dd>
+      <dt>Approval record</dt><dd>${approval.approved_by || "—"}
+        ${approval.approved_at ? `on ${approval.approved_at}` : ""}</dd>
+      <dt>File</dt><dd class="mono">${approval.file || "—"}</dd>
     </dl>
     <p class="muted">Zoning is <b>not</b> machine-learned. A threshold that decides whether
       a family must leave its home is policy, and policy belongs to a named authority who
@@ -165,13 +172,15 @@ export function renderMethodView(el, { district, method, weights, model, manifes
       fired and by what margin.</p>` : empty("ruleset metadata unavailable")}
 
     ${manifest ? html`<h3>8 · Datasets behind this snapshot</h3>
-    <p class="mono muted">snapshot ${manifest.snapshot_id || "—"}</p>
+    <p class="mono muted">Snapshot ${manifest.snapshot_id || district?.snapshot_id || "—"}</p>
+    <p class="muted">Generated: ${manifest.created_at || "not recorded"}. Input vintages are listed individually below.</p>
     <div class="scrollx"><table class="data">
-      <thead><tr><th>Dataset</th><th>Authoritative source</th><th class="n">Status</th></tr></thead>
+      <thead><tr><th>Dataset</th><th>Source</th><th>Vintage / resolution</th><th class="n">Status</th></tr></thead>
       <tbody>${(manifest.datasets || []).map((d) => html`<tr>
         <td>${d.name || d}</td>
         <td>${d.source || d.authority || "—"}</td>
-        <td class="n">${d.synthetic || /SYNTHETIC/i.test(String(d.name || d))
+        <td>${d.vintage || "—"} · ${d.resolution || "—"}</td>
+        <td class="n">${d.is_synthetic || d.synthetic || /SYNTHETIC/i.test(String(d.name || d))
           ? html`<span class="flag">synthetic</span>` : "real"}</td></tr>`)}</tbody>
     </table></div>` : ""}
 
@@ -223,8 +232,8 @@ export function renderMethodView(el, { district, method, weights, model, manifes
         validation, which is the only way to test a susceptibility model honestly.</li>
       <li><b>Cadastral and forest-clearance layers.</b> These would move site selection
         from "physically capable" to "actually acquirable".</li>
-      <li><b>Field verification of the top decile.</b> Each verified cell raises its own
-        confidence and recalibrates the cells around it.</li>
+      <li><b>Field verification of the top decile.</b> Survey the most exposed cells.
+        A survey-entry workflow and recalibration from field results are not implemented in this console.</li>
     </ol>
   </div>`);
 }

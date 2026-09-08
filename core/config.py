@@ -65,12 +65,12 @@ KENDRAPARA = District(
     lgd_district_code="379",
     lgd_state_code="21",
     bbox=(86.30, 20.20, 87.10, 20.80),
-    demo_bbox=(86.90, 20.55, 87.06, 20.72),   # Satabhaya–Bagapatia–Pentha window
+    demo_bbox=(86.68, 20.52, 86.88, 20.70),   # OSM-anchored Rajnagar/coastal residential demo
     terrain="coastal_delta",
     ruleset="od_coastal_v1.3",
     hazards=("erosion", "cyclone", "surge", "flood", "salinity"),
-    notes="Satabhaya lost to the sea; Bagapatia is a COMPLETED state resettlement "
-          "— our blind test for Engine 2.",
+    notes="Synthetic residential demo anchored to mapped Rajnagar-area settlements. "
+          "Whole-cell land screening excludes reference water and wetlands; not field validated.",
 )
 
 DISTRICTS: dict[str, District] = {d.key: d for d in (CHAMOLI, KENDRAPARA)}

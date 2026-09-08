@@ -40,7 +40,7 @@ export function renderCellCard(el, x) {
 
   const drivers = (x.contributions || []).map((c) => ({
     label: c.label || c.factor,
-    value: c.direction === "decreases" ? -c.pct : c.pct,
+    value: c.direction === "decreases" ? -Math.abs(c.pct) : Math.abs(c.pct),
     text: `${c.pct.toFixed(0)}%`,
   }));
 
@@ -65,11 +65,14 @@ export function renderCellCard(el, x) {
 
   return mount(el, html`
     <div class="panelhead">
-      <h3>Cell provenance <span class="chip z-${z}">${z}</span></h3>
+      <h3>Risk explanation <span class="chip z-${z}">${z}</span></h3>
       <div class="sub mono">${x.h3}</div>
     </div>
 
     <div class="panelbody">
+      ${x.is_synthetic ? html`<div class="callout warn"><b>Demo data — synthetic inputs.</b>
+        This cell requires field verification before an operational decision.</div>` : ""}
+      <p class="muted mono">Snapshot: ${x.snapshot_id || "not recorded"}</p>
       ${bare ? html`<div class="callout">
         <b>Open ground.</b> No dwellings are estimated in this cell, so its zone
         describes the land only — it constrains what may be built here and it
@@ -84,7 +87,7 @@ export function renderCellCard(el, x) {
           <dt>Location</dt><dd class="mono">${coord(x.centroid?.lat, x.centroid?.lon)}</dd>
           <dt>Habitation</dt><dd>${x.village_name || x.lgd_village_code || "—"}</dd>
           <dt>Governing hazard</dt><dd>${titleCase(x.governing_hazard?.name)} ·
-            ${rp(x.governing_hazard?.value)}</dd>
+            ${rp(hz.find((h) => h.name === x.governing_hazard?.name)?.annual_probability)}</dd>
           <dt>Hazards present</dt><dd>${num(x.hazard_count)} of 9${
             x.compound_bonus ? ` · compound uplift +${dp3(x.compound_bonus)}` : ""}</dd>
         </dl>
@@ -112,10 +115,14 @@ export function renderCellCard(el, x) {
       ${drivers.length ? html`<div class="block">
         <h5>What drives the score</h5>
         ${waterfall(drivers, { w: 356 })}
-        <p class="muted">Exact Shapley values for the linear model
-          (φᵢ = βᵢ(zᵢ − E[zᵢ])) — not an approximation, because the model is linear
-          by choice.</p>
+        <p class="muted">${x.model?.kind?.startsWith("xgboost")
+          ? "TreeSHAP contributions from the saved XGBoost model, in log-odds space."
+          : "Linear-model contributions in log-odds space: φᵢ = βᵢ(zᵢ − E[zᵢ])."}
+          These explain landslide susceptibility, not the full multi-hazard risk score.</p>
       </div>` : ""}
+      ${!x.model && hz.some((h) => h.key === "h_landslide") ? html`<div class="callout warn">
+        <b>Model attribution unavailable.</b> The saved training model or its runtime dependency
+        is missing. The rule explanation remains available; no substitute model is used.</div>` : ""}
 
       <div class="block">
         <h5>Who is exposed</h5>
@@ -138,11 +145,12 @@ export function renderCellCard(el, x) {
             <span class="muted">structural ${dp2(vu.structural)} · social ${dp2(vu.social)}
             · access ${dp2(vu.accessibility)}</span></dd>
           <dt>Risk score</dt><dd>${dp2(rk.score)}
-            <span class="muted">90% interval ${dp2(rk.ci_low)}–${dp2(rk.ci_high)}</span></dd>
+            <span class="muted">indicative band ${dp2(rk.ci_low)}–${dp2(rk.ci_high)}</span></dd>
           <dt>Expected affected persons / yr</dt><dd>${dp2(rk.eap_annual)}</dd>
           <dt>Expected annual loss</dt><dd>${inr(rk.eal_annual_inr)}
             <span class="muted">assets only</span></dd>
         </dl>
+        <p class="muted">The band widens with lower input confidence; it is not a calibrated statistical confidence interval.</p>
       </div>
 
       ${evRows.length ? html`<div class="block">
@@ -154,6 +162,11 @@ export function renderCellCard(el, x) {
 
       ${x.model ? modelBlock(x.model) : ""}
       ${confidenceBlock(x.confidence)}
+      ${x.approval ? html`<div class="block"><h5>Ruleset record</h5><dl class="kv">
+        <dt>Owner</dt><dd>${x.approval.owner || "not recorded"}</dd>
+        <dt>Approval record</dt><dd>${x.approval.approved_by || "not recorded"}</dd>
+        <dt>Recorded date</dt><dd>${x.approval.approved_at || "not recorded"}</dd>
+      </dl></div>` : ""}
     </div>`);
 }
 
@@ -194,15 +207,15 @@ function modelBlock(m) {
     <h5>The susceptibility model</h5>
     <dl class="kv">
       <dt>Form</dt><dd>${m.kind}</dd>
-      <dt>AUC</dt><dd>${dp3(m.auc_train)} in-sample · <b>${dp3(m.auc_cv)}</b> blocked cross-validation</dd>
+      <dt>AUC</dt><dd>${dp3(m.auc_train)} in-sample · <b>${dp3(m.auc_cv)}</b> random-fold cross-validation</dd>
       <dt>Training inventory</dt><dd>${num(m.n_pos)} positive · ${num(m.n_neg)} negative</dd>
     </dl>
-    <div class="scrollx"><table class="data">
+    ${m.kind?.startsWith("xgboost") ? html`<p class="muted">Tree model loaded from the saved training artefact. The linear coefficients are not its explanation.</p>` : html`<div class="scrollx"><table class="data">
       <thead><tr><th>Standardised coefficient</th><th class="n">β</th></tr></thead>
       <tbody>${rows.map(([k, v]) => html`<tr><td>${k.replace(/_/g, " ")}</td>
         <td class="n">${v > 0 ? "+" : ""}${dp3(v)}</td></tr>`)}</tbody>
-    </table></div>
-    <p class="muted">The cross-validated AUC is the honest one: blocked spatially, so a
-      landslide scar cannot appear in both the training and the test fold.</p>
+    </table></div>`}
+    <p class="muted">Validation uses random folds; spatially independent and dated-event
+      validation remain necessary. Synthetic-inventory AUC is not real-world accuracy.</p>
   </div>`;
 }

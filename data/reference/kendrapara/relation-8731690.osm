@@ -1,0 +1,700 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="openstreetmap-cgimap 2.1.0 (2942790 spike-08.openstreetmap.org)" copyright="OpenStreetMap and contributors" attribution="http://www.openstreetmap.org/copyright" license="http://opendatacommons.org/licenses/odbl/1-0/">
+ <node id="237386870" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6708236" lon="86.8705702"/>
+ <node id="237386893" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6772378" lon="86.8773079"/>
+ <node id="237386899" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6791149" lon="86.8787455"/>
+ <node id="237386914" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6731825" lon="86.8732738"/>
+ <node id="237386920" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6746882" lon="86.8748081"/>
+ <node id="237386925" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6761236" lon="86.8762779"/>
+ <node id="237386929" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6767159" lon="86.8768144"/>
+ <node id="237387671" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6827786" lon="86.8815887"/>
+ <node id="237387675" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6822667" lon="86.8813205"/>
+ <node id="237387688" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6770873" lon="86.8749905"/>
+ <node id="237387692" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6797372" lon="86.8779194"/>
+ <node id="237387695" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6829392" lon="86.8810630"/>
+ <node id="237387698" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6832604" lon="86.8816531"/>
+ <node id="237387701" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6728513" lon="86.8706882"/>
+ <node id="237387705" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6764850" lon="86.8742394"/>
+ <node id="237387710" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6754913" lon="86.8728983"/>
+ <node id="237387715" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6781814" lon="86.8762457"/>
+ <node id="237387723" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6714861" lon="86.8699264"/>
+ <node id="237387728" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6706831" lon="86.8699050"/>
+ <node id="237387731" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6742165" lon="86.8715894"/>
+ <node id="237407195" visible="true" version="4" changeset="62898569" timestamp="2018-09-25T01:43:59Z" user="icecreamfan" uid="7629876" lat="20.6651820" lon="86.8613112"/>
+ <node id="237412065" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6449029" lon="86.8050277"/>
+ <node id="237412069" visible="true" version="4" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6449480" lon="86.8057895"/>
+ <node id="237412074" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6449782" lon="86.8043518"/>
+ <node id="237412078" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6449129" lon="86.8048131"/>
+ <node id="237412083" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6449782" lon="86.8012834"/>
+ <node id="237412084" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6449129" lon="86.8022221"/>
+ <node id="237412262" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6453798" lon="86.8035901"/>
+ <node id="237412268" visible="true" version="3" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6455253" lon="86.8021846"/>
+ <node id="237412273" visible="true" version="4" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6451388" lon="86.8052959"/>
+ <node id="237412277" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6452743" lon="86.8042874"/>
+ <node id="237412283" visible="true" version="3" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6455002" lon="86.7999798"/>
+ <node id="237412287" visible="true" version="3" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6456860" lon="86.8002373"/>
+ <node id="237412295" visible="true" version="3" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6456006" lon="86.8017286"/>
+ <node id="237412300" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:09Z" user="icecreamfan" uid="7629876" lat="20.6452693" lon="86.8002588"/>
+ <node id="237412311" visible="true" version="3" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6457010" lon="86.8007147"/>
+ <node id="910546457" visible="true" version="2" changeset="62872641" timestamp="2018-09-24T08:58:43Z" user="icecreamfan" uid="7629876" lat="20.7048073" lon="87.0024915"/>
+ <node id="1000050924" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6702313" lon="86.7963374"/>
+ <node id="1000050926" visible="true" version="1" changeset="6435237" timestamp="2010-11-22T21:12:28Z" user="PlaneMad" uid="1306" lat="20.6701695" lon="86.8333620"/>
+ <node id="1000050947" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6738250" lon="86.8257022"/>
+ <node id="1000050949" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6764147" lon="86.8205631"/>
+ <node id="1000050977" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6824975" lon="86.8858051"/>
+ <node id="1000050994" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6440896" lon="86.8004787"/>
+ <node id="1000050996" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.7055215" lon="86.9191933"/>
+ <node id="1000051013" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6442402" lon="86.8229020"/>
+ <node id="1000051014" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6383969" lon="86.8133318"/>
+ <node id="1000051028" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.7082312" lon="86.9910335"/>
+ <node id="1000051051" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6660253" lon="86.7952430"/>
+ <node id="1000051065" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6668183" lon="86.8011975"/>
+ <node id="1000051081" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6387081" lon="86.8189537"/>
+ <node id="1000051094" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6564182" lon="86.8390488"/>
+ <node id="1000051096" visible="true" version="4" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6998374" lon="87.0070302"/>
+ <node id="1000051105" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6655585" lon="86.7989123"/>
+ <node id="1000051107" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6759630" lon="86.8008864"/>
+ <node id="1000051116" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6432864" lon="86.7855871"/>
+ <node id="1000051119" visible="true" version="3" changeset="62899201" timestamp="2018-09-25T02:50:24Z" user="icecreamfan" uid="7629876" lat="20.6521816" lon="86.8487155"/>
+ <node id="1000051120" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6739053" lon="86.8690681"/>
+ <node id="1000051131" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6422021" lon="86.8091369"/>
+ <node id="1000051148" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6381459" lon="86.8123019"/>
+ <node id="1000051149" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.7043022" lon="86.9796395"/>
+ <node id="1000051173" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6688762" lon="86.8053496"/>
+ <node id="1000051175" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6452442" lon="86.7856300"/>
+ <node id="1000051190" visible="true" version="3" changeset="180742867" timestamp="2026-04-01T22:22:51Z" user="dmgroom_ct" uid="437598" lat="20.7149650" lon="86.9283208"/>
+ <node id="1000051210" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6729015" lon="86.7970133"/>
+ <node id="1000051233" visible="true" version="1" changeset="6435237" timestamp="2010-11-22T21:12:46Z" user="PlaneMad" uid="1306" lat="20.6534416" lon="86.8181510"/>
+ <node id="1000051260" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6744774" lon="86.8269145"/>
+ <node id="1000051280" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6453346" lon="86.7739034"/>
+ <node id="1000051281" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6755917" lon="86.8192863"/>
+ <node id="1000051282" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6754812" lon="86.8241787"/>
+ <node id="1000051295" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.7089136" lon="86.9163608"/>
+ <node id="1000051303" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6443406" lon="86.7995989"/>
+ <node id="1000051321" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.7023702" lon="86.9118118"/>
+ <node id="1000051332" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6500331" lon="86.8215608"/>
+ <node id="1000051333" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6430957" lon="86.8094802"/>
+ <node id="1000051351" visible="true" version="2" changeset="62898449" timestamp="2018-09-25T01:31:11Z" user="icecreamfan" uid="7629876" lat="20.7147542" lon="86.9598126"/>
+ <node id="1000051363" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6654732" lon="86.8002641"/>
+ <node id="1000051383" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6374933" lon="86.8154025"/>
+ <node id="1000051389" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6547517" lon="86.8396282"/>
+ <node id="1000051393" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.7007594" lon="86.9995576"/>
+ <node id="1000051400" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6646249" lon="86.7970616"/>
+ <node id="1000051404" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6646500" lon="86.8372679"/>
+ <node id="1000051415" visible="true" version="3" changeset="62899201" timestamp="2018-09-25T02:50:24Z" user="icecreamfan" uid="7629876" lat="20.6509969" lon="86.8449604"/>
+ <node id="1000051420" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6813332" lon="86.8764925"/>
+ <node id="1000051428" visible="true" version="1" changeset="6435237" timestamp="2010-11-22T21:12:55Z" user="PlaneMad" uid="1306" lat="20.6663978" lon="86.8699450"/>
+ <node id="1000051447" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6390796" lon="86.8114221"/>
+ <node id="1000051448" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.7047538" lon="86.9777942"/>
+ <node id="1000051473" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6671847" lon="86.8001032"/>
+ <node id="1000051475" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6471919" lon="86.7774331"/>
+ <node id="1000051487" visible="true" version="3" changeset="180742867" timestamp="2026-04-01T22:22:51Z" user="dmgroom_ct" uid="437598" lat="20.7167161" lon="86.9342297"/>
+ <node id="1000051521" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6564282" lon="86.8167865"/>
+ <node id="1000051524" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6593897" lon="86.8561291"/>
+ <node id="1000051533" visible="true" version="1" changeset="6435237" timestamp="2010-11-22T21:12:58Z" user="PlaneMad" uid="1306" lat="20.6440602" lon="86.8218056"/>
+ <node id="1000051538" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6736443" lon="86.8286312"/>
+ <node id="1000051544" visible="true" version="3" changeset="62898449" timestamp="2018-09-25T01:31:11Z" user="icecreamfan" uid="7629876" lat="20.6449932" lon="86.7732596"/>
+ <node id="1000051545" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6685851" lon="86.8334484"/>
+ <node id="1000051547" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6770572" lon="86.8139541"/>
+ <node id="1000051554" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.7116032" lon="86.9219398"/>
+ <node id="1000051563" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6440495" lon="86.8041587"/>
+ <node id="1000051564" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.7118038" lon="86.9364023"/>
+ <node id="1000051575" visible="true" version="2" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6471116" lon="86.8230414"/>
+ <node id="1000051576" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:10Z" user="icecreamfan" uid="7629876" lat="20.6416800" lon="86.8108964"/>
+ <node id="1000051583" visible="true" version="3" changeset="62898449" timestamp="2018-09-25T01:31:11Z" user="icecreamfan" uid="7629876" lat="20.7137306" lon="86.9730198"/>
+ <node id="1000051589" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6653929" lon="86.8121517"/>
+ <node id="1000051595" visible="true" version="3" changeset="62898449" timestamp="2018-09-25T01:31:11Z" user="icecreamfan" uid="7629876" lat="20.7146439" lon="86.9668937"/>
+ <node id="1000051604" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6682638" lon="86.8034935"/>
+ <node id="1000051616" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6374129" lon="86.8167972"/>
+ <node id="1000051628" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6605944" lon="86.8384909"/>
+ <node id="1000051647" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6645847" lon="86.7976463"/>
+ <node id="1000051648" visible="true" version="3" changeset="62899201" timestamp="2018-09-25T02:50:24Z" user="icecreamfan" uid="7629876" lat="20.6633550" lon="86.8378580"/>
+ <node id="1000051662" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6435575" lon="86.7896211"/>
+ <node id="1000051666" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6597913" lon="86.8601632"/>
+ <node id="1000051686" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6619998" lon="86.8636608"/>
+ <node id="1000051700" visible="true" version="2" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6367704" lon="86.8153703"/>
+ <node id="1000051702" visible="true" version="1" changeset="6435237" timestamp="2010-11-22T21:13:08Z" user="PlaneMad" uid="1306" lat="20.7019696" lon="86.9913974"/>
+ <node id="1000051731" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6681986" lon="86.8010956"/>
+ <node id="1000051733" visible="true" version="1" changeset="6435237" timestamp="2010-11-22T21:13:09Z" user="PlaneMad" uid="1306" lat="20.6465318" lon="86.7786105"/>
+ <node id="1000051779" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6694383" lon="86.7951465"/>
+ <node id="1000051808" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6478746" lon="86.8219256"/>
+ <node id="1000051828" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6464088" lon="86.8224299"/>
+ <node id="1000051841" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6518403" lon="86.8438124"/>
+ <node id="1000051853" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6452442" lon="86.7786133"/>
+ <node id="1000051855" visible="true" version="1" changeset="6435237" timestamp="2010-11-22T21:13:12Z" user="PlaneMad" uid="1306" lat="20.6720298" lon="86.8291657"/>
+ <node id="1000051870" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6769267" lon="86.8177199"/>
+ <node id="1000051882" visible="true" version="3" changeset="62899201" timestamp="2018-09-25T02:50:24Z" user="icecreamfan" uid="7629876" lat="20.6552034" lon="86.8382227"/>
+ <node id="1000051894" visible="true" version="3" changeset="62898569" timestamp="2018-09-25T01:43:59Z" user="icecreamfan" uid="7629876" lat="20.7005236" lon="86.9010186"/>
+ <node id="1000051905" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6439390" lon="86.8012404"/>
+ <node id="1000051909" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.7109408" lon="86.9321430"/>
+ <node id="1000051932" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6552837" lon="86.8186319"/>
+ <node id="1000051949" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6457763" lon="86.8041372"/>
+ <node id="1000051952" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.7089236" lon="86.9639861"/>
+ <node id="1000051960" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.7103989" lon="86.9839525"/>
+ <node id="1000051973" visible="true" version="2" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6636261" lon="86.8141901"/>
+ <node id="1000051999" visible="true" version="3" changeset="62898449" timestamp="2018-09-25T01:31:12Z" user="icecreamfan" uid="7629876" lat="20.7157578" lon="86.9486117"/>
+ <node id="1000052019" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6679627" lon="86.8023240"/>
+ <node id="1000052050" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6640276" lon="86.8123019"/>
+ <node id="1000052054" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6584260" lon="86.8387913"/>
+ <node id="1000052082" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6675812" lon="86.7959350"/>
+ <node id="1000052095" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6682638" lon="86.8351543"/>
+ <node id="1000052104" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6445013" lon="86.7989015"/>
+ <node id="1000052113" visible="true" version="3" changeset="62899201" timestamp="2018-09-25T02:50:24Z" user="icecreamfan" uid="7629876" lat="20.6540991" lon="86.8523097"/>
+ <node id="1000052129" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6776695" lon="86.8809020"/>
+ <node id="1000052143" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6372925" lon="86.8139434"/>
+ <node id="1000052145" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.7032032" lon="86.9842207"/>
+ <node id="1000052170" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6385575" lon="86.8198120"/>
+ <node id="1000058465" visible="true" version="4" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6478646" lon="86.7755502"/>
+ <node id="1000058475" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6676716" lon="86.7950499"/>
+ <node id="1000058492" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6499729" lon="86.8205309"/>
+ <node id="1000058497" visible="true" version="1" changeset="6435311" timestamp="2010-11-22T21:23:13Z" user="PlaneMad" uid="1306" lat="20.6532105" lon="86.8481778"/>
+ <node id="1000058502" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6405857" lon="86.8200374"/>
+ <node id="1000058508" visible="true" version="1" changeset="6435311" timestamp="2010-11-22T21:23:14Z" user="PlaneMad" uid="1306" lat="20.6522401" lon="86.8460048"/>
+ <node id="1000058519" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6454852" lon="86.7755234"/>
+ <node id="1000058522" visible="true" version="1" changeset="6435311" timestamp="2010-11-22T21:23:14Z" user="PlaneMad" uid="1306" lat="20.6623261" lon="86.8366354"/>
+ <node id="1000058525" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6768263" lon="86.8044484"/>
+ <node id="1000058536" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6433868" lon="86.7849111"/>
+ <node id="1000058537" visible="true" version="2" changeset="62899201" timestamp="2018-09-25T02:50:24Z" user="icecreamfan" uid="7629876" lat="20.6580746" lon="86.8372679"/>
+ <node id="1000058541" visible="true" version="3" changeset="62898569" timestamp="2018-09-25T01:43:59Z" user="icecreamfan" uid="7629876" lat="20.7017480" lon="86.9040012"/>
+ <node id="1000058549" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6429953" lon="86.8080962"/>
+ <node id="1000058551" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.7104491" lon="86.9478285"/>
+ <node id="1000058565" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6523924" lon="86.8201876"/>
+ <node id="1000058566" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6451237" lon="86.8063795"/>
+ <node id="1000058567" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.7091846" lon="86.9565940"/>
+ <node id="1000058585" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6682237" lon="86.8077850"/>
+ <node id="1000058586" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6448627" lon="86.7877114"/>
+ <node id="1000058594" visible="true" version="2" changeset="62898449" timestamp="2018-09-25T01:31:12Z" user="icecreamfan" uid="7629876" lat="20.7150854" lon="86.9541263"/>
+ <node id="1000058607" visible="true" version="1" changeset="6435311" timestamp="2010-11-22T21:23:17Z" user="PlaneMad" uid="1306" lat="20.6669812" lon="86.8081256"/>
+ <node id="1000058620" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6653025" lon="86.8106818"/>
+ <node id="1000058637" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6650666" lon="86.7964822"/>
+ <node id="1000058639" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6663967" lon="86.8365383"/>
+ <node id="1000058647" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6444611" lon="86.7978930"/>
+ <node id="1000058650" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6758928" lon="86.8042660"/>
+ <node id="1000058660" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6722992" lon="86.8760633"/>
+ <node id="1000058672" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:11Z" user="icecreamfan" uid="7629876" lat="20.6988375" lon="86.9037974"/>
+ <node id="1000058705" visible="true" version="2" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6374832" lon="86.8185997"/>
+ <node id="1000058706" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6475785" lon="86.7766821"/>
+ <node id="1000058713" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.7087129" lon="86.9948530"/>
+ <node id="1000058749" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6643388" lon="86.7991269"/>
+ <node id="1000058755" visible="true" version="1" changeset="6435311" timestamp="2010-11-22T21:23:23Z" user="PlaneMad" uid="1306" lat="20.6543196" lon="86.8502520"/>
+ <node id="1000058763" visible="true" version="1" changeset="6435311" timestamp="2010-11-22T21:23:24Z" user="PlaneMad" uid="1306" lat="20.6423503" lon="86.8209660"/>
+ <node id="1000058770" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6526836" lon="86.8410229"/>
+ <node id="1000058777" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6440294" lon="86.7829907"/>
+ <node id="1000058785" visible="true" version="1" changeset="6435311" timestamp="2010-11-22T21:23:24Z" user="PlaneMad" uid="1306" lat="20.6663694" lon="86.8350303"/>
+ <node id="1000058787" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6768363" lon="86.8072164"/>
+ <node id="1000058810" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6436579" lon="86.7840099"/>
+ <node id="1000058812" visible="true" version="3" changeset="62899201" timestamp="2018-09-25T02:50:24Z" user="icecreamfan" uid="7629876" lat="20.6510070" lon="86.8426108"/>
+ <node id="1000058813" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6890418" lon="86.8846035"/>
+ <node id="1000058821" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6437985" lon="86.8064010"/>
+ <node id="1000058823" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.7118540" lon="86.9398463"/>
+ <node id="1000058846" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6402543" lon="86.8105960"/>
+ <node id="1000058847" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6462683" lon="86.7937839"/>
+ <node id="1000058849" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.7072527" lon="86.9734704"/>
+ <node id="1000058883" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6671395" lon="86.8098020"/>
+ <node id="1000058884" visible="true" version="1" changeset="6435311" timestamp="2010-11-22T21:23:27Z" user="PlaneMad" uid="1306" lat="20.6453080" lon="86.7905442"/>
+ <node id="1000058894" visible="true" version="3" changeset="180742867" timestamp="2026-04-01T22:22:51Z" user="dmgroom_ct" uid="437598" lat="20.7170021" lon="86.9386500"/>
+ <node id="1000058921" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6678623" lon="86.8060899"/>
+ <node id="1000058944" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6604237" lon="86.8150699"/>
+ <node id="1000058978" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6722289" lon="86.7974424"/>
+ <node id="1000058980" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6716367" lon="86.8315816"/>
+ <node id="1000058992" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6752504" lon="86.8014550"/>
+ <node id="1000059007" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6893730" lon="86.8934977"/>
+ <node id="1000059018" visible="true" version="2" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6368206" lon="86.8169260"/>
+ <node id="1000059022" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6948129" lon="86.8991089"/>
+ <node id="1000059032" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6454450" lon="86.8232345"/>
+ <node id="1000059033" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6394210" lon="86.8122697"/>
+ <node id="1000059042" visible="true" version="2" changeset="62872641" timestamp="2018-09-24T08:58:44Z" user="icecreamfan" uid="7629876" lat="20.7105193" lon="86.9976854"/>
+ <node id="1000059058" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6639523" lon="86.7967665"/>
+ <node id="1000059093" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6639071" lon="86.7978930"/>
+ <node id="1000059108" visible="true" version="1" changeset="6435311" timestamp="2010-11-22T21:23:36Z" user="PlaneMad" uid="1306" lat="20.6380522" lon="86.8182004"/>
+ <node id="1000059112" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6520210" lon="86.8423962"/>
+ <node id="1000059121" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6446017" lon="86.7815316"/>
+ <node id="1000059124" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6648708" lon="86.7982954"/>
+ <node id="1000059127" visible="true" version="3" changeset="63001897" timestamp="2018-09-28T08:42:25Z" user="icecreamfan" uid="7629876" lat="20.6747711" lon="86.7989190"/>
+ <node id="1000059141" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6434270" lon="86.7867136"/>
+ <node id="1000059142" visible="true" version="2" changeset="62899201" timestamp="2018-09-25T02:50:24Z" user="icecreamfan" uid="7629876" lat="20.6515993" lon="86.8410551"/>
+ <node id="1000059143" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6955054" lon="86.8929290"/>
+ <node id="1000059157" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6413487" lon="86.8098986"/>
+ <node id="1000059160" visible="true" version="4" changeset="62899201" timestamp="2018-09-25T02:50:24Z" user="icecreamfan" uid="7629876" lat="20.6625620" lon="86.8598735"/>
+ <node id="1000059175" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6406559" lon="86.8103492"/>
+ <node id="1000059176" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6460976" lon="86.7997062"/>
+ <node id="1000059178" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.7084118" lon="86.9699353"/>
+ <node id="1000059194" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6688561" lon="86.8023884"/>
+ <node id="1000059195" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6458064" lon="86.7814672"/>
+ <node id="1000059204" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.7168617" lon="86.9427108"/>
+ <node id="1000059220" visible="true" version="3" changeset="62899275" timestamp="2018-09-25T02:58:55Z" user="icecreamfan" uid="7629876" lat="20.6712703" lon="86.7959136"/>
+ <node id="1000059237" visible="true" version="2" changeset="62873401" timestamp="2018-09-24T09:24:12Z" user="icecreamfan" uid="7629876" lat="20.6625720" lon="86.8136644"/>
+ <node id="5926158928" visible="true" version="1" changeset="62872641" timestamp="2018-09-24T08:58:42Z" user="icecreamfan" uid="7629876" lat="20.6998813" lon="87.0069981"/>
+ <node id="5926214384" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:07Z" user="icecreamfan" uid="7629876" lat="20.6719880" lon="86.8677914"/>
+ <node id="5926215185" visible="true" version="2" changeset="62898569" timestamp="2018-09-25T01:43:59Z" user="icecreamfan" uid="7629876" lat="20.6693781" lon="86.8658602"/>
+ <node id="5926215215" visible="true" version="2" changeset="62899275" timestamp="2018-09-25T02:58:56Z" user="icecreamfan" uid="7629876" lat="20.6439089" lon="86.7932153"/>
+ <node id="5926215216" visible="true" version="2" changeset="62899275" timestamp="2018-09-25T02:58:56Z" user="icecreamfan" uid="7629876" lat="20.6439591" lon="86.7918420"/>
+ <node id="5926215217" visible="true" version="2" changeset="62899275" timestamp="2018-09-25T02:58:56Z" user="icecreamfan" uid="7629876" lat="20.6414592" lon="86.8213677"/>
+ <node id="5926215218" visible="true" version="2" changeset="62899275" timestamp="2018-09-25T02:58:56Z" user="icecreamfan" uid="7629876" lat="20.6485975" lon="86.8225050"/>
+ <node id="5926215219" visible="true" version="2" changeset="62899275" timestamp="2018-09-25T02:58:56Z" user="icecreamfan" uid="7629876" lat="20.6614778" lon="86.8157136"/>
+ <node id="5926215220" visible="true" version="2" changeset="62899275" timestamp="2018-09-25T02:58:56Z" user="icecreamfan" uid="7629876" lat="20.6690769" lon="86.8038261"/>
+ <node id="5926215221" visible="true" version="2" changeset="62899275" timestamp="2018-09-25T02:58:56Z" user="icecreamfan" uid="7629876" lat="20.6659399" lon="86.7960638"/>
+ <node id="5926215222" visible="true" version="2" changeset="62899275" timestamp="2018-09-25T02:58:56Z" user="icecreamfan" uid="7629876" lat="20.6739053" lon="86.7991269"/>
+ <node id="5926215223" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.6748890" lon="86.8225479"/>
+ <node id="5926215224" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.6704522" lon="86.8316459"/>
+ <node id="5926215225" visible="true" version="2" changeset="62899201" timestamp="2018-09-25T02:50:24Z" user="icecreamfan" uid="7629876" lat="20.6529948" lon="86.8393922"/>
+ <node id="5926215226" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.6703518" lon="86.8742180"/>
+ <node id="5926215227" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.6972016" lon="86.9015872"/>
+ <node id="5926215228" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.7009752" lon="86.9080138"/>
+ <node id="5926215229" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.7076391" lon="86.9240427"/>
+ <node id="5926215230" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.7110512" lon="86.9448030"/>
+ <node id="5926215231" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.7088233" lon="86.9677573"/>
+ <node id="5926215232" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.7080004" lon="86.9714695"/>
+ <node id="5926215233" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.7043875" lon="86.9787222"/>
+ <node id="5926215234" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.7013967" lon="86.9950515"/>
+ <node id="5926215235" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.7002677" lon="87.0049649"/>
+ <node id="5926215236" visible="true" version="2" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6477718" lon="86.7757970"/>
+ <node id="5926215237" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.6455153" lon="86.7848039"/>
+ <node id="5926215238" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.6456157" lon="86.7838919"/>
+ <node id="5926215239" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.6448928" lon="86.7892563"/>
+ <node id="5926215240" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.6460072" lon="86.7924535"/>
+ <node id="5926215241" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.6461478" lon="86.7957258"/>
+ <node id="5926215242" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.6461177" lon="86.8010688"/>
+ <node id="5926215243" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.6439089" lon="86.8085897"/>
+ <node id="5926215244" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.6450535" lon="86.8222690"/>
+ <node id="5926215245" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.6681936" lon="86.8049097"/>
+ <node id="5926215246" visible="true" version="2" changeset="62899275" timestamp="2018-09-25T02:58:56Z" user="icecreamfan" uid="7629876" lat="20.6647454" lon="86.7958921"/>
+ <node id="5926215247" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.6765452" lon="86.8027532"/>
+ <node id="5926215248" visible="true" version="1" changeset="62873401" timestamp="2018-09-24T09:24:08Z" user="icecreamfan" uid="7629876" lat="20.6728914" lon="86.8300366"/>
+ <node id="5927889285" visible="true" version="1" changeset="62898569" timestamp="2018-09-25T01:43:59Z" user="icecreamfan" uid="7629876" lat="20.6673905" lon="86.8640685"/>
+ <node id="5927889286" visible="true" version="1" changeset="62898569" timestamp="2018-09-25T01:43:59Z" user="icecreamfan" uid="7629876" lat="20.6663365" lon="86.8628883"/>
+ <node id="5927889287" visible="true" version="1" changeset="62898569" timestamp="2018-09-25T01:43:59Z" user="icecreamfan" uid="7629876" lat="20.7162796" lon="86.9467664"/>
+ <node id="5927889288" visible="true" version="1" changeset="62898569" timestamp="2018-09-25T01:43:59Z" user="icecreamfan" uid="7629876" lat="20.7031430" lon="86.9064474"/>
+ <node id="5927889289" visible="true" version="1" changeset="62898569" timestamp="2018-09-25T01:43:59Z" user="icecreamfan" uid="7629876" lat="20.7045882" lon="86.9083142"/>
+ <node id="5927889290" visible="true" version="1" changeset="62898569" timestamp="2018-09-25T01:43:59Z" user="icecreamfan" uid="7629876" lat="20.7065552" lon="86.9118440"/>
+ <node id="5927889291" visible="true" version="1" changeset="62898569" timestamp="2018-09-25T01:43:59Z" user="icecreamfan" uid="7629876" lat="20.7101279" lon="86.9194829"/>
+ <node id="5927932121" visible="true" version="1" changeset="62899392" timestamp="2018-09-25T03:09:51Z" user="icecreamfan" uid="7629876" lat="20.6468907" lon="86.7741930"/>
+ <node id="6271115585" visible="true" version="1" changeset="67093734" timestamp="2019-02-11T09:20:49Z" user="Heinz_V" uid="91490" lat="20.6927742" lon="86.8894111"/>
+ <node id="8817751772" visible="true" version="1" changeset="106093945" timestamp="2021-06-09T12:03:46Z" user="Konmuang" uid="13253615" lat="20.7156085" lon="86.9302471"/>
+ <node id="8817751818" visible="true" version="1" changeset="106093945" timestamp="2021-06-09T12:03:46Z" user="Konmuang" uid="13253615" lat="20.7163655" lon="86.9461681"/>
+ <node id="8817751928" visible="true" version="1" changeset="106093945" timestamp="2021-06-09T12:03:46Z" user="Konmuang" uid="13253615" lat="20.7149723" lon="86.9560684"/>
+ <node id="8817752074" visible="true" version="1" changeset="106093945" timestamp="2021-06-09T12:03:46Z" user="Konmuang" uid="13253615" lat="20.7119645" lon="86.9788153"/>
+ <node id="13699954687" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6470112" lon="86.7747188"/>
+ <node id="13699954688" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6469259" lon="86.7747670"/>
+ <node id="13699954689" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6468255" lon="86.7749172"/>
+ <node id="13699954690" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6467954" lon="86.7752498"/>
+ <node id="13699954691" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6468054" lon="86.7761671"/>
+ <node id="13699954692" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6469209" lon="86.7772347"/>
+ <node id="13699954693" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6472371" lon="86.7766070"/>
+ <node id="13699954694" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6475182" lon="86.7758077"/>
+ <node id="13699954695" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6475684" lon="86.7755234"/>
+ <node id="13699954696" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6474429" lon="86.7751479"/>
+ <node id="13699954697" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6471919" lon="86.7747939"/>
+ <node id="13699954698" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6450434" lon="86.7832831"/>
+ <node id="13699954699" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6449531" lon="86.7833850"/>
+ <node id="13699954700" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6444812" lon="86.7842486"/>
+ <node id="13699958301" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6442804" lon="86.7852196"/>
+ <node id="13699958302" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6442628" lon="86.7860806"/>
+ <node id="13699958303" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6444385" lon="86.7869389"/>
+ <node id="13699958304" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6447347" lon="86.7858472"/>
+ <node id="13699958305" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6450811" lon="86.7844230"/>
+ <node id="13699958306" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6451262" lon="86.7840394"/>
+ <node id="13699958307" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6451714" lon="86.7837229"/>
+ <node id="13699958308" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6451037" lon="86.7834038"/>
+ <node id="13699958309" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6441599" lon="86.7922765"/>
+ <node id="13699958310" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6441097" lon="86.7930973"/>
+ <node id="13699958311" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6441850" lon="86.7942291"/>
+ <node id="13699958312" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6444812" lon="86.7963266"/>
+ <node id="13699958313" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6447673" lon="86.7986119"/>
+ <node id="13699958314" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6449480" lon="86.7980915"/>
+ <node id="13699958315" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6451539" lon="86.7971957"/>
+ <node id="13699958316" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6453346" lon="86.7961711"/>
+ <node id="13699958317" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6453346" lon="86.7953503"/>
+ <node id="13699958318" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6452894" lon="86.7942506"/>
+ <node id="13699958319" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6452342" lon="86.7936176"/>
+ <node id="13699958320" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6451689" lon="86.7933279"/>
+ <node id="13699958321" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6451288" lon="86.7929739"/>
+ <node id="13699958322" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6449782" lon="86.7925769"/>
+ <node id="13699958323" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6447071" lon="86.7921853"/>
+ <node id="13699958324" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598" lat="20.6442503" lon="86.7919010"/>
+ <node id="13699958770" visible="true" version="1" changeset="180742867" timestamp="2026-04-01T22:22:51Z" user="dmgroom_ct" uid="437598" lat="20.7169419" lon="86.9410908"/>
+ <node id="13699958771" visible="true" version="1" changeset="180742867" timestamp="2026-04-01T22:22:51Z" user="dmgroom_ct" uid="437598" lat="20.7169469" lon="86.9400984"/>
+ <node id="13699958772" visible="true" version="1" changeset="180742867" timestamp="2026-04-01T22:22:51Z" user="dmgroom_ct" uid="437598" lat="20.7170523" lon="86.9374269"/>
+ <node id="13699958773" visible="true" version="1" changeset="180742867" timestamp="2026-04-01T22:22:51Z" user="dmgroom_ct" uid="437598" lat="20.7169720" lon="86.9357049"/>
+ <node id="13699958774" visible="true" version="1" changeset="180742867" timestamp="2026-04-01T22:22:51Z" user="dmgroom_ct" uid="437598" lat="20.7162344" lon="86.9324219"/>
+ <node id="13699958775" visible="true" version="1" changeset="180742867" timestamp="2026-04-01T22:22:51Z" user="dmgroom_ct" uid="437598" lat="20.7147542" lon="86.9276985"/>
+ <node id="13699958776" visible="true" version="1" changeset="180742867" timestamp="2026-04-01T22:22:51Z" user="dmgroom_ct" uid="437598" lat="20.7140643" lon="86.9261241"/>
+ <node id="13699958777" visible="true" version="1" changeset="180742867" timestamp="2026-04-01T22:22:51Z" user="dmgroom_ct" uid="437598" lat="20.7129178" lon="86.9241044"/>
+ <way id="22062567" visible="true" version="3" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598">
+  <nd ref="237412083"/>
+  <nd ref="237412084"/>
+  <nd ref="237412074"/>
+  <nd ref="237412078"/>
+  <nd ref="237412065"/>
+  <nd ref="237412069"/>
+  <nd ref="237412273"/>
+  <nd ref="237412277"/>
+  <nd ref="237412262"/>
+  <nd ref="237412268"/>
+  <nd ref="237412295"/>
+  <nd ref="237412311"/>
+  <nd ref="237412287"/>
+  <nd ref="237412283"/>
+  <nd ref="237412300"/>
+  <nd ref="237412083"/>
+  <tag k="natural" v="wetland"/>
+ </way>
+ <way id="22062603" visible="true" version="3" changeset="180742715" timestamp="2026-04-01T22:15:15Z" user="dmgroom_ct" uid="437598">
+  <nd ref="237387728"/>
+  <nd ref="237386870"/>
+  <nd ref="237386914"/>
+  <nd ref="237386920"/>
+  <nd ref="237386925"/>
+  <nd ref="237386929"/>
+  <nd ref="237386893"/>
+  <nd ref="237386899"/>
+  <nd ref="237387675"/>
+  <nd ref="237387671"/>
+  <nd ref="237387698"/>
+  <nd ref="237387695"/>
+  <nd ref="237387692"/>
+  <nd ref="237387715"/>
+  <nd ref="237387688"/>
+  <nd ref="237387705"/>
+  <nd ref="237387710"/>
+  <nd ref="237387731"/>
+  <nd ref="237387701"/>
+  <nd ref="237387723"/>
+  <nd ref="237387728"/>
+  <tag k="natural" v="wetland"/>
+ </way>
+ <way id="86162239" visible="true" version="3" changeset="62873401" timestamp="2018-09-24T09:24:14Z" user="icecreamfan" uid="7629876">
+  <nd ref="1000051096"/>
+  <nd ref="5926215235"/>
+  <nd ref="1000051393"/>
+  <nd ref="5926215234"/>
+  <nd ref="1000051702"/>
+  <nd ref="1000052145"/>
+  <nd ref="1000051149"/>
+  <nd ref="5926215233"/>
+  <nd ref="1000051448"/>
+  <nd ref="1000058849"/>
+  <nd ref="5926215232"/>
+  <nd ref="1000059178"/>
+  <nd ref="5926215231"/>
+  <nd ref="1000051952"/>
+  <nd ref="1000058567"/>
+  <nd ref="1000058551"/>
+  <nd ref="5926215230"/>
+  <nd ref="1000058823"/>
+  <nd ref="1000051564"/>
+  <nd ref="1000051909"/>
+  <nd ref="5926215229"/>
+  <nd ref="1000050996"/>
+  <nd ref="1000051321"/>
+  <nd ref="5926215228"/>
+  <nd ref="1000058672"/>
+  <nd ref="5926215227"/>
+  <nd ref="1000059022"/>
+  <nd ref="1000059007"/>
+  <nd ref="1000050977"/>
+  <nd ref="1000052129"/>
+  <tag k="source" v="landsat"/>
+ </way>
+ <way id="86162319" visible="true" version="3" changeset="62873401" timestamp="2018-09-24T09:24:14Z" user="icecreamfan" uid="7629876">
+  <nd ref="1000052129"/>
+  <nd ref="1000058660"/>
+  <nd ref="5926215226"/>
+  <nd ref="1000051428"/>
+  <nd ref="1000051686"/>
+  <nd ref="1000051666"/>
+  <nd ref="1000052113"/>
+  <nd ref="1000051119"/>
+  <nd ref="1000051415"/>
+  <nd ref="1000058812"/>
+  <nd ref="1000059142"/>
+  <nd ref="5926215225"/>
+  <nd ref="1000051882"/>
+  <nd ref="1000058537"/>
+  <nd ref="1000058522"/>
+  <nd ref="1000058785"/>
+  <nd ref="1000051545"/>
+  <nd ref="5926215224"/>
+  <nd ref="1000051855"/>
+  <nd ref="1000050947"/>
+  <nd ref="5926215223"/>
+  <nd ref="1000051281"/>
+  <nd ref="1000058650"/>
+  <nd ref="1000058992"/>
+  <nd ref="5926215222"/>
+  <nd ref="1000058978"/>
+  <nd ref="1000050924"/>
+  <nd ref="1000052082"/>
+  <nd ref="5926215221"/>
+  <nd ref="1000058637"/>
+  <nd ref="1000051400"/>
+  <nd ref="1000051647"/>
+  <nd ref="1000059124"/>
+  <nd ref="1000051105"/>
+  <nd ref="1000051473"/>
+  <nd ref="1000051731"/>
+  <nd ref="1000059194"/>
+  <nd ref="5926215220"/>
+  <nd ref="1000051173"/>
+  <nd ref="1000058585"/>
+  <nd ref="1000058883"/>
+  <nd ref="1000051589"/>
+  <nd ref="1000051973"/>
+  <nd ref="5926215219"/>
+  <nd ref="1000051932"/>
+  <nd ref="1000058565"/>
+  <nd ref="1000051332"/>
+  <nd ref="5926215218"/>
+  <nd ref="1000051575"/>
+  <nd ref="1000059032"/>
+  <nd ref="1000051013"/>
+  <nd ref="5926215217"/>
+  <nd ref="1000052170"/>
+  <nd ref="1000058705"/>
+  <nd ref="1000059018"/>
+  <nd ref="1000051700"/>
+  <nd ref="1000052143"/>
+  <nd ref="1000051148"/>
+  <nd ref="1000051447"/>
+  <nd ref="1000058846"/>
+  <nd ref="1000059175"/>
+  <nd ref="1000059157"/>
+  <nd ref="1000051131"/>
+  <nd ref="1000058549"/>
+  <nd ref="1000058821"/>
+  <nd ref="1000051563"/>
+  <nd ref="1000051905"/>
+  <nd ref="1000050994"/>
+  <nd ref="1000051303"/>
+  <nd ref="1000052104"/>
+  <nd ref="1000058647"/>
+  <nd ref="5926215215"/>
+  <nd ref="5926215216"/>
+  <nd ref="1000051662"/>
+  <nd ref="1000059141"/>
+  <nd ref="1000051116"/>
+  <nd ref="1000058536"/>
+  <nd ref="1000058810"/>
+  <nd ref="1000058777"/>
+  <nd ref="1000059121"/>
+  <nd ref="1000051853"/>
+  <nd ref="1000058519"/>
+  <nd ref="1000051280"/>
+  <nd ref="1000051544"/>
+  <tag k="source" v="landsat"/>
+ </way>
+ <way id="86162332" visible="true" version="9" changeset="180742867" timestamp="2026-04-01T22:22:51Z" user="dmgroom_ct" uid="437598">
+  <nd ref="1000058465"/>
+  <nd ref="5926215236"/>
+  <nd ref="1000058706"/>
+  <nd ref="1000051475"/>
+  <nd ref="1000051733"/>
+  <nd ref="1000059195"/>
+  <nd ref="5926215238"/>
+  <nd ref="5926215237"/>
+  <nd ref="1000051175"/>
+  <nd ref="1000058586"/>
+  <nd ref="5926215239"/>
+  <nd ref="1000058884"/>
+  <nd ref="5926215240"/>
+  <nd ref="1000058847"/>
+  <nd ref="5926215241"/>
+  <nd ref="1000059176"/>
+  <nd ref="5926215242"/>
+  <nd ref="1000051949"/>
+  <nd ref="1000058566"/>
+  <nd ref="5926215243"/>
+  <nd ref="1000051333"/>
+  <nd ref="1000051576"/>
+  <nd ref="1000059033"/>
+  <nd ref="1000051014"/>
+  <nd ref="1000051383"/>
+  <nd ref="1000051616"/>
+  <nd ref="1000059108"/>
+  <nd ref="1000051081"/>
+  <nd ref="1000058502"/>
+  <nd ref="1000058763"/>
+  <nd ref="1000051533"/>
+  <nd ref="5926215244"/>
+  <nd ref="1000051828"/>
+  <nd ref="1000051808"/>
+  <nd ref="1000058492"/>
+  <nd ref="1000051233"/>
+  <nd ref="1000051521"/>
+  <nd ref="1000058944"/>
+  <nd ref="1000059237"/>
+  <nd ref="1000052050"/>
+  <nd ref="1000058620"/>
+  <nd ref="1000058607"/>
+  <nd ref="1000058921"/>
+  <nd ref="5926215245"/>
+  <nd ref="1000051604"/>
+  <nd ref="1000052019"/>
+  <nd ref="1000051065"/>
+  <nd ref="1000051363"/>
+  <nd ref="1000058749"/>
+  <nd ref="1000059093"/>
+  <nd ref="1000059058"/>
+  <nd ref="5926215246"/>
+  <nd ref="1000051051"/>
+  <nd ref="1000058475"/>
+  <nd ref="1000051779"/>
+  <nd ref="1000059220"/>
+  <nd ref="1000051210"/>
+  <nd ref="1000059127"/>
+  <nd ref="1000051107"/>
+  <nd ref="5926215247"/>
+  <nd ref="1000058525"/>
+  <nd ref="1000058787"/>
+  <nd ref="1000051547"/>
+  <nd ref="1000051870"/>
+  <nd ref="1000050949"/>
+  <nd ref="1000051282"/>
+  <nd ref="1000051260"/>
+  <nd ref="1000051538"/>
+  <nd ref="5926215248"/>
+  <nd ref="1000058980"/>
+  <nd ref="1000050926"/>
+  <nd ref="1000052095"/>
+  <nd ref="1000058639"/>
+  <nd ref="1000051404"/>
+  <nd ref="1000051648"/>
+  <nd ref="1000051628"/>
+  <nd ref="1000052054"/>
+  <nd ref="1000051094"/>
+  <nd ref="1000051389"/>
+  <nd ref="1000058770"/>
+  <nd ref="1000059112"/>
+  <nd ref="1000051841"/>
+  <nd ref="1000058508"/>
+  <nd ref="1000058497"/>
+  <nd ref="1000058755"/>
+  <nd ref="1000051524"/>
+  <nd ref="1000059160"/>
+  <nd ref="237407195"/>
+  <nd ref="5927889286"/>
+  <nd ref="5927889285"/>
+  <nd ref="5926215185"/>
+  <nd ref="5926214384"/>
+  <nd ref="1000051120"/>
+  <nd ref="1000051420"/>
+  <nd ref="1000058813"/>
+  <nd ref="6271115585"/>
+  <nd ref="1000059143"/>
+  <nd ref="1000051894"/>
+  <nd ref="1000058541"/>
+  <nd ref="5927889288"/>
+  <nd ref="5927889289"/>
+  <nd ref="5927889290"/>
+  <nd ref="1000051295"/>
+  <nd ref="5927889291"/>
+  <nd ref="1000051554"/>
+  <nd ref="13699958777"/>
+  <tag k="source" v="landsat"/>
+ </way>
+ <way id="627743244" visible="true" version="2" changeset="62899392" timestamp="2018-09-25T03:09:52Z" user="icecreamfan" uid="7629876">
+  <nd ref="1000058465"/>
+  <nd ref="5927932121"/>
+  <nd ref="1000051544"/>
+ </way>
+ <way id="627743246" visible="true" version="1" changeset="62872641" timestamp="2018-09-24T08:58:43Z" user="icecreamfan" uid="7629876">
+  <nd ref="1000051096"/>
+  <nd ref="5926158928"/>
+  <nd ref="910546457"/>
+  <nd ref="1000059042"/>
+  <tag k="natural" v="coastline"/>
+ </way>
+ <way id="627918582" visible="true" version="3" changeset="180742867" timestamp="2026-04-01T22:22:51Z" user="dmgroom_ct" uid="437598">
+  <nd ref="13699958777"/>
+  <nd ref="13699958776"/>
+  <nd ref="13699958775"/>
+  <nd ref="1000051190"/>
+  <nd ref="8817751772"/>
+  <nd ref="13699958774"/>
+  <nd ref="1000051487"/>
+  <nd ref="13699958773"/>
+  <nd ref="13699958772"/>
+  <nd ref="1000058894"/>
+  <nd ref="13699958771"/>
+  <nd ref="13699958770"/>
+  <nd ref="1000059204"/>
+  <nd ref="8817751818"/>
+  <nd ref="5927889287"/>
+  <nd ref="1000051999"/>
+  <nd ref="1000058594"/>
+  <nd ref="8817751928"/>
+  <nd ref="1000051351"/>
+  <nd ref="1000051595"/>
+  <nd ref="1000051583"/>
+  <nd ref="8817752074"/>
+  <nd ref="1000051960"/>
+  <nd ref="1000051028"/>
+  <nd ref="1000058713"/>
+  <nd ref="1000059042"/>
+ </way>
+ <way id="1495292643" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598">
+  <nd ref="13699954697"/>
+  <nd ref="13699954696"/>
+  <nd ref="13699954695"/>
+  <nd ref="13699954694"/>
+  <nd ref="13699954693"/>
+  <nd ref="13699954692"/>
+  <nd ref="13699954691"/>
+  <nd ref="13699954690"/>
+  <nd ref="13699954689"/>
+  <nd ref="13699954688"/>
+  <nd ref="13699954687"/>
+  <nd ref="13699954697"/>
+ </way>
+ <way id="1495292644" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598">
+  <nd ref="13699958308"/>
+  <nd ref="13699958307"/>
+  <nd ref="13699958306"/>
+  <nd ref="13699958305"/>
+  <nd ref="13699958304"/>
+  <nd ref="13699958303"/>
+  <nd ref="13699958302"/>
+  <nd ref="13699958301"/>
+  <nd ref="13699954700"/>
+  <nd ref="13699954699"/>
+  <nd ref="13699954698"/>
+  <nd ref="13699958308"/>
+  <tag k="natural" v="wetland"/>
+ </way>
+ <way id="1495292645" visible="true" version="1" changeset="180742644" timestamp="2026-04-01T22:12:16Z" user="dmgroom_ct" uid="437598">
+  <nd ref="13699958324"/>
+  <nd ref="13699958323"/>
+  <nd ref="13699958322"/>
+  <nd ref="13699958321"/>
+  <nd ref="13699958320"/>
+  <nd ref="13699958319"/>
+  <nd ref="13699958318"/>
+  <nd ref="13699958317"/>
+  <nd ref="13699958316"/>
+  <nd ref="13699958315"/>
+  <nd ref="13699958314"/>
+  <nd ref="13699958313"/>
+  <nd ref="13699958312"/>
+  <nd ref="13699958311"/>
+  <nd ref="13699958310"/>
+  <nd ref="13699958309"/>
+  <nd ref="13699958324"/>
+  <tag k="natural" v="wetland"/>
+ </way>
+ <relation id="8731690" visible="true" version="6" changeset="180742867" timestamp="2026-04-01T22:22:51Z" user="dmgroom_ct" uid="437598">
+  <member type="way" ref="1495292643" role="inner"/>
+  <member type="way" ref="1495292644" role="inner"/>
+  <member type="way" ref="1495292645" role="inner"/>
+  <member type="way" ref="22062603" role="inner"/>
+  <member type="way" ref="22062567" role="inner"/>
+  <member type="way" ref="627743244" role="outer"/>
+  <member type="way" ref="86162319" role="outer"/>
+  <member type="way" ref="86162239" role="outer"/>
+  <member type="way" ref="627743246" role="outer"/>
+  <member type="way" ref="627918582" role="outer"/>
+  <member type="way" ref="86162332" role="outer"/>
+  <tag k="natural" v="water"/>
+  <tag k="type" v="multipolygon"/>
+  <tag k="water" v="river"/>
+ </relation>
+</osm>

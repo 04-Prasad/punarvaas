@@ -119,7 +119,8 @@ class RuleSet:
 
 
 def load_ruleset(path: str | Path) -> RuleSet:
-    raw = yaml.safe_load(Path(path).read_text())
+    raw = yaml.safe_load(Path(path).read_text(encoding="utf-8"))
+
     rules = []
     for r in raw["rules"]:
         rules.append(Rule(id=r["id"], label=r["label"], zone=r["zone"],

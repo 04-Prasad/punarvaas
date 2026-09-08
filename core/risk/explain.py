@@ -59,7 +59,7 @@ def _model_for(district: str) -> Susceptibility | None:
         return None
     m = json.loads(p.read_text())
     k = len(m["features"])
-    return Susceptibility(
+    model = Susceptibility(
         names=m["features"], coef=np.array(m["coef"], float),
         intercept=float(m["intercept"]),
         mu=np.array(m.get("mu", [0.0] * k), float),
@@ -68,6 +68,17 @@ def _model_for(district: str) -> Susceptibility | None:
         n_pos=m["n_pos"], n_neg=m["n_neg"], kind=m["kind"],
         prevalence=float(m.get("true_prevalence", 0.0)),
         intercept_raw=float(m.get("intercept_raw", m["intercept"])))
+    if model.kind.startswith("xgboost"):
+        booster_path = p.with_name("model_landslide_booster.json")
+        if not booster_path.exists():
+            return None  # A linear surrogate must not explain a tree prediction.
+        try:
+            import xgboost as xgb
+        except ImportError:
+            return None
+        model.booster = xgb.Booster()
+        model.booster.load_model(booster_path)
+    return model
 
 
 def _features(row: dict, names: list[str]) -> np.ndarray | None:

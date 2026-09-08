@@ -11,8 +11,9 @@ all-weather status — a fair-weather track is not connectivity in July.
 from __future__ import annotations
 
 import numpy as np
+import json
 
-from core.config import District
+from core.config import DATA, District
 from core.grid.hexgrid import haversine_m
 
 
@@ -77,6 +78,10 @@ def road_lines(d: District, villages) -> tuple[list[np.ndarray], bool]:
 def coastline(d: District) -> tuple[np.ndarray | None, bool]:
     if d.terrain != "coastal_delta":
         return None, True
+    if d.key == 'kendrapara':
+        data = json.loads((DATA / 'reference' / d.key / 'coastline.geojson').read_text())
+        lines = [_densify(np.asarray(line)[:, ::-1], 600) for line in data['geometry']['coordinates']]
+        return np.concatenate(lines), False
     minlon, minlat, maxlon, maxlat = (d.demo_bbox or d.bbox)
     v = np.linspace(0, 1, 300)
     lat = minlat + v * (maxlat - minlat)

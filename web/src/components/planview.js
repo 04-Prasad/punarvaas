@@ -52,11 +52,14 @@ export function renderPlanView(el, { district, plan, habs, selHab }) {
       rather than dropped.
     </p>
 
+    <div class="callout warn"><b>Candidate screening, pending land allocation.</b>
+      Portfolios are assessed separately for each habitation. The same parcel can appear
+      in more than one portfolio; resolve overlap before treating these as simultaneous relocation commitments.</div>
+
     ${unplaced > 0 ? html`<div class="callout bad">
       <b>${num(unplaced)} people cannot be placed inside this district.</b>
-      After zoning exclusion, the district does not contain enough safe, norm-compliant
-      land for everyone who must leave. This is the single most important number on the
-      page: it is a request to the state, not an error to be tuned away.
+        The screened candidate portfolios do not cover everyone at risk. Review additional
+        land and service options with the state; this is not a census of all available land.
     </div>` : ""}
 
     <div class="kpigrid">
@@ -76,9 +79,9 @@ export function renderPlanView(el, { district, plan, habs, selHab }) {
       <figure>
         ${phaseBars(phases, { w: 420, h: 170, budget: plan.annual_budget_inr })}
         <figcaption>Cost and present-value benefit by phase. The dashed line is the
-          annual budget. Selection inside each year is an <b>exact 0/1 knapsack</b>, not
-          a greedy sort by benefit–cost ratio — greedy is provably suboptimal when
-          projects are indivisible, and relocating 60% of a habitation is not a project.</figcaption>
+          annual budget. Selection uses <b>0/1 knapsack within each priority tier</b> on a
+          conservative ₹1 lakh grid. Costs round up and budget rounds down, so some money
+          may remain unused. This is not an exact optimum at individual-rupee precision.</figcaption>
       </figure>
       <figure>
         ${hbars(rows.slice(0, 12).map((r) => ({
@@ -87,8 +90,7 @@ export function renderPlanView(el, { district, plan, habs, selHab }) {
           text: `${num(r.population_at_risk)}`,
         })), { w: 420, title: "People at risk by habitation" })}
         <figcaption>People at risk, by habitation, coloured by tier. Ordering here is by
-          exposure; the decision table below orders by phase, which is what a
-          works department needs.</figcaption>
+          phase and priority, matching the decision table below.</figcaption>
       </figure>
     </div>
 
@@ -111,7 +113,7 @@ export function renderPlanView(el, { district, plan, habs, selHab }) {
       </tr></thead>
       <tbody>${rows.map((r) => html`<tr class="pick" data-hab="${r.lgd_village_code}"
           aria-current="${r.lgd_village_code === selHab}">
-        <td><b>${r.village_name}</b><span class="muted"> ${r.lgd_village_code}</span></td>
+        <td><button class="tableaction" aria-label="Open ${r.village_name} on the map">${r.village_name}</button><span class="muted"> ${r.lgd_village_code}</span></td>
         <td><span class="chip t-${r.priority}">${r.priority.replace(/_/g, " ").toLowerCase()}</span></td>
         <td class="n">${num(r.population_at_risk)}<span class="muted"> · ${pct(r.frac_at_risk, 0)}</span></td>
         <td class="n">${rp(r.h_union_max)}</td>

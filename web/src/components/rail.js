@@ -49,12 +49,14 @@ export function renderRail(el, { district, zones, habs, plan, selHab, grid }) {
     return html`<button class="hab" data-hab="${h.lgd_village_code}"
         aria-current="${h.lgd_village_code === selHab}"
         title="${h.headline}">
-      <i class="bar" style="--w:${((h.pop_at_risk / worst) * 100).toFixed(1)}%;--c:${ZONE_LIGHT[h.red_cells > 0 ? "RED" : "ORANGE"]}"></i>
+      <i class="bar" style="--w:${((h.pop_at_risk / worst) * 100).toFixed(1)}%;--c:${ZONE_LIGHT[h.red_cells > 0 ? "RED" : "ORANGE"]}"
+         title="${num(h.pop_at_risk)} people at risk — ${((h.pop_at_risk / worst) * 100).toFixed(0)}% of the most exposed habitation in this district" aria-hidden="true"></i>
       <span class="nm">${h.village_name}</span>
       <span class="ln">${rp(h.h_union_max)} · ${titleCase(h.governing_hazard)}</span>
       <span class="rt"><b class="big">${num(h.pop_at_risk)}</b>
         <b class="sm chip t-${tier}">${tier === "—" ? "—" : tier.replace(/_/g, " ").toLowerCase()}</b></span>
     </button>`;
+
   });
 
   return mount(el, html`
@@ -62,6 +64,7 @@ export function renderRail(el, { district, zones, habs, plan, selHab, grid }) {
       <h2>${district.name}</h2>
       <div class="sub">${district.state} · ${titleCase(district.terrain)} terrain ·
         ${num(district.cells)} cells of 1.5 ha</div>
+      <p class="decisionchain">Hazard → Risk → Affected population → Candidate site → Capacity → Relocation decision</p>
     </div>
 
     <div class="kpigrid">
@@ -77,7 +80,7 @@ export function renderRail(el, { district, zones, habs, plan, selHab, grid }) {
         <span class="n">assets only — no value on life</span></div>
       <div class="kpi"><span class="k">Habitations assessed</span>
         <b class="v">${num(habs?.length || 0)}</b>
-        <span class="n">${num((plan?.habitations || []).filter((h) => h.priority === "IMMEDIATE").length)} need immediate action</span></div>
+        <span class="n">${plan ? `${num((plan.habitations || []).filter((h) => h.priority === "IMMEDIATE").length)} need immediate action` : "Relocation plan unavailable"}</span></div>
     </div>
 
     <div class="railsec">
@@ -102,5 +105,6 @@ export function renderRail(el, { district, zones, habs, plan, selHab, grid }) {
     <div class="railsec">
       <h5>Habitations <span class="muted">· by people at risk</span></h5>
       <div class="hablist">${rows}</div>
+      <p class="search-empty empty" role="status" hidden>No habitations match. Try a village name or clear the search.</p>
     </div>`);
 }
