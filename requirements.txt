@@ -9,3 +9,4 @@ scipy
 shapely>=2.0,<3
 PyYAML
 Jinja2
+libsql; sys_platform != "win32"

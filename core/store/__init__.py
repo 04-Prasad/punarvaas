@@ -31,4 +31,7 @@ def open_store(url: str | None = None) -> Store:
         return PostgisStore(url)
 
     from core.store.sqlite import SqliteStore
+    if not url and os.environ.get("VERCEL"):
+        from core.store.demo import demo_database
+        return SqliteStore(demo_database())
     return SqliteStore(url or None)

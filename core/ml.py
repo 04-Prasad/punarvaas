@@ -20,7 +20,6 @@ from __future__ import annotations
 from dataclasses import dataclass, field
 
 import numpy as np
-from scipy.optimize import minimize
 
 
 def roc_auc(y_true, score) -> float:
@@ -142,6 +141,8 @@ def _fit_logit(Z, y, l2: float = 1.0):
         g[:p] = (Z.T @ r) / n + l2 * w / n
         g[p] = r.sum() / n
         return g
+
+    from scipy.optimize import minimize
 
     res = minimize(nll, np.zeros(p + 1), jac=grad, method="L-BFGS-B",
                    options={"maxiter": 500})

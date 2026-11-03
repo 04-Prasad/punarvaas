@@ -8,6 +8,7 @@ environment variable and nothing else.
 from __future__ import annotations
 
 from functools import lru_cache
+import logging
 
 from core.config import DISTRICTS
 from core.store import Store, open_store
@@ -15,7 +16,11 @@ from core.store import Store, open_store
 
 @lru_cache(maxsize=1)
 def store() -> Store:
-    return open_store()
+    try:
+        return open_store()
+    except Exception:
+        logging.getLogger(__name__).exception("Could not initialize the data store")
+        raise
 
 
 def check_district(district: str) -> str:

@@ -13,6 +13,7 @@ Run with no third-party server at all (this repo's offline mode):
 """
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
 from fastapi import FastAPI
@@ -24,6 +25,8 @@ from api.routers import (admin, grid, habitation, hex as hex_router, plan,
                          report, site)
 
 WEB = Path(__file__).resolve().parents[1] / "web"
+if os.environ.get("VERCEL"):
+    WEB = WEB / "dist"
 
 app = FastAPI(
     title="PUNARVAAS",
